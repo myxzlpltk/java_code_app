@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ValidationBuilder.setLocale('id');
+    ValidationBuilder.setLocale(Get.locale?.languageCode ?? 'id');
 
     return ScreenUtilInit(
       designSize: appDesignSize,
