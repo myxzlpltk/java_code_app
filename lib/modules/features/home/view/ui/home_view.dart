@@ -7,11 +7,16 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('home_page'.tr),
-      ),
-      body: Center(
-        child: Text('home_page'.tr),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await Future.delayed(const Duration(seconds: 1));
+        },
+        child: ListView(
+          children: [
+            SizedBox(height: 100),
+            Text('home_page'.tr, textAlign: TextAlign.center),
+          ],
+        ),
       ),
     );
   }
