@@ -10,7 +10,7 @@ class LoginRepository {
   static final Dio _dio = ApiServices.dioCall();
 
   /// Memanggil API untuk login dengan email dan kata sandi
-  /// @author: Saddam Azy
+  /// @author: Saddam Azy (myxzlpltk@gmail.com)
   static Future<UserRes> getUserWithEmailAndPassword(
       String email, String password) async {
     /// Memanggil API login dengan method POST
@@ -18,6 +18,23 @@ class LoginRepository {
       var response = await _dio.post(ApiConst.login, data: {
         'email': email,
         'password': password,
+      });
+
+      return UserRes.fromJson(response.data);
+    } on DioError {
+      return UserRes(statusCode: 500, message: 'server_error'.tr);
+    }
+  }
+
+  /// Memanggil API untuk login dengan email google dan kata sandi
+  /// @author: Saddam Azy (myxzlpltk@gmail.com)
+  static Future<UserRes> getUserFromGoogle(String nama, String email) async {
+    /// Memanggil API login dengan method POST
+    try {
+      var response = await _dio.post(ApiConst.login, data: {
+        'nama': nama,
+        'email': email,
+        'is_google': 'is_google',
       });
 
       return UserRes.fromJson(response.data);

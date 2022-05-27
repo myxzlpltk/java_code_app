@@ -36,6 +36,7 @@ dependencies:
   form_validator: ^1.0.2
   get: ^4.6.5
   google_fonts: ^3.0.1
+  google_sign_in: ^5.3.2
   shared_preferences: ^2.0.15
 
 

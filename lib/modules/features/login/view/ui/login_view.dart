@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
+import 'package:java_code_app/modules/features/login/controllers/login_controller.dart';
 import 'package:java_code_app/modules/features/login/view/components/login_button_apple.dart';
 import 'package:java_code_app/modules/features/login/view/components/login_button_google.dart';
 import 'package:java_code_app/modules/features/login/view/components/text_field_email.dart';
 import 'package:java_code_app/modules/features/login/view/components/text_field_password.dart';
-import 'package:java_code_app/modules/global_controllers/auth_controller.dart';
 import 'package:java_code_app/shared/widgets/divider_with_text.dart';
 import 'package:java_code_app/shared/widgets/primary_button.dart';
 
@@ -19,7 +19,7 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(AuthController());
+    Get.put(LoginController());
 
     return Scaffold(
       body: Container(
@@ -63,7 +63,7 @@ class LoginView extends StatelessWidget {
                 text: 'Masuk',
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    AuthController.to.loginWithEmailAndPassword(
+                    LoginController.to.loginWithEmailAndPassword(
                       _emailController.text,
                       _passwordController.text,
                     );
@@ -76,7 +76,9 @@ class LoginView extends StatelessWidget {
               SizedBox(height: 20.h),
 
               /// Google Button
-              LoginButtonGoogle(onPressed: () {}),
+              LoginButtonGoogle(onPressed: () {
+                LoginController.to.loginWithGoogle();
+              }),
               SizedBox(height: 15.h),
 
               /// Apple Button
