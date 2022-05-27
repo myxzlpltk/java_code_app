@@ -46,12 +46,6 @@ class DetailPromoView extends StatelessWidget {
                 bottom: Radius.circular(30.w),
               ),
             ),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.share, color: Colors.black),
-                onPressed: () => HomeController.to.sharePromo(),
-              ),
-            ],
           ),
           SliverToBoxAdapter(
             child: Padding(
@@ -113,6 +107,12 @@ class DetailPromoView extends StatelessWidget {
             ),
           )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: blueColor,
+        foregroundColor: Colors.white,
+        child: const Icon(Icons.share),
+        onPressed: () => HomeController.to.sharePromo(),
       ),
     );
   }
