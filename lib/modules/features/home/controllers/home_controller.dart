@@ -1,4 +1,5 @@
-import 'package:flutter_share/flutter_share.dart';
+import 'dart:io';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
@@ -6,6 +7,9 @@ import 'package:java_code_app/modules/features/home/repositories/promo_repositor
 import 'package:java_code_app/modules/features/home/view/components/get_location_dialog.dart';
 import 'package:java_code_app/modules/models/promo.dart';
 import 'package:java_code_app/utils/services/location_services.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HomeController extends GetxController {
   static HomeController get to => Get.find();
@@ -81,12 +85,15 @@ class HomeController extends GetxController {
   }
 
   /// Share current promo
+  ScreenshotController screenshotController = ScreenshotController();
+
   Future<void> sharePromo() async {
-    await FlutterShare.share(
-      title: 'Example share',
-      text: 'Example share text',
-      linkUrl: 'https://flutter.dev/',
-      chooserTitle: 'Example Chooser Title',
-    );
+    final directory = (await getApplicationDocumentsDirectory()).path;
+    String fileName = '${DateTime.now().microsecondsSinceEpoch}.png';
+    String path = '$directory/$fileName';
+
+    await screenshotController.captureAndSave(directory, fileName: fileName);
+    await Share.shareFiles([path], subject: 'get_this_promo'.tr);
+    await File(path).delete();
   }
 }

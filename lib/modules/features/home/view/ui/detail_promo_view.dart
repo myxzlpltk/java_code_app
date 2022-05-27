@@ -10,6 +10,7 @@ import 'package:java_code_app/modules/features/home/view/components/promo_card.d
 import 'package:java_code_app/modules/models/promo.dart';
 import 'package:java_code_app/utils/extensions/currency_extension.dart';
 import 'package:java_code_app/utils/extensions/string_case_extension.dart';
+import 'package:screenshot/screenshot.dart';
 
 class DetailPromoView extends StatelessWidget {
   final Promo promo;
@@ -19,7 +20,7 @@ class DetailPromoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: const Color(0xFFF0F0F0),
+      backgroundColor: const Color(0xFFF0F0F0),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -55,11 +56,14 @@ class DetailPromoView extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(25.w),
-              child: PromoCard(
-                promo: promo,
-                width: 378.w,
-                height: 181.h,
-                shadow: true,
+              child: Screenshot(
+                controller: HomeController.to.screenshotController,
+                child: PromoCard(
+                  promo: promo,
+                  width: 378.w,
+                  height: 181.h,
+                  shadow: true,
+                ),
               ),
             ),
           ),
@@ -70,13 +74,6 @@ class DetailPromoView extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(30.w)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    offset: const Offset(0, -2),
-                    blurRadius: 2,
-                  ),
-                ],
               ),
               child: Column(
                 children: [
@@ -119,61 +116,4 @@ class DetailPromoView extends StatelessWidget {
       ),
     );
   }
-/*@override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: const Icon(Icons.chevron_left, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        centerTitle: true,
-        title: Wrap(
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            SvgPicture.asset(AssetConst.iconPromo, width: 23.w),
-            SizedBox(width: 10.w),
-            Text('Promo', style: Theme.of(context).textTheme.headline6),
-          ],
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30.w),
-          ),
-        ),
-      ),
-      body: ListView(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(25.w),
-            child: PromoCard(promo: promo, width: 378.w, height: 181.h),
-          ),
-          Container(
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 45.h),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      promo.nama.toTitleCase(),
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                    const Spacer(),
-                    Text(
-                      '${promo.type.tr.toTitleCase()} ${promo.type == 'diskon' ? '${promo.diskon}%' : promo.nominal!.toShortK()}',
-                      style: Theme.of(context).textTheme.headline6!.copyWith(
-                            color: blueColor,
-                          ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }*/
 }
