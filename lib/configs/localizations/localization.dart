@@ -13,6 +13,9 @@ class Localization extends Translations {
           'password': 'Password',
           'login_with': 'Login with ',
           'account_incorrect': 'Email or password is incorrect',
+          'connected': 'Connected to the internet',
+          'not_connected': 'Not connected to the internet',
+          'open_settings': 'Open Settings',
         },
         'id_ID': {
           'error': 'Terjadi kesalahan',
@@ -24,6 +27,9 @@ class Localization extends Translations {
           'password': 'Kata Sandi',
           'login_with': 'Masuk menggunakan ',
           'account_incorrect': 'Email atau kata sandi salah',
+          'connected': 'Terhubung ke internet',
+          'not_connected': 'Tidak terhubung ke internet',
+          'open_settings': 'Buka Pengaturan',
         },
       };
 }

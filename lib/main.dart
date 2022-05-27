@@ -7,6 +7,7 @@ import 'package:java_code_app/configs/pages/app_pages.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/configs/themes/light_theme.dart';
 import 'package:java_code_app/constants/commons/constants.dart';
+import 'package:java_code_app/modules/global_controllers/connectivity_binding.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: appDesignSize,
       builder: (context, _) => GetMaterialApp(
+        initialBinding: ConnectivityBinding(),
         title: appName,
         initialRoute: AppRoutes.splashView,
         getPages: AppPages.pages(),

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 class User {
   final int id_user;
   final String email;
