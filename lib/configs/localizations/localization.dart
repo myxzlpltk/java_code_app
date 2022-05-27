@@ -34,6 +34,9 @@ class Localization extends Translations {
 
           /// Halaman Home - Promo
           'available_promo': 'Available Promo',
+          'diskon': 'Discount',
+          'voucher': 'Voucher',
+          'terms_and_conditions': 'Terms and Conditions',
         },
         'id_ID': {
           /// Error umum
@@ -66,6 +69,9 @@ class Localization extends Translations {
 
           /// Halaman Home - Promo
           'available_promo': 'Promo yang Tersedia',
+          'diskon': 'Diskon',
+          'voucher': 'Voucher',
+          'terms_and_conditions': 'Syarat dan Ketentuan',
         },
       };
 }

@@ -56,7 +56,7 @@ final lightTheme = ThemeData(
       ),
       bodyText1: GoogleFonts.montserrat(
         fontSize: 16.sp,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
         letterSpacing: 0.5,
         color: darkColor,
       ),

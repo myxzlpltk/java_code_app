@@ -1,5 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/modules/features/home/repositories/promo_repository.dart';
 import 'package:java_code_app/modules/features/home/view/components/get_location_dialog.dart';
 import 'package:java_code_app/modules/models/promo.dart';
@@ -64,10 +65,17 @@ class HomeController extends GetxController {
         statusPromo.value = 'error';
         messagePromo.value = listPromoRes.message ?? 'unknown_error'.tr;
       }
-    } catch (e, stack) {
-      print(stack);
+    } catch (e) {
       statusPromo.value = 'error';
       messagePromo.value = e.toString();
     }
+  }
+
+  /// Go To Detail Promo Page
+  void viewDetailPromo(int index) {
+    Get.toNamed(
+      AppRoutes.detailPromoView,
+      arguments: listPromo.elementAt(index),
+    );
   }
 }

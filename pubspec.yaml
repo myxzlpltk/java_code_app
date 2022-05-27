@@ -33,6 +33,7 @@ dependencies:
   connectivity_plus: ^2.3.0
   dio: ^4.0.6
   flutter_conditional_rendering: ^2.0.0
+  flutter_html: ^2.2.1
   flutter_screenutil: ^5.5.3+2
   flutter_svg: ^1.1.0
   form_validator: ^1.0.2
@@ -48,6 +49,12 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+
+dependency_overrides:
+  # Because java_code_app depends on flutter_html ^2.2.1 which depends on flutter_svg >=0.22.0 <1.0.0, flutter_svg >=0.22.0 <1.0.0 is required.
+  # So, because java_code_app depends on flutter_svg ^1.1.0, version solving failed.
+  # pub get failed (1; So, because java_code_app depends on flutter_svg ^1.1.0, version solving failed.)
+  flutter_svg: ^1.1.0
 
 dev_dependencies:
   flutter_test:

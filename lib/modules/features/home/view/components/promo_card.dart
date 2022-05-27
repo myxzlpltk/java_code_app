@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/models/promo.dart';
@@ -8,16 +9,27 @@ import 'package:java_code_app/utils/extensions/string_case_extension.dart';
 
 class PromoCard extends StatelessWidget {
   final Promo promo;
+  final Function()? onTap;
+  final double? width;
+  final double? height;
+  final bool shadow;
 
-  const PromoCard(this.promo, {Key? key}) : super(key: key);
+  const PromoCard({
+    Key? key,
+    required this.promo,
+    this.onTap,
+    this.width,
+    this.height,
+    this.shadow = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Ink(
-        width: 282.w,
-        height: 158.h,
+        width: width ?? 282.w,
+        height: height ?? 158.h,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: promo.foto == null
@@ -30,6 +42,14 @@ class PromoCard extends StatelessWidget {
             ),
           ),
           borderRadius: BorderRadius.circular(15.w),
+          boxShadow: [
+            if (shadow)
+              BoxShadow(
+                color: Colors.black.withOpacity(0.35),
+                offset: const Offset(0, 2),
+                blurRadius: 8,
+              ),
+          ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -38,7 +58,7 @@ class PromoCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  promo.type.toTitleCase(),
+                  promo.type.tr.toTitleCase(),
                   style: Theme.of(context)
                       .textTheme
                       .headline6!

@@ -69,7 +69,8 @@ class HomeView extends StatelessWidget {
                           ),
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) => PromoCard(
-                            HomeController.to.listPromo.elementAt(index),
+                            promo: HomeController.to.listPromo.elementAt(index),
+                            onTap: () => HomeController.to.viewDetailPromo(index),
                           ),
                           itemCount: HomeController.to.listPromo.length,
                           separatorBuilder: (context, index) =>
