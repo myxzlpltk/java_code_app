@@ -5,14 +5,15 @@ class ApiServices {
   /// Define singleton instance for ApiServices
   ApiServices._();
 
-  static Dio dioCall({int timeout = 20000}) {
+  static Dio dioCall({int timeout = 20000, String? token}) {
     var headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     };
 
-    // TODO: If token exists, add token to headers
-    // headers['token'] = 'token';
+    if(token != null) {
+      headers['token'] = 'token';
+    }
 
     var dio = Dio(
       BaseOptions(
