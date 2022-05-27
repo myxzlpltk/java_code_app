@@ -4,7 +4,9 @@ class AssetConst {
   static const String iconApple = 'assets/svg/ic_apple.svg';
   static const String iconGoogle = 'assets/svg/ic_google.svg';
   static const String iconNoInternet = 'assets/svg/ic_no_internet.svg';
+  static const String iconLocation = 'assets/images/ic_location.png';
 
   /// Background
   static const String bgPattern1 = 'assets/images/bg_pattern_1.png';
+  static const String bgPattern2 = 'assets/images/bg_pattern_2.png';
 }
