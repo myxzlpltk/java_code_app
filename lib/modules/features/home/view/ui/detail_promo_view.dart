@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
+import 'package:java_code_app/modules/features/home/controllers/home_controller.dart';
 import 'package:java_code_app/modules/features/home/view/components/promo_card.dart';
 import 'package:java_code_app/modules/models/promo.dart';
 import 'package:java_code_app/utils/extensions/currency_extension.dart';
@@ -27,7 +28,7 @@ class DetailPromoView extends StatelessWidget {
             floating: false,
             backgroundColor: Colors.white,
             leading: IconButton(
-              icon: const Icon(Icons.chevron_left, color: Colors.black),
+              icon: Icon(Icons.chevron_left, color: Colors.black, size: 32.w),
               onPressed: () => Get.back(),
             ),
             centerTitle: true,
@@ -44,6 +45,12 @@ class DetailPromoView extends StatelessWidget {
                 bottom: Radius.circular(30.w),
               ),
             ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.share, color: Colors.black),
+                onPressed: () => HomeController.to.sharePromo(),
+              ),
+            ],
           ),
           SliverToBoxAdapter(
             child: Padding(

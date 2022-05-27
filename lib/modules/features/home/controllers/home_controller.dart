@@ -1,3 +1,4 @@
+import 'package:flutter_share/flutter_share.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
@@ -76,6 +77,16 @@ class HomeController extends GetxController {
     Get.toNamed(
       AppRoutes.detailPromoView,
       arguments: listPromo.elementAt(index),
+    );
+  }
+
+  /// Share current promo
+  Future<void> sharePromo() async {
+    await FlutterShare.share(
+      title: 'Example share',
+      text: 'Example share text',
+      linkUrl: 'https://flutter.dev/',
+      chooserTitle: 'Example Chooser Title',
     );
   }
 }
