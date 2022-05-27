@@ -17,14 +17,14 @@ class LoginController extends GetxController {
     UserRes userRes =
         await LoginRepository.getUserWithEmailAndPassword(email, password);
 
-    if (userRes.statusCode == 200) {
+    if (userRes.status_code == 200) {
       /// Mengatur token dan user
       await LocalDBServices.setUser(userRes.user!);
       await LocalDBServices.setToken(userRes.token!);
 
       /// Pergi ke halaman home
       Get.offNamed('/home');
-    } else if (userRes.statusCode == 422 || userRes.statusCode == 204) {
+    } else if (userRes.status_code == 422 || userRes.status_code == 204) {
       Get.showSnackbar(GetSnackBar(
         title: 'error'.tr,
         message: 'account_incorrect'.tr,
@@ -56,7 +56,7 @@ class LoginController extends GetxController {
     UserRes userRes = await LoginRepository.getUserFromGoogle(
         account.displayName ?? '-', account.email);
 
-    if (userRes.statusCode == 200) {
+    if (userRes.status_code == 200) {
       /// Mengatur token dan user
       await LocalDBServices.setUser(userRes.user!);
       await LocalDBServices.setToken(userRes.token!);

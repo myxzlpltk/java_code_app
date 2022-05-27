@@ -12,7 +12,7 @@ class ApiServices {
     };
 
     if(token != null) {
-      headers['token'] = 'token';
+      headers['token'] = token;
     }
 
     var dio = Dio(

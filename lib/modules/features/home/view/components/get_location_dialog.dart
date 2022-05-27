@@ -50,20 +50,22 @@ class GetLocationDialog extends StatelessWidget {
               Obx(
                 () => ConditionalSwitch.single<String>(
                   context: context,
-                  valueBuilder: (context) => HomeController.to.status.value,
+                  valueBuilder: (context) =>
+                      HomeController.to.statusLocation.value,
                   caseBuilders: {
                     'error': (context) => Text(
-                      HomeController.to.message.value,
-                      style: Theme.of(context).textTheme.headline5,
-                      textAlign: TextAlign.center,
-                    ),
+                          HomeController.to.messageLocation.value,
+                          style: Theme.of(context).textTheme.headline5,
+                          textAlign: TextAlign.center,
+                        ),
                     'success': (context) => Text(
-                      HomeController.to.address.value!,
-                      style: Theme.of(context).textTheme.headline5,
-                      textAlign: TextAlign.center,
-                    ),
+                          HomeController.to.address.value!,
+                          style: Theme.of(context).textTheme.headline5,
+                          textAlign: TextAlign.center,
+                        ),
                   },
-                  fallbackBuilder: (context) => const CircularProgressIndicator(),
+                  fallbackBuilder: (context) =>
+                      const CircularProgressIndicator(),
                 ),
               ),
             ],

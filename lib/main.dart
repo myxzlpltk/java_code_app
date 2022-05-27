@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       builder: (context, _) => GetMaterialApp(
         initialBinding: ConnectivityBinding(),
         title: appName,
-        initialRoute: AppRoutes.splashView,
+        initialRoute: AppRoutes.homeView,
         getPages: AppPages.pages(),
         translations: Localization(),
         locale: const Locale('id', 'ID'),

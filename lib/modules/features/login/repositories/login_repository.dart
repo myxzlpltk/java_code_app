@@ -22,7 +22,7 @@ class LoginRepository {
 
       return UserRes.fromJson(response.data);
     } on DioError {
-      return UserRes(statusCode: 500, message: 'server_error'.tr);
+      return UserRes(status_code: 500, message: 'server_error'.tr);
     }
   }
 
@@ -39,7 +39,7 @@ class LoginRepository {
 
       return UserRes.fromJson(response.data);
     } on DioError {
-      return UserRes(statusCode: 500, message: 'server_error'.tr);
+      return UserRes(status_code: 500, message: 'server_error'.tr);
     }
   }
 }

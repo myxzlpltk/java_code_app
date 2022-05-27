@@ -8,6 +8,7 @@ class Localization extends Translations {
           'error': 'Something went wrong',
           'unknown_error': 'Unknown error',
           'server_error': 'Server error. Please try again later.',
+          'no_data': 'No data',
 
           /// Halaman Login
           'continue_to_sign_in': 'Continue to Sign In',
@@ -30,12 +31,16 @@ class Localization extends Translations {
           'location_permission_not_granted': 'Location permission not granted',
           'location_permission_not_granted_forever':
               'Location permission not granted forever',
+
+          /// Halaman Home - Promo
+          'available_promo': 'Available Promo',
         },
         'id_ID': {
           /// Error umum
           'error': 'Terjadi kesalahan',
           'unknown_error': 'Kesalahan tidak diketahui',
           'server_error': 'Kesalahan server. Silahkan coba lagi nanti.',
+          'no_data': 'Tidak ada data',
 
           /// Halaman Login
           'continue_to_sign_in': 'Masuk untuk melanjutkan!',
@@ -49,7 +54,7 @@ class Localization extends Translations {
           'not_connected': 'Tidak terhubung ke internet',
           'open_settings': 'Buka Pengaturan',
 
-          /// Halaman Home
+          /// Halaman Home - Lokasi
           'home_page': 'Halaman Utama',
           'searching_location': 'Mencari Lokasimu...',
           'unknown_location': 'Lokasi tidak diketahui',
@@ -58,6 +63,9 @@ class Localization extends Translations {
           'location_permission_not_granted': 'Izin lokasi tidak diberikan.',
           'location_permission_not_granted_forever':
               'Izin lokasi tidak diberikan secara permanen.',
+
+          /// Halaman Home - Promo
+          'available_promo': 'Promo yang Tersedia',
         },
       };
 }
