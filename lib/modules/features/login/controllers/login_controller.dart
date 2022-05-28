@@ -23,7 +23,7 @@ class LoginController extends GetxController {
       await LocalDBServices.setToken(userRes.token!);
 
       /// Pergi ke halaman home
-      Get.offNamed('/home');
+      Get.offAllNamed('/home');
     } else if (userRes.status_code == 422 || userRes.status_code == 204) {
       Get.showSnackbar(GetSnackBar(
         title: 'error'.tr,

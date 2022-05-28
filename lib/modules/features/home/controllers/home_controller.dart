@@ -4,7 +4,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/modules/features/home/repositories/promo_repository.dart';
-import 'package:java_code_app/modules/features/home/view/components/get_location_dialog.dart';
 import 'package:java_code_app/modules/models/promo.dart';
 import 'package:java_code_app/utils/services/location_services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -24,12 +23,17 @@ class HomeController extends GetxController {
   RxList<Promo> listPromo = RxList<Promo>();
 
   @override
-  void onReady() async {
+  void onReady() {
     super.onReady();
 
-    Get.dialog(const GetLocationDialog(), barrierDismissible: false);
-    await getLocation();
-    await getPromo();
+    /// Mencari lokasi
+    Future.delayed(const Duration(milliseconds: 500), () async {
+      Get.toNamed(AppRoutes.getLocationView);
+      await getLocation();
+    });
+
+    /// Mendapatkan promo
+    getListPromo();
   }
 
   /// Get current location if location not exists
@@ -37,7 +41,7 @@ class HomeController extends GetxController {
     try {
       position.value = await LocationServices.getCurrentPosition();
 
-      if (LocationServices.isDistanceClose(position.value!)) {
+      if (!LocationServices.isDistanceClose(position.value!)) {
         address.value = await LocationServices.getAddress(position.value!);
         statusLocation.value = 'success';
 
@@ -54,7 +58,7 @@ class HomeController extends GetxController {
   }
 
   /// Get all promo
-  Future<void> getPromo() async {
+  Future<void> getListPromo() async {
     statusPromo.value = 'loading';
 
     try {

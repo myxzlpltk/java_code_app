@@ -14,10 +14,10 @@ class SplashController extends GetxController {
 
     if (user != null && token != null) {
       /// Jika ada sesi ke halaman home
-      Get.offNamed('/home');
+      Get.offAllNamed('/home');
     } else {
       /// Jika tidak ada sesi ke halaman login
-      Get.offNamed('/login');
+      Get.offAllNamed('/login');
     }
   }
 }

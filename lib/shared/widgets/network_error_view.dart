@@ -7,8 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 
-class NetworkError extends StatelessWidget {
-  const NetworkError({Key? key}) : super(key: key);
+class NetworkErrorView extends StatelessWidget {
+  const NetworkErrorView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

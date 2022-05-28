@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/home/controllers/home_controller.dart';
 
-class GetLocationDialog extends StatelessWidget {
-  const GetLocationDialog({Key? key}) : super(key: key);
+class GetLocationView extends StatelessWidget {
+  const GetLocationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

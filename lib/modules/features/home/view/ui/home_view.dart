@@ -19,7 +19,7 @@ class HomeView extends StatelessWidget {
       body: RefreshIndicator(
         onRefresh: () async {
           await Future.any([
-            HomeController.to.getPromo(),
+            HomeController.to.getListPromo(),
           ]);
         },
         child: ListView(
