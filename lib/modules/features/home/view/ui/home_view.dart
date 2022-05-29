@@ -39,52 +39,19 @@ class HomeView extends StatelessWidget {
         },
         child: ListView(
           children: [
-            ..._promoSection(context),
-            SizedBox(
-              height: 45.h,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 25.w,
-                  vertical: 5.h,
-                ),
-                children: [
-                  Obx(
-                    () => FilterMenu(
-                      isSelected: HomeController.to.filterMenu.value == 'all',
-                      onTap: () => HomeController.to.setFilterMenu('all'),
-                      iconPath: AssetConst.iconList,
-                      text: 'all_menu'.tr,
-                    ),
-                  ),
-                  SizedBox(width: 13.w),
-                  Obx(
-                    () => FilterMenu(
-                      isSelected: HomeController.to.filterMenu.value == 'food',
-                      onTap: () => HomeController.to.setFilterMenu('food'),
-                      iconPath: AssetConst.iconFood,
-                      text: 'food'.tr,
-                    ),
-                  ),
-                  SizedBox(width: 13.w),
-                  Obx(
-                    () => FilterMenu(
-                      isSelected: HomeController.to.filterMenu.value == 'drink',
-                      onTap: () => HomeController.to.setFilterMenu('drink'),
-                      iconPath: AssetConst.iconDrink,
-                      text: 'drink'.tr,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            /// Promo section
+            ...promoSection(context),
+
+            /// Menu section
+            ...menuSection(context),
           ],
         ),
       ),
     );
   }
 
-  List<Widget> _promoSection(BuildContext context) {
+  /// Promo section
+  List<Widget> promoSection(BuildContext context) {
     return [
       SizedBox(height: 25.h),
 
@@ -146,6 +113,48 @@ class HomeView extends StatelessWidget {
         ),
       ),
       SizedBox(height: 5.h),
+    ];
+  }
+
+  /// Menu section
+  List<Widget> menuSection(BuildContext context) {
+    return [
+      /// Filter
+      SizedBox(
+        height: 45.h,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 5.h),
+          children: [
+            Obx(
+              () => FilterMenu(
+                isSelected: HomeController.to.filterMenu.value == 'all',
+                onTap: () => HomeController.to.setFilterMenu('all'),
+                iconPath: AssetConst.iconList,
+                text: 'all_menu'.tr,
+              ),
+            ),
+            SizedBox(width: 13.w),
+            Obx(
+              () => FilterMenu(
+                isSelected: HomeController.to.filterMenu.value == 'food',
+                onTap: () => HomeController.to.setFilterMenu('food'),
+                iconPath: AssetConst.iconFood,
+                text: 'food'.tr,
+              ),
+            ),
+            SizedBox(width: 13.w),
+            Obx(
+              () => FilterMenu(
+                isSelected: HomeController.to.filterMenu.value == 'drink',
+                onTap: () => HomeController.to.setFilterMenu('drink'),
+                iconPath: AssetConst.iconDrink,
+                text: 'drink'.tr,
+              ),
+            ),
+          ],
+        ),
+      ),
     ];
   }
 }
