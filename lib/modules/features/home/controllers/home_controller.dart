@@ -1,14 +1,9 @@
-import 'dart:io';
-
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/modules/features/home/repositories/promo_repository.dart';
 import 'package:java_code_app/modules/models/promo.dart';
 import 'package:java_code_app/utils/services/location_services.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:screenshot/screenshot.dart';
-import 'package:share_plus/share_plus.dart';
 
 class HomeController extends GetxController {
   static HomeController get to => Get.find();
@@ -41,12 +36,12 @@ class HomeController extends GetxController {
     try {
       position.value = await LocationServices.getCurrentPosition();
 
-      if (!LocationServices.isDistanceClose(position.value!)) {
+      if (LocationServices.isDistanceClose(position.value!)) {
         address.value = await LocationServices.getAddress(position.value!);
         statusLocation.value = 'success';
 
         await Future.delayed(const Duration(seconds: 1));
-        Get.back();
+        Get.back(closeOverlays: true);
       } else {
         statusLocation.value = 'error';
         messageLocation.value = 'distance_not_close'.tr;
@@ -86,18 +81,5 @@ class HomeController extends GetxController {
       AppRoutes.detailPromoView,
       arguments: listPromo.elementAt(index),
     );
-  }
-
-  /// Share current promo
-  ScreenshotController screenshotController = ScreenshotController();
-
-  Future<void> sharePromo() async {
-    final directory = (await getApplicationDocumentsDirectory()).path;
-    String fileName = '${DateTime.now().microsecondsSinceEpoch}.png';
-    String path = '$directory/$fileName';
-
-    await screenshotController.captureAndSave(directory, fileName: fileName);
-    await Share.shareFiles([path], subject: 'get_this_promo'.tr);
-    await File(path).delete();
   }
 }

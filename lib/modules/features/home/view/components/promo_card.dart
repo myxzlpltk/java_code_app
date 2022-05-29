@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/models/promo.dart';
-import 'package:java_code_app/utils/extensions/currency_extension.dart';
 import 'package:java_code_app/utils/extensions/string_case_extension.dart';
 
 class PromoCard extends StatelessWidget {
@@ -63,7 +61,7 @@ class PromoCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      promo.type.tr.toTitleCase(),
+                      promo.typeLabel,
                       style: Theme.of(context)
                           .textTheme
                           .headline6!
@@ -71,9 +69,7 @@ class PromoCard extends StatelessWidget {
                     ),
                     SizedBox(width: 5.w),
                     Text(
-                      promo.type == 'diskon'
-                          ? '${promo.diskon}%'
-                          : promo.nominal!.toShortK(),
+                      promo.amountLabel,
                       style: Theme.of(context).textTheme.headline4!.copyWith(
                             foreground: Paint()
                               ..style = PaintingStyle.stroke

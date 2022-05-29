@@ -7,7 +7,6 @@ import 'package:java_code_app/modules/features/home/view/ui/get_location_view.da
 import 'package:java_code_app/modules/features/home/view/ui/home_view.dart';
 import 'package:java_code_app/modules/features/login/view/ui/login_view.dart';
 import 'package:java_code_app/modules/features/splash/view/ui/splash_view.dart';
-import 'package:java_code_app/modules/models/promo.dart';
 import 'package:java_code_app/shared/widgets/network_error_view.dart';
 
 class AppPages {
@@ -43,7 +42,7 @@ class AppPages {
       ),
       GetPage(
         name: AppRoutes.detailPromoView,
-        page: () => DetailPromoView(promo: Get.arguments as Promo),
+        page: () => DetailPromoView(),
       ),
     ];
   }

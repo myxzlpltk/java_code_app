@@ -58,8 +58,7 @@ class NetworkErrorView extends StatelessWidget {
                     const Spacer(),
                   ],
                 ),
-              )
-              ,
+              ),
               SizedBox(height: 32.h),
             ],
           ),

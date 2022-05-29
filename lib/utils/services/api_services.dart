@@ -11,7 +11,7 @@ class ApiServices {
       'Accept': 'application/json',
     };
 
-    if(token != null) {
+    if (token != null) {
       headers['token'] = token;
     }
 

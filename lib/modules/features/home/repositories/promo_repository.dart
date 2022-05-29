@@ -19,4 +19,16 @@ class PromoRepository {
       return ListPromoRes(status_code: 500, message: 'server_error'.tr);
     }
   }
+
+  /// Memanggil API untuk mendapatkan promo berdasarkan id
+  static Future<PromoRes> getFromId(int id_promo) async {
+    try {
+      var dio = ApiServices.dioCall(token: await LocalDBServices.getToken());
+      var response = await dio.get('${ApiConst.promo}/$id_promo');
+
+      return PromoRes.fromJson(response.data);
+    } on DioError {
+      return PromoRes(status_code: 500, message: 'server_error'.tr);
+    }
+  }
 }

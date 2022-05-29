@@ -1,5 +1,9 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:get/get.dart';
+import 'package:java_code_app/utils/extensions/currency_extension.dart';
+import 'package:java_code_app/utils/extensions/string_case_extension.dart';
+
 class Promo {
   final int id_promo;
   final String nama;
@@ -48,6 +52,12 @@ class Promo {
       'foto': foto,
     };
   }
+
+  String get typeLabel => type.tr.toTitleCase();
+
+  String get amountLabel => type == 'diskon' ? '$diskon%' : nominal!.toShortK();
+
+  String get typeAmountLabel => '$typeLabel $amountLabel';
 }
 
 class ListPromoRes {
@@ -69,6 +79,27 @@ class ListPromoRes {
       data: json['status_code'] == 200
           ? json['data'].map<Promo>((e) => Promo.fromJson(e)).toList()
           : null,
+    );
+  }
+}
+
+class PromoRes {
+  final int status_code;
+  final String? message;
+  final Promo? data;
+
+  const PromoRes({
+    required this.status_code,
+    this.message,
+    this.data,
+  });
+
+  /// From Json
+  factory PromoRes.fromJson(Map<String, dynamic> json) {
+    return PromoRes(
+      status_code: json['status_code'],
+      message: json['message'],
+      data: json['status_code'] == 200 ? Promo.fromJson(json['data']) : null,
     );
   }
 }

@@ -37,7 +37,7 @@ class Localization extends Translations {
           'diskon': 'Discount',
           'voucher': 'Voucher',
           'terms_and_conditions': 'Terms and Conditions',
-          'get_this_promo': 'Get this promo',
+          'get_this_promo': 'Get this promo! Access this link\n@link',
         },
         'id_ID': {
           /// Error umum
@@ -73,7 +73,7 @@ class Localization extends Translations {
           'diskon': 'Diskon',
           'voucher': 'Voucher',
           'terms_and_conditions': 'Syarat dan Ketentuan',
-          'get_this_promo': 'Dapatkan Promo ini',
+          'get_this_promo': 'Dapatkan Promo ini! Akses link berikut\n@link',
         },
       };
 }

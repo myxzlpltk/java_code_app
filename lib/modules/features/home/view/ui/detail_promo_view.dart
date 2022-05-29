@@ -5,20 +5,20 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
-import 'package:java_code_app/modules/features/home/controllers/home_controller.dart';
+import 'package:java_code_app/modules/features/home/controllers/detail_promo_controller.dart';
 import 'package:java_code_app/modules/features/home/view/components/promo_card.dart';
-import 'package:java_code_app/modules/models/promo.dart';
-import 'package:java_code_app/utils/extensions/currency_extension.dart';
 import 'package:java_code_app/utils/extensions/string_case_extension.dart';
 import 'package:screenshot/screenshot.dart';
 
 class DetailPromoView extends StatelessWidget {
-  final Promo promo;
-
-  const DetailPromoView({Key? key, required this.promo}) : super(key: key);
+  const DetailPromoView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Get.put(DetailPromoController());
+
+    final promo = DetailPromoController.to.promo.value;
+
     return Scaffold(
       backgroundColor: const Color(0xFFF0F0F0),
       body: CustomScrollView(
@@ -30,7 +30,7 @@ class DetailPromoView extends StatelessWidget {
             backgroundColor: Colors.white,
             leading: IconButton(
               icon: Icon(Icons.chevron_left, color: Colors.black, size: 32.w),
-              onPressed: () => Get.back(),
+              onPressed: () => Get.back(closeOverlays: true),
             ),
             centerTitle: true,
             title: Wrap(
@@ -51,7 +51,7 @@ class DetailPromoView extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(25.w),
               child: Screenshot(
-                controller: HomeController.to.screenshotController,
+                controller: DetailPromoController.to.screenshotController,
                 child: PromoCard(
                   promo: promo,
                   width: 378.w,
@@ -73,6 +73,7 @@ class DetailPromoView extends StatelessWidget {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: Text(
@@ -80,11 +81,13 @@ class DetailPromoView extends StatelessWidget {
                           style: Theme.of(context).textTheme.headline6,
                         ),
                       ),
+                      SizedBox(width: 25.w),
                       Text(
-                        '${promo.type.tr.toTitleCase()} ${promo.type == 'diskon' ? '${promo.diskon}%' : promo.nominal!.toShortK()}',
-                        style: Theme.of(context).textTheme.headline6!.copyWith(
-                              color: blueColor,
-                            ),
+                        promo.typeAmountLabel,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6!
+                            .copyWith(color: blueColor),
                       ),
                     ],
                   ),
@@ -112,7 +115,7 @@ class DetailPromoView extends StatelessWidget {
         backgroundColor: blueColor,
         foregroundColor: Colors.white,
         child: const Icon(Icons.share),
-        onPressed: () => HomeController.to.sharePromo(),
+        onPressed: () => DetailPromoController.to.sharePromo(),
       ),
     );
   }
