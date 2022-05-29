@@ -17,6 +17,8 @@ class HomeController extends GetxController {
   RxString messagePromo = RxString('');
   RxList<Promo> listPromo = RxList<Promo>();
 
+  RxString filterMenu = RxString('all');
+
   @override
   void onReady() {
     super.onReady();
@@ -75,11 +77,7 @@ class HomeController extends GetxController {
     }
   }
 
-  /// Go To Detail Promo Page
-  void viewDetailPromo(int index) {
-    Get.toNamed(
-      AppRoutes.detailPromoView,
-      arguments: listPromo.elementAt(index),
-    );
+  Future<void> setFilterMenu(String value) async {
+    filterMenu.value = value;
   }
 }

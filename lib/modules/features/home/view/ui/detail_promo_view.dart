@@ -20,49 +20,43 @@ class DetailPromoView extends StatelessWidget {
     final promo = DetailPromoController.to.promo.value;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Icon(Icons.chevron_left, color: Colors.black, size: 32.w),
+          onPressed: () => Get.back(closeOverlays: true),
+        ),
+        centerTitle: true,
+        title: Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            SvgPicture.asset(AssetConst.iconPromo, width: 23.w),
+            SizedBox(width: 10.w),
+            Text('Promo', style: Theme.of(context).textTheme.headline6),
+          ],
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30.w),
+          ),
+        ),
+      ),
       backgroundColor: const Color(0xFFF0F0F0),
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            forceElevated: true,
-            pinned: true,
-            floating: false,
-            backgroundColor: Colors.white,
-            leading: IconButton(
-              icon: Icon(Icons.chevron_left, color: Colors.black, size: 32.w),
-              onPressed: () => Get.back(closeOverlays: true),
-            ),
-            centerTitle: true,
-            title: Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                SvgPicture.asset(AssetConst.iconPromo, width: 23.w),
-                SizedBox(width: 10.w),
-                Text('Promo', style: Theme.of(context).textTheme.headline6),
-              ],
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(30.w),
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(25.w),
+            child: Screenshot(
+              controller: DetailPromoController.to.screenshotController,
+              child: PromoCard(
+                promo: promo,
+                width: 378.w,
+                height: 181.h,
+                shadow: true,
               ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.all(25.w),
-              child: Screenshot(
-                controller: DetailPromoController.to.screenshotController,
-                child: PromoCard(
-                  promo: promo,
-                  width: 378.w,
-                  height: 181.h,
-                  shadow: true,
-                ),
-              ),
-            ),
-          ),
-          SliverFillRemaining(
-            hasScrollBody: false,
+          Expanded(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 45.h),
               decoration: BoxDecoration(

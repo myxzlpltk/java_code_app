@@ -38,6 +38,12 @@ class Localization extends Translations {
           'voucher': 'Voucher',
           'terms_and_conditions': 'Terms and Conditions',
           'get_this_promo': 'Get this promo! Access this link\n@link',
+
+          /// Halaman Home - Menu
+          'search_bar': 'Search',
+          'all_menu': 'All Menu',
+          'food': 'Food',
+          'drink': 'Drink',
         },
         'id_ID': {
           /// Error umum
@@ -74,6 +80,12 @@ class Localization extends Translations {
           'voucher': 'Voucher',
           'terms_and_conditions': 'Syarat dan Ketentuan',
           'get_this_promo': 'Dapatkan Promo ini! Akses link berikut\n@link',
+
+          /// Halaman Home - Menu
+          'search_bar': 'Pencarian',
+          'all_menu': 'Semua Menu',
+          'food': 'Makanan',
+          'drink': 'Minuman',
         },
       };
 }
