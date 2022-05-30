@@ -10,3 +10,7 @@ const String appDeepLink = 'landa://javacode.app';
 const locationLatitude = -7.9423;
 const locationLongitude = 112.6230;
 const maximumDistance = 100;
+
+/// Menu
+const defaultMenuPhoto =
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png';

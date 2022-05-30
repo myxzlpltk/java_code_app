@@ -12,6 +12,7 @@ class AssetConst {
   static const String iconHome = 'assets/svg/ic_home.svg';
   static const String iconOrder = 'assets/svg/ic_order.svg';
   static const String iconProfile = 'assets/svg/ic_profile.svg';
+  static const String iconEdit = 'assets/svg/ic_edit.svg';
 
   /// Background
   static const String bgPattern1 = 'assets/images/bg_pattern_1.png';
