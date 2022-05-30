@@ -1,15 +1,18 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
-import 'package:java_code_app/modules/features/dashboard/controllers/detail_promo_controller.dart';
+import 'package:java_code_app/shared/widgets/network_error_view.dart';
 import 'package:uni_links/uni_links.dart';
 
 class GlobalController extends GetxController {
+  static GlobalController get to => Get.find();
+
   /// Instance dari connectivity_plus
   final Connectivity _connectivity = Connectivity();
+
+  RxBool internetStatus = RxBool(true);
 
   @override
   void onInit() {
@@ -31,46 +34,37 @@ class GlobalController extends GetxController {
     switch (result) {
       case ConnectivityResult.mobile:
       case ConnectivityResult.wifi:
-        if (Get.currentRoute == AppRoutes.noInternetView) Get.back();
+        internetStatus.value = true;
         break;
       default:
-        Get.toNamed(AppRoutes.noInternetView);
+        internetStatus.value = false;
+        if (Get.currentRoute != AppRoutes.splashView) {
+          showAlert();
+        }
         break;
     }
   }
 
-  Future<void> initUniLinks() async {
-    _processUniLinks(await getInitialUri());
-    uriLinkStream.listen(_processUniLinks);
+  /// Show alert internet
+  Future<void> showAlert() async {
+    await Get.defaultDialog(
+      title: 'error'.tr,
+      content: const NetworkErrorView(),
+    );
   }
 
-  void _processUniLinks(Uri? uri) async {
+  Future<void> initUniLinks() async {
+    /// Background process
+    uriLinkStream.listen(processUniLinks);
+  }
+
+  void processUniLinks(Uri? uri) async {
     if (uri is Uri && uri.queryParameters['id_promo'] != null) {
-      /// Put controller
-      Get.put(DetailPromoController());
-
-      try {
-        /// Set from id
-        await DetailPromoController.to
-            .setFromId(int.parse(uri.queryParameters['id_promo']!));
-
-        /// Navigate to detail promo
-        await Get.toNamed(AppRoutes.detailPromoView);
-
-        /// Wait and remove controller
-        Get.delete<DetailPromoController>();
-      } catch (e) {
-        /// Show snackbar error
-        Get.showSnackbar(GetSnackBar(
-          title: 'error'.tr,
-          message: e.toString(),
-          backgroundColor: Colors.red,
-          duration: const Duration(seconds: 2),
-        ));
-
-        /// Delete controller
-        Get.delete<DetailPromoController>();
-      }
+      /// Navigate to detail promo
+      await Get.toNamed(
+        AppRoutes.detailPromoView,
+        arguments: int.parse(uri.queryParameters['id_promo']!),
+      );
     }
   }
 }

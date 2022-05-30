@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,6 +8,7 @@ import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/dashboard/controllers/detail_promo_controller.dart';
 import 'package:java_code_app/modules/features/dashboard/view/components/promo_card.dart';
+import 'package:java_code_app/shared/widgets/rect_shimmer.dart';
 import 'package:java_code_app/utils/extensions/string_case_extension.dart';
 import 'package:screenshot/screenshot.dart';
 
@@ -16,8 +18,6 @@ class DetailPromoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(DetailPromoController());
-
-    final promo = DetailPromoController.to.promo.value;
 
     return Scaffold(
       appBar: AppBar(
@@ -46,13 +46,25 @@ class DetailPromoView extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.all(25.w),
-            child: Screenshot(
-              controller: DetailPromoController.to.screenshotController,
-              child: PromoCard(
-                promo: promo,
-                width: 378.w,
-                height: 181.h,
-                shadow: true,
+            child: Obx(
+              () => Conditional.single(
+                context: context,
+                conditionBuilder: (context) =>
+                    DetailPromoController.to.status.value == 'success',
+                widgetBuilder: (context) => Screenshot(
+                  controller: DetailPromoController.to.screenshotController,
+                  child: PromoCard(
+                    promo: DetailPromoController.to.promo.value!,
+                    width: 378.w,
+                    height: 181.h,
+                    shadow: true,
+                  ),
+                ),
+                fallbackBuilder: (context) => RectShimmer(
+                  width: 378.w,
+                  height: 181.h,
+                  radius: 15.w,
+                ),
               ),
             ),
           ),
@@ -65,25 +77,35 @@ class DetailPromoView extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          promo.nama.toTitleCase(),
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
+                  Obx(
+                    () => Conditional.single(
+                      context: context,
+                      conditionBuilder: (context) =>
+                          DetailPromoController.to.status.value == 'success',
+                      widgetBuilder: (context) => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              DetailPromoController.to.promo.value!.nama
+                                  .toTitleCase(),
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ),
+                          SizedBox(width: 25.w),
+                          Text(
+                            DetailPromoController
+                                .to.promo.value!.typeAmountLabel,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6!
+                                .copyWith(color: blueColor),
+                          ),
+                        ],
                       ),
-                      SizedBox(width: 25.w),
-                      Text(
-                        promo.typeAmountLabel,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .copyWith(color: blueColor),
-                      ),
-                    ],
+                      fallbackBuilder: (context) => RectShimmer(height: 25.h),
+                    ),
                   ),
                   SizedBox(height: 17.h),
                   Divider(color: const Color(0xFF2E2E2E).withOpacity(0.25)),
@@ -98,11 +120,23 @@ class DetailPromoView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Html(data: promo.syarat_ketentuan),
+                  SizedBox(height: 10.h),
+                  Obx(
+                    () => Conditional.single(
+                      context: context,
+                      conditionBuilder: (context) =>
+                          DetailPromoController.to.status.value == 'success',
+                      widgetBuilder: (context) => Html(
+                        data: DetailPromoController
+                            .to.promo.value!.syarat_ketentuan,
+                      ),
+                      fallbackBuilder: (context) => RectShimmer(height: 100.h),
+                    ),
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ShimmerPromoCard extends StatelessWidget {
+class RectShimmer extends StatelessWidget {
   final double? width;
   final double? height;
-  final bool shadow;
+  final double? radius;
 
-  const ShimmerPromoCard({
+  const RectShimmer({
     Key? key,
     this.width,
     this.height,
-    this.shadow = false,
+    this.radius,
   }) : super(key: key);
 
   @override
@@ -20,19 +20,11 @@ class ShimmerPromoCard extends StatelessWidget {
       baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey.shade100,
       child: Container(
-        width: width ?? 282.w,
-        height: height ?? 158.h,
+        width: width ?? double.infinity,
+        height: height ?? 45.h,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15.w),
+          borderRadius: BorderRadius.circular(radius ?? 5.w),
           color: Colors.white,
-          boxShadow: [
-            if (shadow)
-              BoxShadow(
-                color: Colors.black.withOpacity(0.35),
-                offset: const Offset(0, 2),
-                blurRadius: 8,
-              ),
-          ],
         ),
       ),
     );

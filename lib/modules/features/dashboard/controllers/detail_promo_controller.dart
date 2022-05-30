@@ -11,24 +11,29 @@ import 'package:share_plus/share_plus.dart';
 class DetailPromoController extends GetxController {
   static DetailPromoController get to => Get.find();
 
-  late Rx<Promo> promo;
+  RxString status = RxString('loading');
+  Rxn<Promo> promo = Rxn<Promo>();
 
   @override
   void onInit() {
     super.onInit();
 
     if (Get.arguments is Promo) {
-      promo = Rx<Promo>(Get.arguments as Promo);
+      status.value = 'success';
+      promo.value = Get.arguments as Promo;
+    } else if (Get.arguments is int) {
+      setFromId(Get.arguments as int);
     }
   }
 
-  Future<void> setFromId(int id_promo) async {
-    final promoRes = await PromoRepository.getFromId(id_promo);
+  Future<void> setFromId(int id) async {
+    final promoRes = await PromoRepository.getFromId(id);
 
     if (promoRes.status_code == 200) {
-      promo = Rx<Promo>(promoRes.data!);
+      status.value = 'success';
+      promo.value = promoRes.data;
     } else {
-      return Future.error(promoRes.message!);
+      status.value = 'error';
     }
   }
 
@@ -36,6 +41,8 @@ class DetailPromoController extends GetxController {
   ScreenshotController screenshotController = ScreenshotController();
 
   Future<void> sharePromo() async {
+    if (promo.value == null) return;
+
     final directory = (await getApplicationDocumentsDirectory()).path;
     String fileName = '${DateTime.now().microsecondsSinceEpoch}.png';
     String path = '$directory/$fileName';
@@ -44,7 +51,7 @@ class DetailPromoController extends GetxController {
     await Share.shareFiles(
       [path],
       text: 'get_this_promo'.trParams({
-        'link': '$appDeepLink?id_promo=${promo.value.id_promo}',
+        'link': '$appDeepLink?id_promo=${promo.value!.id_promo}',
       }),
     );
     await File(path).delete();

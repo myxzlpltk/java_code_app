@@ -9,7 +9,7 @@ import 'package:java_code_app/modules/features/dashboard/controllers/dashboard_c
 import 'package:java_code_app/modules/features/dashboard/view/components/filter_menu.dart';
 import 'package:java_code_app/modules/features/dashboard/view/components/promo_card.dart';
 import 'package:java_code_app/modules/features/dashboard/view/components/search_bar.dart';
-import 'package:java_code_app/modules/features/dashboard/view/components/shimmer_promo_card.dart';
+import 'package:java_code_app/shared/widgets/rect_shimmer.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -91,12 +91,16 @@ class HomeView extends StatelessWidget {
             valueBuilder: (context) => DashboardController.to.statusPromo.value,
             caseBuilders: {
               'loading': (context) => ListView.separated(
-                    padding: EdgeInsets.symmetric(
+                padding: EdgeInsets.symmetric(
                       horizontal: 25.w,
                       vertical: 15.h,
                     ),
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, _) => const ShimmerPromoCard(),
+                    itemBuilder: (context, _) => RectShimmer(
+                      width: 282.w,
+                      height: 158.h,
+                      radius: 15.w,
+                    ),
                     itemCount: 5,
                     separatorBuilder: (context, _) => SizedBox(width: 25.w),
                   ),
