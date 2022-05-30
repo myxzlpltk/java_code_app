@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:java_code_app/constants/commons/constants.dart';
-import 'package:java_code_app/modules/features/home/repositories/promo_repository.dart';
+import 'package:java_code_app/modules/features/dashboard/repositories/promo_repository.dart';
 import 'package:java_code_app/modules/models/promo.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';

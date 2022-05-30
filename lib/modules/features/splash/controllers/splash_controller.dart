@@ -13,8 +13,8 @@ class SplashController extends GetxController {
     var token = await LocalDBServices.getToken();
 
     if (user != null && token != null) {
-      /// Jika ada sesi ke halaman home
-      Get.offAllNamed('/home');
+      /// Jika ada sesi ke halaman dashboard
+      Get.offAllNamed('/dashboard');
     } else {
       /// Jika tidak ada sesi ke halaman login
       Get.offAllNamed('/login');

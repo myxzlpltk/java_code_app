@@ -9,6 +9,9 @@ class AssetConst {
   static const String iconList = 'assets/svg/ic_list.svg';
   static const String iconFood = 'assets/svg/ic_food.svg';
   static const String iconDrink = 'assets/svg/ic_drink.svg';
+  static const String iconHome = 'assets/svg/ic_home.svg';
+  static const String iconOrder = 'assets/svg/ic_order.svg';
+  static const String iconProfile = 'assets/svg/ic_profile.svg';
 
   /// Background
   static const String bgPattern1 = 'assets/images/bg_pattern_1.png';

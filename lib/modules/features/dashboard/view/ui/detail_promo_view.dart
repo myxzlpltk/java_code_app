@@ -5,8 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
-import 'package:java_code_app/modules/features/home/controllers/detail_promo_controller.dart';
-import 'package:java_code_app/modules/features/home/view/components/promo_card.dart';
+import 'package:java_code_app/modules/features/dashboard/controllers/detail_promo_controller.dart';
+import 'package:java_code_app/modules/features/dashboard/view/components/promo_card.dart';
 import 'package:java_code_app/utils/extensions/string_case_extension.dart';
 import 'package:screenshot/screenshot.dart';
 

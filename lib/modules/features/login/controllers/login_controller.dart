@@ -22,8 +22,8 @@ class LoginController extends GetxController {
       await LocalDBServices.setUser(userRes.user!);
       await LocalDBServices.setToken(userRes.token!);
 
-      /// Pergi ke halaman home
-      Get.offAllNamed('/home');
+      /// Pergi ke halaman dashboard
+      Get.offAllNamed('/dashboard');
     } else if (userRes.status_code == 422 || userRes.status_code == 204) {
       Get.showSnackbar(GetSnackBar(
         title: 'error'.tr,
@@ -61,8 +61,8 @@ class LoginController extends GetxController {
       await LocalDBServices.setUser(userRes.user!);
       await LocalDBServices.setToken(userRes.token!);
 
-      /// Pergi ke halaman home
-      Get.offNamed('/home');
+      /// Pergi ke halaman dashboard
+      Get.offNamed('/dashboard');
     } else {
       Get.showSnackbar(GetSnackBar(
         title: 'error'.tr,

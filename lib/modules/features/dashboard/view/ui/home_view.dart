@@ -1,49 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
-import 'package:java_code_app/modules/features/home/controllers/home_controller.dart';
-import 'package:java_code_app/modules/features/home/view/components/filter_menu.dart';
-import 'package:java_code_app/modules/features/home/view/components/promo_card.dart';
-import 'package:java_code_app/modules/features/home/view/components/search_bar.dart';
-import 'package:java_code_app/modules/features/home/view/components/shimmer_promo_card.dart';
+import 'package:java_code_app/modules/features/dashboard/controllers/dashboard_controller.dart';
+import 'package:java_code_app/modules/features/dashboard/view/components/filter_menu.dart';
+import 'package:java_code_app/modules/features/dashboard/view/components/promo_card.dart';
+import 'package:java_code_app/modules/features/dashboard/view/components/search_bar.dart';
+import 'package:java_code_app/modules/features/dashboard/view/components/shimmer_promo_card.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeController());
-
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: SearchBar(
-          onChanged: (value) => {},
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30.w),
-          ),
-        ),
-      ),
       body: RefreshIndicator(
         onRefresh: () async {
           await Future.any([
-            HomeController.to.getListPromo(),
+            DashboardController.to.getListPromo(),
           ]);
         },
-        child: ListView(
-          children: [
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              pinned: true,
+              forceElevated: true,
+              backgroundColor: Colors.white,
+              centerTitle: true,
+              title: SearchBar(
+                onChanged: (value) => {},
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(30.w),
+                ),
+              ),
+            ),
+
             /// Promo section
-            ...promoSection(context),
+            SliverList(
+              delegate: SliverChildListDelegate(promoSection(context)),
+            ),
 
             /// Menu section
-            ...menuSection(context),
+            SliverList(
+              delegate: SliverChildListDelegate(menuSection(context)),
+            ),
+
+            SliverFillRemaining(
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 20.w),
+                child: Text("End of list", textAlign: TextAlign.center),
+              ),
+            ),
           ],
         ),
       ),
@@ -76,7 +88,7 @@ class HomeView extends StatelessWidget {
         child: Obx(
           () => ConditionalSwitch.single<String>(
             context: context,
-            valueBuilder: (context) => HomeController.to.statusPromo.value,
+            valueBuilder: (context) => DashboardController.to.statusPromo.value,
             caseBuilders: {
               'loading': (context) => ListView.separated(
                     padding: EdgeInsets.symmetric(
@@ -89,7 +101,7 @@ class HomeView extends StatelessWidget {
                     separatorBuilder: (context, _) => SizedBox(width: 25.w),
                   ),
               'error': (context) => Center(
-                    child: Text(HomeController.to.messagePromo.value),
+                    child: Text(DashboardController.to.messagePromo.value),
                   ),
               'success': (context) => ListView.separated(
                     padding: EdgeInsets.symmetric(
@@ -98,13 +110,14 @@ class HomeView extends StatelessWidget {
                     ),
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => PromoCard(
-                      promo: HomeController.to.listPromo.elementAt(index),
+                      promo: DashboardController.to.listPromo.elementAt(index),
                       onTap: () => Get.toNamed(
                         AppRoutes.detailPromoView,
-                        arguments: HomeController.to.listPromo.elementAt(index),
+                        arguments:
+                            DashboardController.to.listPromo.elementAt(index),
                       ),
                     ),
-                    itemCount: HomeController.to.listPromo.length,
+                    itemCount: DashboardController.to.listPromo.length,
                     separatorBuilder: (context, index) => SizedBox(width: 25.w),
                   ),
             },
@@ -128,8 +141,8 @@ class HomeView extends StatelessWidget {
           children: [
             Obx(
               () => FilterMenu(
-                isSelected: HomeController.to.filterMenu.value == 'all',
-                onTap: () => HomeController.to.setFilterMenu('all'),
+                isSelected: DashboardController.to.filterMenu.value == 'all',
+                onTap: () => DashboardController.to.setFilterMenu('all'),
                 iconPath: AssetConst.iconList,
                 text: 'all_menu'.tr,
               ),
@@ -137,8 +150,8 @@ class HomeView extends StatelessWidget {
             SizedBox(width: 13.w),
             Obx(
               () => FilterMenu(
-                isSelected: HomeController.to.filterMenu.value == 'food',
-                onTap: () => HomeController.to.setFilterMenu('food'),
+                isSelected: DashboardController.to.filterMenu.value == 'food',
+                onTap: () => DashboardController.to.setFilterMenu('food'),
                 iconPath: AssetConst.iconFood,
                 text: 'food'.tr,
               ),
@@ -146,8 +159,8 @@ class HomeView extends StatelessWidget {
             SizedBox(width: 13.w),
             Obx(
               () => FilterMenu(
-                isSelected: HomeController.to.filterMenu.value == 'drink',
-                onTap: () => HomeController.to.setFilterMenu('drink'),
+                isSelected: DashboardController.to.filterMenu.value == 'drink',
+                onTap: () => DashboardController.to.setFilterMenu('drink'),
                 iconPath: AssetConst.iconDrink,
                 text: 'drink'.tr,
               ),

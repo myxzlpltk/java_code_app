@@ -4,7 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
-import 'package:java_code_app/modules/features/home/controllers/detail_promo_controller.dart';
+import 'package:java_code_app/modules/features/dashboard/controllers/detail_promo_controller.dart';
 import 'package:uni_links/uni_links.dart';
 
 class GlobalController extends GetxController {

@@ -44,6 +44,11 @@ class Localization extends Translations {
           'all_menu': 'All Menu',
           'food': 'Food',
           'drink': 'Drink',
+
+          /// Bottom Navigation Bar
+          'home': 'Home',
+          'order': 'Order',
+          'profile': 'Profile',
         },
         'id_ID': {
           /// Error umum
@@ -86,6 +91,11 @@ class Localization extends Translations {
           'all_menu': 'Semua Menu',
           'food': 'Makanan',
           'drink': 'Minuman',
+
+          /// Bottom Navigation Bar
+          'home': 'Beranda',
+          'order': 'Pesanan',
+          'profile': 'Profil',
         },
       };
 }

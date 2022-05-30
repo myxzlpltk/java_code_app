@@ -3,7 +3,7 @@ import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
-import 'package:java_code_app/modules/features/home/controllers/home_controller.dart';
+import 'package:java_code_app/modules/features/dashboard/controllers/dashboard_controller.dart';
 
 class GetLocationView extends StatelessWidget {
   const GetLocationView({Key? key}) : super(key: key);
@@ -51,15 +51,15 @@ class GetLocationView extends StatelessWidget {
                 () => ConditionalSwitch.single<String>(
                   context: context,
                   valueBuilder: (context) =>
-                      HomeController.to.statusLocation.value,
+                      DashboardController.to.statusLocation.value,
                   caseBuilders: {
                     'error': (context) => Text(
-                          HomeController.to.messageLocation.value,
+                          DashboardController.to.messageLocation.value,
                           style: Theme.of(context).textTheme.headline5,
                           textAlign: TextAlign.center,
                         ),
                     'success': (context) => Text(
-                          HomeController.to.address.value!,
+                          DashboardController.to.address.value!,
                           style: Theme.of(context).textTheme.headline5,
                           textAlign: TextAlign.center,
                         ),

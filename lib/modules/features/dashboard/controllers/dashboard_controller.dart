@@ -1,23 +1,12 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
-import 'package:java_code_app/modules/features/home/repositories/promo_repository.dart';
+import 'package:java_code_app/modules/features/dashboard/repositories/promo_repository.dart';
 import 'package:java_code_app/modules/models/promo.dart';
 import 'package:java_code_app/utils/services/location_services.dart';
 
-class HomeController extends GetxController {
-  static HomeController get to => Get.find();
-
-  RxString statusLocation = RxString('loading');
-  RxString messageLocation = RxString('');
-  Rxn<Position> position = Rxn<Position>();
-  RxnString address = RxnString();
-
-  RxString statusPromo = RxString('loading');
-  RxString messagePromo = RxString('');
-  RxList<Promo> listPromo = RxList<Promo>();
-
-  RxString filterMenu = RxString('all');
+class DashboardController extends GetxController {
+  static DashboardController get to => Get.find();
 
   @override
   void onReady() {
@@ -32,6 +21,20 @@ class HomeController extends GetxController {
     /// Mendapatkan promo
     getListPromo();
   }
+
+  /// Navigation bar
+  RxInt tabIndex = RxInt(0);
+
+  /// Change tab index
+  void changeTabIndex(int index) {
+    tabIndex.value = index;
+  }
+
+  /// Location
+  RxString statusLocation = RxString('loading');
+  RxString messageLocation = RxString('');
+  Rxn<Position> position = Rxn<Position>();
+  RxnString address = RxnString();
 
   /// Get current location if location not exists
   Future<void> getLocation() async {
@@ -53,6 +56,11 @@ class HomeController extends GetxController {
       messageLocation.value = e.toString();
     }
   }
+
+  /// Promo
+  RxString statusPromo = RxString('loading');
+  RxString messagePromo = RxString('');
+  RxList<Promo> listPromo = RxList<Promo>();
 
   /// Get all promo
   Future<void> getListPromo() async {
@@ -77,6 +85,10 @@ class HomeController extends GetxController {
     }
   }
 
+  /// Menu
+  RxString filterMenu = RxString('all');
+
+  /// Update filter menu
   Future<void> setFilterMenu(String value) async {
     filterMenu.value = value;
   }

@@ -27,6 +27,14 @@ class FilterMenu extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.w),
           color: isSelected ? darkColor2 : blueColor,
+          boxShadow: [
+            BoxShadow(
+              offset: const Offset(0, 2),
+              blurRadius: 8,
+              spreadRadius: -1,
+              color: darkColor2.withOpacity(0.25),
+            ),
+          ],
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
