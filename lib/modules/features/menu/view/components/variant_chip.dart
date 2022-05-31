@@ -17,6 +17,8 @@ class VariantChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      clipBehavior: Clip.antiAlias,
+      borderRadius: BorderRadius.circular(30.w),
       child: InkWell(
         onTap: onTap,
         child: Ink(
