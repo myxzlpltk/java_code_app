@@ -31,9 +31,10 @@ class ToppingBottomSheet extends StatelessWidget {
                   .map<Widget>(
                     (topping) => VariantChip(
                       text: topping.keterangan,
-                      onTap: () => DetailMenuController.to.setTopping(topping),
-                      isSelected: topping ==
-                          DetailMenuController.to.selectedTopping.value,
+                      onTap: () =>
+                          DetailMenuController.to.toggleTopping(topping),
+                      isSelected: DetailMenuController.to.selectedToppings
+                          .contains(topping),
                     ),
                   )
                   .toList(),

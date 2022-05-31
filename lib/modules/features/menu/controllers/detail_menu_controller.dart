@@ -4,6 +4,7 @@ import 'package:java_code_app/modules/features/menu/repositories/menu_repository
 import 'package:java_code_app/modules/features/menu/view/components/level_bottom_sheet.dart';
 import 'package:java_code_app/modules/features/menu/view/components/note_bottom_sheet.dart';
 import 'package:java_code_app/modules/features/menu/view/components/topping_bottom_sheet.dart';
+import 'package:java_code_app/modules/global_controllers/cart_controller.dart';
 import 'package:java_code_app/modules/models/menu.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
 
@@ -20,7 +21,7 @@ class DetailMenuController extends GetxController {
 
   RxInt quantity = RxInt(1);
   Rxn<MenuVariant> selectedLevel = Rxn<MenuVariant>();
-  Rxn<MenuVariant> selectedTopping = Rxn<MenuVariant>();
+  RxList<MenuVariant> selectedToppings = RxList<MenuVariant>();
   RxString note = RxString('');
 
   @override
@@ -40,7 +41,6 @@ class DetailMenuController extends GetxController {
         }
         if (menuRes.topping.isNotEmpty) {
           toppings.value = menuRes.topping;
-          selectedTopping.value = menuRes.topping.first;
         }
       } else {
         status.value = 'error';
@@ -91,6 +91,9 @@ class DetailMenuController extends GetxController {
     if (Get.isBottomSheetOpen == true) Get.back();
   }
 
+  /// Getter for selected level text
+  String get selectedLevelText => selectedLevel.value?.keterangan ?? '-';
+
   /// Open topping bottom sheet
   void openToppingBottomSheet() {
     Get.bottomSheet(
@@ -102,16 +105,31 @@ class DetailMenuController extends GetxController {
   }
 
   /// Set topping
-  void setTopping(MenuVariant topping) {
-    selectedTopping.value = topping;
-    if (Get.isBottomSheetOpen == true) Get.back();
+  void toggleTopping(MenuVariant topping) {
+    if (selectedToppings.contains(topping)) {
+      selectedToppings.remove(topping);
+    } else {
+      selectedToppings.add(topping);
+    }
+    selectedToppings.sort((a, b) => a.keterangan.compareTo(b.keterangan));
   }
 
+  /// Getter for selected topping text
+  String get selectedToppingsText => selectedToppings.isNotEmpty
+      ? selectedToppings.map((topping) => topping.keterangan).join(', ')
+      : '-';
+
+  /// is
   bool get isAllowedToOrder =>
       status.value == 'success' &&
-      (selectedLevel.value != null || levels.isEmpty) &&
-      (selectedTopping.value != null || toppings.isEmpty);
+      (selectedLevel.value != null || levels.isEmpty);
 
   /// On add to cart
-  void addToOrder() {}
+  void addToCart() {
+    Get.put(CartController());
+
+    if (isAllowedToOrder) {
+      Get.back();
+    }
+  }
 }

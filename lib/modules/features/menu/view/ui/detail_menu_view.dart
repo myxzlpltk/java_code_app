@@ -122,8 +122,7 @@ class DetailMenuView extends StatelessWidget {
                           Tile(
                             icon: AssetConst.iconLevel,
                             title: 'level'.tr,
-                            message: DetailMenuController
-                                .to.selectedLevel.value!.keterangan,
+                            message: DetailMenuController.to.selectedLevelText,
                             onTap: DetailMenuController.to.openLevelBottomSheet,
                           ),
                         ],
@@ -145,8 +144,8 @@ class DetailMenuView extends StatelessWidget {
                           Tile(
                             icon: AssetConst.iconTopping,
                             title: 'topping'.tr,
-                            message: DetailMenuController
-                                .to.selectedTopping.value!.keterangan,
+                            message:
+                                DetailMenuController.to.selectedToppingsText,
                             onTap:
                                 DetailMenuController.to.openToppingBottomSheet,
                           ),
@@ -175,7 +174,7 @@ class DetailMenuView extends StatelessWidget {
                           DetailMenuController.to.status.value == 'success',
                       widgetBuilder: (context) => PrimaryButton(
                         text: 'add_to_order'.tr,
-                        onPressed: DetailMenuController.to.addToOrder,
+                        onPressed: DetailMenuController.to.addToCart,
                       ),
                       fallbackBuilder: (context) => const SizedBox(),
                     ),
