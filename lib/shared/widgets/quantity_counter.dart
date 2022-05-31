@@ -18,21 +18,26 @@ class QuantityCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        if (quantity > 1)
-          InkWell(
-            onTap: onDecrement,
+        Visibility(
+          visible: quantity > 0,
+          maintainState: true,
+          maintainSize: true,
+          maintainAnimation: true,
+          child: Material(
+            clipBehavior: Clip.antiAlias,
             borderRadius: BorderRadius.circular(4),
-            child: Ink(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                border: Border.all(
-                  color: blueColor,
-                  width: 2,
+            child: InkWell(
+              onTap: onDecrement,
+              child: Ink(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: blueColor, width: 2),
                 ),
+                child: const Icon(Icons.remove, size: 16, color: blueColor),
               ),
-              child: const Icon(Icons.remove, size: 16, color: blueColor),
             ),
           ),
+        ),
         Container(
           constraints: BoxConstraints(minWidth: 30.w),
           padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -44,19 +49,16 @@ class QuantityCounter extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        InkWell(
-          onTap: onIncrement,
+        Material(
+          clipBehavior: Clip.antiAlias,
           borderRadius: BorderRadius.circular(4),
-          child: Ink(
-            decoration: BoxDecoration(
+          child: InkWell(
+            onTap: onIncrement,
+            child: Ink(
+              padding: const EdgeInsets.all(2),
               color: blueColor,
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(
-                color: blueColor,
-                width: 2,
-              ),
+              child: const Icon(Icons.add, size: 16, color: Colors.white),
             ),
-            child: const Icon(Icons.add, size: 16, color: Colors.white),
           ),
         ),
       ],
