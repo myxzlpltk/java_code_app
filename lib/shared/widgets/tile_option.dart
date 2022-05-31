@@ -4,14 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 
-class Tile extends StatelessWidget {
+class TileOption extends StatelessWidget {
   final String? icon;
   final String title;
   final String message;
   final TextStyle? messageStyle;
   final void Function()? onTap;
 
-  const Tile({
+  const TileOption({
     Key? key,
     this.icon,
     required this.title,
@@ -50,7 +50,8 @@ class Tile extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 10.w),
-              const Icon(Icons.chevron_right, color: greyColor),
+              if (onTap != null)
+                const Icon(Icons.chevron_right, color: greyColor),
             ],
           ),
         ),

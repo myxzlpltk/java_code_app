@@ -7,7 +7,7 @@ import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/menu/controllers/detail_menu_controller.dart';
 import 'package:java_code_app/shared/widgets/primary_button.dart';
 import 'package:java_code_app/shared/widgets/quantity_counter.dart';
-import 'package:java_code_app/shared/widgets/tile.dart';
+import 'package:java_code_app/shared/widgets/tile_option.dart';
 import 'package:java_code_app/utils/extensions/currency_extension.dart';
 
 class DetailMenuView extends StatelessWidget {
@@ -98,7 +98,7 @@ class DetailMenuView extends StatelessWidget {
                   ),
                   SizedBox(height: 40.h),
                   Divider(color: darkColor2.withOpacity(0.25), height: 1),
-                  Tile(
+                  TileOption(
                     icon: AssetConst.iconPrice,
                     title: 'price'.tr,
                     message:
@@ -119,7 +119,7 @@ class DetailMenuView extends StatelessWidget {
                             color: darkColor2.withOpacity(0.25),
                             height: 1,
                           ),
-                          Tile(
+                          TileOption(
                             icon: AssetConst.iconLevel,
                             title: 'level'.tr,
                             message: DetailMenuController.to.selectedLevelText,
@@ -141,7 +141,7 @@ class DetailMenuView extends StatelessWidget {
                             color: darkColor2.withOpacity(0.25),
                             height: 1,
                           ),
-                          Tile(
+                          TileOption(
                             icon: AssetConst.iconTopping,
                             title: 'topping'.tr,
                             message:
@@ -156,7 +156,7 @@ class DetailMenuView extends StatelessWidget {
                   ),
                   Divider(color: darkColor2.withOpacity(0.25), height: 1),
                   Obx(
-                    () => Tile(
+                        () => TileOption(
                       icon: AssetConst.iconEdit,
                       title: 'note'.tr,
                       message: DetailMenuController.to.note.isNotEmpty
