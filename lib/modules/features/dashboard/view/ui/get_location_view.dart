@@ -32,7 +32,7 @@ class GetLocationView extends StatelessWidget {
             children: [
               Text(
                 'searching_location'.tr,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: darkColor.withOpacity(0.5),
                     ),
                 textAlign: TextAlign.center,

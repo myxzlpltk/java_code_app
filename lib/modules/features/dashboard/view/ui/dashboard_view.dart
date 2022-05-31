@@ -34,17 +34,17 @@ class DashboardView extends StatelessWidget {
             onTap: DashboardController.to.changeTabIndex,
             currentIndex: DashboardController.to.tabIndex.value,
             backgroundColor: darkColor2,
-            selectedLabelStyle: Theme.of(context).textTheme.caption,
-            unselectedLabelStyle: Theme.of(context).textTheme.caption,
+            selectedLabelStyle: Theme.of(context).textTheme.labelSmall,
+            unselectedLabelStyle: Theme.of(context).textTheme.labelSmall,
             selectedItemColor: Colors.white,
-            unselectedItemColor: greyColor,
+            unselectedItemColor: greyColor2,
             items: [
               BottomNavigationBarItem(
                 icon: Padding(
                   padding: EdgeInsets.only(bottom: 5.h),
                   child: SvgPicture.asset(
                     AssetConst.iconHome,
-                    color: greyColor,
+                    color: greyColor2,
                     height: 27.h,
                   ),
                 ),
@@ -63,7 +63,7 @@ class DashboardView extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 5.h),
                   child: SvgPicture.asset(
                     AssetConst.iconOrder,
-                    color: greyColor,
+                    color: greyColor2,
                     height: 27.h,
                   ),
                 ),
@@ -82,7 +82,7 @@ class DashboardView extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 5.h),
                   child: SvgPicture.asset(
                     AssetConst.iconProfile,
-                    color: greyColor,
+                    color: greyColor2,
                     height: 27.h,
                   ),
                 ),

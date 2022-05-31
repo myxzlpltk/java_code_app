@@ -1,6 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
-class User {
+import 'package:equatable/equatable.dart';
+
+class User extends Equatable {
   final int id_user;
   final String email;
   final String nama;
@@ -36,6 +38,9 @@ class User {
       'foto': foto,
     };
   }
+
+  @override
+  List<Object?> get props => [id_user];
 }
 
 class UserRes {

@@ -42,7 +42,7 @@ class DetailPromoView extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: lightColor2,
+      backgroundColor: lightColor3,
       body: Column(
         children: [
           Padding(
@@ -71,12 +71,13 @@ class DetailPromoView extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 45.h),
+              clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(30.w)),
               ),
-              child: Column(
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 45.h),
                 children: [
                   Obx(
                     () => Conditional.single(
@@ -132,7 +133,7 @@ class DetailPromoView extends StatelessWidget {
                             .to.promo.value!.syarat_ketentuan,
                         style: {
                           '*': Style.fromTextStyle(
-                            Theme.of(context).textTheme.labelLarge!,
+                            Theme.of(context).textTheme.labelMedium!,
                           ),
                         },
                       ),

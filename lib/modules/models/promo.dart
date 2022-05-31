@@ -1,10 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:equatable/equatable.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/utils/extensions/currency_extension.dart';
 import 'package:java_code_app/utils/extensions/string_case_extension.dart';
 
-class Promo {
+class Promo extends Equatable {
   final int id_promo;
   final String nama;
   final String type;
@@ -58,6 +59,9 @@ class Promo {
   String get amountLabel => type == 'diskon' ? '$diskon%' : nominal!.toShortK();
 
   String get typeAmountLabel => '$typeLabel $amountLabel';
+
+  @override
+  List<Object?> get props => [id_promo];
 }
 
 class ListPromoRes {

@@ -34,7 +34,7 @@ class MenuCard extends StatelessWidget {
       child: Ink(
         padding: EdgeInsets.all(7.w),
         decoration: BoxDecoration(
-          color: lightColor,
+          color: lightColor2,
           borderRadius: BorderRadius.circular(10.w),
           boxShadow: [
             BoxShadow(
@@ -54,7 +54,7 @@ class MenuCard extends StatelessWidget {
               padding: EdgeInsets.all(5.w),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.w),
-                color: greyColor2,
+                color: lightColor,
               ),
               child: Image.network(
                 menu.foto,
@@ -89,7 +89,7 @@ class MenuCard extends StatelessWidget {
                         SizedBox(
                           width: 150.w,
                           child: TextField(
-                            style: Theme.of(context).textTheme.labelLarge,
+                            style: Theme.of(context).textTheme.labelMedium,
                             decoration: InputDecoration.collapsed(
                               hintText: 'add_note'.tr,
                               border: InputBorder.none,

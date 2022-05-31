@@ -23,7 +23,7 @@ class NetworkErrorView extends StatelessWidget {
           ),
           Text(
             'not_connected'.tr,
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.titleSmall,
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 15.h),

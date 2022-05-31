@@ -49,6 +49,7 @@ class GlobalController extends GetxController {
   Future<void> showAlert() async {
     await Get.defaultDialog(
       title: 'error'.tr,
+      titleStyle: Get.textTheme.headlineSmall,
       content: const NetworkErrorView(),
     );
   }

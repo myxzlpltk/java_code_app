@@ -82,7 +82,7 @@ class PromoCard extends StatelessWidget {
                 SizedBox(height: 5.h),
                 Text(
                   promo.nama.toTitleCase(),
-                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
                         color: Colors.white.withOpacity(0.75),
                       ),
                   textAlign: TextAlign.center,

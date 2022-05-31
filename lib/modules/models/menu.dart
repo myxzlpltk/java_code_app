@@ -1,8 +1,9 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:equatable/equatable.dart';
 import 'package:java_code_app/constants/commons/constants.dart';
 
-class Menu {
+class Menu extends Equatable {
   final int id_menu;
   final String nama;
   final String kategori;
@@ -11,7 +12,7 @@ class Menu {
   final String foto;
   final int status;
 
-  Menu({
+  const Menu({
     required this.id_menu,
     required this.nama,
     required this.kategori,
@@ -46,6 +47,46 @@ class Menu {
       'status': status,
     };
   }
+
+  @override
+  List<Object?> get props => [id_menu];
+}
+
+class MenuVariant extends Equatable {
+  final int id_detail;
+  final String keterangan;
+  final String type;
+  final int harga;
+
+  const MenuVariant({
+    required this.id_detail,
+    required this.keterangan,
+    required this.type,
+    required this.harga,
+  });
+
+  /// From json
+  factory MenuVariant.fromJson(Map<String, dynamic> json) {
+    return MenuVariant(
+      id_detail: json['id_detail'] as int,
+      keterangan: json['keterangan'] as String,
+      type: json['type'] as String,
+      harga: json['harga'] as int,
+    );
+  }
+
+  /// To map
+  Map<String, dynamic> toMap() {
+    return {
+      'id_detail': id_detail,
+      'keterangan': keterangan,
+      'type': type,
+      'harga': harga,
+    };
+  }
+
+  @override
+  List<Object?> get props => [id_detail];
 }
 
 class ListMenuRes {
@@ -75,11 +116,15 @@ class MenuRes {
   final int status_code;
   final String? message;
   final Menu? data;
+  final List<MenuVariant> topping;
+  final List<MenuVariant> level;
 
   MenuRes({
     required this.status_code,
     this.message,
     this.data,
+    this.topping = const <MenuVariant>[],
+    this.level = const <MenuVariant>[],
   });
 
   /// From json
@@ -87,7 +132,19 @@ class MenuRes {
     return MenuRes(
       status_code: json['status_code'] as int,
       message: json['message'] as String?,
-      data: json['status_code'] == 200 ? Menu.fromJson(json['data']) : null,
+      data: json['status_code'] == 200
+          ? Menu.fromJson(json['data']['menu'])
+          : null,
+      topping: json['status_code'] == 200 && json['data']['topping'] is List
+          ? json['data']['topping']
+              .map<MenuVariant>((e) => MenuVariant.fromJson(e))
+              .toList()
+          : const <MenuVariant>[],
+      level: json['status_code'] == 200 && json['data']['level'] is List
+          ? json['data']['level']
+              .map<MenuVariant>((e) => MenuVariant.fromJson(e))
+              .toList()
+          : const <MenuVariant>[],
     );
   }
 }

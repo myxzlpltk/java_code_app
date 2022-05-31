@@ -18,22 +18,24 @@ class QuantityCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        InkWell(
-          onTap: onDecrement,
-          borderRadius: BorderRadius.circular(4),
-          child: Ink(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(
-                color: blueColor,
-                width: 2,
+        if (quantity > 1)
+          InkWell(
+            onTap: onDecrement,
+            borderRadius: BorderRadius.circular(4),
+            child: Ink(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(
+                  color: blueColor,
+                  width: 2,
+                ),
               ),
+              child: const Icon(Icons.remove, size: 16, color: blueColor),
             ),
-            child: const Icon(Icons.remove, size: 16, color: blueColor),
           ),
-        ),
         Container(
           constraints: BoxConstraints(minWidth: 30.w),
+          padding: EdgeInsets.symmetric(horizontal: 5.w),
           child: Text(
             quantity.toString(),
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -43,7 +45,7 @@ class QuantityCounter extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: onDecrement,
+          onTap: onIncrement,
           borderRadius: BorderRadius.circular(4),
           child: Ink(
             decoration: BoxDecoration(

@@ -48,6 +48,14 @@ class Localization extends Translations {
           'add_note': 'Add Note',
           'promo': 'Promo',
           'detail_menu': 'Detail Menu',
+          'price': 'Price',
+          'topping': 'Topping',
+          'level': 'Level',
+          'note': 'Note',
+          'add_to_order': 'Add to Order',
+          'create_note': 'Create Note',
+          'select_level': 'Select Level',
+          'select_topping': 'Select Topping',
 
           /// Bottom Navigation Bar
           'home': 'Home',
@@ -99,6 +107,14 @@ class Localization extends Translations {
           'add_note': 'Tambahkan catatan',
           'promo': 'Promo',
           'detail_menu': 'Detail Menu',
+          'price': 'Harga',
+          'topping': 'Toping',
+          'level': 'Level',
+          'note': 'Catatan',
+          'add_to_order': 'Tambahkan ke Pesanan',
+          'create_note': 'Buat catatan',
+          'select_level': 'Pilih Level',
+          'select_topping': 'Pilih Toping',
 
           /// Bottom Navigation Bar
           'home': 'Beranda',

@@ -5,9 +5,10 @@ import 'package:java_code_app/configs/themes/colors.dart';
 
 final lightTheme = ThemeData(
   primaryColor: blueColor,
+  focusColor: blueColor,
   fontFamily: GoogleFonts.montserrat().fontFamily,
   scaffoldBackgroundColor: Colors.white,
-  textTheme: TextTheme(
+  textTheme: GoogleFonts.montserratTextTheme().copyWith(
     displayLarge: GoogleFonts.montserrat(
       fontSize: 35.sp,
       fontWeight: FontWeight.w600,
@@ -57,7 +58,7 @@ final lightTheme = ThemeData(
       height: 1.219,
     ),
     bodyLarge: GoogleFonts.montserrat(
-      fontSize: 22.sp,
+      fontSize: 18.sp,
       fontWeight: FontWeight.normal,
       color: darkColor,
       height: 1.219,
@@ -75,6 +76,12 @@ final lightTheme = ThemeData(
       height: 1.219,
     ),
     labelLarge: GoogleFonts.montserrat(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w400,
+      color: darkColor2,
+      height: 1.219,
+    ),
+    labelMedium: GoogleFonts.montserrat(
       fontSize: 12.sp,
       fontWeight: FontWeight.w400,
       color: darkColor2,
