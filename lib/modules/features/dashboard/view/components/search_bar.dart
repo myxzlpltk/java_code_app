@@ -23,10 +23,10 @@ class SearchBar extends StatelessWidget {
           Expanded(
             child: TextField(
               onChanged: onChanged,
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.headlineSmall,
               decoration: InputDecoration.collapsed(
                 hintText: 'search_bar'.tr,
-                hintStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                hintStyle: Theme.of(context).textTheme.headlineSmall!.copyWith(
                       color: const Color(0xFFAAAAAA),
                     ),
               ),

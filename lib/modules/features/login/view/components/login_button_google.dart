@@ -31,6 +31,7 @@ class LoginButtonGoogle extends StatelessWidget {
               fontSize: ScreenUtil().setSp(14),
               fontWeight: FontWeight.w400,
               color: darkColor,
+              height: 1.219,
             ),
           ),
           Text(
@@ -39,6 +40,7 @@ class LoginButtonGoogle extends StatelessWidget {
               fontSize: ScreenUtil().setSp(14),
               fontWeight: FontWeight.w600,
               color: darkColor,
+              height: 1.219,
             ),
           ),
           const Spacer(),

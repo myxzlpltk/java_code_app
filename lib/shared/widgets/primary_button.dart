@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 
 class PrimaryButton extends StatelessWidget {
@@ -18,17 +19,16 @@ class PrimaryButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         primary: blueColor,
-        elevation: 4,
-        textStyle: Theme.of(context).textTheme.button,
-        padding: EdgeInsets.symmetric(
-          horizontal: 24.w,
-          vertical: 14.h,
+        elevation: 3,
+        textStyle: GoogleFonts.montserrat(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w800,
+          color: Colors.white,
+          height: 1.219,
         ),
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.h),
         shape: RoundedRectangleBorder(
-          side: const BorderSide(
-            color: darkBlueColor,
-            width: 1,
-          ),
+          side: const BorderSide(color: darkBlueColor, width: 1),
           borderRadius: BorderRadius.circular(24),
         ),
       ),

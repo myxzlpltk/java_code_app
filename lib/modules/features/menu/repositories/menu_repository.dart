@@ -8,15 +8,15 @@ import 'package:java_code_app/utils/services/local_db_services.dart';
 class MenuRepository {
   MenuRepository._();
 
-  /// Memanggil API untuk mendapatkan semua menu
-  static Future<ListMenuRes> getAll() async {
+  /// Memanggil API untuk mendapatkan menu berdasarkan id
+  static Future<MenuRes> getFromId(int id_menu) async {
     try {
       var dio = ApiServices.dioCall(token: await LocalDBServices.getToken());
-      var response = await dio.get(ApiConst.allMenu);
+      var response = await dio.get('${ApiConst.menu}/$id_menu');
 
-      return ListMenuRes.fromJson(response.data);
+      return MenuRes.fromJson(response.data);
     } on DioError {
-      return ListMenuRes(status_code: 500, message: 'server_error'.tr);
+      return MenuRes(status_code: 500, message: 'server_error'.tr);
     }
   }
 }

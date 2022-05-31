@@ -30,6 +30,7 @@ class LoginButtonApple extends StatelessWidget {
             style: GoogleFonts.montserrat(
               fontSize: ScreenUtil().setSp(14),
               fontWeight: FontWeight.w400,
+              height: 1.219,
             ),
           ),
           Text(
@@ -37,6 +38,7 @@ class LoginButtonApple extends StatelessWidget {
             style: GoogleFonts.montserrat(
               fontSize: ScreenUtil().setSp(14),
               fontWeight: FontWeight.w600,
+              height: 1.219,
             ),
           ),
           const Spacer(),

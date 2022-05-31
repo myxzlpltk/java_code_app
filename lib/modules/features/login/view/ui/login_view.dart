@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/login/controllers/login_controller.dart';
+import 'package:java_code_app/modules/features/login/view/components/divider_with_text.dart';
 import 'package:java_code_app/modules/features/login/view/components/login_button_apple.dart';
 import 'package:java_code_app/modules/features/login/view/components/login_button_google.dart';
 import 'package:java_code_app/modules/features/login/view/components/text_field_email.dart';
 import 'package:java_code_app/modules/features/login/view/components/text_field_password.dart';
-import 'package:java_code_app/shared/widgets/divider_with_text.dart';
 import 'package:java_code_app/shared/widgets/primary_button.dart';
 
 class LoginView extends StatelessWidget {
@@ -45,7 +45,7 @@ class LoginView extends StatelessWidget {
               /// Heading
               Text(
                 'continue_to_sign_in'.tr,
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 40.h),
@@ -72,13 +72,11 @@ class LoginView extends StatelessWidget {
               ),
 
               SizedBox(height: 70.h),
-              const DividerWithText('atau'),
+              const DividerWithText('or'),
               SizedBox(height: 20.h),
 
               /// Google Button
-              LoginButtonGoogle(onPressed: () {
-                LoginController.to.loginWithGoogle();
-              }),
+              LoginButtonGoogle(onPressed: LoginController.to.loginWithGoogle),
               SizedBox(height: 15.h),
 
               /// Apple Button

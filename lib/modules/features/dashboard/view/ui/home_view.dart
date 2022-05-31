@@ -6,11 +6,11 @@ import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
-import 'package:java_code_app/modules/features/dashboard/controllers/dashboard_controller.dart';
+import 'package:java_code_app/modules/features/dashboard/controllers/home_controller.dart';
 import 'package:java_code_app/modules/features/dashboard/view/components/filter_menu.dart';
-import 'package:java_code_app/modules/features/dashboard/view/components/menu_card.dart';
-import 'package:java_code_app/modules/features/dashboard/view/components/promo_card.dart';
 import 'package:java_code_app/modules/features/dashboard/view/components/search_bar.dart';
+import 'package:java_code_app/shared/widgets/menu_card.dart';
+import 'package:java_code_app/shared/widgets/promo_card.dart';
 import 'package:java_code_app/shared/widgets/rect_shimmer.dart';
 
 class HomeView extends StatelessWidget {
@@ -18,12 +18,14 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(HomeController());
+
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
           await Future.any([
-            DashboardController.to.getListPromo(),
-            DashboardController.to.getListMenu(),
+            HomeController.to.getListPromo(),
+            HomeController.to.getListMenu(),
           ]);
         },
         child: CustomScrollView(
@@ -33,7 +35,7 @@ class HomeView extends StatelessWidget {
               forceElevated: true,
               backgroundColor: Colors.white,
               centerTitle: true,
-              title: SearchBar(onChanged: DashboardController.to.setFilterMenu),
+              title: SearchBar(onChanged: HomeController.to.setFilterMenu),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(30.w),
@@ -49,16 +51,16 @@ class HomeView extends StatelessWidget {
             /// Menu section
             SliverToBoxAdapter(
               child: Obx(
-                () => Column(
+                    () => Column(
                   children: [
                     ...menuSection(context),
-                    if (DashboardController.to.categoryMenu.value == 'all' ||
-                        DashboardController.to.categoryMenu.value == 'food')
+                    if (HomeController.to.categoryMenu.value == 'all' ||
+                        HomeController.to.categoryMenu.value == 'food')
                       ...foodSection(context),
-                    if (DashboardController.to.categoryMenu.value == 'all')
-                      SizedBox(width: 25.w),
-                    if (DashboardController.to.categoryMenu.value == 'all' ||
-                        DashboardController.to.categoryMenu.value == 'drink')
+                    if (HomeController.to.categoryMenu.value == 'all')
+                      SizedBox(height: 17.h),
+                    if (HomeController.to.categoryMenu.value == 'all' ||
+                        HomeController.to.categoryMenu.value == 'drink')
                       ...drinkSection(context),
                   ],
                 ),
@@ -83,7 +85,7 @@ class HomeView extends StatelessWidget {
           SizedBox(width: 10.w),
           Text(
             'available_promo'.tr,
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           SizedBox(width: 25.w),
         ],
@@ -96,10 +98,10 @@ class HomeView extends StatelessWidget {
         child: Obx(
           () => ConditionalSwitch.single<String>(
             context: context,
-            valueBuilder: (context) => DashboardController.to.statusPromo.value,
+            valueBuilder: (context) => HomeController.to.statusPromo.value,
             caseBuilders: {
               'loading': (context) => ListView.separated(
-                padding: EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                       horizontal: 25.w,
                       vertical: 15.h,
                     ),
@@ -113,7 +115,7 @@ class HomeView extends StatelessWidget {
                     separatorBuilder: (context, _) => SizedBox(width: 25.w),
                   ),
               'error': (context) => Center(
-                    child: Text(DashboardController.to.messagePromo.value),
+                child: Text(HomeController.to.messagePromo.value),
                   ),
             },
             fallbackBuilder: (context) => ListView.separated(
@@ -123,13 +125,13 @@ class HomeView extends StatelessWidget {
               ),
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => PromoCard(
-                promo: DashboardController.to.listPromo.elementAt(index),
+                promo: HomeController.to.listPromo.elementAt(index),
                 onTap: () => Get.toNamed(
                   AppRoutes.detailPromoView,
-                  arguments: DashboardController.to.listPromo.elementAt(index),
+                  arguments: HomeController.to.listPromo.elementAt(index),
                 ),
               ),
-              itemCount: DashboardController.to.listPromo.length,
+              itemCount: HomeController.to.listPromo.length,
               separatorBuilder: (context, index) => SizedBox(width: 25.w),
             ),
           ),
@@ -151,8 +153,8 @@ class HomeView extends StatelessWidget {
           children: [
             Obx(
               () => FilterMenu(
-                isSelected: DashboardController.to.categoryMenu.value == 'all',
-                onTap: () => DashboardController.to.setCategoryMenu('all'),
+                isSelected: HomeController.to.categoryMenu.value == 'all',
+                onTap: () => HomeController.to.setCategoryMenu('all'),
                 iconPath: AssetConst.iconList,
                 text: 'all_menu'.tr,
               ),
@@ -160,8 +162,8 @@ class HomeView extends StatelessWidget {
             SizedBox(width: 13.w),
             Obx(
               () => FilterMenu(
-                isSelected: DashboardController.to.categoryMenu.value == 'food',
-                onTap: () => DashboardController.to.setCategoryMenu('food'),
+                isSelected: HomeController.to.categoryMenu.value == 'food',
+                onTap: () => HomeController.to.setCategoryMenu('food'),
                 iconPath: AssetConst.iconFood,
                 text: 'food'.tr,
               ),
@@ -169,9 +171,8 @@ class HomeView extends StatelessWidget {
             SizedBox(width: 13.w),
             Obx(
               () => FilterMenu(
-                isSelected:
-                    DashboardController.to.categoryMenu.value == 'drink',
-                onTap: () => DashboardController.to.setCategoryMenu('drink'),
+                isSelected: HomeController.to.categoryMenu.value == 'drink',
+                onTap: () => HomeController.to.setCategoryMenu('drink'),
                 iconPath: AssetConst.iconDrink,
                 text: 'drink'.tr,
               ),
@@ -193,7 +194,7 @@ class HomeView extends StatelessWidget {
           SizedBox(width: 10.w),
           Text(
             'food'.tr,
-            style: Theme.of(context).textTheme.headline6!.copyWith(
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   color: blueColor,
                 ),
           ),
@@ -205,7 +206,7 @@ class HomeView extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 17.h),
         child: ConditionalSwitch.single<String>(
           context: context,
-          valueBuilder: (context) => DashboardController.to.statusMenu.value,
+          valueBuilder: (context) => HomeController.to.statusMenu.value,
           caseBuilders: {
             'loading': (context) => Wrap(
                   runSpacing: 17.h,
@@ -216,13 +217,13 @@ class HomeView extends StatelessWidget {
                 ),
             'error': (context) => Center(
                   child: Text(
-                    DashboardController.to.messageMenu.value,
+                    HomeController.to.messageMenu.value,
                     textAlign: TextAlign.center,
                   ),
                 ),
           },
           fallbackBuilder: (context) {
-            final foods = DashboardController.to.foodMenu;
+            final foods = HomeController.to.foodMenu;
 
             if (foods.isEmpty) {
               return Center(
@@ -234,9 +235,12 @@ class HomeView extends StatelessWidget {
                 children: foods
                     .map<Widget>(
                       (menu) => MenuCard(
-                        menu: menu,
+                    menu: menu,
                         simple: true,
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed(AppRoutes.detailMenuView,
+                              arguments: menu);
+                        },
                       ),
                     )
                     .toList(),
@@ -245,7 +249,6 @@ class HomeView extends StatelessWidget {
           },
         ),
       ),
-      SizedBox(height: 17.h),
     ];
   }
 
@@ -259,7 +262,7 @@ class HomeView extends StatelessWidget {
           SizedBox(width: 10.w),
           Text(
             'drink'.tr,
-            style: Theme.of(context).textTheme.headline6!.copyWith(
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   color: blueColor,
                 ),
           ),
@@ -272,7 +275,7 @@ class HomeView extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 17.h),
         child: ConditionalSwitch.single<String>(
           context: context,
-          valueBuilder: (context) => DashboardController.to.statusMenu.value,
+          valueBuilder: (context) => HomeController.to.statusMenu.value,
           caseBuilders: {
             'loading': (context) => Wrap(
                   runSpacing: 17.h,
@@ -283,13 +286,13 @@ class HomeView extends StatelessWidget {
                 ),
             'error': (context) => Center(
                   child: Text(
-                    DashboardController.to.messageMenu.value,
+                    HomeController.to.messageMenu.value,
                     textAlign: TextAlign.center,
                   ),
                 ),
           },
           fallbackBuilder: (context) {
-            final foods = DashboardController.to.drinkMenu;
+            final foods = HomeController.to.drinkMenu;
 
             if (foods.isEmpty) {
               return Center(
@@ -301,9 +304,12 @@ class HomeView extends StatelessWidget {
                 children: foods
                     .map<Widget>(
                       (menu) => MenuCard(
-                        menu: menu,
+                    menu: menu,
                         simple: true,
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed(AppRoutes.detailMenuView,
+                              arguments: menu);
+                        },
                       ),
                     )
                     .toList(),

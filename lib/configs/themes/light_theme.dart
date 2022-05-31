@@ -4,85 +4,87 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 
 final lightTheme = ThemeData(
+  primaryColor: blueColor,
   fontFamily: GoogleFonts.montserrat().fontFamily,
+  scaffoldBackgroundColor: Colors.white,
   textTheme: TextTheme(
-    headline1: GoogleFonts.montserrat(
-      fontSize: 96.sp,
-      fontWeight: FontWeight.w300,
-      letterSpacing: -1.5,
-      color: darkColor,
-    ),
-    headline2: GoogleFonts.montserrat(
-      fontSize: 60.sp,
-      fontWeight: FontWeight.w300,
-      letterSpacing: -0.5,
-      color: darkColor,
-    ),
-    headline3: GoogleFonts.montserrat(
-      fontSize: 48.sp,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0,
-      color: darkColor,
-    ),
-    headline4: GoogleFonts.montserrat(
+    displayLarge: GoogleFonts.montserrat(
       fontSize: 35.sp,
-      fontWeight: FontWeight.w900,
-      letterSpacing: 0.25,
+      fontWeight: FontWeight.w600,
       color: darkColor,
+      height: 1.219,
     ),
-    headline5: GoogleFonts.montserrat(
+    displayMedium: GoogleFonts.montserrat(
+      fontSize: 30.sp,
+      fontWeight: FontWeight.w600,
+      color: darkColor,
+      height: 1.219,
+    ),
+    displaySmall: GoogleFonts.montserrat(
+      fontSize: 26.sp,
+      fontWeight: FontWeight.w600,
+      color: darkColor,
+      height: 1.219,
+    ),
+    headlineMedium: GoogleFonts.montserrat(
       fontSize: 22.sp,
       fontWeight: FontWeight.w600,
-      letterSpacing: 0,
       color: darkColor,
+      height: 1.219,
     ),
-    headline6: GoogleFonts.montserrat(
+    headlineSmall: GoogleFonts.montserrat(
+      fontSize: 18.sp,
+      fontWeight: FontWeight.w600,
+      color: darkColor,
+      height: 1.219,
+    ),
+    titleLarge: GoogleFonts.montserrat(
+      fontSize: 22.sp,
+      fontWeight: FontWeight.w600,
+      color: darkColor2,
+      height: 1.219,
+    ),
+    titleMedium: GoogleFonts.montserrat(
       fontSize: 20.sp,
-      fontWeight: FontWeight.w700,
-      letterSpacing: 0.15,
-      color: darkColor,
+      fontWeight: FontWeight.w600,
+      color: darkColor2,
+      height: 1.219,
     ),
-    subtitle1: GoogleFonts.montserrat(
-      fontSize: 16.sp,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0.15,
-      color: darkColor,
-    ),
-    subtitle2: GoogleFonts.montserrat(
-      fontSize: 14.sp,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0.1,
-      color: darkColor,
-    ),
-    bodyText1: GoogleFonts.montserrat(
+    titleSmall: GoogleFonts.montserrat(
       fontSize: 16.sp,
       fontWeight: FontWeight.w600,
-      letterSpacing: 0.5,
-      color: darkColor,
+      color: darkColor2,
+      height: 1.219,
     ),
-    bodyText2: GoogleFonts.montserrat(
+    bodyLarge: GoogleFonts.montserrat(
+      fontSize: 22.sp,
+      fontWeight: FontWeight.normal,
+      color: darkColor,
+      height: 1.219,
+    ),
+    bodyMedium: GoogleFonts.montserrat(
+      fontSize: 16.sp,
+      fontWeight: FontWeight.normal,
+      color: darkColor,
+      height: 1.219,
+    ),
+    bodySmall: GoogleFonts.montserrat(
       fontSize: 14.sp,
       fontWeight: FontWeight.w400,
-      letterSpacing: 0.25,
       color: darkColor,
+      height: 1.219,
     ),
-    button: GoogleFonts.montserrat(
-      fontSize: 14.sp,
-      fontWeight: FontWeight.w800,
-      letterSpacing: 1.25,
-      color: Colors.white,
-    ),
-    caption: GoogleFonts.montserrat(
+    labelLarge: GoogleFonts.montserrat(
       fontSize: 12.sp,
       fontWeight: FontWeight.w400,
-      letterSpacing: 0.4,
-      color: darkColor,
+      color: darkColor2,
+      height: 1.219,
     ),
-    overline: GoogleFonts.montserrat(
+    labelSmall: GoogleFonts.montserrat(
       fontSize: 10.sp,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 1.5,
-      color: darkColor,
+      fontWeight: FontWeight.w700,
+      color: darkColor2,
+      height: 1.219,
     ),
   ),
 );

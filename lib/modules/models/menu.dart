@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:java_code_app/constants/commons/constants.dart';
 
 class Menu {
@@ -65,6 +67,27 @@ class ListMenuRes {
       data: json['status_code'] == 200
           ? json['data'].map<Menu>((e) => Menu.fromJson(e)).toList()
           : null,
+    );
+  }
+}
+
+class MenuRes {
+  final int status_code;
+  final String? message;
+  final Menu? data;
+
+  MenuRes({
+    required this.status_code,
+    this.message,
+    this.data,
+  });
+
+  /// From json
+  factory MenuRes.fromJson(Map<String, dynamic> json) {
+    return MenuRes(
+      status_code: json['status_code'] as int,
+      message: json['message'] as String?,
+      data: json['status_code'] == 200 ? Menu.fromJson(json['data']) : null,
     );
   }
 }

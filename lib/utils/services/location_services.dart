@@ -33,7 +33,7 @@ class LocationServices {
       position.longitude,
       localeIdentifier: Get.locale == null
           ? 'id_ID'
-          : '${Get.locale!.languageCode}_${Get.locale!.countryCode}',
+          : '${Get.locale!.languageCode}menu${Get.locale!.countryCode}',
     );
 
     if (placemarks.isEmpty) {

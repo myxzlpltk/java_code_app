@@ -7,3 +7,4 @@ const darkColor2 = Color(0xFF2E2E2E);
 const greyColor = Color(0xFFC2C2C2);
 const greyColor2 = Color(0xFFDFDFDF);
 const lightColor = Color(0xFFF6F6F6);
+const lightColor2 = Color(0xFFF0F0F0);

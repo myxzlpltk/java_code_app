@@ -37,13 +37,12 @@ class FilterMenu extends StatelessWidget {
           ],
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgPicture.asset(iconPath),
             SizedBox(width: 10.w),
             Text(
               text,
-              style: Theme.of(context).textTheme.headline6!.copyWith(
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: Colors.white,
                   ),
             ),

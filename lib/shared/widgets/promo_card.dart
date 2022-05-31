@@ -64,13 +64,13 @@ class PromoCard extends StatelessWidget {
                       promo.typeLabel,
                       style: Theme.of(context)
                           .textTheme
-                          .headline6!
+                          .titleMedium!
                           .copyWith(color: Colors.white),
                     ),
                     SizedBox(width: 5.w),
                     Text(
                       promo.amountLabel,
-                      style: Theme.of(context).textTheme.headline4!.copyWith(
+                      style: Theme.of(context).textTheme.displayLarge!.copyWith(
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
                               ..strokeWidth = 1.5
@@ -82,7 +82,7 @@ class PromoCard extends StatelessWidget {
                 SizedBox(height: 5.h),
                 Text(
                   promo.nama.toTitleCase(),
-                  style: Theme.of(context).textTheme.caption!.copyWith(
+                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
                         color: Colors.white.withOpacity(0.75),
                       ),
                   textAlign: TextAlign.center,

@@ -6,8 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
-import 'package:java_code_app/modules/features/dashboard/controllers/detail_promo_controller.dart';
-import 'package:java_code_app/modules/features/dashboard/view/components/promo_card.dart';
+import 'package:java_code_app/modules/features/promo/controllers/detail_promo_controller.dart';
+import 'package:java_code_app/shared/widgets/promo_card.dart';
 import 'package:java_code_app/shared/widgets/rect_shimmer.dart';
 import 'package:java_code_app/utils/extensions/string_case_extension.dart';
 import 'package:screenshot/screenshot.dart';
@@ -21,6 +21,7 @@ class DetailPromoView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 2,
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(Icons.chevron_left, color: Colors.black, size: 32.w),
@@ -32,7 +33,7 @@ class DetailPromoView extends StatelessWidget {
           children: [
             SvgPicture.asset(AssetConst.iconPromo, width: 23.w),
             SizedBox(width: 10.w),
-            Text('Promo', style: Theme.of(context).textTheme.headline6),
+            Text('promo'.tr, style: Theme.of(context).textTheme.titleMedium),
           ],
         ),
         shape: RoundedRectangleBorder(
@@ -41,7 +42,7 @@ class DetailPromoView extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: const Color(0xFFF0F0F0),
+      backgroundColor: lightColor2,
       body: Column(
         children: [
           Padding(
@@ -90,7 +91,7 @@ class DetailPromoView extends StatelessWidget {
                             child: Text(
                               DetailPromoController.to.promo.value!.nama
                                   .toTitleCase(),
-                              style: Theme.of(context).textTheme.headline6,
+                              style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
                           SizedBox(width: 25.w),
@@ -99,7 +100,7 @@ class DetailPromoView extends StatelessWidget {
                                 .to.promo.value!.typeAmountLabel,
                             style: Theme.of(context)
                                 .textTheme
-                                .headline6!
+                                .titleMedium!
                                 .copyWith(color: blueColor),
                           ),
                         ],
@@ -116,7 +117,7 @@ class DetailPromoView extends StatelessWidget {
                       SizedBox(width: 14.w),
                       Text(
                         'terms_and_conditions'.tr,
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.titleSmall,
                       ),
                     ],
                   ),
@@ -129,6 +130,11 @@ class DetailPromoView extends StatelessWidget {
                       widgetBuilder: (context) => Html(
                         data: DetailPromoController
                             .to.promo.value!.syarat_ketentuan,
+                        style: {
+                          '*': Style.fromTextStyle(
+                            Theme.of(context).textTheme.labelLarge!,
+                          ),
+                        },
                       ),
                       fallbackBuilder: (context) => RectShimmer(height: 100.h),
                     ),

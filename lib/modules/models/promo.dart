@@ -74,8 +74,8 @@ class ListPromoRes {
   /// From Json
   factory ListPromoRes.fromJson(Map<String, dynamic> json) {
     return ListPromoRes(
-      status_code: json['status_code'],
-      message: json['message'],
+      status_code: json['status_code'] as int,
+      message: json['message'] as String?,
       data: json['status_code'] == 200
           ? json['data'].map<Promo>((e) => Promo.fromJson(e)).toList()
           : null,
@@ -97,8 +97,8 @@ class PromoRes {
   /// From Json
   factory PromoRes.fromJson(Map<String, dynamic> json) {
     return PromoRes(
-      status_code: json['status_code'],
-      message: json['message'],
+      status_code: json['status_code'] as int,
+      message: json['message'] as String?,
       data: json['status_code'] == 200 ? Promo.fromJson(json['data']) : null,
     );
   }

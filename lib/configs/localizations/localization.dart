@@ -16,6 +16,7 @@ class Localization extends Translations {
           'password': 'Password',
           'login_with': 'Login with ',
           'account_incorrect': 'Email or password is incorrect',
+          'or': 'or',
 
           /// Koneksi
           'connected': 'Connected to the internet',
@@ -44,7 +45,9 @@ class Localization extends Translations {
           'all_menu': 'All Menu',
           'food': 'Food',
           'drink': 'Drink',
-          'add_note': 'Add Note...',
+          'add_note': 'Add Note',
+          'promo': 'Promo',
+          'detail_menu': 'Detail Menu',
 
           /// Bottom Navigation Bar
           'home': 'Home',
@@ -64,6 +67,7 @@ class Localization extends Translations {
           'password': 'Kata Sandi',
           'login_with': 'Masuk menggunakan ',
           'account_incorrect': 'Email atau kata sandi salah',
+          'or': 'atau',
 
           /// Koneksi
           'connected': 'Terhubung ke internet',
@@ -92,7 +96,9 @@ class Localization extends Translations {
           'all_menu': 'Semua Menu',
           'food': 'Makanan',
           'drink': 'Minuman',
-          'add_note': 'Tambahkan catatan......',
+          'add_note': 'Tambahkan catatan',
+          'promo': 'Promo',
+          'detail_menu': 'Detail Menu',
 
           /// Bottom Navigation Bar
           'home': 'Beranda',

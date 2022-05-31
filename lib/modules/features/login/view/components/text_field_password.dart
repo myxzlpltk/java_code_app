@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
+import 'package:java_code_app/configs/themes/colors.dart';
 
 class TextFieldPassword extends StatelessWidget {
   final TextEditingController controller;
@@ -12,11 +13,14 @@ class TextFieldPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      style: Theme.of(context).textTheme.bodySmall,
       decoration: InputDecoration(
         labelText: 'password'.tr,
-        labelStyle: Theme.of(context).textTheme.subtitle2,
+        labelStyle: Theme.of(context).textTheme.bodySmall,
         hintText: '****************',
-        hintStyle: Theme.of(context).textTheme.bodyText2,
+        hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
+              color: darkColor.withOpacity(0.25),
+            ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       obscureText: true,

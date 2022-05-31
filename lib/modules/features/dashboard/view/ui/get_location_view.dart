@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/dashboard/controllers/dashboard_controller.dart';
 
@@ -31,8 +32,8 @@ class GetLocationView extends StatelessWidget {
             children: [
               Text(
                 'searching_location'.tr,
-                style: Theme.of(context).textTheme.headline5!.copyWith(
-                      fontWeight: FontWeight.w400,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      color: darkColor.withOpacity(0.5),
                     ),
                 textAlign: TextAlign.center,
               ),
@@ -54,13 +55,13 @@ class GetLocationView extends StatelessWidget {
                       DashboardController.to.statusLocation.value,
                   caseBuilders: {
                     'error': (context) => Text(
-                          DashboardController.to.messageLocation.value,
-                          style: Theme.of(context).textTheme.headline5,
+                      DashboardController.to.messageLocation.value,
+                          style: Theme.of(context).textTheme.titleLarge,
                           textAlign: TextAlign.center,
                         ),
                     'success': (context) => Text(
-                          DashboardController.to.address.value!,
-                          style: Theme.of(context).textTheme.headline5,
+                      DashboardController.to.address.value!,
+                          style: Theme.of(context).textTheme.titleLarge,
                           textAlign: TextAlign.center,
                         ),
                   },
