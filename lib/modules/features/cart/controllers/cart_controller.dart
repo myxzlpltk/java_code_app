@@ -1,4 +1,3 @@
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/modules/models/menu.dart';
 import 'package:java_code_app/modules/models/order_detail.dart';
@@ -53,12 +52,6 @@ class CartController extends GetxController {
 
   /// Update note
   void updateNote(OrderDetail orderDetail, String note) {
-    EasyDebounce.debounce(
-      'update-note-${orderDetail.menu.id_menu}',
-      const Duration(milliseconds: 500),
-      () {
-        orderDetail.note = note;
-      },
-    );
+    orderDetail.note = note;
   }
 }
