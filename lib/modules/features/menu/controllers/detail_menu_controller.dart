@@ -6,6 +6,7 @@ import 'package:java_code_app/modules/features/menu/view/components/note_bottom_
 import 'package:java_code_app/modules/features/menu/view/components/topping_bottom_sheet.dart';
 import 'package:java_code_app/modules/global_controllers/cart_controller.dart';
 import 'package:java_code_app/modules/models/menu.dart';
+import 'package:java_code_app/modules/models/order_detail.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
 
 class DetailMenuController extends GetxController {
@@ -56,7 +57,7 @@ class DetailMenuController extends GetxController {
 
   /// On decrement quantity
   void onDecrement() {
-    if (quantity > 1) quantity.value--;
+    if (quantity > 0) quantity.value--;
   }
 
   /// Open note bottom sheet
@@ -124,12 +125,22 @@ class DetailMenuController extends GetxController {
       status.value == 'success' &&
       (selectedLevel.value != null || levels.isEmpty);
 
+  OrderDetail get _orderDetail => OrderDetail(
+      menu: menu.value!,
+      quantity: quantity.value,
+      note: note.value,
+      level: selectedLevel.value,
+      toppings: toppings.isEmpty ? null : selectedToppings.toList());
+
   /// On add to cart
   void addToCart() {
-    Get.put(CartController());
-
     if (isAllowedToOrder) {
+      CartController.to.add(_orderDetail);
       Get.back();
     }
+  }
+
+  void deleteFromCart() {
+    CartController.to.remove(_orderDetail);
   }
 }

@@ -56,6 +56,8 @@ class Localization extends Translations {
           'create_note': 'Create Note',
           'select_level': 'Select Level',
           'select_topping': 'Select Topping',
+          'delete_from_order': 'Delete from Order',
+          'update_to_order': 'Update to Order',
 
           /// Bottom Navigation Bar
           'home': 'Home',
@@ -115,6 +117,8 @@ class Localization extends Translations {
           'create_note': 'Buat catatan',
           'select_level': 'Pilih Level',
           'select_topping': 'Pilih Toping',
+          'delete_from_order': 'Hapus dari Pesanan',
+          'update_to_order': 'Perbarui ke Pesanan',
 
           /// Bottom Navigation Bar
           'home': 'Beranda',

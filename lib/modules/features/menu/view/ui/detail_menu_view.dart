@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/menu/controllers/detail_menu_controller.dart';
+import 'package:java_code_app/modules/global_controllers/cart_controller.dart';
+import 'package:java_code_app/shared/widgets/danger_button.dart';
 import 'package:java_code_app/shared/widgets/primary_button.dart';
 import 'package:java_code_app/shared/widgets/quantity_counter.dart';
 import 'package:java_code_app/shared/widgets/tile_option.dart';
@@ -85,13 +87,11 @@ class DetailMenuView extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 10.w),
-                      Material(
-                        child: Obx(
-                          () => QuantityCounter(
-                            quantity: DetailMenuController.to.quantity.value,
-                            onIncrement: DetailMenuController.to.onIncrement,
-                            onDecrement: DetailMenuController.to.onDecrement,
-                          ),
+                      Obx(
+                        () => QuantityCounter(
+                          quantity: DetailMenuController.to.quantity.value,
+                          onIncrement: DetailMenuController.to.onIncrement,
+                          onDecrement: DetailMenuController.to.onDecrement,
                         ),
                       ),
                     ],
@@ -172,10 +172,20 @@ class DetailMenuView extends StatelessWidget {
                       context: context,
                       conditionBuilder: (context) =>
                           DetailMenuController.to.status.value == 'success',
-                      widgetBuilder: (context) => PrimaryButton(
-                        text: 'add_to_order'.tr,
-                        onPressed: DetailMenuController.to.addToCart,
-                      ),
+                      widgetBuilder: (context) =>
+                          DetailMenuController.to.quantity > 0
+                              ? PrimaryButton(
+                                  text: CartController.to.isMenuExists(
+                                          DetailMenuController.to.menu.value!)
+                                      ? 'update_to_order'.tr
+                                      : 'add_to_order'.tr,
+                                  onPressed: DetailMenuController.to.addToCart,
+                                )
+                              : DangerButton(
+                                  text: 'delete_from_order'.tr,
+                                  onPressed:
+                                      DetailMenuController.to.deleteFromCart,
+                                ),
                       fallbackBuilder: (context) => const SizedBox(),
                     ),
                   ),

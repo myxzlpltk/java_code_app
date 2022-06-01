@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +10,8 @@ import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/dashboard/controllers/home_controller.dart';
 import 'package:java_code_app/modules/features/dashboard/view/components/filter_menu.dart';
 import 'package:java_code_app/modules/features/dashboard/view/components/search_bar.dart';
+import 'package:java_code_app/modules/global_controllers/cart_controller.dart';
+import 'package:java_code_app/shared/styles/shapes.dart';
 import 'package:java_code_app/shared/widgets/menu_card.dart';
 import 'package:java_code_app/shared/widgets/promo_card.dart';
 import 'package:java_code_app/shared/widgets/rect_shimmer.dart';
@@ -34,13 +37,34 @@ class HomeView extends StatelessWidget {
               pinned: true,
               forceElevated: true,
               backgroundColor: Colors.white,
-              centerTitle: true,
-              title: SearchBar(onChanged: HomeController.to.setFilterMenu),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(30.w),
-                ),
+              title: Row(
+                children: [
+                  Expanded(
+                    child: SearchBar(
+                      onChanged: HomeController.to.setFilterMenu,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Obx(
+                      () => Badge(
+                        showBadge: CartController.to.cart.isNotEmpty,
+                        badgeColor: blueColor,
+                        badgeContent: Text(
+                          CartController.to.totalCart.toString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelMedium!
+                              .copyWith(color: Colors.white),
+                        ),
+                        child: const Icon(Icons.shopping_cart),
+                      ),
+                    ),
+                    color: Colors.black,
+                  ),
+                ],
               ),
+              shape: CustomShape.bottomRoundedShape,
             ),
 
             /// Promo section
@@ -49,11 +73,15 @@ class HomeView extends StatelessWidget {
             ),
 
             /// Menu section
+            SliverList(
+              delegate: SliverChildListDelegate(menuSection(context)),
+            ),
+
+            /// Food and drink section
             SliverToBoxAdapter(
               child: Obx(
-                    () => Column(
+                () => Column(
                   children: [
-                    ...menuSection(context),
                     if (HomeController.to.categoryMenu.value == 'all' ||
                         HomeController.to.categoryMenu.value == 'food')
                       ...foodSection(context),
@@ -96,7 +124,7 @@ class HomeView extends StatelessWidget {
       SizedBox(
         height: 188.h,
         child: Obx(
-          () => ConditionalSwitch.single<String>(
+              () => ConditionalSwitch.single<String>(
             context: context,
             valueBuilder: (context) => HomeController.to.statusPromo.value,
             caseBuilders: {
@@ -115,7 +143,7 @@ class HomeView extends StatelessWidget {
                     separatorBuilder: (context, _) => SizedBox(width: 25.w),
                   ),
               'error': (context) => Center(
-                child: Text(HomeController.to.messagePromo.value),
+                    child: Text(HomeController.to.messagePromo.value),
                   ),
             },
             fallbackBuilder: (context) => ListView.separated(
@@ -152,7 +180,7 @@ class HomeView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 5.h),
           children: [
             Obx(
-              () => FilterMenu(
+                  () => FilterMenu(
                 isSelected: HomeController.to.categoryMenu.value == 'all',
                 onTap: () => HomeController.to.setCategoryMenu('all'),
                 iconPath: AssetConst.iconList,
@@ -161,7 +189,7 @@ class HomeView extends StatelessWidget {
             ),
             SizedBox(width: 13.w),
             Obx(
-              () => FilterMenu(
+                  () => FilterMenu(
                 isSelected: HomeController.to.categoryMenu.value == 'food',
                 onTap: () => HomeController.to.setCategoryMenu('food'),
                 iconPath: AssetConst.iconFood,
@@ -170,7 +198,7 @@ class HomeView extends StatelessWidget {
             ),
             SizedBox(width: 13.w),
             Obx(
-              () => FilterMenu(
+                  () => FilterMenu(
                 isSelected: HomeController.to.categoryMenu.value == 'drink',
                 onTap: () => HomeController.to.setCategoryMenu('drink'),
                 iconPath: AssetConst.iconDrink,
@@ -190,13 +218,19 @@ class HomeView extends StatelessWidget {
       Row(
         children: [
           SizedBox(width: 25.w),
-          SvgPicture.asset(AssetConst.iconFood, width: 23.w, color: blueColor),
+          SvgPicture.asset(
+            AssetConst.iconFood,
+            width: 20.r,
+            height: 20.r,
+            color: blueColor,
+          ),
           SizedBox(width: 10.w),
           Text(
             'food'.tr,
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: blueColor,
-                ),
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: blueColor),
           ),
         ],
       ),
@@ -235,7 +269,7 @@ class HomeView extends StatelessWidget {
                 children: foods
                     .map<Widget>(
                       (menu) => MenuCard(
-                    menu: menu,
+                        menu: menu,
                         simple: true,
                         onTap: () {
                           Get.toNamed(AppRoutes.detailMenuView,
@@ -258,13 +292,19 @@ class HomeView extends StatelessWidget {
       Row(
         children: [
           SizedBox(width: 25.w),
-          SvgPicture.asset(AssetConst.iconDrink, width: 23.w, color: blueColor),
+          SvgPicture.asset(
+            AssetConst.iconDrink,
+            width: 20.r,
+            height: 20.r,
+            color: blueColor,
+          ),
           SizedBox(width: 10.w),
           Text(
             'drink'.tr,
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: blueColor,
-                ),
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: blueColor),
           ),
           SizedBox(width: 25.w),
         ],
@@ -304,7 +344,7 @@ class HomeView extends StatelessWidget {
                 children: foods
                     .map<Widget>(
                       (menu) => MenuCard(
-                    menu: menu,
+                        menu: menu,
                         simple: true,
                         onTap: () {
                           Get.toNamed(AppRoutes.detailMenuView,

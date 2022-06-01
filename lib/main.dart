@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: appDesignSize,
       builder: (context, _) => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         initialBinding: GlobalBinding(),
         title: appName,
         initialRoute: AppRoutes.splashView,
