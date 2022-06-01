@@ -29,10 +29,10 @@ class NoteBottomSheet extends StatelessWidget {
               Expanded(
                 child: TextField(
                   controller: noteController,
-                  style: Theme.of(context).textTheme.labelLarge,
+                  style: Theme.of(context).textTheme.bodySmall,
                   decoration: InputDecoration(
                     hintText: 'add_note'.tr,
-                    hintStyle: Theme.of(context).textTheme.labelLarge,
+                    hintStyle: Theme.of(context).textTheme.bodySmall,
                   ),
                   maxLength: 100,
                 ),

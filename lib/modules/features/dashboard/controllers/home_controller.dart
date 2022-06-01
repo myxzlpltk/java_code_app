@@ -1,5 +1,6 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:get/get.dart';
+import 'package:java_code_app/constants/commons/constants.dart';
 import 'package:java_code_app/modules/features/dashboard/repositories/menu_repository.dart';
 import 'package:java_code_app/modules/features/dashboard/repositories/promo_repository.dart';
 import 'package:java_code_app/modules/models/menu.dart';
@@ -86,10 +87,10 @@ class HomeController extends GetxController {
   }
 
   /// Get food list
-  List<Menu> get foodMenu => _getListMenuByFilter('makanan');
+  List<Menu> get foodMenu => _getListMenuByFilter(foodCategory);
 
   /// Get drink list
-  List<Menu> get drinkMenu => _getListMenuByFilter('minuman');
+  List<Menu> get drinkMenu => _getListMenuByFilter(drinkCategory);
 
   List<Menu> _getListMenuByFilter(String category) {
     return listMenu

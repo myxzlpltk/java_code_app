@@ -20,7 +20,7 @@ class SplashController extends GetxController {
     }
 
     if (user != null && token != null) {
-      if (uri is Uri) {
+      if (uri != null) {
         Get.offAllNamed('/dashboard');
         GlobalController.to.processUniLinks(uri);
       } else {

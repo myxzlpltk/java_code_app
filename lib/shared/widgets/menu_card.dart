@@ -11,6 +11,8 @@ import 'package:java_code_app/utils/extensions/currency_extension.dart';
 class MenuCard extends StatelessWidget {
   final Menu menu;
   final bool simple;
+  final int quantity;
+  final String note;
   final void Function()? onTap;
   final void Function()? onIncrement;
   final void Function()? onDecrement;
@@ -20,6 +22,8 @@ class MenuCard extends StatelessWidget {
     Key? key,
     required this.menu,
     this.simple = false,
+    this.quantity = 0,
+    this.note = '',
     this.onTap,
     this.onIncrement,
     this.onDecrement,
@@ -28,6 +32,8 @@ class MenuCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('MenuCard.build ${note}');
+
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(10.w),
@@ -56,11 +62,14 @@ class MenuCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.w),
                 color: lightColor,
               ),
-              child: Image.network(
-                menu.foto,
-                fit: BoxFit.contain,
-                height: 75.w,
-                width: 75.w,
+              child: Hero(
+                tag: 'menu-photo-${menu.id_menu}',
+                child: Image.network(
+                  menu.foto,
+                  fit: BoxFit.contain,
+                  height: 75.w,
+                  width: 75.w,
+                ),
               ),
             ),
             SizedBox(width: 12.w),
@@ -88,7 +97,8 @@ class MenuCard extends StatelessWidget {
                         SizedBox(width: 7.w),
                         SizedBox(
                           width: 150.w,
-                          child: TextField(
+                          child: TextFormField(
+                            initialValue: note,
                             style: Theme.of(context).textTheme.labelMedium,
                             decoration: InputDecoration.collapsed(
                               hintText: 'add_note'.tr,
@@ -105,7 +115,7 @@ class MenuCard extends StatelessWidget {
             SizedBox(width: 12.w),
             if (!simple) ...[
               QuantityCounter(
-                quantity: 1,
+                quantity: quantity,
                 onIncrement: onIncrement,
                 onDecrement: onDecrement,
               ),

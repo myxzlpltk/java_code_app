@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/menu/controllers/detail_menu_controller.dart';
-import 'package:java_code_app/modules/global_controllers/cart_controller.dart';
 import 'package:java_code_app/shared/widgets/danger_button.dart';
 import 'package:java_code_app/shared/widgets/primary_button.dart';
 import 'package:java_code_app/shared/widgets/quantity_counter.dart';
@@ -43,11 +42,14 @@ class DetailMenuView extends StatelessWidget {
         children: [
           SizedBox(height: 25.h),
           Center(
-            child: Image.network(
-              DetailMenuController.to.menu.value!.foto,
-              height: 181.h,
-              width: 234.w,
-              fit: BoxFit.contain,
+            child: Hero(
+              tag: 'menu-photo-${DetailMenuController.to.menu.value!.id_menu}',
+              child: Image.network(
+                DetailMenuController.to.menu.value!.foto,
+                height: 181.h,
+                width: 234.w,
+                fit: BoxFit.contain,
+              ),
             ),
           ),
           SizedBox(height: 25.h),
@@ -172,20 +174,19 @@ class DetailMenuView extends StatelessWidget {
                       context: context,
                       conditionBuilder: (context) =>
                           DetailMenuController.to.status.value == 'success',
-                      widgetBuilder: (context) =>
-                          DetailMenuController.to.quantity > 0
-                              ? PrimaryButton(
-                                  text: CartController.to.isMenuExists(
-                                          DetailMenuController.to.menu.value!)
-                                      ? 'update_to_order'.tr
-                                      : 'add_to_order'.tr,
-                                  onPressed: DetailMenuController.to.addToCart,
-                                )
-                              : DangerButton(
-                                  text: 'delete_from_order'.tr,
-                                  onPressed:
-                                      DetailMenuController.to.deleteFromCart,
-                                ),
+                      widgetBuilder: (context) => DetailMenuController
+                                  .to.quantity >
+                              0
+                          ? PrimaryButton(
+                              text: DetailMenuController.to.isExistsInCart.value
+                                  ? 'update_to_order'.tr
+                                  : 'add_to_order'.tr,
+                              onPressed: DetailMenuController.to.addToCart,
+                            )
+                          : DangerButton(
+                              text: 'delete_from_order'.tr,
+                              onPressed: DetailMenuController.to.deleteFromCart,
+                            ),
                       fallbackBuilder: (context) => const SizedBox(),
                     ),
                   ),

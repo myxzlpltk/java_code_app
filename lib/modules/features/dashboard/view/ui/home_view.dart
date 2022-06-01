@@ -7,10 +7,10 @@ import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
+import 'package:java_code_app/modules/features/cart/controllers/cart_controller.dart';
 import 'package:java_code_app/modules/features/dashboard/controllers/home_controller.dart';
 import 'package:java_code_app/modules/features/dashboard/view/components/filter_menu.dart';
 import 'package:java_code_app/modules/features/dashboard/view/components/search_bar.dart';
-import 'package:java_code_app/modules/global_controllers/cart_controller.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
 import 'package:java_code_app/shared/widgets/menu_card.dart';
 import 'package:java_code_app/shared/widgets/promo_card.dart';
@@ -45,13 +45,13 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () => Get.toNamed(AppRoutes.cartView),
                     icon: Obx(
                       () => Badge(
                         showBadge: CartController.to.cart.isNotEmpty,
                         badgeColor: blueColor,
                         badgeContent: Text(
-                          CartController.to.totalCart.toString(),
+                          CartController.to.totalQuantities.toString(),
                           style: Theme.of(context)
                               .textTheme
                               .labelMedium!
@@ -85,8 +85,6 @@ class HomeView extends StatelessWidget {
                     if (HomeController.to.categoryMenu.value == 'all' ||
                         HomeController.to.categoryMenu.value == 'food')
                       ...foodSection(context),
-                    if (HomeController.to.categoryMenu.value == 'all')
-                      SizedBox(height: 17.h),
                     if (HomeController.to.categoryMenu.value == 'all' ||
                         HomeController.to.categoryMenu.value == 'drink')
                       ...drinkSection(context),
@@ -283,6 +281,7 @@ class HomeView extends StatelessWidget {
           },
         ),
       ),
+      SizedBox(height: 17.h),
     ];
   }
 
@@ -358,6 +357,7 @@ class HomeView extends StatelessWidget {
           },
         ),
       ),
+      SizedBox(height: 17.h),
     ];
   }
 }

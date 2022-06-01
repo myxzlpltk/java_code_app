@@ -60,7 +60,7 @@ class GlobalController extends GetxController {
   }
 
   void processUniLinks(Uri? uri) async {
-    if (uri is Uri && uri.queryParameters['id_promo'] != null) {
+    if (uri != null && uri.queryParameters['id_promo'] != null) {
       /// Navigate to detail promo
       await Get.toNamed(
         AppRoutes.detailPromoView,

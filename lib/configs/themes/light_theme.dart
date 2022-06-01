@@ -59,13 +59,13 @@ final lightTheme = ThemeData(
     ),
     bodyLarge: GoogleFonts.montserrat(
       fontSize: 18.sp,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.w400,
       color: darkColor,
       height: 1.219,
     ),
     bodyMedium: GoogleFonts.montserrat(
       fontSize: 16.sp,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.w400,
       color: darkColor,
       height: 1.219,
     ),
@@ -77,7 +77,7 @@ final lightTheme = ThemeData(
     ),
     labelLarge: GoogleFonts.montserrat(
       fontSize: 14.sp,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w600,
       color: darkColor2,
       height: 1.219,
     ),
@@ -89,7 +89,7 @@ final lightTheme = ThemeData(
     ),
     labelSmall: GoogleFonts.montserrat(
       fontSize: 10.sp,
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w600,
       color: darkColor2,
       height: 1.219,
     ),

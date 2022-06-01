@@ -3,6 +3,7 @@ class AssetConst {
   static const String iconApple = 'assets/svg/ic_apple.svg';
   static const String iconDrink = 'assets/svg/ic_drink.svg';
   static const String iconEdit = 'assets/svg/ic_edit.svg';
+  static const String iconEmptyCart = 'assets/svg/ic_empty_cart.svg';
   static const String iconFood = 'assets/svg/ic_food.svg';
   static const String iconGoogle = 'assets/svg/ic_google.svg';
   static const String iconHome = 'assets/svg/ic_home.svg';
@@ -16,6 +17,10 @@ class AssetConst {
   static const String iconProfile = 'assets/svg/ic_profile.svg';
   static const String iconPromo = 'assets/svg/ic_promo.svg';
   static const String iconTopping = 'assets/svg/ic_topping.svg';
+  static const String iconCart = 'assets/svg/ic_cart.svg';
+  static const String iconDiscount = 'assets/svg/ic_discount.svg';
+  static const String iconPayment = 'assets/svg/ic_payment.svg';
+  static const String iconVoucher = 'assets/svg/ic_voucher.svg';
 
   /// Background
   static const String bgPattern1 = 'assets/images/bg_pattern_1.png';

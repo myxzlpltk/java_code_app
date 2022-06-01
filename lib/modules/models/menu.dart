@@ -22,6 +22,11 @@ class Menu extends Equatable {
     required this.status,
   });
 
+  /// Getter untuk kategori
+  bool get isFood => kategori == foodCategory;
+
+  bool get isDrink => kategori == drinkCategory;
+
   /// From json
   factory Menu.fromJson(Map<String, dynamic> json) {
     return Menu(

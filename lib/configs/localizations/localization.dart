@@ -59,6 +59,16 @@ class Localization extends Translations {
           'delete_from_order': 'Delete from Order',
           'update_to_order': 'Update to Order',
 
+          /// Keranjang
+          'empty_cart': 'Empty Cart',
+          'total_orders': 'Total Orders',
+          'discount': 'Discount',
+          'payment': 'Payment',
+          'total_payment': 'Total Payment',
+          'order_now': 'Order Now',
+          'choose_discount': 'Choose Discount',
+          'choose_voucher': 'Choose Voucher',
+
           /// Bottom Navigation Bar
           'home': 'Home',
           'order': 'Order',
@@ -119,6 +129,16 @@ class Localization extends Translations {
           'select_topping': 'Pilih Toping',
           'delete_from_order': 'Hapus dari Pesanan',
           'update_to_order': 'Perbarui ke Pesanan',
+
+          /// Keranjang
+          'empty_cart': 'Keranjang Kosong',
+          'total_orders': 'Total Pesanan',
+          'discount': 'Diskon',
+          'payment': 'Pembayaran',
+          'total_payment': 'Total Pembayaran',
+          'order_now': 'Pesan Sekarang',
+          'choose_discount': 'Pilih Diskon',
+          'choose_voucher': 'Pilih Voucher',
 
           /// Bottom Navigation Bar
           'home': 'Beranda',

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:java_code_app/modules/features/cart/controllers/cart_controller.dart';
 import 'package:java_code_app/modules/features/menu/repositories/menu_repository.dart';
 import 'package:java_code_app/modules/features/menu/view/components/level_bottom_sheet.dart';
 import 'package:java_code_app/modules/features/menu/view/components/note_bottom_sheet.dart';
 import 'package:java_code_app/modules/features/menu/view/components/topping_bottom_sheet.dart';
-import 'package:java_code_app/modules/global_controllers/cart_controller.dart';
 import 'package:java_code_app/modules/models/menu.dart';
 import 'package:java_code_app/modules/models/order_detail.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
@@ -12,11 +12,10 @@ import 'package:java_code_app/shared/styles/shapes.dart';
 class DetailMenuController extends GetxController {
   static DetailMenuController get to => Get.find();
 
-  Rxn<Menu> menu = Rxn<Menu>();
-
   RxString status = RxString('loading');
-  RxString message = RxString('');
+  RxBool isExistsInCart = RxBool(false);
 
+  Rxn<Menu> menu = Rxn<Menu>();
   RxList<MenuVariant> levels = RxList<MenuVariant>();
   RxList<MenuVariant> toppings = RxList<MenuVariant>();
 
@@ -34,18 +33,30 @@ class DetailMenuController extends GetxController {
 
     /// Set menu from API
     MenuRepository.getFromId(menu.value!.id_menu).then((menuRes) {
+      /// Jika request API sukses
       if (menuRes.status_code == 200) {
         status.value = 'success';
-        if (menuRes.level.isNotEmpty) {
-          levels.value = menuRes.level;
+        levels.value = menuRes.level;
+        toppings.value = menuRes.topping;
+
+        /// Cari apakah sudah ada dikeranjang
+        final orderDetail = CartController.to.findByMenu(menuRes.data!);
+
+        if (orderDetail != null) {
+          /// Jika ada dikeranjang
+          isExistsInCart.value = true;
+          quantity.value = orderDetail.quantity;
+          selectedLevel.value = orderDetail.level;
+          note.value = orderDetail.note;
+          if (orderDetail.toppings != null) {
+            selectedToppings.value = orderDetail.toppings!;
+          }
+        } else {
+          /// Jika tidak ada dikeranjang
           selectedLevel.value = menuRes.level.first;
-        }
-        if (menuRes.topping.isNotEmpty) {
-          toppings.value = menuRes.topping;
         }
       } else {
         status.value = 'error';
-        message.value = menuRes.message!;
       }
     });
   }
@@ -120,7 +131,7 @@ class DetailMenuController extends GetxController {
       ? selectedToppings.map((topping) => topping.keterangan).join(', ')
       : '-';
 
-  /// is
+  /// Apakah diperbolehkan melakukan order
   bool get isAllowedToOrder =>
       status.value == 'success' &&
       (selectedLevel.value != null || levels.isEmpty);
