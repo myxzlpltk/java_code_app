@@ -45,7 +45,8 @@ class DashboardView extends StatelessWidget {
                   child: SvgPicture.asset(
                     AssetConst.iconHome,
                     color: greyColor2,
-                    height: 27.h,
+                    height: 27.r,
+                    width: 27.r,
                   ),
                 ),
                 activeIcon: Padding(
@@ -53,7 +54,8 @@ class DashboardView extends StatelessWidget {
                   child: SvgPicture.asset(
                     AssetConst.iconHome,
                     color: Colors.white,
-                    height: 27.h,
+                    height: 27.r,
+                    width: 27.r,
                   ),
                 ),
                 label: 'home'.tr,
@@ -64,7 +66,8 @@ class DashboardView extends StatelessWidget {
                   child: SvgPicture.asset(
                     AssetConst.iconOrder,
                     color: greyColor2,
-                    height: 27.h,
+                    height: 27.r,
+                    width: 27.r,
                   ),
                 ),
                 activeIcon: Padding(
@@ -72,7 +75,8 @@ class DashboardView extends StatelessWidget {
                   child: SvgPicture.asset(
                     AssetConst.iconOrder,
                     color: Colors.white,
-                    height: 27.h,
+                    height: 27.r,
+                    width: 27.r,
                   ),
                 ),
                 label: 'order'.tr,
@@ -83,7 +87,8 @@ class DashboardView extends StatelessWidget {
                   child: SvgPicture.asset(
                     AssetConst.iconProfile,
                     color: greyColor2,
-                    height: 27.h,
+                    height: 27.r,
+                    width: 27.r,
                   ),
                 ),
                 activeIcon: Padding(
@@ -91,7 +96,8 @@ class DashboardView extends StatelessWidget {
                   child: SvgPicture.asset(
                     AssetConst.iconProfile,
                     color: Colors.white,
-                    height: 27.h,
+                    height: 27.r,
+                    width: 27.r,
                   ),
                 ),
                 label: 'profile'.tr,
