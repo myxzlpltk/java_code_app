@@ -21,6 +21,12 @@ class TextFieldEmail extends StatelessWidget {
               color: darkColor.withOpacity(0.25),
             ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        enabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: blueColor, width: 2),
+        ),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: blueColor, width: 2),
+        ),
       ),
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,

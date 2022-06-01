@@ -33,6 +33,12 @@ class NoteBottomSheet extends StatelessWidget {
                   decoration: InputDecoration(
                     hintText: 'add_note'.tr,
                     hintStyle: Theme.of(context).textTheme.bodySmall,
+                    enabledBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(color: blueColor, width: 2),
+                    ),
+                    focusedBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(color: blueColor, width: 2),
+                    ),
                   ),
                   maxLength: 100,
                 ),
