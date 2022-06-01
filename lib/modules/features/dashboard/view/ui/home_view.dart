@@ -46,12 +46,12 @@ class HomeView extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () => Get.toNamed(AppRoutes.cartView),
-                    icon: Obx(
-                      () => Badge(
-                        showBadge: CartController.to.cart.isNotEmpty,
+                    icon: GetBuilder<CartController>(
+                      builder: (state) => Badge(
+                        showBadge: state.cart.isNotEmpty,
                         badgeColor: blueColor,
                         badgeContent: Text(
-                          CartController.to.totalQuantities.toString(),
+                          state.totalQuantities.toString(),
                           style: Theme.of(context)
                               .textTheme
                               .labelMedium!

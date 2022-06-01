@@ -169,128 +169,134 @@ class CartView extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 22.w),
-              decoration: BoxDecoration(
-                color: lightColor2,
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(30.w),
-                ),
-              ),
-              child: Wrap(
-                direction: Axis.horizontal,
-                children: [
-                  TileOption(
-                    title: 'total_orders'.tr,
-                    subtitle: '(${state.totalQuantities} Menu):',
-                    message: state.totalPrice.toRupiah(),
-                    titleStyle: Theme.of(context).textTheme.headlineSmall,
-                    messageStyle: Theme.of(context)
-                        .textTheme
-                        .labelLarge!
-                        .copyWith(color: blueColor),
-                    color: lightColor2,
-                  ),
-                  Divider(color: darkColor2.withOpacity(0.25), height: 2),
-                  TileOption(
-                    icon: AssetConst.iconDiscount,
-                    iconSize: 24.r,
-                    title: 'discount'.tr,
-                    message: 'Rp.4.000',
-                    titleStyle: Theme.of(context).textTheme.headlineSmall,
-                    messageStyle: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .copyWith(color: redColor),
-                    color: lightColor2,
-                    onTap: () {},
-                  ),
-                  Divider(color: darkColor2.withOpacity(0.25), height: 2),
-                  TileOption(
-                    icon: AssetConst.iconVoucher,
-                    iconSize: 24.r,
-                    title: 'voucher'.tr,
-                    message: 'choose_voucher'.tr,
-                    messageSubtitle: 'Friend Referral Retention',
-                    titleStyle: Theme.of(context).textTheme.headlineSmall,
-                    messageStyle: Theme.of(context).textTheme.bodySmall,
-                    color: lightColor2,
-                    onTap: () {},
-                  ),
-                  Divider(color: darkColor2.withOpacity(0.25), height: 2),
-                  TileOption(
-                    icon: AssetConst.iconPayment,
-                    iconSize: 24.r,
-                    title: 'payment'.tr,
-                    message: 'Pay Later',
-                    titleStyle: Theme.of(context).textTheme.headlineSmall,
-                    messageStyle: Theme.of(context).textTheme.bodySmall,
-                    color: lightColor2,
-                  ),
-                ],
-              ),
-            ),
-
-            /// Actions
-            Container(
-              color: lightColor2,
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 22.w),
+        bottomNavigationBar: Conditional.single(
+          context: context,
+          conditionBuilder: (context) => state.cart.isEmpty,
+          widgetBuilder: (context) => const SizedBox(),
+          fallbackBuilder: (context) => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 22.w),
                 decoration: BoxDecoration(
+                  color: lightColor2,
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(30.w),
                   ),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      blurRadius: 20,
-                      spreadRadius: -1,
-                      offset: const Offset(0, 1),
-                    ),
-                  ],
                 ),
-                child: Row(
+                child: Wrap(
+                  direction: Axis.horizontal,
                   children: [
-                    SvgPicture.asset(
-                      AssetConst.iconCart,
-                      width: 35.r,
-                      height: 35.r,
+                    TileOption(
+                      title: 'total_orders'.tr,
+                      subtitle: '(${state.totalQuantities} Menu):',
+                      message: state.totalPrice.toRupiah(),
+                      titleStyle: Theme.of(context).textTheme.headlineSmall,
+                      messageStyle: Theme.of(context)
+                          .textTheme
+                          .labelLarge!
+                          .copyWith(color: blueColor),
+                      color: lightColor2,
                     ),
-                    SizedBox(width: 9.w),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'total_payment'.tr,
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                          Text(
-                            state.totalPrice.toRupiah(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(color: blueColor),
-                          ),
-                        ],
-                      ),
+                    Divider(color: darkColor2.withOpacity(0.25), height: 2),
+                    TileOption(
+                      icon: AssetConst.iconDiscount,
+                      iconSize: 24.r,
+                      title: 'discount'.tr,
+                      message: 'Rp.4.000',
+                      titleStyle: Theme.of(context).textTheme.headlineSmall,
+                      messageStyle: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: redColor),
+                      color: lightColor2,
+                      onTap: () {},
                     ),
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: PrimaryButton(
-                        text: 'order_now'.tr,
-                        onPressed: () {},
-                      ),
+                    Divider(color: darkColor2.withOpacity(0.25), height: 2),
+                    TileOption(
+                      icon: AssetConst.iconVoucher,
+                      iconSize: 24.r,
+                      title: 'voucher'.tr,
+                      message: 'choose_voucher'.tr,
+                      messageSubtitle: 'Friend Referral Retention',
+                      titleStyle: Theme.of(context).textTheme.headlineSmall,
+                      messageStyle: Theme.of(context).textTheme.bodySmall,
+                      color: lightColor2,
+                      onTap: () {},
+                    ),
+                    Divider(color: darkColor2.withOpacity(0.25), height: 2),
+                    TileOption(
+                      icon: AssetConst.iconPayment,
+                      iconSize: 24.r,
+                      title: 'payment'.tr,
+                      message: 'Pay Later',
+                      titleStyle: Theme.of(context).textTheme.headlineSmall,
+                      messageStyle: Theme.of(context).textTheme.bodySmall,
+                      color: lightColor2,
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+
+              /// Actions
+              Container(
+                color: lightColor2,
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 22.w),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(30.w),
+                    ),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 20,
+                        spreadRadius: -1,
+                        offset: const Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        AssetConst.iconCart,
+                        width: 35.r,
+                        height: 35.r,
+                      ),
+                      SizedBox(width: 9.w),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'total_payment'.tr,
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                            Text(
+                              state.totalPrice.toRupiah(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(color: blueColor),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Flexible(
+                        fit: FlexFit.loose,
+                        child: PrimaryButton(
+                          text: 'order_now'.tr,
+                          onPressed: () {},
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

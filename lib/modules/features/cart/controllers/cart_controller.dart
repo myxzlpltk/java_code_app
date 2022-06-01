@@ -6,7 +6,7 @@ import 'package:java_code_app/modules/models/order_detail.dart';
 class CartController extends GetxController {
   static CartController get to => Get.find();
 
-  RxList<OrderDetail> cart = RxList<OrderDetail>();
+  List<OrderDetail> cart = <OrderDetail>[];
 
   /// Getter for food items
   List<OrderDetail> get foodItems => cart.where((e) => e.isFood).toList();

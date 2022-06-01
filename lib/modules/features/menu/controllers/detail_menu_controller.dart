@@ -31,6 +31,15 @@ class DetailMenuController extends GetxController {
     /// Set menu from argument
     menu.value = Get.arguments as Menu;
 
+    /// Cari apakah sudah ada dikeranjang
+    final orderDetail = CartController.to.findByMenu(menu.value!);
+
+    /// Jika ada dikeranjang
+    if (orderDetail != null) {
+      isExistsInCart.value = true;
+      quantity.value = orderDetail.quantity;
+    }
+
     /// Set menu from API
     MenuRepository.getFromId(menu.value!.id_menu).then((menuRes) {
       /// Jika request API sukses
@@ -39,13 +48,8 @@ class DetailMenuController extends GetxController {
         levels.value = menuRes.level;
         toppings.value = menuRes.topping;
 
-        /// Cari apakah sudah ada dikeranjang
-        final orderDetail = CartController.to.findByMenu(menuRes.data!);
-
         if (orderDetail != null) {
           /// Jika ada dikeranjang
-          isExistsInCart.value = true;
-          quantity.value = orderDetail.quantity;
           selectedLevel.value = orderDetail.level;
           note.value = orderDetail.note;
           if (orderDetail.toppings != null) {
@@ -153,5 +157,6 @@ class DetailMenuController extends GetxController {
 
   void deleteFromCart() {
     CartController.to.remove(_orderDetail);
+    Get.back();
   }
 }

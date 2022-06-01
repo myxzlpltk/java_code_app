@@ -5,8 +5,8 @@ import 'package:java_code_app/configs/themes/colors.dart';
 
 final lightTheme = ThemeData(
   primaryColor: blueColor,
-  focusColor: blueColor,
   fontFamily: GoogleFonts.montserrat().fontFamily,
+  focusColor: Colors.transparent,
   scaffoldBackgroundColor: Colors.white,
   textTheme: GoogleFonts.montserratTextTheme().copyWith(
     displayLarge: GoogleFonts.montserrat(
