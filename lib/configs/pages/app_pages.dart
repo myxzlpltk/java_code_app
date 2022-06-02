@@ -3,6 +3,8 @@
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/modules/features/cart/view/ui/cart_view.dart';
+import 'package:java_code_app/modules/features/cart/view/ui/choose_voucher_view.dart';
+import 'package:java_code_app/modules/features/cart/view/ui/detail_voucher_view.dart';
 import 'package:java_code_app/modules/features/dashboard/view/ui/dashboard_view.dart';
 import 'package:java_code_app/modules/features/dashboard/view/ui/get_location_view.dart';
 import 'package:java_code_app/modules/features/login/view/ui/login_view.dart';
@@ -50,6 +52,14 @@ class AppPages {
       GetPage(
         name: AppRoutes.cartView,
         page: () => CartView(),
+      ),
+      GetPage(
+        name: AppRoutes.chooseVoucherView,
+        page: () => ChooseVoucherView(),
+      ),
+      GetPage(
+        name: AppRoutes.detailVoucherView,
+        page: () => DetailVoucherView(),
       ),
     ];
   }

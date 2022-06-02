@@ -72,6 +72,12 @@ class Localization extends Translations {
           'choose_voucher': 'Choose Voucher',
           'info_discount': 'Info Discount',
           'no_discount': 'No Discount',
+          'detail_voucher': 'Detail Voucher',
+          'valid_date': 'Valid Date',
+          'choose_voucher_terms_1':
+              'The use of vouchers cannot be combined with a discount',
+          'choose_voucher_terms_2': 'employee reward program',
+          'discount_can_not_be_combined': 'Discount can not be combined',
 
           /// Bottom Navigation Bar
           'home': 'Home',
@@ -147,6 +153,12 @@ class Localization extends Translations {
           'choose_voucher': 'Pilih Voucher',
           'info_discount': 'Info Diskon',
           'no_discount': 'Tidak Ada Diskon',
+          'detail_voucher': 'Detail Voucher',
+          'valid_date': 'Tanggal Valid',
+          'choose_voucher_terms_1':
+              'Penggunaan voucher tidak dapat digabung dengan discount ',
+          'choose_voucher_terms_2': 'employee reward program',
+          'discount_can_not_be_combined': 'Diskon tidak dapat digabung',
 
           /// Bottom Navigation Bar
           'home': 'Beranda',

@@ -24,7 +24,7 @@ class DetailMenuView extends StatelessWidget {
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(Icons.chevron_left, color: Colors.black, size: 32.w),
-          onPressed: () => Get.back(closeOverlays: true),
+          onPressed: () => Get.back(),
         ),
         centerTitle: true,
         title: Text(

@@ -49,7 +49,8 @@ class DetailMenuController extends GetxController {
     });
 
     /// Cari apakah sudah ada dikeranjang
-    final cartOrderDetail = CartController.to.findByMenu(menu.value!);
+    final cartOrderDetail =
+        CartController.to.cart.firstWhereOrNull((e) => e.menu == menu.value);
 
     /// Jika ada dikeranjang
     if (cartOrderDetail != null) {

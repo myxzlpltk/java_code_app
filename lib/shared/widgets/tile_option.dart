@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 
 class TileOption extends StatelessWidget {
@@ -83,10 +84,12 @@ class TileOption extends StatelessWidget {
                         messageSubtitle!,
                         textAlign: TextAlign.end,
                         style: messageSubtitleStyle ??
-                            Theme.of(context)
-                                .textTheme
-                                .labelMedium!
-                                .copyWith(height: 1),
+                            GoogleFonts.montserrat(
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w400,
+                              color: darkColor2,
+                              height: 1.219,
+                            ),
                       ),
                   ],
                 ),

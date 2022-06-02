@@ -23,7 +23,7 @@ class CartView extends StatelessWidget {
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(Icons.chevron_left, color: Colors.black, size: 32.w),
-          onPressed: () => Get.back(closeOverlays: true),
+          onPressed: () => Get.back(),
         ),
         centerTitle: true,
         title: Wrap(
@@ -46,7 +46,7 @@ class CartView extends StatelessWidget {
       ),
       body: RefreshIndicator(
         onRefresh: () => Future.any([
-          CartController.to.getDiscount(),
+          CartController.to.getDiscounts(),
         ]),
         child: Obx(
           () => Conditional.single(
@@ -220,12 +220,14 @@ class CartView extends StatelessWidget {
                     Conditional.single(
                       context: context,
                       conditionBuilder: (context) =>
-                          CartController.to.discounts.isEmpty,
+                          CartController.to.discountPrice == 0,
                       widgetBuilder: (context) => TileOption(
                         icon: AssetConst.iconDiscount,
                         iconSize: 24.r,
                         title: 'discount'.tr,
-                        message: 'no_discount'.tr,
+                        message: CartController.to.selectedVoucher.value == null
+                            ? 'no_discount'.tr
+                            : 'discount_can_not_be_combined'.tr,
                         titleStyle: Theme.of(context).textTheme.headlineSmall,
                         messageStyle: Theme.of(context).textTheme.bodySmall,
                         color: lightColor2,
@@ -234,8 +236,7 @@ class CartView extends StatelessWidget {
                         icon: AssetConst.iconDiscount,
                         iconSize: 24.r,
                         title: 'discount'.tr,
-                        message:
-                            CartController.to.totalDiscountPrice.toRupiah(),
+                        message: CartController.to.discountPrice.toRupiah(),
                         titleStyle: Theme.of(context).textTheme.headlineSmall,
                         messageStyle: Theme.of(context)
                             .textTheme
@@ -248,16 +249,35 @@ class CartView extends StatelessWidget {
                     Divider(color: darkColor2.withOpacity(0.25), height: 2),
 
                     /// Vouchers
-                    TileOption(
-                      icon: AssetConst.iconVoucher,
-                      iconSize: 24.r,
-                      title: 'voucher'.tr,
-                      message: 'choose_voucher'.tr,
-                      messageSubtitle: 'Friend Referral Retention',
-                      titleStyle: Theme.of(context).textTheme.headlineSmall,
-                      messageStyle: Theme.of(context).textTheme.bodySmall,
-                      color: lightColor2,
-                      onTap: () {},
+                    Conditional.single(
+                      context: context,
+                      conditionBuilder: (context) =>
+                          CartController.to.selectedVoucher.value == null,
+                      widgetBuilder: (context) => TileOption(
+                        icon: AssetConst.iconVoucher,
+                        iconSize: 24.r,
+                        title: 'voucher'.tr,
+                        message: 'choose_voucher'.tr,
+                        titleStyle: Theme.of(context).textTheme.headlineSmall,
+                        messageStyle: Theme.of(context).textTheme.bodySmall,
+                        color: lightColor2,
+                        onTap: CartController.to.openVoucherDialog,
+                      ),
+                      fallbackBuilder: (context) => TileOption(
+                        icon: AssetConst.iconVoucher,
+                        iconSize: 24.r,
+                        title: 'voucher'.tr,
+                        message: CartController.to.voucherPrice.toRupiah(),
+                        messageSubtitle:
+                            CartController.to.selectedVoucher.value!.nama,
+                        titleStyle: Theme.of(context).textTheme.headlineSmall,
+                        messageStyle: Theme.of(context)
+                            .textTheme
+                            .bodySmall!
+                            .copyWith(color: redColor),
+                        color: lightColor2,
+                        onTap: CartController.to.openVoucherDialog,
+                      ),
                     ),
                     Divider(color: darkColor2.withOpacity(0.25), height: 2),
 
