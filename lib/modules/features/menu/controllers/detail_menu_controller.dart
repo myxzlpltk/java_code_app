@@ -39,6 +39,10 @@ class DetailMenuController extends GetxController {
         status.value = 'success';
         levels.value = menuRes.level;
         toppings.value = menuRes.topping;
+
+        if (levels.isNotEmpty) {
+          selectedLevel.value = levels.first;
+        }
       } else {
         status.value = 'error';
       }
@@ -95,12 +99,7 @@ class DetailMenuController extends GetxController {
 
   /// Set level
   void setLevel(MenuVariant level) {
-    if (selectedLevel.value == level) {
-      selectedLevel.value = null;
-    } else {
-      selectedLevel.value = level;
-    }
-
+    selectedLevel.value = level;
     if (Get.isBottomSheetOpen == true) Get.back();
   }
 
@@ -141,7 +140,8 @@ class DetailMenuController extends GetxController {
 
   /// On add to cart
   void addToCart() {
-    if (status.value == 'success') {
+    if (status.value == 'success' &&
+        (selectedLevel.value != null || levels.isEmpty)) {
       CartController.to.add(orderDetail);
       Get.offNamedUntil(
         AppRoutes.cartView,
