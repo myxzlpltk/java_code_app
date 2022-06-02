@@ -13,4 +13,7 @@ class ApiConst {
   static const String promo = '$apiBaseUrl/promo/detail';
   static const String allMenu = '$apiBaseUrl/menu/all';
   static const String menu = '$apiBaseUrl/menu/detail';
+
+  /// Cart
+  static const String allDiscount = '$apiBaseUrl/diskon/all';
 }

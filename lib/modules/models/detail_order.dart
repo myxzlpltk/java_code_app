@@ -4,14 +4,14 @@ import 'package:equatable/equatable.dart';
 import 'package:java_code_app/constants/commons/constants.dart';
 import 'package:java_code_app/modules/models/menu.dart';
 
-class OrderDetail extends Equatable {
+class DetailOrder extends Equatable {
   Menu menu;
   int quantity;
   String note;
   MenuVariant? level;
   List<MenuVariant>? toppings;
 
-  OrderDetail({
+  DetailOrder({
     required this.menu,
     required this.quantity,
     required this.note,

@@ -45,130 +45,135 @@ class CartView extends StatelessWidget {
         ),
       ),
       body: GetBuilder<CartController>(
-        builder: (state) => Conditional.single(
-          context: context,
-          conditionBuilder: (context) => state.cart.isEmpty,
-          widgetBuilder: (context) => SizedBox(
-            width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+        builder: (state) => RefreshIndicator(
+          onRefresh: () => Future.any([
+            state.getDiscount(),
+          ]),
+          child: Conditional.single(
+            context: context,
+            conditionBuilder: (context) => state.cart.isEmpty,
+            widgetBuilder: (context) => SizedBox(
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    AssetConst.iconEmptyCart,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                  ),
+                  Text(
+                    'empty_cart'.tr,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+            fallbackBuilder: (context) => ListView(
+              padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 28.h),
               children: [
-                SvgPicture.asset(
-                  AssetConst.iconEmptyCart,
-                  width: MediaQuery.of(context).size.width * 0.8,
+                /// Food
+                ...Conditional.list(
+                  context: context,
+                  conditionBuilder: (context) => state.foodItems.isEmpty,
+                  widgetBuilder: (context) => const [],
+                  fallbackBuilder: (context) => [
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          AssetConst.iconFood,
+                          width: 20.r,
+                          height: 20.r,
+                          color: blueColor,
+                        ),
+                        SizedBox(width: 10.w),
+                        Text(
+                          'food'.tr,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(color: blueColor),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 17.h),
+                    Wrap(
+                      runSpacing: 17.h,
+                      children: state.foodItems
+                          .map<Widget>(
+                            (orderDetail) => MenuCard(
+                              menu: orderDetail.menu,
+                              price: orderDetail.price,
+                              quantity: orderDetail.quantity,
+                              note: orderDetail.note,
+                              onIncrement: () => state.increment(orderDetail),
+                              onDecrement: () => state.decrement(orderDetail),
+                              onNoteChanged: (value) =>
+                                  state.updateNote(orderDetail, value),
+                              onTap: () => Get.toNamed(
+                                AppRoutes.detailMenuView,
+                                arguments: orderDetail.menu,
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                    SizedBox(height: 37.h),
+                  ],
                 ),
-                Text(
-                  'empty_cart'.tr,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                  textAlign: TextAlign.center,
+
+                /// Drink
+                ...Conditional.list(
+                  context: context,
+                  conditionBuilder: (context) => state.drinkItems.isEmpty,
+                  widgetBuilder: (context) => const [],
+                  fallbackBuilder: (context) => [
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          AssetConst.iconDrink,
+                          width: 20.r,
+                          height: 20.r,
+                          color: blueColor,
+                        ),
+                        SizedBox(width: 10.w),
+                        Text(
+                          'drink'.tr,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(color: blueColor),
+                        ),
+                        SizedBox(width: 25.w),
+                      ],
+                    ),
+                    SizedBox(height: 17.h),
+                    Wrap(
+                      runSpacing: 17.h,
+                      children: state.drinkItems
+                          .map<Widget>(
+                            (orderDetail) => MenuCard(
+                              menu: orderDetail.menu,
+                              price: orderDetail.price,
+                              quantity: orderDetail.quantity,
+                              note: orderDetail.note,
+                              onIncrement: () => state.increment(orderDetail),
+                              onDecrement: () => state.decrement(orderDetail),
+                              onNoteChanged: (value) =>
+                                  state.updateNote(orderDetail, value),
+                              onTap: () => Get.toNamed(
+                                AppRoutes.detailMenuView,
+                                arguments: orderDetail.menu,
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                    SizedBox(height: 37.h),
+                  ],
                 ),
               ],
             ),
-          ),
-          fallbackBuilder: (context) => ListView(
-            padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 28.h),
-            children: [
-              /// Food
-              ...Conditional.list(
-                context: context,
-                conditionBuilder: (context) => state.foodItems.isEmpty,
-                widgetBuilder: (context) => const [],
-                fallbackBuilder: (context) => [
-                  Row(
-                    children: [
-                      SvgPicture.asset(
-                        AssetConst.iconFood,
-                        width: 20.r,
-                        height: 20.r,
-                        color: blueColor,
-                      ),
-                      SizedBox(width: 10.w),
-                      Text(
-                        'food'.tr,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(color: blueColor),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 17.h),
-                  Wrap(
-                    runSpacing: 17.h,
-                    children: state.foodItems
-                        .map<Widget>(
-                          (orderDetail) => MenuCard(
-                            menu: orderDetail.menu,
-                            price: orderDetail.price,
-                            quantity: orderDetail.quantity,
-                            note: orderDetail.note,
-                            onIncrement: () => state.increment(orderDetail),
-                            onDecrement: () => state.decrement(orderDetail),
-                            onNoteChanged: (value) =>
-                                state.updateNote(orderDetail, value),
-                            onTap: () => Get.toNamed(
-                              AppRoutes.detailMenuView,
-                              arguments: orderDetail.menu,
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                  SizedBox(height: 37.h),
-                ],
-              ),
-
-              /// Drink
-              ...Conditional.list(
-                context: context,
-                conditionBuilder: (context) => state.drinkItems.isEmpty,
-                widgetBuilder: (context) => const [],
-                fallbackBuilder: (context) => [
-                  Row(
-                    children: [
-                      SvgPicture.asset(
-                        AssetConst.iconDrink,
-                        width: 20.r,
-                        height: 20.r,
-                        color: blueColor,
-                      ),
-                      SizedBox(width: 10.w),
-                      Text(
-                        'drink'.tr,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(color: blueColor),
-                      ),
-                      SizedBox(width: 25.w),
-                    ],
-                  ),
-                  SizedBox(height: 17.h),
-                  Wrap(
-                    runSpacing: 17.h,
-                    children: state.drinkItems
-                        .map<Widget>(
-                          (orderDetail) => MenuCard(
-                            menu: orderDetail.menu,
-                            price: orderDetail.price,
-                            quantity: orderDetail.quantity,
-                            note: orderDetail.note,
-                            onIncrement: () => state.increment(orderDetail),
-                            onDecrement: () => state.decrement(orderDetail),
-                            onNoteChanged: (value) =>
-                                state.updateNote(orderDetail, value),
-                            onTap: () => Get.toNamed(
-                              AppRoutes.detailMenuView,
-                              arguments: orderDetail.menu,
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                  SizedBox(height: 37.h),
-                ],
-              ),
-            ],
           ),
         ),
       ),
@@ -191,6 +196,8 @@ class CartView extends StatelessWidget {
                 child: Wrap(
                   direction: Axis.horizontal,
                   children: [
+
+                    /// Total orders
                     TileOption(
                       title: 'total_orders'.tr,
                       subtitle: '(${state.cart.length} Menu):',
@@ -203,20 +210,37 @@ class CartView extends StatelessWidget {
                       color: lightColor2,
                     ),
                     Divider(color: darkColor2.withOpacity(0.25), height: 2),
-                    TileOption(
-                      icon: AssetConst.iconDiscount,
-                      iconSize: 24.r,
-                      title: 'discount'.tr,
-                      message: 'Rp.4.000',
-                      titleStyle: Theme.of(context).textTheme.headlineSmall,
-                      messageStyle: Theme.of(context)
-                          .textTheme
-                          .bodySmall!
-                          .copyWith(color: redColor),
-                      color: lightColor2,
-                      onTap: () {},
+
+                    /// Discount
+                    Conditional.single(
+                      context: context,
+                      conditionBuilder: (context) => state.discounts.isEmpty,
+                      widgetBuilder: (context) => TileOption(
+                        icon: AssetConst.iconDiscount,
+                        iconSize: 24.r,
+                        title: 'discount'.tr,
+                        message: 'no_discount'.tr,
+                        titleStyle: Theme.of(context).textTheme.headlineSmall,
+                        messageStyle: Theme.of(context).textTheme.bodySmall,
+                        color: lightColor2,
+                      ),
+                      fallbackBuilder: (context) => TileOption(
+                        icon: AssetConst.iconDiscount,
+                        iconSize: 24.r,
+                        title: 'discount'.tr,
+                        message: state.totalDiscountPrice.toRupiah(),
+                        titleStyle: Theme.of(context).textTheme.headlineSmall,
+                        messageStyle: Theme.of(context)
+                            .textTheme
+                            .bodySmall!
+                            .copyWith(color: redColor),
+                        color: lightColor2,
+                        onTap: state.openDiscountDialog,
+                      ),
                     ),
                     Divider(color: darkColor2.withOpacity(0.25), height: 2),
+
+                    /// Vouchers
                     TileOption(
                       icon: AssetConst.iconVoucher,
                       iconSize: 24.r,
@@ -229,6 +253,8 @@ class CartView extends StatelessWidget {
                       onTap: () {},
                     ),
                     Divider(color: darkColor2.withOpacity(0.25), height: 2),
+
+                    /// Payment options
                     TileOption(
                       icon: AssetConst.iconPayment,
                       iconSize: 24.r,
@@ -279,7 +305,7 @@ class CartView extends StatelessWidget {
                               style: Theme.of(context).textTheme.labelMedium,
                             ),
                             Text(
-                              state.totalPrice.toRupiah(),
+                              state.grandTotalPrice.toRupiah(),
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!

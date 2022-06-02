@@ -25,12 +25,10 @@ class HomeView extends StatelessWidget {
 
     return Scaffold(
       body: RefreshIndicator(
-        onRefresh: () async {
-          await Future.any([
-            HomeController.to.getListPromo(),
-            HomeController.to.getListMenu(),
-          ]);
-        },
+        onRefresh: () => Future.any([
+          HomeController.to.getListPromo(),
+          HomeController.to.getListMenu(),
+        ]),
         child: CustomScrollView(
           slivers: [
             SliverAppBar(

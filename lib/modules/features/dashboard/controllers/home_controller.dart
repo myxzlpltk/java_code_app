@@ -25,22 +25,17 @@ class HomeController extends GetxController {
   Future<void> getListPromo() async {
     statusPromo.value = 'loading';
 
-    try {
-      var listPromoRes = await PromoRepository.getAll();
+    var listPromoRes = await PromoRepository.getAll();
 
-      if (listPromoRes.status_code == 200) {
-        statusPromo.value = 'success';
-        listPromo.value = listPromoRes.data!;
-      } else if (listPromoRes.status_code == 204) {
-        statusPromo.value = 'error';
-        messagePromo.value = 'no_data'.tr;
-      } else {
-        statusPromo.value = 'error';
-        messagePromo.value = listPromoRes.message ?? 'unknown_error'.tr;
-      }
-    } catch (e) {
+    if (listPromoRes.status_code == 200) {
+      statusPromo.value = 'success';
+      listPromo.value = listPromoRes.data!;
+    } else if (listPromoRes.status_code == 204) {
       statusPromo.value = 'error';
-      messagePromo.value = e.toString();
+      messagePromo.value = 'no_data'.tr;
+    } else {
+      statusPromo.value = 'error';
+      messagePromo.value = listPromoRes.message ?? 'unknown_error'.tr;
     }
   }
 
@@ -67,22 +62,17 @@ class HomeController extends GetxController {
   Future<void> getListMenu() async {
     statusMenu.value = 'loading';
 
-    try {
-      var listMenuRes = await MenuRepository.getAll();
+    var listMenuRes = await MenuRepository.getAll();
 
-      if (listMenuRes.status_code == 200) {
-        statusMenu.value = 'success';
-        listMenu.value = listMenuRes.data!;
-      } else if (listMenuRes.status_code == 204) {
-        statusMenu.value = 'error';
-        messageMenu.value = 'no_data'.tr;
-      } else {
-        statusMenu.value = 'error';
-        messageMenu.value = listMenuRes.message ?? 'unknown_error'.tr;
-      }
-    } catch (e) {
+    if (listMenuRes.status_code == 200) {
+      statusMenu.value = 'success';
+      listMenu.value = listMenuRes.data!;
+    } else if (listMenuRes.status_code == 204) {
       statusMenu.value = 'error';
-      messageMenu.value = e.toString();
+      messageMenu.value = 'no_data'.tr;
+    } else {
+      statusMenu.value = 'error';
+      messageMenu.value = listMenuRes.message ?? 'unknown_error'.tr;
     }
   }
 

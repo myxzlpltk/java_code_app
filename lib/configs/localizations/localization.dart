@@ -4,6 +4,8 @@ class Localization extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+          'ok': 'OK',
+
           /// Error umum
           'error': 'Something went wrong',
           'unknown_error': 'Unknown error',
@@ -68,6 +70,8 @@ class Localization extends Translations {
           'order_now': 'Order Now',
           'choose_discount': 'Choose Discount',
           'choose_voucher': 'Choose Voucher',
+          'info_discount': 'Info Discount',
+          'no_discount': 'No Discount',
 
           /// Bottom Navigation Bar
           'home': 'Home',
@@ -75,6 +79,8 @@ class Localization extends Translations {
           'profile': 'Profile',
         },
         'id_ID': {
+          'ok': 'Oke',
+
           /// Error umum
           'error': 'Terjadi kesalahan',
           'unknown_error': 'Kesalahan tidak diketahui',
@@ -139,6 +145,8 @@ class Localization extends Translations {
           'order_now': 'Pesan Sekarang',
           'choose_discount': 'Pilih Diskon',
           'choose_voucher': 'Pilih Voucher',
+          'info_discount': 'Info Diskon',
+          'no_discount': 'Tidak Ada Diskon',
 
           /// Bottom Navigation Bar
           'home': 'Beranda',

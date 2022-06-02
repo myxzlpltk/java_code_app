@@ -6,8 +6,8 @@ import 'package:java_code_app/modules/features/menu/repositories/menu_repository
 import 'package:java_code_app/modules/features/menu/view/components/level_bottom_sheet.dart';
 import 'package:java_code_app/modules/features/menu/view/components/note_bottom_sheet.dart';
 import 'package:java_code_app/modules/features/menu/view/components/topping_bottom_sheet.dart';
+import 'package:java_code_app/modules/models/detail_order.dart';
 import 'package:java_code_app/modules/models/menu.dart';
-import 'package:java_code_app/modules/models/order_detail.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
 
 class DetailMenuController extends GetxController {
@@ -131,7 +131,7 @@ class DetailMenuController extends GetxController {
       ? selectedToppings.map((topping) => topping.keterangan).join(', ')
       : '-';
 
-  OrderDetail get orderDetail => OrderDetail(
+  DetailOrder get orderDetail => DetailOrder(
       menu: menu.value!,
       quantity: quantity.value,
       note: note.value,
