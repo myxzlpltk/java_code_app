@@ -19,7 +19,6 @@ class VoucherCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    imageCache.clear();
     return Ink(
       decoration: BoxDecoration(
         color: lightColor2,
@@ -68,21 +67,15 @@ class VoucherCard extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 12.h),
-              Container(
-                clipBehavior: Clip.hardEdge,
+              Ink(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(8.w),
-                    bottom: Radius.circular(15.w),
-                  ),
-                ),
-                child: AspectRatio(
-                  aspectRatio: 379 / 177,
-                  child: Image.network(
-                    voucher.info_voucher,
+                  borderRadius: BorderRadius.circular(15.w),
+                  image: DecorationImage(
+                    image: NetworkImage(voucher.info_voucher),
                     fit: BoxFit.cover,
                   ),
                 ),
+                child: const AspectRatio(aspectRatio: 379 / 177),
               ),
             ],
           ),
