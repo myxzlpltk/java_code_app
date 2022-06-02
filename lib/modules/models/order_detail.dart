@@ -25,8 +25,33 @@ class OrderDetail extends Equatable {
   /// Getter untuk minuman
   bool get isDrink => menu.kategori == drinkCategory;
 
-  /// Getter untuk total harga
-  int get totalPrice => quantity * menu.harga;
+  /// Total level price
+  int get totalLevelPrice {
+    if (level == null) {
+      return 0;
+    } else {
+      return level!.harga;
+    }
+  }
+
+  /// Total topping price
+  int get totalToppingsPrice {
+    if (toppings == null) {
+      return 0;
+    } else {
+      return toppings!.fold<int>(0, (total, topping) => total + topping.harga);
+    }
+  }
+
+  /// Price per item with level or topping
+  int get price {
+    return menu.harga + totalLevelPrice + totalToppingsPrice;
+  }
+
+  /// Total price = price * quantity
+  int get totalPrice {
+    return price * quantity;
+  }
 
   @override
   List<Object?> get props => [menu.id_menu];

@@ -7,7 +7,7 @@ class AppRoutes {
   static const String loginView = '/login';
 
   /// Home
-  static const String homeView = '/dashboard';
+  static const String dashboardView = '/dashboard';
   static const String getLocationView = '/dashboard/get-location';
 
   /// Menu dan Promo

@@ -17,35 +17,35 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CartController>(
-      builder: (state) => Scaffold(
-        appBar: AppBar(
-          elevation: 2,
-          backgroundColor: Colors.white,
-          leading: IconButton(
-            icon: Icon(Icons.chevron_left, color: Colors.black, size: 32.w),
-            onPressed: () => Get.back(closeOverlays: true),
-          ),
-          centerTitle: true,
-          title: Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              SvgPicture.asset(
-                AssetConst.iconOrder,
-                width: 23.w,
-                color: blueColor,
-              ),
-              SizedBox(width: 10.w),
-              Text('order'.tr, style: Theme.of(context).textTheme.titleMedium),
-            ],
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(30.w),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 2,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Icon(Icons.chevron_left, color: Colors.black, size: 32.w),
+          onPressed: () => Get.back(closeOverlays: true),
+        ),
+        centerTitle: true,
+        title: Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            SvgPicture.asset(
+              AssetConst.iconOrder,
+              width: 23.w,
+              color: blueColor,
             ),
+            SizedBox(width: 10.w),
+            Text('order'.tr, style: Theme.of(context).textTheme.titleMedium),
+          ],
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30.w),
           ),
         ),
-        body: Conditional.single(
+      ),
+      body: GetBuilder<CartController>(
+        builder: (state) => Conditional.single(
           context: context,
           conditionBuilder: (context) => state.cart.isEmpty,
           widgetBuilder: (context) => SizedBox(
@@ -99,6 +99,7 @@ class CartView extends StatelessWidget {
                         .map<Widget>(
                           (orderDetail) => MenuCard(
                             menu: orderDetail.menu,
+                            price: orderDetail.price,
                             quantity: orderDetail.quantity,
                             note: orderDetail.note,
                             onIncrement: () => state.increment(orderDetail),
@@ -149,6 +150,7 @@ class CartView extends StatelessWidget {
                         .map<Widget>(
                           (orderDetail) => MenuCard(
                             menu: orderDetail.menu,
+                            price: orderDetail.price,
                             quantity: orderDetail.quantity,
                             note: orderDetail.note,
                             onIncrement: () => state.increment(orderDetail),
@@ -169,7 +171,9 @@ class CartView extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: Conditional.single(
+      ),
+      bottomNavigationBar: GetBuilder<CartController>(
+        builder: (state) => Conditional.single(
           context: context,
           conditionBuilder: (context) => state.cart.isEmpty,
           widgetBuilder: (context) => const SizedBox(),
@@ -189,7 +193,7 @@ class CartView extends StatelessWidget {
                   children: [
                     TileOption(
                       title: 'total_orders'.tr,
-                      subtitle: '(${state.totalQuantities} Menu):',
+                      subtitle: '(${state.cart.length} Menu):',
                       message: state.totalPrice.toRupiah(),
                       titleStyle: Theme.of(context).textTheme.headlineSmall,
                       messageStyle: Theme.of(context)

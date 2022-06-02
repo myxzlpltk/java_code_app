@@ -28,7 +28,7 @@ class AppPages {
 
       /// Home
       GetPage(
-        name: AppRoutes.homeView,
+        name: AppRoutes.dashboardView,
         page: () => DashboardView(),
       ),
       GetPage(

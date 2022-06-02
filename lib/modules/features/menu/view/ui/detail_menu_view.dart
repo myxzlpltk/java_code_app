@@ -100,15 +100,17 @@ class DetailMenuView extends StatelessWidget {
                   ),
                   SizedBox(height: 40.h),
                   Divider(color: darkColor2.withOpacity(0.25), height: 1),
-                  TileOption(
-                    icon: AssetConst.iconPrice,
-                    title: 'price'.tr,
-                    message:
-                        DetailMenuController.to.menu.value!.harga.toRupiah(),
-                    messageStyle: Theme.of(context)
-                        .textTheme
-                        .headlineSmall!
-                        .copyWith(color: blueColor),
+                  Obx(
+                    () => TileOption(
+                      icon: AssetConst.iconPrice,
+                      title: 'price'.tr,
+                      message:
+                          DetailMenuController.to.orderDetail.price.toRupiah(),
+                      messageStyle: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(color: blueColor),
+                    ),
                   ),
                   Obx(
                     () => Conditional.single(

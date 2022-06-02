@@ -51,7 +51,7 @@ class HomeView extends StatelessWidget {
                         showBadge: state.cart.isNotEmpty,
                         badgeColor: blueColor,
                         badgeContent: Text(
-                          state.totalQuantities.toString(),
+                          state.cart.length.toString(),
                           style: Theme.of(context)
                               .textTheme
                               .labelMedium!

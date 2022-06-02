@@ -10,6 +10,7 @@ import 'package:java_code_app/utils/extensions/currency_extension.dart';
 
 class MenuCard extends StatelessWidget {
   final Menu menu;
+  final int? price;
   final bool simple;
   final int quantity;
   final String note;
@@ -21,6 +22,7 @@ class MenuCard extends StatelessWidget {
   const MenuCard({
     Key? key,
     required this.menu,
+    this.price,
     this.simple = false,
     this.quantity = 0,
     this.note = '',
@@ -32,8 +34,6 @@ class MenuCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('MenuCard.build ${note}');
-
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(10.w),
@@ -85,7 +85,7 @@ class MenuCard extends StatelessWidget {
                   ),
                   SizedBox(height: 4.h),
                   Text(
-                    menu.harga.toRupiah(),
+                    (price ?? menu.harga).toRupiah(),
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: blueColor, fontWeight: FontWeight.bold),
                   ),

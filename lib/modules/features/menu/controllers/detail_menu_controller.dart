@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/modules/features/cart/controllers/cart_controller.dart';
 import 'package:java_code_app/modules/features/menu/repositories/menu_repository.dart';
 import 'package:java_code_app/modules/features/menu/view/components/level_bottom_sheet.dart';
@@ -31,15 +32,6 @@ class DetailMenuController extends GetxController {
     /// Set menu from argument
     menu.value = Get.arguments as Menu;
 
-    /// Cari apakah sudah ada dikeranjang
-    final orderDetail = CartController.to.findByMenu(menu.value!);
-
-    /// Jika ada dikeranjang
-    if (orderDetail != null) {
-      isExistsInCart.value = true;
-      quantity.value = orderDetail.quantity;
-    }
-
     /// Set menu from API
     MenuRepository.getFromId(menu.value!.id_menu).then((menuRes) {
       /// Jika request API sukses
@@ -47,22 +39,22 @@ class DetailMenuController extends GetxController {
         status.value = 'success';
         levels.value = menuRes.level;
         toppings.value = menuRes.topping;
-
-        if (orderDetail != null) {
-          /// Jika ada dikeranjang
-          selectedLevel.value = orderDetail.level;
-          note.value = orderDetail.note;
-          if (orderDetail.toppings != null) {
-            selectedToppings.value = orderDetail.toppings!;
-          }
-        } else {
-          /// Jika tidak ada dikeranjang
-          selectedLevel.value = menuRes.level.first;
-        }
       } else {
         status.value = 'error';
       }
     });
+
+    /// Cari apakah sudah ada dikeranjang
+    final cartOrderDetail = CartController.to.findByMenu(menu.value!);
+
+    /// Jika ada dikeranjang
+    if (cartOrderDetail != null) {
+      isExistsInCart.value = true;
+      selectedLevel.value = cartOrderDetail.level;
+      note.value = cartOrderDetail.note;
+      selectedToppings.value = cartOrderDetail.toppings?.toList() ?? [];
+      quantity.value = cartOrderDetail.quantity;
+    }
   }
 
   /// On increment quantity
@@ -103,7 +95,12 @@ class DetailMenuController extends GetxController {
 
   /// Set level
   void setLevel(MenuVariant level) {
-    selectedLevel.value = level;
+    if (selectedLevel.value == level) {
+      selectedLevel.value = null;
+    } else {
+      selectedLevel.value = level;
+    }
+
     if (Get.isBottomSheetOpen == true) Get.back();
   }
 
@@ -135,12 +132,7 @@ class DetailMenuController extends GetxController {
       ? selectedToppings.map((topping) => topping.keterangan).join(', ')
       : '-';
 
-  /// Apakah diperbolehkan melakukan order
-  bool get isAllowedToOrder =>
-      status.value == 'success' &&
-      (selectedLevel.value != null || levels.isEmpty);
-
-  OrderDetail get _orderDetail => OrderDetail(
+  OrderDetail get orderDetail => OrderDetail(
       menu: menu.value!,
       quantity: quantity.value,
       note: note.value,
@@ -149,14 +141,20 @@ class DetailMenuController extends GetxController {
 
   /// On add to cart
   void addToCart() {
-    if (isAllowedToOrder) {
-      CartController.to.add(_orderDetail);
-      Get.back();
+    if (status.value == 'success') {
+      CartController.to.add(orderDetail);
+      Get.offNamedUntil(
+        AppRoutes.cartView,
+        ModalRoute.withName(AppRoutes.dashboardView),
+      );
     }
   }
 
   void deleteFromCart() {
-    CartController.to.remove(_orderDetail);
-    Get.back();
+    CartController.to.remove(orderDetail);
+    Get.offNamedUntil(
+      AppRoutes.cartView,
+      ModalRoute.withName(AppRoutes.dashboardView),
+    );
   }
 }

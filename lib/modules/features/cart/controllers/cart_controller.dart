@@ -47,6 +47,9 @@ class CartController extends GetxController {
     if (orderDetail.quantity > 1) {
       orderDetail.quantity--;
       update();
+    } else {
+      cart.remove(orderDetail);
+      update();
     }
   }
 
