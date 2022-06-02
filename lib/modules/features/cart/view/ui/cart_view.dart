@@ -44,14 +44,14 @@ class CartView extends StatelessWidget {
           ),
         ),
       ),
-      body: GetBuilder<CartController>(
-        builder: (state) => RefreshIndicator(
-          onRefresh: () => Future.any([
-            state.getDiscount(),
-          ]),
-          child: Conditional.single(
+      body: RefreshIndicator(
+        onRefresh: () => Future.any([
+          CartController.to.getDiscount(),
+        ]),
+        child: Obx(
+          () => Conditional.single(
             context: context,
-            conditionBuilder: (context) => state.cart.isEmpty,
+            conditionBuilder: (context) => CartController.to.cart.isEmpty,
             widgetBuilder: (context) => SizedBox(
               width: double.infinity,
               child: Column(
@@ -75,7 +75,8 @@ class CartView extends StatelessWidget {
                 /// Food
                 ...Conditional.list(
                   context: context,
-                  conditionBuilder: (context) => state.foodItems.isEmpty,
+                  conditionBuilder: (context) =>
+                      CartController.to.foodItems.isEmpty,
                   widgetBuilder: (context) => const [],
                   fallbackBuilder: (context) => [
                     Row(
@@ -99,17 +100,19 @@ class CartView extends StatelessWidget {
                     SizedBox(height: 17.h),
                     Wrap(
                       runSpacing: 17.h,
-                      children: state.foodItems
+                      children: CartController.to.foodItems
                           .map<Widget>(
                             (orderDetail) => MenuCard(
                               menu: orderDetail.menu,
                               price: orderDetail.price,
                               quantity: orderDetail.quantity,
                               note: orderDetail.note,
-                              onIncrement: () => state.increment(orderDetail),
-                              onDecrement: () => state.decrement(orderDetail),
-                              onNoteChanged: (value) =>
-                                  state.updateNote(orderDetail, value),
+                              onIncrement: () =>
+                                  CartController.to.increment(orderDetail),
+                              onDecrement: () =>
+                                  CartController.to.decrement(orderDetail),
+                              onNoteChanged: (value) => CartController.to
+                                  .updateNote(orderDetail, value),
                               onTap: () => Get.toNamed(
                                 AppRoutes.detailMenuView,
                                 arguments: orderDetail.menu,
@@ -125,7 +128,8 @@ class CartView extends StatelessWidget {
                 /// Drink
                 ...Conditional.list(
                   context: context,
-                  conditionBuilder: (context) => state.drinkItems.isEmpty,
+                  conditionBuilder: (context) =>
+                      CartController.to.drinkItems.isEmpty,
                   widgetBuilder: (context) => const [],
                   fallbackBuilder: (context) => [
                     Row(
@@ -150,17 +154,19 @@ class CartView extends StatelessWidget {
                     SizedBox(height: 17.h),
                     Wrap(
                       runSpacing: 17.h,
-                      children: state.drinkItems
+                      children: CartController.to.drinkItems
                           .map<Widget>(
                             (orderDetail) => MenuCard(
                               menu: orderDetail.menu,
                               price: orderDetail.price,
                               quantity: orderDetail.quantity,
                               note: orderDetail.note,
-                              onIncrement: () => state.increment(orderDetail),
-                              onDecrement: () => state.decrement(orderDetail),
-                              onNoteChanged: (value) =>
-                                  state.updateNote(orderDetail, value),
+                              onIncrement: () =>
+                                  CartController.to.increment(orderDetail),
+                              onDecrement: () =>
+                                  CartController.to.decrement(orderDetail),
+                              onNoteChanged: (value) => CartController.to
+                                  .updateNote(orderDetail, value),
                               onTap: () => Get.toNamed(
                                 AppRoutes.detailMenuView,
                                 arguments: orderDetail.menu,
@@ -177,10 +183,10 @@ class CartView extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: GetBuilder<CartController>(
-        builder: (state) => Conditional.single(
+      bottomNavigationBar: Obx(
+        () => Conditional.single(
           context: context,
-          conditionBuilder: (context) => state.cart.isEmpty,
+          conditionBuilder: (context) => CartController.to.cart.isEmpty,
           widgetBuilder: (context) => const SizedBox(),
           fallbackBuilder: (context) => Column(
             mainAxisSize: MainAxisSize.min,
@@ -196,12 +202,11 @@ class CartView extends StatelessWidget {
                 child: Wrap(
                   direction: Axis.horizontal,
                   children: [
-
                     /// Total orders
                     TileOption(
                       title: 'total_orders'.tr,
-                      subtitle: '(${state.cart.length} Menu):',
-                      message: state.totalPrice.toRupiah(),
+                      subtitle: '(${CartController.to.cart.length} Menu):',
+                      message: CartController.to.totalPrice.toRupiah(),
                       titleStyle: Theme.of(context).textTheme.headlineSmall,
                       messageStyle: Theme.of(context)
                           .textTheme
@@ -214,7 +219,8 @@ class CartView extends StatelessWidget {
                     /// Discount
                     Conditional.single(
                       context: context,
-                      conditionBuilder: (context) => state.discounts.isEmpty,
+                      conditionBuilder: (context) =>
+                          CartController.to.discounts.isEmpty,
                       widgetBuilder: (context) => TileOption(
                         icon: AssetConst.iconDiscount,
                         iconSize: 24.r,
@@ -228,14 +234,15 @@ class CartView extends StatelessWidget {
                         icon: AssetConst.iconDiscount,
                         iconSize: 24.r,
                         title: 'discount'.tr,
-                        message: state.totalDiscountPrice.toRupiah(),
+                        message:
+                            CartController.to.totalDiscountPrice.toRupiah(),
                         titleStyle: Theme.of(context).textTheme.headlineSmall,
                         messageStyle: Theme.of(context)
                             .textTheme
                             .bodySmall!
                             .copyWith(color: redColor),
                         color: lightColor2,
-                        onTap: state.openDiscountDialog,
+                        onTap: CartController.to.openDiscountDialog,
                       ),
                     ),
                     Divider(color: darkColor2.withOpacity(0.25), height: 2),
@@ -305,7 +312,7 @@ class CartView extends StatelessWidget {
                               style: Theme.of(context).textTheme.labelMedium,
                             ),
                             Text(
-                              state.grandTotalPrice.toRupiah(),
+                              CartController.to.grandTotalPrice.toRupiah(),
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!

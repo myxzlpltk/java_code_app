@@ -15,8 +15,8 @@ class CartController extends GetxController {
     getDiscount();
   }
 
-  List<DetailOrder> cart = <DetailOrder>[];
-  List<Discount> discounts = [];
+  RxList<DetailOrder> cart = RxList<DetailOrder>();
+  RxList<Discount> discounts = RxList<Discount>();
 
   /// Get discount for user
   Future<void> getDiscount() async {
@@ -24,8 +24,7 @@ class CartController extends GetxController {
 
     if (listDiscountRes.status_code == 200) {
       listDiscountRes.data!.shuffle();
-      discounts = listDiscountRes.data!.sublist(0, 2);
-      update();
+      discounts.value = listDiscountRes.data!.sublist(0, 2);
     }
   }
 
@@ -59,29 +58,26 @@ class CartController extends GetxController {
   void add(DetailOrder orderDetail) {
     cart.remove(orderDetail);
     cart.add(orderDetail);
-    update();
   }
 
   /// Remove item from cart
   void remove(DetailOrder orderDetail) {
     cart.remove(orderDetail);
-    update();
   }
 
   /// Increment item quantity
   void increment(DetailOrder orderDetail) {
     orderDetail.quantity++;
-    update();
+    cart.refresh();
   }
 
   /// Decrement item quantity
   void decrement(DetailOrder orderDetail) {
     if (orderDetail.quantity > 1) {
       orderDetail.quantity--;
-      update();
+      cart.refresh();
     } else {
       cart.remove(orderDetail);
-      update();
     }
   }
 
