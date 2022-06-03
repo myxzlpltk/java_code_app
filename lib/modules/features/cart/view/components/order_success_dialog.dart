@@ -35,7 +35,7 @@ class OrderSuccessDialog extends StatelessWidget {
           SizedBox(
             width: 168.w,
             child: PrimaryButton(
-              onPressed: () {},
+              onPressed: () => Get.back(),
               text: 'Okay'.tr,
             ),
           ),

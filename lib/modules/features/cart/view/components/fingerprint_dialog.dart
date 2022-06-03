@@ -28,11 +28,14 @@ class FingerprintDialog extends StatelessWidget {
                 .copyWith(color: greyColor2),
           ),
           SizedBox(height: 30.h),
-          SvgPicture.asset(AssetConst.iconFingerprint),
+          GestureDetector(
+            child: SvgPicture.asset(AssetConst.iconFingerprint),
+            onTap: () => Get.back<String>(result: 'fingerprint'),
+          ),
           SizedBox(height: 30.h),
           DividerWithText('or'.tr),
           TextButton(
-            onPressed: () {},
+            onPressed: () => Get.back<String>(result: 'pin'),
             child: Text(
               'Verify using PIN code'.tr,
               style: Theme.of(context)

@@ -2,6 +2,7 @@
     package="com.venturo.java_code_app">
    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+   <uses-permission android:name="android.permission.USE_FINGERPRINT" />
    <application
         android:label="java_code_app"
         android:name="${applicationName}"

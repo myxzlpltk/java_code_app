@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/modules/features/cart/repositories/discount_repository.dart';
@@ -11,7 +12,10 @@ import 'package:java_code_app/modules/features/cart/view/components/order_succes
 import 'package:java_code_app/modules/features/cart/view/components/pin_dialog.dart';
 import 'package:java_code_app/modules/models/detail_order.dart';
 import 'package:java_code_app/modules/models/discount.dart';
+import 'package:java_code_app/modules/models/user.dart';
 import 'package:java_code_app/modules/models/voucher.dart';
+import 'package:java_code_app/utils/services/local_db_services.dart';
+import 'package:local_auth/local_auth.dart';
 
 class CartController extends GetxController {
   static CartController get to => Get.find();
@@ -154,27 +158,88 @@ class CartController extends GetxController {
   /// Cart action functions
   /// - Order
 
-  void order() {
-    openOrderSuccessDialog();
+  void order() async {
+    final LocalAuthentication auth = LocalAuthentication();
+
+    final bool isBiometricSupported = await auth.isDeviceSupported();
+    final bool canCheckBiometrics = await auth.canCheckBiometrics;
+
+    /// Bisa menggunakan biometrik
+    if (isBiometricSupported && canCheckBiometrics) {
+      try {
+        final status = await openFingerprintDialog();
+        if (status == 'fingerprint') {
+          final bool didAuthenticate = await auth.authenticate(
+            localizedReason: 'Please authenticate to confirm order'.tr,
+            options: const AuthenticationOptions(
+              biometricOnly: true,
+            ),
+          );
+
+          if (didAuthenticate) {
+            openOrderSuccessDialog();
+          }
+        } else if (status == 'pin') {
+          openPinDialog();
+        }
+      } on PlatformException {
+        await openPinDialog();
+      }
+    } else {
+      await openPinDialog();
+    }
   }
 
-  void openFingerprintDialog() {
-    Get.defaultDialog(
+  Future<String?> openFingerprintDialog() async {
+    Get.until(ModalRoute.withName(AppRoutes.cartView));
+    final arguments = await Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
       content: const FingerprintDialog(),
     );
+
+    return arguments;
   }
 
-  void openPinDialog() {
-    Get.defaultDialog(
+  Future<void> openPinDialog() async {
+    Get.until(ModalRoute.withName(AppRoutes.cartView));
+
+    int tries = 0;
+    final User user = await LocalDBServices.getUser() as User;
+
+    await Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
-      content: const PinDialog(),
+      content: PinDialog(
+        onCheckPin: (String? pin) {
+          if (pin == user.pin) {
+            openOrderSuccessDialog();
+            return null;
+          } else {
+            tries++;
+            if (tries >= 3) {
+              Get.until(ModalRoute.withName(AppRoutes.cartView));
+              Get.showSnackbar(GetSnackBar(
+                title: 'Error'.tr,
+                message:
+                    'PIN already wrong 3 times. Please try again later.'.tr,
+                backgroundColor: Colors.red,
+                duration: const Duration(seconds: 3),
+              ));
+              return null;
+            } else {
+              return 'PIN wrong! n chances left.'.trParams({
+                'n': (3 - tries).toString(),
+              });
+            }
+          }
+        },
+      ),
     );
   }
 
   void openOrderSuccessDialog() {
+    Get.until(ModalRoute.withName(AppRoutes.cartView));
     Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),

@@ -26,6 +26,7 @@ class Localization extends Translations {
           'Email': 'Email',
           'Empty cart': 'Empty cart',
           'Enter PIN code': 'Enter PIN code',
+          'Error': 'Error',
           'Food': 'Food',
           'Get this promo': 'Get this promo! Access this link\n@link',
           'Home Page': 'Home Page',
@@ -49,6 +50,11 @@ class Localization extends Translations {
           'Order': 'Order',
           'Password': 'Password',
           'Payment': 'Payment',
+          'PIN already wrong 3 times. Please try again later.':
+              'PIN already wrong 3 times. Please try again later.',
+          'PIN wrong! n chances left.': 'PIN wrong! @n chances left.',
+          'Please authenticate to confirm order':
+              'Please authenticate to confirm order',
           'Press your fingerprint': 'Press your fingerprint',
           'Price': 'Price',
           'Profile': 'Profile',
@@ -102,6 +108,7 @@ class Localization extends Translations {
           'Email': 'Email',
           'Empty cart': 'Keranjang kosong',
           'Enter PIN code': 'Masukkan PIN',
+          'Error': 'Terjadi kesalahan',
           'Food': 'Makanan',
           'Get this promo': 'Dapatkan promo ini! Akses link berikut\n@link',
           'Home Page': 'Halaman utama',
@@ -125,6 +132,11 @@ class Localization extends Translations {
           'Order': 'Pesanan',
           'Password': 'Kata Sandi',
           'Payment': 'Pembayaran',
+          'PIN already wrong 3 times. Please try again later.':
+              'PIN salah 3 kali. Silahkan coba lagi nanti.',
+          'PIN wrong! n chances left.': 'PIN salah! Sisa @n kesempatan.',
+          'Please authenticate to confirm order':
+              'Harap otentikasi untuk konfirmasi pesanan',
           'Press your fingerprint': 'Tekan fingerprint Anda',
           'Price': 'Harga',
           'Profile': 'Profil',
