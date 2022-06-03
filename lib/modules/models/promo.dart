@@ -19,11 +19,11 @@ class Promo extends Equatable {
     required this.id_promo,
     required this.nama,
     required this.type,
-    this.diskon,
-    this.nominal,
-    this.kadaluarsa,
+    required this.diskon,
+    required this.nominal,
+    required this.kadaluarsa,
     required this.syarat_ketentuan,
-    this.foto,
+    required this.foto,
   });
 
   /// From Json

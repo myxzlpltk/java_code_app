@@ -14,7 +14,7 @@ class User extends Equatable {
     required this.email,
     required this.nama,
     required this.pin,
-    this.foto,
+    required this.foto,
   });
 
   /// From Json

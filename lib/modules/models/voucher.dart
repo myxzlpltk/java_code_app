@@ -26,7 +26,7 @@ class Voucher extends Equatable {
     required this.periode_selesai,
     required this.type,
     required this.status,
-    this.catatan,
+    required this.catatan,
   });
 
   /// From json
