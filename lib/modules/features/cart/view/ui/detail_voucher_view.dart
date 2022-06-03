@@ -3,6 +3,7 @@ import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
@@ -95,7 +96,8 @@ class DetailVoucherView extends StatelessWidget {
                   TileOption(
                     icon: AssetConst.iconDate,
                     title: 'Valid date'.tr,
-                    message: '31/12/2021 - 31/12/2021',
+                    message:
+                        '${DateFormat('dd/MM/yyyy').format(voucher.periode_mulai)} - ${DateFormat('dd/MM/yyyy').format(voucher.periode_selesai)}',
                     titleStyle: Theme.of(context).textTheme.headlineSmall,
                     messageStyle: Theme.of(context).textTheme.bodyMedium,
                   ),
