@@ -3,6 +3,7 @@ import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/cart/controllers/cart_controller.dart';
@@ -129,14 +130,14 @@ class DetailVoucherView extends StatelessWidget {
               text: 'use_voucher'.tr,
               onPressed: () {
                 CartController.to.setVoucher(voucher);
-                Get.close(2);
+                Get.until(ModalRoute.withName(AppRoutes.cartView));
               },
             ),
             fallbackBuilder: (context) => DangerButton(
               text: 'use_voucher_later'.tr,
               onPressed: () {
                 CartController.to.setVoucher(null);
-                Get.close(2);
+                Get.until(ModalRoute.withName(AppRoutes.cartView));
               },
             ),
           ),
