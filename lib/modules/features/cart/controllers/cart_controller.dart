@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
+import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/modules/features/cart/repositories/discount_repository.dart';
+import 'package:java_code_app/modules/features/cart/repositories/order_repository.dart';
 import 'package:java_code_app/modules/features/cart/repositories/voucher_repository.dart';
 import 'package:java_code_app/modules/features/cart/view/components/discount_info.dart';
 import 'package:java_code_app/modules/features/cart/view/components/fingerprint_dialog.dart';
 import 'package:java_code_app/modules/features/cart/view/components/order_success_dialog.dart';
 import 'package:java_code_app/modules/features/cart/view/components/pin_dialog.dart';
-import 'package:java_code_app/modules/models/detail_order.dart';
+import 'package:java_code_app/modules/models/cart_item.dart';
 import 'package:java_code_app/modules/models/discount.dart';
 import 'package:java_code_app/modules/models/user.dart';
 import 'package:java_code_app/modules/models/voucher.dart';
@@ -33,27 +35,27 @@ class CartController extends GetxController {
   /// - Increment quantity
   /// - Decrement quantity
   /// - Update note
-  RxList<DetailOrder> cart = RxList<DetailOrder>();
+  RxList<CartItem> cart = RxList<CartItem>();
 
   /// add item to cart
-  void add(DetailOrder orderDetail) {
+  void add(CartItem orderDetail) {
     cart.remove(orderDetail);
     cart.add(orderDetail);
   }
 
   /// Remove item from cart
-  void remove(DetailOrder orderDetail) {
+  void remove(CartItem orderDetail) {
     cart.remove(orderDetail);
   }
 
   /// Increment item quantity
-  void increment(DetailOrder orderDetail) {
+  void increment(CartItem orderDetail) {
     orderDetail.quantity++;
     cart.refresh();
   }
 
   /// Decrement item quantity
-  void decrement(DetailOrder orderDetail) {
+  void decrement(CartItem orderDetail) {
     if (orderDetail.quantity > 1) {
       orderDetail.quantity--;
       cart.refresh();
@@ -63,15 +65,15 @@ class CartController extends GetxController {
   }
 
   /// Update note
-  void updateNote(DetailOrder orderDetail, String note) {
+  void updateNote(CartItem orderDetail, String note) {
     orderDetail.note = note;
   }
 
   /// Getter for food items
-  List<DetailOrder> get foodItems => cart.where((e) => e.isFood).toList();
+  List<CartItem> get foodItems => cart.where((e) => e.isFood).toList();
 
   /// Getter for drink items
-  List<DetailOrder> get drinkItems => cart.where((e) => e.isDrink).toList();
+  List<CartItem> get drinkItems => cart.where((e) => e.isDrink).toList();
 
   /// Discount and voucher functions
   /// - Get discounts
@@ -157,8 +159,42 @@ class CartController extends GetxController {
 
   /// Cart action functions
   /// - Order
+  /// - Verify fingerprint or PIN
 
   void order() async {
+    Get.until(ModalRoute.withName(AppRoutes.cartView));
+    Get.defaultDialog(
+      title: '',
+      titleStyle: const TextStyle(fontSize: 0),
+      content: const CircularProgressIndicator(),
+    );
+
+    final cartReq = CartReq(
+      user: await LocalDBServices.getUser() as User,
+      cart: cart,
+      discounts: discounts.isEmpty ? null : discounts.toList(),
+      voucher: selectedVoucher.value,
+      discountPrice: totalPrice - grandTotalPrice,
+      totalPrice: grandTotalPrice,
+    );
+
+    int statusCode = await OrderRepository.add(cartReq);
+
+    if (statusCode == 200) {
+      openOrderSuccessDialog();
+    } else {
+      Get.until(ModalRoute.withName(AppRoutes.cartView));
+      Get.showSnackbar(GetSnackBar(
+        title: 'Error'.tr,
+        message: 'Server error'.tr,
+        duration: const Duration(seconds: 2),
+        backgroundColor: redColor,
+      ));
+    }
+  }
+
+  /// Verify fingerprint or PIN
+  void verify() async {
     final LocalAuthentication auth = LocalAuthentication();
 
     final bool isBiometricSupported = await auth.isDeviceSupported();
@@ -177,7 +213,7 @@ class CartController extends GetxController {
           );
 
           if (didAuthenticate) {
-            openOrderSuccessDialog();
+            order();
           }
         } else if (status == 'pin') {
           openPinDialog();
@@ -190,6 +226,7 @@ class CartController extends GetxController {
     }
   }
 
+  /// Open fingerprint dialog
   Future<String?> openFingerprintDialog() async {
     Get.until(ModalRoute.withName(AppRoutes.cartView));
     final arguments = await Get.defaultDialog(
@@ -201,6 +238,7 @@ class CartController extends GetxController {
     return arguments;
   }
 
+  /// Open pin dialog
   Future<void> openPinDialog() async {
     Get.until(ModalRoute.withName(AppRoutes.cartView));
 
@@ -213,7 +251,7 @@ class CartController extends GetxController {
       content: PinDialog(
         onCheckPin: (String? pin) {
           if (pin == user.pin) {
-            openOrderSuccessDialog();
+            order();
             return null;
           } else {
             tries++;
@@ -238,12 +276,19 @@ class CartController extends GetxController {
     );
   }
 
-  void openOrderSuccessDialog() {
+  /// Open order success dialog
+  void openOrderSuccessDialog() async {
     Get.until(ModalRoute.withName(AppRoutes.cartView));
-    Get.defaultDialog(
+    await Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
       content: const OrderSuccessDialog(),
     );
+
+    /// TODO: redirect to detail order in dashboardview - orders
+    Get.until(ModalRoute.withName(AppRoutes.dashboardView));
+
+    cart.clear();
+    selectedVoucher.value = null;
   }
 }

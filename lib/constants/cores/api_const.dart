@@ -17,4 +17,7 @@ class ApiConst {
   /// Cart
   static const String allDiscount = '$apiBaseUrl/diskon/all';
   static const String allVoucher = '$apiBaseUrl/voucher/all';
+
+  /// Order
+  static const String addOrder = '$apiBaseUrl/order/add';
 }

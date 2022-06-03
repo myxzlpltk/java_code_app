@@ -345,7 +345,7 @@ class CartView extends StatelessWidget {
                         fit: FlexFit.loose,
                         child: PrimaryButton(
                           text: 'Order now'.tr,
-                          onPressed: CartController.to.order,
+                          onPressed: CartController.to.verify,
                         ),
                       ),
                     ],

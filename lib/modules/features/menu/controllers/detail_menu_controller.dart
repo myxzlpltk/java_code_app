@@ -6,7 +6,7 @@ import 'package:java_code_app/modules/features/menu/repositories/menu_repository
 import 'package:java_code_app/modules/features/menu/view/components/level_bottom_sheet.dart';
 import 'package:java_code_app/modules/features/menu/view/components/note_bottom_sheet.dart';
 import 'package:java_code_app/modules/features/menu/view/components/topping_bottom_sheet.dart';
-import 'package:java_code_app/modules/models/detail_order.dart';
+import 'package:java_code_app/modules/models/cart_item.dart';
 import 'package:java_code_app/modules/models/menu.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
 
@@ -132,7 +132,7 @@ class DetailMenuController extends GetxController {
       ? selectedToppings.map((topping) => topping.keterangan).join(', ')
       : 'Choose topping'.tr;
 
-  DetailOrder get orderDetail => DetailOrder(
+  CartItem get orderDetail => CartItem(
       menu: menu.value!,
       quantity: quantity.value,
       note: note.value,
