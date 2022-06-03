@@ -12,6 +12,7 @@ import 'package:java_code_app/modules/features/cart/view/components/discount_inf
 import 'package:java_code_app/modules/features/cart/view/components/fingerprint_dialog.dart';
 import 'package:java_code_app/modules/features/cart/view/components/order_success_dialog.dart';
 import 'package:java_code_app/modules/features/cart/view/components/pin_dialog.dart';
+import 'package:java_code_app/modules/features/dashboard/controllers/dashboard_controller.dart';
 import 'package:java_code_app/modules/models/cart_item.dart';
 import 'package:java_code_app/modules/models/discount.dart';
 import 'package:java_code_app/modules/models/user.dart';
@@ -285,7 +286,8 @@ class CartController extends GetxController {
       content: const OrderSuccessDialog(),
     );
 
-    /// TODO: redirect to detail order in dashboardview - orders
+    /// TODO: redirect to detail order in dashboard -> orders -> detail order
+    DashboardController.to.tabIndex.value = 1;
     Get.until(ModalRoute.withName(AppRoutes.dashboardView));
 
     cart.clear();
