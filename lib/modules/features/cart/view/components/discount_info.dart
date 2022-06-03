@@ -17,6 +17,13 @@ class DiscountInfo extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          Text(
+            'info_discount'.tr,
+            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+          ),
+          SizedBox(height: 30.h),
           ...discounts.map<Widget>(
             (discount) => Padding(
               padding: EdgeInsets.only(bottom: 7.h),

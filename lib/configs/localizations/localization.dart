@@ -80,6 +80,13 @@ class Localization extends Translations {
           'discount_can_not_be_combined': 'Discount can not be combined',
           'use_voucher': 'Use Voucher',
           'use_voucher_later': 'Use Voucher Later',
+          'verify_order': 'Verify Order',
+          'press_fingerprint': 'Press your fingerprint',
+          'verify_using_pin': 'Verify using PIN',
+          'enter_pin_code': 'Enter PIN code',
+          'order_being_prepared': 'Order being prepared',
+          'you_can_track_your_order_in_order_history':
+              'You can track your order in order history',
 
           /// Bottom Navigation Bar
           'home': 'Home',
@@ -163,6 +170,13 @@ class Localization extends Translations {
           'discount_can_not_be_combined': 'Diskon tidak dapat digabung',
           'use_voucher': 'Pakai Voucher',
           'use_voucher_later': 'Pakai Voucher Nanti',
+          'verify_order': 'Verifikasi Pesanan',
+          'press_fingerprint': 'Tekan Fingerprint Anda',
+          'verify_using_pin': 'Verifikasi menggunakan PIN',
+          'enter_pin_code': 'Masukkan PIN',
+          'order_being_prepared': 'Pesanan sedang diproses',
+          'you_can_track_your_order_in_order_history':
+              'Kamu dapat melacak pesananmu di fitur Pesanan',
 
           /// Bottom Navigation Bar
           'home': 'Beranda',

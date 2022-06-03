@@ -1,10 +1,14 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/modules/features/cart/repositories/discount_repository.dart';
 import 'package:java_code_app/modules/features/cart/repositories/voucher_repository.dart';
 import 'package:java_code_app/modules/features/cart/view/components/discount_info.dart';
+import 'package:java_code_app/modules/features/cart/view/components/fingerprint_dialog.dart';
+import 'package:java_code_app/modules/features/cart/view/components/order_success_dialog.dart';
+import 'package:java_code_app/modules/features/cart/view/components/pin_dialog.dart';
 import 'package:java_code_app/modules/models/detail_order.dart';
 import 'package:java_code_app/modules/models/discount.dart';
 import 'package:java_code_app/modules/models/voucher.dart';
@@ -102,10 +106,8 @@ class CartController extends GetxController {
   /// Open dialog for discount
   void openDiscountDialog() {
     Get.defaultDialog(
-      title: 'info_discount'.tr,
-      titleStyle: Get.textTheme.headlineMedium!.copyWith(
-        color: Get.theme.colorScheme.primary,
-      ),
+      title: '',
+      titleStyle: const TextStyle(fontSize: 0),
       content: DiscountInfo(discounts: discounts),
     );
   }
@@ -147,5 +149,36 @@ class CartController extends GetxController {
     } else {
       return max(totalPrice - discountPrice, 0);
     }
+  }
+
+  /// Cart action functions
+  /// - Order
+
+  void order() {
+    openOrderSuccessDialog();
+  }
+
+  void openFingerprintDialog() {
+    Get.defaultDialog(
+      title: '',
+      titleStyle: const TextStyle(fontSize: 0),
+      content: const FingerprintDialog(),
+    );
+  }
+
+  void openPinDialog() {
+    Get.defaultDialog(
+      title: '',
+      titleStyle: const TextStyle(fontSize: 0),
+      content: const PinDialog(),
+    );
+  }
+
+  void openOrderSuccessDialog() {
+    Get.defaultDialog(
+      title: '',
+      titleStyle: const TextStyle(fontSize: 0),
+      content: const OrderSuccessDialog(),
+    );
   }
 }

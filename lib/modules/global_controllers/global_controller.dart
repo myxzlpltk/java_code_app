@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/shared/widgets/network_error_view.dart';
@@ -48,8 +49,8 @@ class GlobalController extends GetxController {
   /// Show alert internet
   Future<void> showAlert() async {
     await Get.defaultDialog(
-      title: 'error'.tr,
-      titleStyle: Get.textTheme.headlineSmall,
+      title: '',
+      titleStyle: const TextStyle(fontSize: 0),
       content: const NetworkErrorView(),
     );
   }

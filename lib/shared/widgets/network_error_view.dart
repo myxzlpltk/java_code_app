@@ -17,6 +17,8 @@ class NetworkErrorView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          Text('error'.tr, style: Theme.of(context).textTheme.headlineSmall),
+          SizedBox(height: 15.h),
           SvgPicture.asset(
             AssetConst.iconNoInternet,
             width: MediaQuery.of(context).size.width * 0.6,
