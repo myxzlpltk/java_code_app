@@ -16,7 +16,7 @@ class MenuRepository {
 
       return MenuRes.fromJson(response.data);
     } on DioError {
-      return MenuRes(status_code: 500, message: 'server_error'.tr);
+      return MenuRes(status_code: 500, message: 'Server error'.tr);
     }
   }
 }

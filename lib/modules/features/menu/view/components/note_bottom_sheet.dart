@@ -20,7 +20,7 @@ class NoteBottomSheet extends StatelessWidget {
           const HolderBottomSheet(),
           SizedBox(height: 13.h),
           Text(
-            'create_note'.tr,
+            'Create note'.tr,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           SizedBox(height: 13.h),
@@ -31,7 +31,7 @@ class NoteBottomSheet extends StatelessWidget {
                   controller: noteController,
                   style: Theme.of(context).textTheme.bodySmall,
                   decoration: InputDecoration(
-                    hintText: 'add_note'.tr,
+                    hintText: 'Add note'.tr,
                     hintStyle: Theme.of(context).textTheme.bodySmall,
                     enabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(color: blueColor, width: 2),

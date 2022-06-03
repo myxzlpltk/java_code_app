@@ -24,7 +24,7 @@ class NetworkErrorView extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.6,
           ),
           Text(
-            'not_connected'.tr,
+            'Not connected to the internet'.tr,
             style: Theme.of(context).textTheme.titleSmall,
             textAlign: TextAlign.center,
           ),
@@ -45,7 +45,7 @@ class NetworkErrorView extends StatelessWidget {
                 const Icon(Icons.settings, color: darkColor),
                 SizedBox(width: 16.w),
                 Text(
-                  'open_settings'.tr,
+                  'Open settings'.tr,
                   style: GoogleFonts.montserrat(
                     fontSize: ScreenUtil().setSp(14),
                     fontWeight: FontWeight.w400,

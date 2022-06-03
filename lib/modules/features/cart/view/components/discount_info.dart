@@ -18,7 +18,7 @@ class DiscountInfo extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'info_discount'.tr,
+            'Info discount'.tr,
             style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -47,7 +47,7 @@ class DiscountInfo extends StatelessWidget {
           SizedBox(
             width: 168.w,
             child: PrimaryButton(
-              text: 'ok'.tr,
+              text: 'Okay'.tr,
               onPressed: () => Get.back(),
             ),
           ),

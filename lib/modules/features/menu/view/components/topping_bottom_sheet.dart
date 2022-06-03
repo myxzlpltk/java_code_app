@@ -19,7 +19,7 @@ class ToppingBottomSheet extends StatelessWidget {
           const HolderBottomSheet(),
           SizedBox(height: 13.h),
           Text(
-            'select_topping'.tr,
+            'Choose topping'.tr,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           SizedBox(height: 16.h),

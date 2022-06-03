@@ -34,10 +34,10 @@ class HomeController extends GetxController {
       listPromo.value = listPromoRes.data!;
     } else if (listPromoRes.status_code == 204) {
       statusPromo.value = 'error';
-      messagePromo.value = 'no_data'.tr;
+      messagePromo.value = 'No data'.tr;
     } else {
       statusPromo.value = 'error';
-      messagePromo.value = listPromoRes.message ?? 'unknown_error'.tr;
+      messagePromo.value = listPromoRes.message ?? 'Unknown error'.tr;
     }
   }
 
@@ -71,10 +71,10 @@ class HomeController extends GetxController {
       listMenu.value = listMenuRes.data!;
     } else if (listMenuRes.status_code == 204) {
       statusMenu.value = 'error';
-      messageMenu.value = 'no_data'.tr;
+      messageMenu.value = 'No data'.tr;
     } else {
       statusMenu.value = 'error';
-      messageMenu.value = listMenuRes.message ?? 'unknown_error'.tr;
+      messageMenu.value = listMenuRes.message ?? 'Unknown error'.tr;
     }
   }
 

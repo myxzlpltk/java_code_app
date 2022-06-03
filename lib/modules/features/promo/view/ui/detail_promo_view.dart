@@ -33,7 +33,7 @@ class DetailPromoView extends StatelessWidget {
           children: [
             SvgPicture.asset(AssetConst.iconPromo, width: 23.w),
             SizedBox(width: 10.w),
-            Text('promo'.tr, style: Theme.of(context).textTheme.titleMedium),
+            Text('Promo'.tr, style: Theme.of(context).textTheme.titleMedium),
           ],
         ),
         shape: RoundedRectangleBorder(
@@ -117,7 +117,7 @@ class DetailPromoView extends StatelessWidget {
                       const Icon(Icons.list, color: blueColor),
                       SizedBox(width: 14.w),
                       Text(
-                        'terms_and_conditions'.tr,
+                        'Terms and conditions'.tr,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                     ],

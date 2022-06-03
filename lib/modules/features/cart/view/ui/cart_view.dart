@@ -35,7 +35,7 @@ class CartView extends StatelessWidget {
               color: blueColor,
             ),
             SizedBox(width: 10.w),
-            Text('order'.tr, style: Theme.of(context).textTheme.titleMedium),
+            Text('Order'.tr, style: Theme.of(context).textTheme.titleMedium),
           ],
         ),
         shape: RoundedRectangleBorder(
@@ -62,7 +62,7 @@ class CartView extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.8,
                   ),
                   Text(
-                    'empty_cart'.tr,
+                    'Empty cart'.tr,
                     style: Theme.of(context).textTheme.bodyLarge,
                     textAlign: TextAlign.center,
                   ),
@@ -89,7 +89,7 @@ class CartView extends StatelessWidget {
                         ),
                         SizedBox(width: 10.w),
                         Text(
-                          'food'.tr,
+                          'Food'.tr,
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium!
@@ -142,7 +142,7 @@ class CartView extends StatelessWidget {
                         ),
                         SizedBox(width: 10.w),
                         Text(
-                          'drink'.tr,
+                          'Drink'.tr,
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium!
@@ -224,10 +224,10 @@ class CartView extends StatelessWidget {
                       widgetBuilder: (context) => TileOption(
                         icon: AssetConst.iconDiscount,
                         iconSize: 24.r,
-                        title: 'discount'.tr,
+                        title: 'Discount'.tr,
                         message: CartController.to.selectedVoucher.value == null
-                            ? 'no_discount'.tr
-                            : 'discount_can_not_be_combined'.tr,
+                            ? 'No discount'.tr
+                            : 'Discount can not be combined'.tr,
                         titleStyle: Theme.of(context).textTheme.headlineSmall,
                         messageStyle: Theme.of(context).textTheme.bodySmall,
                         color: lightColor2,
@@ -235,7 +235,7 @@ class CartView extends StatelessWidget {
                       fallbackBuilder: (context) => TileOption(
                         icon: AssetConst.iconDiscount,
                         iconSize: 24.r,
-                        title: 'discount'.tr,
+                        title: 'Discount'.tr,
                         message: CartController.to.discountPrice.toRupiah(),
                         titleStyle: Theme.of(context).textTheme.headlineSmall,
                         messageStyle: Theme.of(context)
@@ -257,7 +257,7 @@ class CartView extends StatelessWidget {
                         icon: AssetConst.iconVoucher,
                         iconSize: 24.r,
                         title: 'voucher'.tr,
-                        message: 'choose_voucher'.tr,
+                        message: 'Choose voucher'.tr,
                         titleStyle: Theme.of(context).textTheme.headlineSmall,
                         messageStyle: Theme.of(context).textTheme.bodySmall,
                         color: lightColor2,
@@ -285,7 +285,7 @@ class CartView extends StatelessWidget {
                     TileOption(
                       icon: AssetConst.iconPayment,
                       iconSize: 24.r,
-                      title: 'payment'.tr,
+                      title: 'Payment'.tr,
                       message: 'Pay Later',
                       titleStyle: Theme.of(context).textTheme.headlineSmall,
                       messageStyle: Theme.of(context).textTheme.bodySmall,
@@ -328,7 +328,7 @@ class CartView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'total_payment'.tr,
+                              'Total payment'.tr,
                               style: Theme.of(context).textTheme.labelMedium,
                             ),
                             Text(
@@ -344,7 +344,7 @@ class CartView extends StatelessWidget {
                       Flexible(
                         fit: FlexFit.loose,
                         child: PrimaryButton(
-                          text: 'order_now'.tr,
+                          text: 'Order now'.tr,
                           onPressed: CartController.to.order,
                         ),
                       ),

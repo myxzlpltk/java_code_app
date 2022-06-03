@@ -19,7 +19,7 @@ class LevelBottomSheet extends StatelessWidget {
           const HolderBottomSheet(),
           SizedBox(height: 13.h),
           Text(
-            'select_level'.tr,
+            'Choose level'.tr,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           SizedBox(height: 16.h),

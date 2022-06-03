@@ -16,7 +16,7 @@ class PromoRepository {
 
       return PromoRes.fromJson(response.data);
     } on DioError {
-      return PromoRes(status_code: 500, message: 'server_error'.tr);
+      return PromoRes(status_code: 500, message: 'Server error'.tr);
     }
   }
 }

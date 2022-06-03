@@ -31,7 +31,7 @@ class GetLocationView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'searching_location'.tr,
+                'Searching location...'.tr,
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: darkColor.withOpacity(0.5),
                     ),

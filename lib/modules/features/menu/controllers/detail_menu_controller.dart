@@ -130,7 +130,7 @@ class DetailMenuController extends GetxController {
   /// Getter for selected topping text
   String get selectedToppingsText => selectedToppings.isNotEmpty
       ? selectedToppings.map((topping) => topping.keterangan).join(', ')
-      : '-';
+      : 'Choose topping'.tr;
 
   DetailOrder get orderDetail => DetailOrder(
       menu: menu.value!,

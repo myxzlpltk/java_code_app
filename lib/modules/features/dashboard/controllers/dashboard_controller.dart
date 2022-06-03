@@ -44,11 +44,11 @@ class DashboardController extends GetxController {
         Get.back(closeOverlays: true);
       } else {
         statusLocation.value = 'error';
-        messageLocation.value = 'distance_not_close'.tr;
+        messageLocation.value = 'Distance not close'.tr;
       }
     } catch (e) {
       statusLocation.value = 'error';
-      messageLocation.value = 'server_error'.tr;
+      messageLocation.value = 'Server error'.tr;
     }
   }
 }

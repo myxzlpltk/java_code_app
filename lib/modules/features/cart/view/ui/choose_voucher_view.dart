@@ -30,8 +30,10 @@ class ChooseVoucherView extends StatelessWidget {
           children: [
             SvgPicture.asset(AssetConst.iconVoucher, width: 23.w),
             SizedBox(width: 10.w),
-            Text('choose_voucher'.tr,
-                style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Choose voucher'.tr,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
           ],
         ),
         shape: RoundedRectangleBorder(
@@ -50,7 +52,7 @@ class ChooseVoucherView extends StatelessWidget {
               'error': (context) => Stack(
                     children: [
                       ListView(),
-                      Center(child: Text('server_error'.tr)),
+                      Center(child: Text('Server error'.tr)),
                     ],
                   ),
               'loading': (context) => ListView.separated(
@@ -119,11 +121,13 @@ class ChooseVoucherView extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: 'choose_voucher_terms_1'.tr,
+                          text:
+                              'The use of vouchers cannot be combined with a discount'
+                                  .tr,
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                         TextSpan(
-                          text: 'choose_voucher_terms_2'.tr,
+                          text: ' ${'employee reward program'.tr}',
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge!
@@ -139,7 +143,7 @@ class ChooseVoucherView extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: PrimaryButton(
-                text: 'ok'.tr,
+                text: 'Okay'.tr,
                 onPressed: () => Get.back(),
               ),
             ),

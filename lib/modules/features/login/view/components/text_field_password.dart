@@ -15,7 +15,7 @@ class TextFieldPassword extends StatelessWidget {
       controller: controller,
       style: Theme.of(context).textTheme.bodySmall,
       decoration: InputDecoration(
-        labelText: 'password'.tr,
+        labelText: 'Password'.tr,
         labelStyle: Theme.of(context).textTheme.bodySmall,
         hintText: '****************',
         hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(

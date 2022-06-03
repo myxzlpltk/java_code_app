@@ -26,7 +26,7 @@ class LoginButtonApple extends StatelessWidget {
           SvgPicture.asset(AssetConst.iconApple, width: 24.w, height: 24.h),
           const Spacer(),
           Text(
-            'login_with'.tr,
+            'Login with'.tr,
             style: GoogleFonts.montserrat(
               fontSize: ScreenUtil().setSp(14),
               fontWeight: FontWeight.w400,
@@ -34,7 +34,7 @@ class LoginButtonApple extends StatelessWidget {
             ),
           ),
           Text(
-            'Apple',
+            ' Apple',
             style: GoogleFonts.montserrat(
               fontSize: ScreenUtil().setSp(14),
               fontWeight: FontWeight.w600,

@@ -81,10 +81,10 @@ class HomeView extends StatelessWidget {
                 () => Column(
                   children: [
                     if (HomeController.to.categoryMenu.value == 'all' ||
-                        HomeController.to.categoryMenu.value == 'food')
+                        HomeController.to.categoryMenu.value == 'Food')
                       ...foodSection(context),
                     if (HomeController.to.categoryMenu.value == 'all' ||
-                        HomeController.to.categoryMenu.value == 'drink')
+                        HomeController.to.categoryMenu.value == 'Drink')
                       ...drinkSection(context),
                   ],
                 ),
@@ -108,7 +108,7 @@ class HomeView extends StatelessWidget {
           SvgPicture.asset(AssetConst.iconPromo, width: 23.w),
           SizedBox(width: 10.w),
           Text(
-            'available_promo'.tr,
+            'Available promo'.tr,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           SizedBox(width: 25.w),
@@ -177,28 +177,28 @@ class HomeView extends StatelessWidget {
           children: [
             Obx(
                   () => FilterMenu(
-                isSelected: HomeController.to.categoryMenu.value == 'all',
+                    isSelected: HomeController.to.categoryMenu.value == 'all',
                 onTap: () => HomeController.to.setCategoryMenu('all'),
                 iconPath: AssetConst.iconList,
-                text: 'all_menu'.tr,
+                text: 'All menu'.tr,
               ),
             ),
             SizedBox(width: 13.w),
             Obx(
-                  () => FilterMenu(
-                isSelected: HomeController.to.categoryMenu.value == 'food',
-                onTap: () => HomeController.to.setCategoryMenu('food'),
+              () => FilterMenu(
+                isSelected: HomeController.to.categoryMenu.value == 'Food',
+                onTap: () => HomeController.to.setCategoryMenu('Food'),
                 iconPath: AssetConst.iconFood,
-                text: 'food'.tr,
+                text: 'Food'.tr,
               ),
             ),
             SizedBox(width: 13.w),
             Obx(
-                  () => FilterMenu(
-                isSelected: HomeController.to.categoryMenu.value == 'drink',
-                onTap: () => HomeController.to.setCategoryMenu('drink'),
+              () => FilterMenu(
+                isSelected: HomeController.to.categoryMenu.value == 'Drink',
+                onTap: () => HomeController.to.setCategoryMenu('Drink'),
                 iconPath: AssetConst.iconDrink,
-                text: 'drink'.tr,
+                text: 'Drink'.tr,
               ),
             ),
           ],
@@ -222,7 +222,7 @@ class HomeView extends StatelessWidget {
           ),
           SizedBox(width: 10.w),
           Text(
-            'food'.tr,
+            'Food'.tr,
             style: Theme.of(context)
                 .textTheme
                 .titleMedium!
@@ -257,7 +257,7 @@ class HomeView extends StatelessWidget {
 
             if (foods.isEmpty) {
               return Center(
-                child: Text('no_data'.tr, textAlign: TextAlign.center),
+                child: Text('No data'.tr, textAlign: TextAlign.center),
               );
             } else {
               return Wrap(
@@ -297,7 +297,7 @@ class HomeView extends StatelessWidget {
           ),
           SizedBox(width: 10.w),
           Text(
-            'drink'.tr,
+            'Drink'.tr,
             style: Theme.of(context)
                 .textTheme
                 .titleMedium!
@@ -333,7 +333,7 @@ class HomeView extends StatelessWidget {
 
             if (foods.isEmpty) {
               return Center(
-                child: Text('no_data'.tr, textAlign: TextAlign.center),
+                child: Text('No data'.tr, textAlign: TextAlign.center),
               );
             } else {
               return Wrap(

@@ -28,7 +28,7 @@ class DetailMenuView extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          'detail_menu'.tr,
+          'Detail menu'.tr,
           style: Theme.of(context).textTheme.titleMedium,
         ),
         shape: RoundedRectangleBorder(
@@ -103,7 +103,7 @@ class DetailMenuView extends StatelessWidget {
                   Obx(
                     () => TileOption(
                       icon: AssetConst.iconPrice,
-                      title: 'price'.tr,
+                      title: 'Price'.tr,
                       message:
                           DetailMenuController.to.orderDetail.price.toRupiah(),
                       messageStyle: Theme.of(context)
@@ -125,7 +125,7 @@ class DetailMenuView extends StatelessWidget {
                           ),
                           TileOption(
                             icon: AssetConst.iconLevel,
-                            title: 'level'.tr,
+                            title: 'Level'.tr,
                             message: DetailMenuController.to.selectedLevelText,
                             onTap: DetailMenuController.to.openLevelBottomSheet,
                           ),
@@ -147,7 +147,7 @@ class DetailMenuView extends StatelessWidget {
                           ),
                           TileOption(
                             icon: AssetConst.iconTopping,
-                            title: 'topping'.tr,
+                            title: 'Topping'.tr,
                             message:
                                 DetailMenuController.to.selectedToppingsText,
                             onTap:
@@ -162,10 +162,10 @@ class DetailMenuView extends StatelessWidget {
                   Obx(
                     () => TileOption(
                       icon: AssetConst.iconEdit,
-                      title: 'note'.tr,
+                      title: 'Note'.tr,
                       message: DetailMenuController.to.note.isNotEmpty
                           ? DetailMenuController.to.note.value
-                          : 'add_note'.tr,
+                          : 'Add note'.tr,
                       onTap: DetailMenuController.to.openNoteBottomSheet,
                     ),
                   ),
@@ -181,12 +181,12 @@ class DetailMenuView extends StatelessWidget {
                               0
                           ? PrimaryButton(
                               text: DetailMenuController.to.isExistsInCart.value
-                                  ? 'update_to_order'.tr
-                                  : 'add_to_order'.tr,
+                                  ? 'Update to order'.tr
+                                  : 'Add to order'.tr,
                               onPressed: DetailMenuController.to.addToCart,
                             )
                           : DangerButton(
-                              text: 'delete_from_order'.tr,
+                        text: 'Delete from order'.tr,
                               onPressed: DetailMenuController.to.deleteFromCart,
                             ),
                       fallbackBuilder: (context) => const SizedBox(),

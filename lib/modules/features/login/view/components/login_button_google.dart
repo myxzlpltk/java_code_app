@@ -26,7 +26,7 @@ class LoginButtonGoogle extends StatelessWidget {
           SvgPicture.asset(AssetConst.iconGoogle, width: 24.w, height: 24.h),
           const Spacer(),
           Text(
-            'login_with'.tr,
+            'Login with'.tr,
             style: GoogleFonts.montserrat(
               fontSize: ScreenUtil().setSp(14),
               fontWeight: FontWeight.w400,
@@ -35,7 +35,7 @@ class LoginButtonGoogle extends StatelessWidget {
             ),
           ),
           Text(
-            'Google',
+            ' Google',
             style: GoogleFonts.montserrat(
               fontSize: ScreenUtil().setSp(14),
               fontWeight: FontWeight.w600,

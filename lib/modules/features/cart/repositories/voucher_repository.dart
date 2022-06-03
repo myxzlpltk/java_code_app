@@ -17,7 +17,7 @@ class VoucherRepository {
 
       return ListVoucherRes.fromJson(response.data);
     } on DioError {
-      return ListVoucherRes(status_code: 500, message: 'server_error'.tr);
+      return ListVoucherRes(status_code: 500, message: 'Server error'.tr);
     }
   }
 }

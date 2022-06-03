@@ -30,7 +30,7 @@ class DetailVoucherView extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          'detail_voucher'.tr,
+          'Detail voucher'.tr,
           style: Theme.of(context).textTheme.titleMedium,
         ),
         shape: RoundedRectangleBorder(
@@ -94,7 +94,7 @@ class DetailVoucherView extends StatelessWidget {
                   Divider(color: darkColor2.withOpacity(0.25), height: 1),
                   TileOption(
                     icon: AssetConst.iconDate,
-                    title: 'valid_date'.tr,
+                    title: 'Valid date'.tr,
                     message: '31/12/2021 - 31/12/2021',
                     titleStyle: Theme.of(context).textTheme.headlineSmall,
                     messageStyle: Theme.of(context).textTheme.bodyMedium,
@@ -127,14 +127,14 @@ class DetailVoucherView extends StatelessWidget {
             conditionBuilder: (context) =>
                 voucher != CartController.to.selectedVoucher.value,
             widgetBuilder: (context) => PrimaryButton(
-              text: 'use_voucher'.tr,
+              text: 'Use voucher'.tr,
               onPressed: () {
                 CartController.to.setVoucher(voucher);
                 Get.until(ModalRoute.withName(AppRoutes.cartView));
               },
             ),
             fallbackBuilder: (context) => DangerButton(
-              text: 'use_voucher_later'.tr,
+              text: 'Use voucher later'.tr,
               onPressed: () {
                 CartController.to.setVoucher(null);
                 Get.until(ModalRoute.withName(AppRoutes.cartView));

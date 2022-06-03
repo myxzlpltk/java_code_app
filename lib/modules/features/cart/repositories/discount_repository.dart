@@ -17,7 +17,7 @@ class DiscountRepository {
 
       return ListDiscountRes.fromJson(response.data);
     } on DioError {
-      return ListDiscountRes(status_code: 500, message: 'server_error'.tr);
+      return ListDiscountRes(status_code: 500, message: 'Server error'.tr);
     }
   }
 }

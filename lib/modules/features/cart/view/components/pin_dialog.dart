@@ -24,11 +24,11 @@ class PinDialog extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'verify_order'.tr,
+          'Verify order'.tr,
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         Text(
-          'enter_pin_code'.tr,
+          'Enter PIN code'.tr,
           style: Theme.of(context)
               .textTheme
               .bodySmall!

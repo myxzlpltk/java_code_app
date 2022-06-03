@@ -9,19 +9,19 @@ class LocationServices {
   static Future<Position> getCurrentPosition() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      return Future.error('location_service_not_enabled'.tr);
+      return Future.error('Location service not enabled'.tr);
     }
 
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error('location_permission_not_granted'.tr);
+        return Future.error('Location permission not granted'.tr);
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      return Future.error('location_permission_not_granted_forever'.tr);
+      return Future.error('Location permission not granted forever'.tr);
     }
 
     return await Geolocator.getCurrentPosition();
@@ -37,7 +37,7 @@ class LocationServices {
     );
 
     if (placemarks.isEmpty) {
-      return Future.error('unknown_location'.tr);
+      return Future.error('Unknown location'.tr);
     } else {
       return [
         placemarks[0].name,

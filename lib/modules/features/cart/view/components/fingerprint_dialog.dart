@@ -17,11 +17,11 @@ class FingerprintDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'verify_order'.tr,
+            'Verify order'.tr,
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           Text(
-            'press_fingerprint'.tr,
+            'Press your fingerprint'.tr,
             style: Theme.of(context)
                 .textTheme
                 .bodySmall!
@@ -34,7 +34,7 @@ class FingerprintDialog extends StatelessWidget {
           TextButton(
             onPressed: () {},
             child: Text(
-              'verify_using_pin'.tr,
+              'Verify using PIN code'.tr,
               style: Theme.of(context)
                   .textTheme
                   .titleSmall!

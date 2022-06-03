@@ -50,7 +50,7 @@ class DetailPromoController extends GetxController {
     await screenshotController.captureAndSave(directory, fileName: fileName);
     await Share.shareFiles(
       [path],
-      text: 'get_this_promo'.trParams({
+      text: 'Get this promo'.trParams({
         'link': '$appDeepLink?id_promo=${promo.value!.id_promo}',
       }),
     );

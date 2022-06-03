@@ -25,7 +25,7 @@ class SearchBar extends StatelessWidget {
               onChanged: onChanged,
               style: Theme.of(context).textTheme.headlineSmall,
               decoration: InputDecoration.collapsed(
-                hintText: 'search_bar'.tr,
+                hintText: 'Search'.tr,
                 hintStyle: Theme.of(context).textTheme.headlineSmall!.copyWith(
                       color: const Color(0xFFAAAAAA),
                     ),

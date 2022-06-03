@@ -58,7 +58,7 @@ class DashboardView extends StatelessWidget {
                     width: 27.r,
                   ),
                 ),
-                label: 'home'.tr,
+                label: 'Home'.tr,
               ),
               BottomNavigationBarItem(
                 icon: Padding(
@@ -79,7 +79,7 @@ class DashboardView extends StatelessWidget {
                     width: 27.r,
                   ),
                 ),
-                label: 'order'.tr,
+                label: 'Order'.tr,
               ),
               BottomNavigationBarItem(
                 icon: Padding(
@@ -100,7 +100,7 @@ class DashboardView extends StatelessWidget {
                     width: 27.r,
                   ),
                 ),
-                label: 'profile'.tr,
+                label: 'Profile'.tr,
               ),
             ],
           ),

@@ -26,14 +26,14 @@ class LoginController extends GetxController {
       Get.offAllNamed('/dashboard');
     } else if (userRes.status_code == 422 || userRes.status_code == 204) {
       Get.showSnackbar(GetSnackBar(
-        title: 'error'.tr,
+        title: 'Something went wrong'.tr,
         message: 'account_incorrect'.tr,
         duration: const Duration(seconds: 2),
       ));
     } else {
       Get.showSnackbar(GetSnackBar(
-        title: 'error'.tr,
-        message: userRes.message ?? 'unknown_error'.tr,
+        title: 'Something went wrong'.tr,
+        message: userRes.message ?? 'Unknown error'.tr,
         duration: const Duration(seconds: 2),
       ));
     }
@@ -65,8 +65,8 @@ class LoginController extends GetxController {
       Get.offNamed('/dashboard');
     } else {
       Get.showSnackbar(GetSnackBar(
-        title: 'error'.tr,
-        message: 'unknown_error'.tr,
+        title: 'Something went wrong'.tr,
+        message: 'Unknown error'.tr,
         duration: const Duration(seconds: 2),
       ));
     }

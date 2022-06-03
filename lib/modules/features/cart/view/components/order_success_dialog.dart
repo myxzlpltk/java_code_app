@@ -20,12 +20,12 @@ class OrderSuccessDialog extends StatelessWidget {
           SvgPicture.asset(AssetConst.iconOrderSuccess),
           SizedBox(height: 28.h),
           Text(
-            'order_being_prepared'.tr,
+            'Order is being prepared'.tr,
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           SizedBox(height: 14.h),
           Text(
-            'you_can_track_your_order_in_order_history'.tr,
+            'You can track your order in order history'.tr,
             style: Theme.of(context)
                 .textTheme
                 .bodySmall!
@@ -36,7 +36,7 @@ class OrderSuccessDialog extends StatelessWidget {
             width: 168.w,
             child: PrimaryButton(
               onPressed: () {},
-              text: 'ok'.tr,
+              text: 'Okay'.tr,
             ),
           ),
         ],

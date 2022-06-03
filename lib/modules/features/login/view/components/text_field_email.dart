@@ -14,7 +14,7 @@ class TextFieldEmail extends StatelessWidget {
       controller: controller,
       style: Theme.of(context).textTheme.bodySmall,
       decoration: InputDecoration(
-        labelText: 'email'.tr,
+        labelText: 'Email'.tr,
         labelStyle: Theme.of(context).textTheme.bodySmall,
         hintText: 'Lorem.ipsum@gmail.com',
         hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(

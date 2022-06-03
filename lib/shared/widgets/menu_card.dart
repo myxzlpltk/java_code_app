@@ -101,7 +101,7 @@ class MenuCard extends StatelessWidget {
                             initialValue: note,
                             style: Theme.of(context).textTheme.labelMedium,
                             decoration: InputDecoration.collapsed(
-                              hintText: 'add_note'.tr,
+                              hintText: 'Add note'.tr,
                               border: InputBorder.none,
                             ),
                             onChanged: onNoteChanged,

@@ -44,7 +44,7 @@ class LoginView extends StatelessWidget {
 
               /// Heading
               Text(
-                'continue_to_sign_in'.tr,
+                'Continue to sign in'.tr,
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
@@ -60,7 +60,7 @@ class LoginView extends StatelessWidget {
 
               /// Login Button
               PrimaryButton(
-                text: 'Masuk',
+                text: 'Login'.tr,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     LoginController.to.loginWithEmailAndPassword(
