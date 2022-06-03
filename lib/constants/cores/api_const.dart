@@ -20,4 +20,5 @@ class ApiConst {
 
   /// Order
   static const String addOrder = '$apiBaseUrl/order/add';
+  static const String onGoingOrder = '$apiBaseUrl/order/user';
 }

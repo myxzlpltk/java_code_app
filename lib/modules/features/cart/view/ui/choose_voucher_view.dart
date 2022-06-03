@@ -10,6 +10,7 @@ import 'package:java_code_app/modules/features/cart/controllers/cart_controller.
 import 'package:java_code_app/modules/features/cart/view/components/voucher_card.dart';
 import 'package:java_code_app/shared/widgets/primary_button.dart';
 import 'package:java_code_app/shared/widgets/rect_shimmer.dart';
+import 'package:java_code_app/shared/widgets/server_error_list_view.dart';
 
 class ChooseVoucherView extends StatelessWidget {
   const ChooseVoucherView({Key? key}) : super(key: key);
@@ -49,12 +50,7 @@ class ChooseVoucherView extends StatelessWidget {
             context: context,
             valueBuilder: (context) => CartController.to.voucherStatus.value,
             caseBuilders: {
-              'error': (context) => Stack(
-                    children: [
-                      ListView(),
-                      Center(child: Text('Server error'.tr)),
-                    ],
-                  ),
+              'error': (context) => const ServerErrorListView(),
               'loading': (context) => ListView.separated(
                     padding: EdgeInsets.symmetric(
                       horizontal: 25.w,

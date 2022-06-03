@@ -7,6 +7,8 @@ class Localization extends Translations {
           'Add note': 'Add note',
           'Add to order': 'Add to order',
           'All menu': 'All menu',
+          'Already Ordered?\nTrack the order here.':
+              'Already Ordered?\nTrack the order here.',
           'Available promo': 'Available promo',
           'Choose discount': 'Choose discount',
           'Choose level': 'Choose level',
@@ -91,6 +93,8 @@ class Localization extends Translations {
           'Add note': 'Tambahkan catatan',
           'Add to order': 'Tambahkan ke pesanan',
           'All menu': 'Semua menu',
+          'Already Ordered?\nTrack the order here.':
+              'Sudah Pesan?\nLacak pesananmu di sini.',
           'Available promo': 'Promo yang tersedia',
           'Choose discount': 'Pilih diskon',
           'Choose level': 'Pilih level',
