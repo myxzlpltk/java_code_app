@@ -120,7 +120,7 @@ class HomeView extends StatelessWidget {
       SizedBox(
         height: 188.h,
         child: Obx(
-              () => ConditionalSwitch.single<String>(
+          () => ConditionalSwitch.single<String>(
             context: context,
             valueBuilder: (context) => HomeController.to.statusPromo.value,
             caseBuilders: {

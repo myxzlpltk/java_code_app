@@ -55,7 +55,7 @@ class GetLocationView extends StatelessWidget {
                       DashboardController.to.statusLocation.value,
                   caseBuilders: {
                     'error': (context) => Text(
-                      DashboardController.to.messageLocation.value,
+                          DashboardController.to.messageLocation.value,
                           style: Theme.of(context).textTheme.titleLarge,
                           textAlign: TextAlign.center,
                         ),

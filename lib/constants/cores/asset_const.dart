@@ -21,6 +21,7 @@ class AssetConst {
   static const String iconDiscount = 'assets/svg/ic_discount.svg';
   static const String iconPayment = 'assets/svg/ic_payment.svg';
   static const String iconVoucher = 'assets/svg/ic_voucher.svg';
+  static const String iconDate = 'assets/svg/ic_date.svg';
 
   /// Background
   static const String bgPattern1 = 'assets/images/bg_pattern_1.png';

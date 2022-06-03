@@ -78,6 +78,8 @@ class Localization extends Translations {
               'The use of vouchers cannot be combined with a discount',
           'choose_voucher_terms_2': 'employee reward program',
           'discount_can_not_be_combined': 'Discount can not be combined',
+          'use_voucher': 'Use Voucher',
+          'use_voucher_later': 'Use Voucher Later',
 
           /// Bottom Navigation Bar
           'home': 'Home',
@@ -159,6 +161,8 @@ class Localization extends Translations {
               'Penggunaan voucher tidak dapat digabung dengan discount ',
           'choose_voucher_terms_2': 'employee reward program',
           'discount_can_not_be_combined': 'Diskon tidak dapat digabung',
+          'use_voucher': 'Pakai Voucher',
+          'use_voucher_later': 'Pakai Voucher Nanti',
 
           /// Bottom Navigation Bar
           'home': 'Beranda',

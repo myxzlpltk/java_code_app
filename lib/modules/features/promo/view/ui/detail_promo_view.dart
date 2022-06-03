@@ -135,6 +135,10 @@ class DetailPromoView extends StatelessWidget {
                           '*': Style.fromTextStyle(
                             Theme.of(context).textTheme.labelMedium!,
                           ),
+                          'body': Style(
+                            margin: EdgeInsets.zero,
+                            padding: EdgeInsets.zero,
+                          ),
                         },
                       ),
                       fallbackBuilder: (context) => RectShimmer(height: 100.h),

@@ -67,15 +67,20 @@ class VoucherCard extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 12.h),
-              Ink(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.w),
-                  image: DecorationImage(
-                    image: NetworkImage(voucher.info_voucher),
-                    fit: BoxFit.cover,
+              Hero(
+                tag: 'voucher-image-${voucher.id_voucher}',
+                child: Material(
+                  child: Ink(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.w),
+                      image: DecorationImage(
+                        image: NetworkImage(voucher.info_voucher),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: const AspectRatio(aspectRatio: 379 / 177),
                   ),
                 ),
-                child: const AspectRatio(aspectRatio: 379 / 177),
               ),
             ],
           ),

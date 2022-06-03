@@ -160,7 +160,7 @@ class DetailMenuView extends StatelessWidget {
                   ),
                   Divider(color: darkColor2.withOpacity(0.25), height: 1),
                   Obx(
-                        () => TileOption(
+                    () => TileOption(
                       icon: AssetConst.iconEdit,
                       title: 'note'.tr,
                       message: DetailMenuController.to.note.isNotEmpty
