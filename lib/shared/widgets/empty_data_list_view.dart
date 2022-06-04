@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 
-class NoDataOrder extends StatelessWidget {
-  final String title;
-  final String? subtitle;
-
-  const NoDataOrder({
-    Key? key,
-    required this.title,
-    this.subtitle,
-  }) : super(key: key);
+class EmptyDataListView extends StatelessWidget {
+  const EmptyDataListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +19,13 @@ class NoDataOrder extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SvgPicture.asset(
-                AssetConst.iconNote,
-                width: 150.w,
+                AssetConst.iconNoData,
+                width: 250.r,
               ),
-              SizedBox(height: 25.r),
+              25.verticalSpacingRadius,
               Text(
-                title,
-                style: Theme.of(context).textTheme.bodyLarge,
+                'No data'.tr,
+                style: Get.textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
             ],

@@ -7,6 +7,7 @@ import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/cart/controllers/cart_controller.dart';
+import 'package:java_code_app/shared/styles/shapes.dart';
 import 'package:java_code_app/shared/widgets/menu_card.dart';
 import 'package:java_code_app/shared/widgets/primary_button.dart';
 import 'package:java_code_app/shared/widgets/tile_option.dart';
@@ -22,7 +23,8 @@ class CartView extends StatelessWidget {
         elevation: 2,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.chevron_left, color: Colors.black, size: 32.w),
+          splashRadius: 30.r,
+          icon: Icon(Icons.chevron_left, color: Colors.black, size: 36.r),
           onPressed: () => Get.back(),
         ),
         centerTitle: true,
@@ -31,23 +33,17 @@ class CartView extends StatelessWidget {
           children: [
             SvgPicture.asset(
               AssetConst.iconOrder,
-              width: 23.w,
+              width: 23.r,
               color: blueColor,
             ),
-            SizedBox(width: 10.w),
-            Text('Order'.tr, style: Theme.of(context).textTheme.titleMedium),
+            10.horizontalSpaceRadius,
+            Text('Order'.tr, style: Get.textTheme.titleMedium),
           ],
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30.w),
-          ),
-        ),
+        shape: CustomShape.bottomRoundedShape,
       ),
       body: RefreshIndicator(
-        onRefresh: () => Future.any([
-          CartController.to.getDiscounts(),
-        ]),
+        onRefresh: CartController.to.getDiscounts,
         child: Obx(
           () => Conditional.single(
             context: context,
@@ -63,121 +59,105 @@ class CartView extends StatelessWidget {
                   ),
                   Text(
                     'Empty cart'.tr,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: Get.textTheme.bodyLarge,
                     textAlign: TextAlign.center,
                   ),
                 ],
               ),
             ),
             fallbackBuilder: (context) => ListView(
-              padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 28.h),
+              padding: EdgeInsets.symmetric(horizontal: 25.r, vertical: 28.r),
               children: [
                 /// Food
-                ...Conditional.list(
-                  context: context,
-                  conditionBuilder: (context) =>
-                      CartController.to.foodItems.isEmpty,
-                  widgetBuilder: (context) => const [],
-                  fallbackBuilder: (context) => [
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                          AssetConst.iconFood,
-                          width: 20.r,
-                          height: 20.r,
-                          color: blueColor,
-                        ),
-                        SizedBox(width: 10.w),
-                        Text(
-                          'Food'.tr,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium!
-                              .copyWith(color: blueColor),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 17.h),
-                    Wrap(
-                      runSpacing: 17.h,
-                      children: CartController.to.foodItems
-                          .map<Widget>(
-                            (orderDetail) => MenuCard(
-                              menu: orderDetail.menu,
-                              price: orderDetail.price,
-                              quantity: orderDetail.quantity,
-                              note: orderDetail.note,
-                              onIncrement: () =>
-                                  CartController.to.increment(orderDetail),
-                              onDecrement: () =>
-                                  CartController.to.decrement(orderDetail),
-                              onNoteChanged: (value) => CartController.to
-                                  .updateNote(orderDetail, value),
-                              onTap: () => Get.toNamed(
-                                AppRoutes.detailMenuView,
-                                arguments: orderDetail.menu,
-                              ),
+                if (CartController.to.foodItems.isNotEmpty) ...[
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        AssetConst.iconFood,
+                        width: 20.r,
+                        height: 20.r,
+                        color: blueColor,
+                      ),
+                      10.horizontalSpaceRadius,
+                      Text(
+                        'Food'.tr,
+                        style: Get.textTheme.titleMedium!
+                            .copyWith(color: blueColor),
+                      ),
+                    ],
+                  ),
+                  17.verticalSpacingRadius,
+                  Wrap(
+                    runSpacing: 17.r,
+                    children: CartController.to.foodItems
+                        .map<Widget>(
+                          (orderDetail) => MenuCard(
+                            menu: orderDetail.menu,
+                            price: orderDetail.price,
+                            quantity: orderDetail.quantity,
+                            note: orderDetail.note,
+                            onIncrement: () =>
+                                CartController.to.increment(orderDetail),
+                            onDecrement: () =>
+                                CartController.to.decrement(orderDetail),
+                            onNoteChanged: (value) => CartController.to
+                                .updateNote(orderDetail, value),
+                            onTap: () => Get.toNamed(
+                              AppRoutes.detailMenuView,
+                              arguments: orderDetail.menu,
                             ),
-                          )
-                          .toList(),
-                    ),
-                    SizedBox(height: 37.h),
-                  ],
-                ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                  37.verticalSpacingRadius,
+                ],
 
                 /// Drink
-                ...Conditional.list(
-                  context: context,
-                  conditionBuilder: (context) =>
-                      CartController.to.drinkItems.isEmpty,
-                  widgetBuilder: (context) => const [],
-                  fallbackBuilder: (context) => [
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                          AssetConst.iconDrink,
-                          width: 20.r,
-                          height: 20.r,
-                          color: blueColor,
-                        ),
-                        SizedBox(width: 10.w),
-                        Text(
-                          'Drink'.tr,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium!
-                              .copyWith(color: blueColor),
-                        ),
-                        SizedBox(width: 25.w),
-                      ],
-                    ),
-                    SizedBox(height: 17.h),
-                    Wrap(
-                      runSpacing: 17.h,
-                      children: CartController.to.drinkItems
-                          .map<Widget>(
-                            (orderDetail) => MenuCard(
-                              menu: orderDetail.menu,
-                              price: orderDetail.price,
-                              quantity: orderDetail.quantity,
-                              note: orderDetail.note,
-                              onIncrement: () =>
-                                  CartController.to.increment(orderDetail),
-                              onDecrement: () =>
-                                  CartController.to.decrement(orderDetail),
-                              onNoteChanged: (value) => CartController.to
-                                  .updateNote(orderDetail, value),
-                              onTap: () => Get.toNamed(
-                                AppRoutes.detailMenuView,
-                                arguments: orderDetail.menu,
-                              ),
+                if (CartController.to.drinkItems.isNotEmpty) ...[
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        AssetConst.iconDrink,
+                        width: 20.r,
+                        height: 20.r,
+                        color: blueColor,
+                      ),
+                      10.horizontalSpaceRadius,
+                      Text(
+                        'Drink'.tr,
+                        style: Get.textTheme.titleMedium!
+                            .copyWith(color: blueColor),
+                      ),
+                      25.horizontalSpaceRadius,
+                    ],
+                  ),
+                  17.verticalSpacingRadius,
+                  Wrap(
+                    runSpacing: 17.r,
+                    children: CartController.to.drinkItems
+                        .map<Widget>(
+                          (orderDetail) => MenuCard(
+                            menu: orderDetail.menu,
+                            price: orderDetail.price,
+                            quantity: orderDetail.quantity,
+                            note: orderDetail.note,
+                            onIncrement: () =>
+                                CartController.to.increment(orderDetail),
+                            onDecrement: () =>
+                                CartController.to.decrement(orderDetail),
+                            onNoteChanged: (value) => CartController.to
+                                .updateNote(orderDetail, value),
+                            onTap: () => Get.toNamed(
+                              AppRoutes.detailMenuView,
+                              arguments: orderDetail.menu,
                             ),
-                          )
-                          .toList(),
-                    ),
-                    SizedBox(height: 37.h),
-                  ],
-                ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                  37.verticalSpacingRadius,
+                ],
               ],
             ),
           ),
@@ -186,17 +166,16 @@ class CartView extends StatelessWidget {
       bottomNavigationBar: Obx(
         () => Conditional.single(
           context: context,
-          conditionBuilder: (context) => CartController.to.cart.isEmpty,
-          widgetBuilder: (context) => const SizedBox(),
-          fallbackBuilder: (context) => Column(
+          conditionBuilder: (context) => CartController.to.cart.isNotEmpty,
+          widgetBuilder: (context) => Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 22.w),
+                padding: EdgeInsets.symmetric(vertical: 25.r, horizontal: 22.r),
                 decoration: BoxDecoration(
                   color: lightColor2,
                   borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(30.w),
+                    top: Radius.circular(30.r),
                   ),
                 ),
                 child: Wrap(
@@ -207,14 +186,12 @@ class CartView extends StatelessWidget {
                       title: 'total_orders'.tr,
                       subtitle: '(${CartController.to.cart.length} Menu):',
                       message: CartController.to.totalPrice.toRupiah(),
-                      titleStyle: Theme.of(context).textTheme.headlineSmall,
-                      messageStyle: Theme.of(context)
-                          .textTheme
-                          .labelLarge!
-                          .copyWith(color: blueColor),
+                      titleStyle: Get.textTheme.headlineSmall,
+                      messageStyle:
+                          Get.textTheme.labelLarge!.copyWith(color: blueColor),
                       color: lightColor2,
                     ),
-                    Divider(color: darkColor2.withOpacity(0.25), height: 2),
+                    Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
 
                     /// Discount
                     Conditional.single(
@@ -228,8 +205,8 @@ class CartView extends StatelessWidget {
                         message: CartController.to.selectedVoucher.value == null
                             ? 'No discount'.tr
                             : 'Discount can not be combined'.tr,
-                        titleStyle: Theme.of(context).textTheme.headlineSmall,
-                        messageStyle: Theme.of(context).textTheme.bodySmall,
+                        titleStyle: Get.textTheme.headlineSmall,
+                        messageStyle: Get.textTheme.bodySmall,
                         color: lightColor2,
                       ),
                       fallbackBuilder: (context) => TileOption(
@@ -237,16 +214,14 @@ class CartView extends StatelessWidget {
                         iconSize: 24.r,
                         title: 'Discount'.tr,
                         message: CartController.to.discountPrice.toRupiah(),
-                        titleStyle: Theme.of(context).textTheme.headlineSmall,
-                        messageStyle: Theme.of(context)
-                            .textTheme
-                            .bodySmall!
-                            .copyWith(color: redColor),
+                        titleStyle: Get.textTheme.headlineSmall,
+                        messageStyle:
+                            Get.textTheme.bodySmall!.copyWith(color: redColor),
                         color: lightColor2,
                         onTap: CartController.to.openDiscountDialog,
                       ),
                     ),
-                    Divider(color: darkColor2.withOpacity(0.25), height: 2),
+                    Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
 
                     /// Vouchers
                     Conditional.single(
@@ -258,8 +233,8 @@ class CartView extends StatelessWidget {
                         iconSize: 24.r,
                         title: 'voucher'.tr,
                         message: 'Choose voucher'.tr,
-                        titleStyle: Theme.of(context).textTheme.headlineSmall,
-                        messageStyle: Theme.of(context).textTheme.bodySmall,
+                        titleStyle: Get.textTheme.headlineSmall,
+                        messageStyle: Get.textTheme.bodySmall,
                         color: lightColor2,
                         onTap: CartController.to.openVoucherDialog,
                       ),
@@ -270,16 +245,14 @@ class CartView extends StatelessWidget {
                         message: CartController.to.voucherPrice.toRupiah(),
                         messageSubtitle:
                             CartController.to.selectedVoucher.value!.nama,
-                        titleStyle: Theme.of(context).textTheme.headlineSmall,
-                        messageStyle: Theme.of(context)
-                            .textTheme
-                            .bodySmall!
-                            .copyWith(color: redColor),
+                        titleStyle: Get.textTheme.headlineSmall,
+                        messageStyle:
+                            Get.textTheme.bodySmall!.copyWith(color: redColor),
                         color: lightColor2,
                         onTap: CartController.to.openVoucherDialog,
                       ),
                     ),
-                    Divider(color: darkColor2.withOpacity(0.25), height: 2),
+                    Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
 
                     /// Payment options
                     TileOption(
@@ -287,8 +260,8 @@ class CartView extends StatelessWidget {
                       iconSize: 24.r,
                       title: 'Payment'.tr,
                       message: 'Pay Later',
-                      titleStyle: Theme.of(context).textTheme.headlineSmall,
-                      messageStyle: Theme.of(context).textTheme.bodySmall,
+                      titleStyle: Get.textTheme.headlineSmall,
+                      messageStyle: Get.textTheme.bodySmall,
                       color: lightColor2,
                     ),
                   ],
@@ -299,11 +272,13 @@ class CartView extends StatelessWidget {
               Container(
                 color: lightColor2,
                 child: Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 22.w),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.r,
+                    horizontal: 22.r,
+                  ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(30.w),
+                      top: Radius.circular(30.r),
                     ),
                     color: Colors.white,
                     boxShadow: [
@@ -322,31 +297,26 @@ class CartView extends StatelessWidget {
                         width: 35.r,
                         height: 35.r,
                       ),
-                      SizedBox(width: 9.w),
+                      9.horizontalSpaceRadius,
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               'Total payment'.tr,
-                              style: Theme.of(context).textTheme.labelMedium,
+                              style: Get.textTheme.labelMedium,
                             ),
                             Text(
                               CartController.to.grandTotalPrice.toRupiah(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
+                              style: Get.textTheme.titleMedium!
                                   .copyWith(color: blueColor),
                             ),
                           ],
                         ),
                       ),
-                      Flexible(
-                        fit: FlexFit.loose,
-                        child: PrimaryButton(
-                          text: 'Order now'.tr,
-                          onPressed: CartController.to.verify,
-                        ),
+                      PrimaryButton(
+                        text: 'Order now'.tr,
+                        onPressed: CartController.to.verify,
                       ),
                     ],
                   ),
@@ -354,6 +324,7 @@ class CartView extends StatelessWidget {
               ),
             ],
           ),
+          fallbackBuilder: (context) => const SizedBox(),
         ),
       ),
     );

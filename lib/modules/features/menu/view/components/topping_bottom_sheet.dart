@@ -11,22 +11,19 @@ class ToppingBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 19.h),
+      padding: EdgeInsets.symmetric(horizontal: 17.r, vertical: 19.r),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const HolderBottomSheet(),
-          SizedBox(height: 13.h),
-          Text(
-            'Choose topping'.tr,
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-          SizedBox(height: 16.h),
+          13.verticalSpacingRadius,
+          Text('Choose topping'.tr, style: Get.textTheme.headlineSmall),
+          16.verticalSpacingRadius,
           Obx(
             () => Wrap(
-              spacing: 12.w,
-              runSpacing: 12.h,
+              spacing: 12.r,
+              runSpacing: 12.r,
               children: DetailMenuController.to.toppings
                   .map<Widget>(
                     (topping) => VariantChip(

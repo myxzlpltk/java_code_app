@@ -21,9 +21,9 @@ class RectShimmer extends StatelessWidget {
       highlightColor: Colors.grey.shade100,
       child: Container(
         width: width ?? double.infinity,
-        height: height ?? 45.h,
+        height: height ?? 45.r,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(radius ?? 5.w),
+          borderRadius: BorderRadius.circular(radius ?? 5.r),
           color: Colors.white,
         ),
       ),

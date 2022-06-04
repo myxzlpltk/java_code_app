@@ -18,17 +18,19 @@ class LoginButtonApple extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         primary: darkColor,
         elevation: 4,
-        padding: EdgeInsets.symmetric(horizontal: 36.w, vertical: 14.h),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        padding: EdgeInsets.symmetric(horizontal: 36.r, vertical: 14.r),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24.r),
+        ),
       ),
       child: Row(
         children: [
-          SvgPicture.asset(AssetConst.iconApple, width: 24.w, height: 24.h),
+          SvgPicture.asset(AssetConst.iconApple, width: 24.r, height: 24.r),
           const Spacer(),
           Text(
             'Login with'.tr,
             style: GoogleFonts.montserrat(
-              fontSize: ScreenUtil().setSp(14),
+              fontSize: 14.sp,
               fontWeight: FontWeight.w400,
               height: 1.219,
             ),
@@ -36,7 +38,7 @@ class LoginButtonApple extends StatelessWidget {
           Text(
             ' Apple',
             style: GoogleFonts.montserrat(
-              fontSize: ScreenUtil().setSp(14),
+              fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               height: 1.219,
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/splash/controllers/splash_controller.dart';
@@ -14,7 +15,7 @@ class SplashView extends StatelessWidget {
       body: Center(
         child: Image.asset(
           AssetConst.iconJavaCode,
-          width: MediaQuery.of(context).size.width * 0.8,
+          width: 0.8.sw,
         ),
       ),
     );

@@ -8,7 +8,6 @@ class AppRoutes {
 
   /// Home
   static const String dashboardView = '/dashboard';
-  static const String getLocationView = '/dashboard/get-location';
 
   /// Menu dan Promo
   static const String detailPromoView = '/dashboard/detail-promo';

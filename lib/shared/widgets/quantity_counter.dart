@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 
 class QuantityCounter extends StatelessWidget {
@@ -18,34 +20,33 @@ class QuantityCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Visibility(
-          visible: quantity > 0,
-          maintainState: true,
-          maintainSize: true,
-          maintainAnimation: true,
-          child: Material(
+        Conditional.single(
+          context: context,
+          conditionBuilder: (context) => quantity > 0,
+          widgetBuilder: (context) => Material(
             clipBehavior: Clip.antiAlias,
             borderRadius: BorderRadius.circular(4),
             child: InkWell(
               onTap: onDecrement,
               child: Ink(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: blueColor, width: 2),
+                  borderRadius: BorderRadius.circular(4.r),
+                  border: Border.all(color: blueColor, width: 2.r),
                 ),
-                child: const Icon(Icons.remove, size: 16, color: blueColor),
+                child: Icon(Icons.remove, size: 20.r, color: blueColor),
               ),
             ),
           ),
+          fallbackBuilder: (context) => const SizedBox(),
         ),
         Container(
-          constraints: BoxConstraints(minWidth: 30.w),
-          padding: EdgeInsets.symmetric(horizontal: 5.w),
+          constraints: BoxConstraints(minWidth: 30.r),
+          padding: EdgeInsets.symmetric(horizontal: 10.r),
           child: Text(
             quantity.toString(),
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+            style: Get.textTheme.bodyMedium!.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
             textAlign: TextAlign.center,
           ),
         ),
@@ -55,9 +56,9 @@ class QuantityCounter extends StatelessWidget {
           child: InkWell(
             onTap: onIncrement,
             child: Ink(
-              padding: const EdgeInsets.all(2),
+              padding: EdgeInsets.all(2.r),
               color: blueColor,
-              child: const Icon(Icons.add, size: 16, color: Colors.white),
+              child: Icon(Icons.add, size: 20.r, color: Colors.white),
             ),
           ),
         ),

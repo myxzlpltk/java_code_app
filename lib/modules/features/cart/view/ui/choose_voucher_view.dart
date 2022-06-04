@@ -8,6 +8,8 @@ import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/cart/controllers/cart_controller.dart';
 import 'package:java_code_app/modules/features/cart/view/components/voucher_card.dart';
+import 'package:java_code_app/shared/styles/shapes.dart';
+import 'package:java_code_app/shared/widgets/empty_data_list_view.dart';
 import 'package:java_code_app/shared/widgets/primary_button.dart';
 import 'package:java_code_app/shared/widgets/rect_shimmer.dart';
 import 'package:java_code_app/shared/widgets/server_error_list_view.dart';
@@ -22,26 +24,20 @@ class ChooseVoucherView extends StatelessWidget {
         elevation: 2,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.chevron_left, color: Colors.black, size: 32.w),
+          splashRadius: 30.r,
+          icon: Icon(Icons.chevron_left, color: Colors.black, size: 36.r),
           onPressed: () => Get.back(),
         ),
         centerTitle: true,
         title: Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            SvgPicture.asset(AssetConst.iconVoucher, width: 23.w),
-            SizedBox(width: 10.w),
-            Text(
-              'Choose voucher'.tr,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
+            SvgPicture.asset(AssetConst.iconVoucher, width: 23.r),
+            10.horizontalSpaceRadius,
+            Text('Choose voucher'.tr, style: Get.textTheme.titleMedium),
           ],
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30.w),
-          ),
-        ),
+        shape: CustomShape.bottomRoundedShape,
       ),
       body: RefreshIndicator(
         onRefresh: CartController.to.getVouchers,
@@ -51,47 +47,50 @@ class ChooseVoucherView extends StatelessWidget {
             valueBuilder: (context) => CartController.to.voucherStatus.value,
             caseBuilders: {
               'error': (context) => const ServerErrorListView(),
+              'empty': (context) => const EmptyDataListView(),
               'loading': (context) => ListView.separated(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 25.w,
-                      vertical: 30.h,
+                      horizontal: 25.r,
+                      vertical: 30.r,
                     ),
                     itemBuilder: (context, _) =>
-                        RectShimmer(height: 216.h, radius: 15.w),
-                    separatorBuilder: (context, _) => SizedBox(height: 17.h),
+                        RectShimmer(height: 216.r, radius: 15.r),
+                    separatorBuilder: (context, _) => 17.verticalSpacingRadius,
                     itemCount: 5,
                   ),
             },
-            fallbackBuilder: (context) => ListView(
-              padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 30.h),
-              children: CartController.to.vouchers
-                  .map(
-                    (voucher) => Padding(
-                      padding: EdgeInsets.only(bottom: 20.h),
-                      child: VoucherCard(
-                        voucher: voucher,
-                        isSelected:
-                            voucher == CartController.to.selectedVoucher.value,
-                        onTap: () => Get.toNamed(
-                          AppRoutes.detailVoucherView,
-                          arguments: voucher,
-                        ),
-                        onChanged: (value) {
-                          CartController.to
-                              .setVoucher(value == true ? voucher : null);
-                        },
-                      ),
-                    ),
-                  )
-                  .toList(),
+            fallbackBuilder: (context) => ListView.separated(
+              padding: EdgeInsets.symmetric(
+                horizontal: 25.r,
+                vertical: 30.r,
+              ),
+              itemBuilder: (context, index) => VoucherCard(
+                voucher: CartController.to.vouchers.elementAt(index),
+                isSelected: CartController.to.vouchers.elementAt(index) ==
+                    CartController.to.selectedVoucher.value,
+                onTap: () => Get.toNamed(
+                  AppRoutes.detailVoucherView,
+                  arguments: CartController.to.vouchers.elementAt(index),
+                ),
+                onChanged: (value) {
+                  if (value == true) {
+                    CartController.to.setVoucher(
+                        CartController.to.vouchers.elementAt(index));
+                  } else {
+                    CartController.to.setVoucher(null);
+                  }
+                },
+              ),
+              separatorBuilder: (context, _) => 17.verticalSpacingRadius,
+              itemCount: CartController.to.vouchers.length,
             ),
           ),
         ),
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 22.w),
+        padding: EdgeInsets.symmetric(vertical: 10.r, horizontal: 22.r),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(30.w)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
           color: Colors.white,
           boxShadow: [
             BoxShadow(
@@ -105,12 +104,12 @@ class ChooseVoucherView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(height: 5.h),
+            5.verticalSpacingRadius,
             Row(
               children: [
-                SizedBox(width: 10.w),
+                10.horizontalSpaceRadius,
                 Icon(Icons.check_circle_outline, color: blueColor, size: 24.r),
-                SizedBox(width: 10.w),
+                10.horizontalSpaceRadius,
                 Expanded(
                   child: RichText(
                     textAlign: TextAlign.left,
@@ -120,13 +119,11 @@ class ChooseVoucherView extends StatelessWidget {
                           text:
                               'The use of vouchers cannot be combined with a discount'
                                   .tr,
-                          style: Theme.of(context).textTheme.bodySmall,
+                          style: Get.textTheme.bodySmall,
                         ),
                         TextSpan(
                           text: ' ${'employee reward program'.tr}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge!
+                          style: Get.textTheme.labelLarge!
                               .copyWith(color: blueColor),
                         ),
                       ],
@@ -135,7 +132,7 @@ class ChooseVoucherView extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10.h),
+            10.verticalSpacingRadius,
             SizedBox(
               width: double.infinity,
               child: PrimaryButton(

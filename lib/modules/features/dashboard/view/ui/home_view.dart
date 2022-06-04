@@ -12,6 +12,8 @@ import 'package:java_code_app/modules/features/dashboard/controllers/home_contro
 import 'package:java_code_app/modules/features/dashboard/view/components/filter_menu.dart';
 import 'package:java_code_app/modules/features/dashboard/view/components/search_bar.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
+import 'package:java_code_app/shared/widgets/custom_error_vertical.dart';
+import 'package:java_code_app/shared/widgets/empty_data_vertical.dart';
 import 'package:java_code_app/shared/widgets/menu_card.dart';
 import 'package:java_code_app/shared/widgets/promo_card.dart';
 import 'package:java_code_app/shared/widgets/rect_shimmer.dart';
@@ -24,70 +26,75 @@ class HomeView extends StatelessWidget {
     Get.put(HomeController());
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 2,
+        title: Row(
+          children: [
+            Expanded(
+              child: SearchBar(
+                onChanged: HomeController.to.setFilterMenu,
+              ),
+            ),
+            IconButton(
+              onPressed: () => Get.toNamed(AppRoutes.cartView),
+              splashRadius: 30.r,
+              visualDensity: VisualDensity.compact,
+              icon: Obx(
+                () => Badge(
+                  showBadge: CartController.to.cart.isNotEmpty,
+                  badgeColor: blueColor,
+                  badgeContent: Text(
+                    CartController.to.cart.length.toString(),
+                    style: Get.textTheme.labelMedium!
+                        .copyWith(color: Colors.white),
+                  ),
+                  child: Icon(Icons.shopping_cart, size: 30.r),
+                ),
+              ),
+              color: Colors.black,
+            ),
+          ],
+        ),
+        shape: CustomShape.bottomRoundedShape,
+      ),
       body: RefreshIndicator(
         onRefresh: () => Future.any([
           HomeController.to.getListPromo(),
           HomeController.to.getListMenu(),
         ]),
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              pinned: true,
-              forceElevated: true,
-              backgroundColor: Colors.white,
-              title: Row(
-                children: [
-                  Expanded(
-                    child: SearchBar(
-                      onChanged: HomeController.to.setFilterMenu,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () => Get.toNamed(AppRoutes.cartView),
-                    icon: Obx(
-                      () => Badge(
-                        showBadge: CartController.to.cart.isNotEmpty,
-                        badgeColor: blueColor,
-                        badgeContent: Text(
-                          CartController.to.cart.length.toString(),
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelMedium!
-                              .copyWith(color: Colors.white),
-                        ),
-                        child: const Icon(Icons.shopping_cart),
-                      ),
-                    ),
-                    color: Colors.black,
-                  ),
-                ],
-              ),
-              shape: CustomShape.bottomRoundedShape,
-            ),
-
+        child: ListView(
+          children: [
             /// Promo section
-            SliverList(
-              delegate: SliverChildListDelegate(promoSection(context)),
-            ),
+            ...promoSection(context),
 
             /// Menu section
-            SliverList(
-              delegate: SliverChildListDelegate(menuSection(context)),
+            listCategoryMenu(context),
+            17.verticalSpacingRadius,
+
+            Obx(
+              () => Conditional.single(
+                context: context,
+                conditionBuilder: (context) =>
+                    HomeController.to.categoryMenu.value != 'drink',
+                widgetBuilder: (context) => Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: foodSection(context),
+                ),
+                fallbackBuilder: (context) => const SizedBox(),
+              ),
             ),
 
-            /// Food and drink section
-            SliverToBoxAdapter(
-              child: Obx(
-                () => Column(
-                  children: [
-                    if (HomeController.to.categoryMenu.value == 'all' ||
-                        HomeController.to.categoryMenu.value == 'Food')
-                      ...foodSection(context),
-                    if (HomeController.to.categoryMenu.value == 'all' ||
-                        HomeController.to.categoryMenu.value == 'Drink')
-                      ...drinkSection(context),
-                  ],
+            Obx(
+              () => Conditional.single(
+                context: context,
+                conditionBuilder: (context) =>
+                    HomeController.to.categoryMenu.value != 'food',
+                widgetBuilder: (context) => Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: drinkSection(context),
                 ),
+                fallbackBuilder: (context) => const SizedBox(),
               ),
             ),
           ],
@@ -99,54 +106,53 @@ class HomeView extends StatelessWidget {
   /// Promo section
   List<Widget> promoSection(BuildContext context) {
     return [
-      SizedBox(height: 25.h),
+      25.verticalSpacingRadius,
 
       /// Promo Section - Title
       Row(
         children: [
-          SizedBox(width: 25.w),
-          SvgPicture.asset(AssetConst.iconPromo, width: 23.w),
-          SizedBox(width: 10.w),
-          Text(
-            'Available promo'.tr,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          SizedBox(width: 25.w),
+          25.horizontalSpaceRadius,
+          SvgPicture.asset(AssetConst.iconPromo, width: 23.r),
+          10.horizontalSpaceRadius,
+          Text('Available promo'.tr, style: Get.textTheme.titleMedium),
+          25.horizontalSpaceRadius,
         ],
       ),
-      SizedBox(height: 7.h),
+      7.verticalSpacingRadius,
 
       /// Promo Section - List
-      SizedBox(
-        height: 188.h,
-        child: Obx(
-          () => ConditionalSwitch.single<String>(
-            context: context,
-            valueBuilder: (context) => HomeController.to.statusPromo.value,
-            caseBuilders: {
-              'loading': (context) => ListView.separated(
+      Obx(
+        () => ConditionalSwitch.single<String>(
+          context: context,
+          valueBuilder: (context) => HomeController.to.statusPromo.value,
+          caseBuilders: {
+            'loading': (context) => SizedBox(
+                  height: 188.r,
+                  child: ListView.separated(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 25.w,
-                      vertical: 15.h,
+                      horizontal: 25.r,
+                      vertical: 15.r,
                     ),
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, _) => RectShimmer(
-                      width: 282.w,
-                      height: 158.h,
-                      radius: 15.w,
+                      width: 282.r,
+                      height: 158.r,
+                      radius: 15.r,
                     ),
                     itemCount: 5,
-                    separatorBuilder: (context, _) => SizedBox(width: 25.w),
+                    separatorBuilder: (context, _) => 25.horizontalSpaceRadius,
                   ),
-              'error': (context) => Center(
-                    child: Text(HomeController.to.messagePromo.value),
-                  ),
-            },
-            fallbackBuilder: (context) => ListView.separated(
-              padding: EdgeInsets.symmetric(
-                horizontal: 25.w,
-                vertical: 15.h,
-              ),
+                ),
+            'empty': (context) => const EmptyDataVertical(),
+            'error': (context) => CustomErrorVertical(
+                  message: HomeController.to.messagePromo.value,
+                ),
+          },
+          fallbackBuilder: (context) => SizedBox(
+            height: 188.r,
+            child: ListView.separated(
+              shrinkWrap: true,
+              padding: EdgeInsets.symmetric(horizontal: 25.r, vertical: 15.r),
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => PromoCard(
                 promo: HomeController.to.listPromo.elementAt(index),
@@ -156,56 +162,42 @@ class HomeView extends StatelessWidget {
                 ),
               ),
               itemCount: HomeController.to.listPromo.length,
-              separatorBuilder: (context, index) => SizedBox(width: 25.w),
+              separatorBuilder: (context, index) => 25.horizontalSpaceRadius,
             ),
           ),
         ),
       ),
-      SizedBox(height: 5.h),
+      5.verticalSpacingRadius,
     ];
   }
 
   /// Menu section
-  List<Widget> menuSection(BuildContext context) {
-    return [
-      /// Filter
-      SizedBox(
-        height: 45.h,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 5.h),
-          children: [
-            Obx(
-                  () => FilterMenu(
-                    isSelected: HomeController.to.categoryMenu.value == 'all',
-                onTap: () => HomeController.to.setCategoryMenu('all'),
-                iconPath: AssetConst.iconList,
-                text: 'All menu'.tr,
-              ),
-            ),
-            SizedBox(width: 13.w),
-            Obx(
-              () => FilterMenu(
-                isSelected: HomeController.to.categoryMenu.value == 'Food',
-                onTap: () => HomeController.to.setCategoryMenu('Food'),
-                iconPath: AssetConst.iconFood,
-                text: 'Food'.tr,
-              ),
-            ),
-            SizedBox(width: 13.w),
-            Obx(
-              () => FilterMenu(
-                isSelected: HomeController.to.categoryMenu.value == 'Drink',
-                onTap: () => HomeController.to.setCategoryMenu('Drink'),
-                iconPath: AssetConst.iconDrink,
-                text: 'Drink'.tr,
-              ),
-            ),
-          ],
-        ),
-      ),
-      SizedBox(height: 17.h),
+  Widget listCategoryMenu(BuildContext context) {
+    final List<Map<String, String>> filters = [
+      {'name': 'All menu'.tr, 'value': 'all', 'icon': AssetConst.iconList},
+      {'name': 'Food'.tr, 'value': 'food', 'icon': AssetConst.iconFood},
+      {'name': 'Drink'.tr, 'value': 'drink', 'icon': AssetConst.iconDrink},
     ];
+
+    return SizedBox(
+      height: 45.r,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: 25.r, vertical: 5.r),
+        itemBuilder: (context, index) => Obx(
+          () => FilterMenu(
+            isSelected:
+                HomeController.to.categoryMenu.value == filters[index]['value'],
+            onTap: () =>
+                HomeController.to.setCategoryMenu(filters[index]['value']!),
+            iconPath: filters[index]['icon']!,
+            text: filters[index]['name']!,
+          ),
+        ),
+        itemCount: filters.length,
+        separatorBuilder: (context, index) => 13.horizontalSpaceRadius,
+      ),
+    );
   }
 
   /// Food section
@@ -213,38 +205,36 @@ class HomeView extends StatelessWidget {
     return [
       Row(
         children: [
-          SizedBox(width: 25.w),
+          25.horizontalSpaceRadius,
           SvgPicture.asset(
             AssetConst.iconFood,
             width: 20.r,
             height: 20.r,
             color: blueColor,
           ),
-          SizedBox(width: 10.w),
+          10.horizontalSpaceRadius,
           Text(
             'Food'.tr,
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(color: blueColor),
+            style: Get.textTheme.titleMedium!.copyWith(color: blueColor),
           ),
         ],
       ),
 
       /// Food Section - List
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 17.h),
+        padding: EdgeInsets.symmetric(horizontal: 25.r, vertical: 17.r),
         child: ConditionalSwitch.single<String>(
           context: context,
           valueBuilder: (context) => HomeController.to.statusMenu.value,
           caseBuilders: {
             'loading': (context) => Wrap(
-                  runSpacing: 17.h,
+                  runSpacing: 17.r,
                   children: List.generate(
                     2,
-                    (i) => RectShimmer(height: 89.h, radius: 10.w),
+                    (i) => RectShimmer(height: 89.r, radius: 10.r),
                   ),
                 ),
+            'empty': (context) => const EmptyDataVertical(),
             'error': (context) => Center(
                   child: Text(
                     HomeController.to.messageMenu.value,
@@ -252,34 +242,23 @@ class HomeView extends StatelessWidget {
                   ),
                 ),
           },
-          fallbackBuilder: (context) {
-            final foods = HomeController.to.foodMenu;
-
-            if (foods.isEmpty) {
-              return Center(
-                child: Text('No data'.tr, textAlign: TextAlign.center),
-              );
-            } else {
-              return Wrap(
-                runSpacing: 17.h,
-                children: foods
-                    .map<Widget>(
-                      (menu) => MenuCard(
-                        menu: menu,
-                        simple: true,
-                        onTap: () {
-                          Get.toNamed(AppRoutes.detailMenuView,
-                              arguments: menu);
-                        },
-                      ),
-                    )
-                    .toList(),
-              );
-            }
-          },
+          fallbackBuilder: (context) => Wrap(
+            runSpacing: 17.r,
+            children: HomeController.to.foodMenu
+                .map<Widget>(
+                  (menu) => MenuCard(
+                    menu: menu,
+                    simple: true,
+                    onTap: () {
+                      Get.toNamed(AppRoutes.detailMenuView, arguments: menu);
+                    },
+                  ),
+                )
+                .toList(),
+          ),
         ),
       ),
-      SizedBox(height: 17.h),
+      17.verticalSpacingRadius,
     ];
   }
 
@@ -288,39 +267,37 @@ class HomeView extends StatelessWidget {
     return [
       Row(
         children: [
-          SizedBox(width: 25.w),
+          25.horizontalSpaceRadius,
           SvgPicture.asset(
             AssetConst.iconDrink,
             width: 20.r,
             height: 20.r,
             color: blueColor,
           ),
-          SizedBox(width: 10.w),
+          10.horizontalSpaceRadius,
           Text(
             'Drink'.tr,
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(color: blueColor),
+            style: Get.textTheme.titleMedium!.copyWith(color: blueColor),
           ),
-          SizedBox(width: 25.w),
+          25.horizontalSpaceRadius,
         ],
       ),
 
       /// Drink Section - List
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 17.h),
+        padding: EdgeInsets.symmetric(horizontal: 25.r, vertical: 17.r),
         child: ConditionalSwitch.single<String>(
           context: context,
           valueBuilder: (context) => HomeController.to.statusMenu.value,
           caseBuilders: {
             'loading': (context) => Wrap(
-                  runSpacing: 17.h,
+                  runSpacing: 17.r,
                   children: List.generate(
                     2,
-                    (i) => RectShimmer(height: 89.h, radius: 10.w),
+                    (i) => RectShimmer(height: 89.r, radius: 10.r),
                   ),
                 ),
+            'empty': (context) => const EmptyDataVertical(),
             'error': (context) => Center(
                   child: Text(
                     HomeController.to.messageMenu.value,
@@ -328,34 +305,23 @@ class HomeView extends StatelessWidget {
                   ),
                 ),
           },
-          fallbackBuilder: (context) {
-            final foods = HomeController.to.drinkMenu;
-
-            if (foods.isEmpty) {
-              return Center(
-                child: Text('No data'.tr, textAlign: TextAlign.center),
-              );
-            } else {
-              return Wrap(
-                runSpacing: 17.h,
-                children: foods
-                    .map<Widget>(
-                      (menu) => MenuCard(
-                        menu: menu,
-                        simple: true,
-                        onTap: () {
-                          Get.toNamed(AppRoutes.detailMenuView,
-                              arguments: menu);
-                        },
-                      ),
-                    )
-                    .toList(),
-              );
-            }
-          },
+          fallbackBuilder: (context) => Wrap(
+            runSpacing: 17.r,
+            children: HomeController.to.drinkMenu
+                .map<Widget>(
+                  (menu) => MenuCard(
+                    menu: menu,
+                    simple: true,
+                    onTap: () {
+                      Get.toNamed(AppRoutes.detailMenuView, arguments: menu);
+                    },
+                  ),
+                )
+                .toList(),
+          ),
         ),
       ),
-      SizedBox(height: 17.h),
+      17.verticalSpacingRadius,
     ];
   }
 }

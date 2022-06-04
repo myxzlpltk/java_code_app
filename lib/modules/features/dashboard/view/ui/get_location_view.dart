@@ -25,29 +25,29 @@ class GetLocationView extends StatelessWidget {
               alignment: Alignment.topCenter,
             ),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 30.w),
+          padding: EdgeInsets.symmetric(horizontal: 30.r),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 'Searching location...'.tr,
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: darkColor.withOpacity(0.5),
-                    ),
+                style: Get.textTheme.titleLarge!.copyWith(
+                  color: darkColor.withOpacity(0.5),
+                ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 50.h),
+              50.verticalSpacingRadius,
               Stack(
                 children: [
-                  Image.asset(AssetConst.iconLocation, width: 190.h),
+                  Image.asset(AssetConst.iconLocation, width: 190.r),
                   Padding(
-                    padding: EdgeInsets.all(70.h),
-                    child: Icon(Icons.location_pin, size: 50.h),
+                    padding: EdgeInsets.all(70.r),
+                    child: Icon(Icons.location_pin, size: 50.r),
                   ),
                 ],
               ),
-              SizedBox(height: 50.h),
+              50.verticalSpacingRadius,
               Obx(
                 () => ConditionalSwitch.single<String>(
                   context: context,
@@ -56,12 +56,12 @@ class GetLocationView extends StatelessWidget {
                   caseBuilders: {
                     'error': (context) => Text(
                           DashboardController.to.messageLocation.value,
-                          style: Theme.of(context).textTheme.titleLarge,
+                          style: Get.textTheme.titleLarge,
                           textAlign: TextAlign.center,
                         ),
                     'success': (context) => Text(
-                      DashboardController.to.address.value!,
-                          style: Theme.of(context).textTheme.titleLarge,
+                          DashboardController.to.address.value!,
+                          style: Get.textTheme.titleLarge,
                           textAlign: TextAlign.center,
                         ),
                   },

@@ -1,89 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/modules/models/voucher.dart';
 
 class VoucherCard extends StatelessWidget {
   final Voucher voucher;
   final bool isSelected;
-  final void Function()? onTap;
-  final void Function(bool?)? onChanged;
+  final void Function() onTap;
+  final void Function(bool?) onChanged;
 
   const VoucherCard({
     Key? key,
     required this.voucher,
     required this.isSelected,
-    this.onTap,
-    this.onChanged,
+    required this.onTap,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Ink(
-      decoration: BoxDecoration(
-        color: lightColor2,
-        borderRadius: BorderRadius.circular(15.w),
-        boxShadow: [
-          BoxShadow(
-            color: darkColor2.withOpacity(0.35),
-            offset: const Offset(0, 2),
-            blurRadius: 8,
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15.w),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(15.w),
-          onTap: onTap,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(height: 12.h),
-              Row(
-                children: [
-                  SizedBox(width: 15.w),
-                  Expanded(
-                    child: Text(
-                      voucher.nama,
-                      style: Theme.of(context).textTheme.titleSmall,
-                      overflow: TextOverflow.ellipsis,
+    imageCache.clear();
+    return Material(
+      color: lightColor2,
+      elevation: 3,
+      clipBehavior: Clip.antiAlias,
+      borderRadius: BorderRadius.circular(15.r),
+      child: InkWell(
+        onTap: () => onChanged(!isSelected),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            12.verticalSpacingRadius,
+            Row(
+              children: [
+                15.horizontalSpaceRadius,
+                Expanded(
+                  child: Text(
+                    voucher.nama,
+                    style: Get.textTheme.titleSmall,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                10.horizontalSpaceRadius,
+                Checkbox(
+                  value: isSelected,
+                  onChanged: onChanged,
+                  checkColor: blueColor,
+                  fillColor: MaterialStateProperty.all(lightColor2),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4.r),
+                  ),
+                  side: MaterialStateBorderSide.resolveWith(
+                    (_) => const BorderSide(color: darkColor2, width: 1),
+                  ),
+                  visualDensity: VisualDensity.compact,
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                15.horizontalSpaceRadius
+              ],
+            ),
+            12.verticalSpacingRadius,
+            Hero(
+              tag: 'voucher-image-${voucher.id_voucher}',
+              child: Material(
+                child: Ink(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.r),
+                    image: DecorationImage(
+                      image: NetworkImage(voucher.info_voucher),
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  SizedBox(width: 10.w),
-                  Checkbox(
-                    value: isSelected,
-                    onChanged: onChanged,
-                    checkColor: blueColor,
-                    fillColor: MaterialStateProperty.all(lightColor2),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4.w)),
-                    side: MaterialStateBorderSide.resolveWith(
-                        (_) => const BorderSide(color: darkColor2, width: 1)),
-                    visualDensity: VisualDensity.compact,
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  ),
-                  SizedBox(width: 10.w),
-                ],
-              ),
-              SizedBox(height: 12.h),
-              Hero(
-                tag: 'voucher-image-${voucher.id_voucher}',
-                child: Material(
-                  child: Ink(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.w),
-                      image: DecorationImage(
-                        image: NetworkImage(voucher.info_voucher),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                  child: InkWell(
+                    onTap: onTap,
+                    borderRadius: BorderRadius.circular(15.r),
                     child: const AspectRatio(aspectRatio: 379 / 177),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

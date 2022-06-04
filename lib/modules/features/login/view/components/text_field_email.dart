@@ -6,26 +6,29 @@ import 'package:java_code_app/configs/themes/colors.dart';
 class TextFieldEmail extends StatelessWidget {
   final TextEditingController controller;
 
-  const TextFieldEmail({Key? key, required this.controller}) : super(key: key);
+  const TextFieldEmail({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      style: Theme.of(context).textTheme.bodySmall,
+      style: Get.textTheme.bodySmall,
       decoration: InputDecoration(
         labelText: 'Email'.tr,
-        labelStyle: Theme.of(context).textTheme.bodySmall,
+        labelStyle: Get.textTheme.bodySmall,
         hintText: 'Lorem.ipsum@gmail.com',
-        hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
-              color: darkColor.withOpacity(0.25),
-            ),
+        hintStyle: Get.textTheme.bodySmall!.copyWith(
+          color: darkColor.withOpacity(0.25),
+        ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: blueColor, width: 2),
+          borderSide: BorderSide(color: blueColor, width: 1),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: blueColor, width: 2),
+          borderSide: BorderSide(color: blueColor, width: 1),
         ),
       ),
       keyboardType: TextInputType.emailAddress,

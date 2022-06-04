@@ -23,8 +23,6 @@ class LoginView extends StatelessWidget {
 
     return Scaffold(
       body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(AssetConst.bgPattern1),
@@ -35,28 +33,28 @@ class LoginView extends StatelessWidget {
         child: Form(
           key: _formKey,
           child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 30.w),
+            padding: EdgeInsets.symmetric(horizontal: 30.r),
             children: [
               /// Logo
-              SizedBox(height: 80.h),
-              Image.asset(AssetConst.iconJavaCode, width: 270.w),
-              SizedBox(height: 120.h),
+              80.verticalSpacingRadius,
+              Image.asset(AssetConst.iconJavaCode, width: 0.8.sw),
+              120.verticalSpacingRadius,
 
               /// Heading
               Text(
                 'Continue to sign in'.tr,
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Get.textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 40.h),
+              40.verticalSpacingRadius,
 
               /// Email
               TextFieldEmail(controller: _emailController),
-              SizedBox(height: 20.h),
+              20.verticalSpacingRadius,
 
               /// Password
               TextFieldPassword(controller: _passwordController),
-              SizedBox(height: 40.h),
+              40.verticalSpacingRadius,
 
               /// Login Button
               PrimaryButton(
@@ -71,17 +69,17 @@ class LoginView extends StatelessWidget {
                 },
               ),
 
-              SizedBox(height: 70.h),
+              70.verticalSpacingRadius,
               const DividerWithText('or'),
-              SizedBox(height: 20.h),
+              20.verticalSpacingRadius,
 
               /// Google Button
               LoginButtonGoogle(onPressed: LoginController.to.loginWithGoogle),
-              SizedBox(height: 15.h),
+              15.verticalSpacingRadius,
 
               /// Apple Button
               LoginButtonApple(onPressed: () {}),
-              SizedBox(height: 20.h),
+              20.verticalSpacingRadius,
             ],
           ),
         ),

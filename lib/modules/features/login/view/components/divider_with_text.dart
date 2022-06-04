@@ -13,14 +13,14 @@ class DividerWithText extends StatelessWidget {
     return Row(
       children: [
         Expanded(child: Divider(color: Colors.black.withOpacity(0.25))),
-        SizedBox(width: 15.w),
+        15.horizontalSpaceRadius,
         Text(
           text.tr,
-          style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                color: darkColor.withOpacity(0.25),
-              ),
+          style: Get.textTheme.bodySmall!.copyWith(
+            color: darkColor.withOpacity(0.25),
+          ),
         ),
-        SizedBox(width: 15.w),
+        15.horizontalSpaceRadius,
         Expanded(child: Divider(color: Colors.black.withOpacity(0.25))),
       ],
     );

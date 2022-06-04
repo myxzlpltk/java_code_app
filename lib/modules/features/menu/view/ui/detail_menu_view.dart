@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/menu/controllers/detail_menu_controller.dart';
+import 'package:java_code_app/shared/styles/shapes.dart';
 import 'package:java_code_app/shared/widgets/danger_button.dart';
 import 'package:java_code_app/shared/widgets/primary_button.dart';
 import 'package:java_code_app/shared/widgets/quantity_counter.dart';
@@ -23,72 +24,59 @@ class DetailMenuView extends StatelessWidget {
         elevation: 2,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.chevron_left, color: Colors.black, size: 32.w),
+          splashRadius: 30.r,
+          icon: Icon(Icons.chevron_left, color: Colors.black, size: 36.r),
           onPressed: () => Get.back(),
         ),
         centerTitle: true,
-        title: Text(
-          'Detail menu'.tr,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30.w),
-          ),
-        ),
+        title: Text('Detail menu'.tr, style: Get.textTheme.titleMedium),
+        shape: CustomShape.bottomRoundedShape,
       ),
       backgroundColor: lightColor3,
-      body: Column(
-        children: [
-          SizedBox(height: 25.h),
-          Center(
-            child: Hero(
-              tag: 'menu-photo-${DetailMenuController.to.menu.value!.id_menu}',
-              child: Image.network(
-                DetailMenuController.to.menu.value!.foto,
-                height: 181.h,
-                width: 234.w,
-                fit: BoxFit.contain,
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(25.r),
+              child: Center(
+                child: Hero(
+                  tag: 'menu-${DetailMenuController.to.menu.value!.id_menu}',
+                  child: Image.network(
+                    DetailMenuController.to.menu.value!.foto,
+                    height: 181.r,
+                    width: 234.r,
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
             ),
           ),
-          SizedBox(height: 25.h),
-          Expanded(
+          SliverFillRemaining(
+            hasScrollBody: false,
             child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 22.r, vertical: 45.r),
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(30.w)),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
               ),
-              child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 45.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              DetailMenuController.to.menu.value!.nama,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(color: blueColor),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                            ),
-                            SizedBox(height: 14.h),
-                            Text(
-                              DetailMenuController.to.menu.value!.deskripsi,
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                          ],
+                        child: Text(
+                          DetailMenuController.to.menu.value!.nama,
+                          style: Get.textTheme.titleMedium!
+                              .copyWith(color: blueColor),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                         ),
                       ),
-                      SizedBox(width: 10.w),
+                      10.horizontalSpaceRadius,
                       Obx(
                         () => QuantityCounter(
                           quantity: DetailMenuController.to.quantity.value,
@@ -98,30 +86,34 @@ class DetailMenuView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 40.h),
-                  Divider(color: darkColor2.withOpacity(0.25), height: 1),
+                  14.verticalSpacingRadius,
+                  Text(
+                    DetailMenuController.to.menu.value!.deskripsi,
+                    style: Get.textTheme.labelMedium,
+                    textAlign: TextAlign.left,
+                  ),
+                  40.verticalSpacingRadius,
+                  Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
                   Obx(
                     () => TileOption(
                       icon: AssetConst.iconPrice,
                       title: 'Price'.tr,
                       message:
                           DetailMenuController.to.orderDetail.price.toRupiah(),
-                      messageStyle: Theme.of(context)
-                          .textTheme
-                          .headlineSmall!
+                      messageStyle: Get.textTheme.headlineSmall!
                           .copyWith(color: blueColor),
                     ),
                   ),
                   Obx(
-                    () => Conditional.single(
+                        () => Conditional.single(
                       context: context,
                       conditionBuilder: (context) =>
-                          DetailMenuController.to.levels.isNotEmpty,
+                      DetailMenuController.to.levels.isNotEmpty,
                       widgetBuilder: (context) => Wrap(
                         children: [
                           Divider(
                             color: darkColor2.withOpacity(0.25),
-                            height: 1,
+                            height: 2.r,
                           ),
                           TileOption(
                             icon: AssetConst.iconLevel,
@@ -135,15 +127,15 @@ class DetailMenuView extends StatelessWidget {
                     ),
                   ),
                   Obx(
-                    () => Conditional.single(
+                        () => Conditional.single(
                       context: context,
                       conditionBuilder: (context) =>
-                          DetailMenuController.to.toppings.isNotEmpty,
+                      DetailMenuController.to.toppings.isNotEmpty,
                       widgetBuilder: (context) => Wrap(
                         children: [
                           Divider(
                             color: darkColor2.withOpacity(0.25),
-                            height: 1,
+                            height: 2.r,
                           ),
                           TileOption(
                             icon: AssetConst.iconTopping,
@@ -158,7 +150,7 @@ class DetailMenuView extends StatelessWidget {
                       fallbackBuilder: (context) => const SizedBox(),
                     ),
                   ),
-                  Divider(color: darkColor2.withOpacity(0.25), height: 1),
+                  Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
                   Obx(
                     () => TileOption(
                       icon: AssetConst.iconEdit,
@@ -169,26 +161,31 @@ class DetailMenuView extends StatelessWidget {
                       onTap: DetailMenuController.to.openNoteBottomSheet,
                     ),
                   ),
-                  Divider(color: darkColor2.withOpacity(0.25), height: 1),
-                  SizedBox(height: 40.h),
+                  Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
+                  40.verticalSpacingRadius,
                   Obx(
                     () => Conditional.single(
                       context: context,
                       conditionBuilder: (context) =>
                           DetailMenuController.to.status.value == 'success',
-                      widgetBuilder: (context) => DetailMenuController
-                                  .to.quantity >
-                              0
-                          ? PrimaryButton(
-                              text: DetailMenuController.to.isExistsInCart.value
-                                  ? 'Update to order'.tr
-                                  : 'Add to order'.tr,
-                              onPressed: DetailMenuController.to.addToCart,
-                            )
-                          : DangerButton(
-                        text: 'Delete from order'.tr,
-                              onPressed: DetailMenuController.to.deleteFromCart,
-                            ),
+                      widgetBuilder: (context) => SizedBox(
+                        width: double.infinity,
+                        child: Conditional.single(
+                          context: context,
+                          conditionBuilder: (context) =>
+                              DetailMenuController.to.quantity > 0,
+                          widgetBuilder: (context) => PrimaryButton(
+                            text: DetailMenuController.to.isExistsInCart.value
+                                ? 'Update to order'.tr
+                                : 'Add to order'.tr,
+                            onPressed: DetailMenuController.to.addToCart,
+                          ),
+                          fallbackBuilder: (context) => DangerButton(
+                            text: 'Delete from order'.tr,
+                            onPressed: DetailMenuController.to.deleteFromCart,
+                          ),
+                        ),
+                      ),
                       fallbackBuilder: (context) => const SizedBox(),
                     ),
                   ),

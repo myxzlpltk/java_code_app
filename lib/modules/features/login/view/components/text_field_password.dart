@@ -6,27 +6,29 @@ import 'package:java_code_app/configs/themes/colors.dart';
 class TextFieldPassword extends StatelessWidget {
   final TextEditingController controller;
 
-  const TextFieldPassword({Key? key, required this.controller})
-      : super(key: key);
+  const TextFieldPassword({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      style: Theme.of(context).textTheme.bodySmall,
+      style: Get.textTheme.bodySmall,
       decoration: InputDecoration(
         labelText: 'Password'.tr,
-        labelStyle: Theme.of(context).textTheme.bodySmall,
+        labelStyle: Get.textTheme.bodySmall,
         hintText: '****************',
-        hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
-              color: darkColor.withOpacity(0.25),
-            ),
+        hintStyle: Get.textTheme.bodySmall!.copyWith(
+          color: darkColor.withOpacity(0.25),
+        ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: blueColor, width: 2),
+          borderSide: BorderSide(color: blueColor, width: 1),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: blueColor, width: 2),
+          borderSide: BorderSide(color: blueColor, width: 1),
         ),
       ),
       obscureText: true,

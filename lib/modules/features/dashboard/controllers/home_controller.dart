@@ -33,8 +33,7 @@ class HomeController extends GetxController {
       statusPromo.value = 'success';
       listPromo.value = listPromoRes.data!;
     } else if (listPromoRes.status_code == 204) {
-      statusPromo.value = 'error';
-      messagePromo.value = 'No data'.tr;
+      statusPromo.value = 'empty';
     } else {
       statusPromo.value = 'error';
       messagePromo.value = listPromoRes.message ?? 'Unknown error'.tr;
@@ -70,8 +69,7 @@ class HomeController extends GetxController {
       statusMenu.value = 'success';
       listMenu.value = listMenuRes.data!;
     } else if (listMenuRes.status_code == 204) {
-      statusMenu.value = 'error';
-      messageMenu.value = 'No data'.tr;
+      statusMenu.value = 'empty';
     } else {
       statusMenu.value = 'error';
       messageMenu.value = listMenuRes.message ?? 'Unknown error'.tr;

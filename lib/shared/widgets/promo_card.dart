@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/models/promo.dart';
@@ -8,16 +11,12 @@ import 'package:java_code_app/utils/extensions/string_case_extension.dart';
 class PromoCard extends StatelessWidget {
   final Promo promo;
   final Function()? onTap;
-  final double? width;
-  final double? height;
   final bool shadow;
 
   const PromoCard({
     Key? key,
     required this.promo,
     this.onTap,
-    this.width,
-    this.height,
     this.shadow = false,
   }) : super(key: key);
 
@@ -26,8 +25,8 @@ class PromoCard extends StatelessWidget {
     return Hero(
       tag: 'promo_card_${promo.id_promo}',
       child: Container(
-        width: width ?? 282.w,
-        height: height ?? 158.h,
+        width: 282.r,
+        height: 158.r,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: promo.foto == null
@@ -39,7 +38,7 @@ class PromoCard extends StatelessWidget {
               BlendMode.srcATop,
             ),
           ),
-          borderRadius: BorderRadius.circular(15.w),
+          borderRadius: BorderRadius.circular(15.r),
           boxShadow: [
             if (shadow)
               BoxShadow(
@@ -53,41 +52,71 @@ class PromoCard extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            borderRadius: BorderRadius.circular(15.w),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      promo.typeLabel,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium!
-                          .copyWith(color: Colors.white),
-                    ),
-                    SizedBox(width: 5.w),
-                    Text(
-                      promo.amountLabel,
-                      style: Theme.of(context).textTheme.displayLarge!.copyWith(
+            borderRadius: BorderRadius.circular(15.r),
+            child: Padding(
+              padding: EdgeInsets.all(16.r),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Conditional.single(
+                    context: context,
+                    conditionBuilder: (context) => promo.type == 'diskon',
+                    widgetBuilder: (context) => Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          promo.typeLabel,
+                          style: Get.textTheme.titleMedium!
+                              .copyWith(color: Colors.white),
+                        ),
+                        5.horizontalSpaceRadius,
+                        Text(
+                          promo.amountLabel,
+                          style: GoogleFonts.montserrat(
+                            fontSize: 35.sp,
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
-                              ..strokeWidth = 1.5
+                              ..strokeWidth = 1.r
                               ..color = Colors.white,
                           ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                SizedBox(height: 5.h),
-                Text(
-                  promo.nama.toTitleCase(),
-                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                        color: Colors.white.withOpacity(0.75),
-                      ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+                    fallbackBuilder: (context) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          promo.typeLabel,
+                          style: Get.textTheme.titleMedium!
+                              .copyWith(color: Colors.white),
+                        ),
+                        5.verticalSpacingRadius,
+                        Text(
+                          promo.amountLabel,
+                          style: GoogleFonts.montserrat(
+                            fontSize: 25.sp,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 1.r
+                              ..color = Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  5.verticalSpacingRadius,
+                  Text(
+                    promo.nama.toTitleCase(),
+                    style: Get.textTheme.labelMedium!.copyWith(
+                      color: Colors.white.withOpacity(0.75),
+                    ),
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

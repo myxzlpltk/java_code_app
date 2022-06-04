@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 
 class VariantChip extends StatelessWidget {
@@ -18,13 +19,13 @@ class VariantChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       clipBehavior: Clip.antiAlias,
-      borderRadius: BorderRadius.circular(30.w),
+      borderRadius: BorderRadius.circular(30.r),
       child: InkWell(
         onTap: onTap,
         child: Ink(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 5.h),
+          padding: EdgeInsets.symmetric(horizontal: 12.r, vertical: 5.r),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30.w),
+            borderRadius: BorderRadius.circular(30.r),
             color: isSelected ? blueColor : Colors.white,
             border: Border.all(color: blueColor),
           ),
@@ -33,19 +34,18 @@ class VariantChip extends StatelessWidget {
             children: [
               Text(
                 text,
-                style: Theme.of(context)
-                    .textTheme
-                    .labelMedium!
-                    .copyWith(color: isSelected ? Colors.white : darkColor2),
+                style: Get.textTheme.labelMedium!.copyWith(
+                  color: isSelected ? Colors.white : darkColor2,
+                ),
               ),
               if (isSelected) ...[
-                SizedBox(width: 5.w),
+                5.horizontalSpaceRadius,
                 Icon(
                   Icons.check,
-                  size: 18.h,
+                  size: 18.r,
                   color: Colors.white,
                 ),
-              ]
+              ],
             ],
           ),
         ),

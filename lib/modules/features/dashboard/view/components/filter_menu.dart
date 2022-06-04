@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 
 class FilterMenu extends StatelessWidget {
@@ -21,11 +22,11 @@ class FilterMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(30.w),
+      borderRadius: BorderRadius.circular(30.r),
       child: Ink(
-        padding: EdgeInsets.symmetric(horizontal: 14.w),
+        padding: EdgeInsets.symmetric(horizontal: 14.r),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.w),
+          borderRadius: BorderRadius.circular(30.r),
           color: isSelected ? darkColor2 : blueColor,
           boxShadow: [
             BoxShadow(
@@ -39,12 +40,15 @@ class FilterMenu extends StatelessWidget {
         child: Row(
           children: [
             SvgPicture.asset(iconPath),
-            SizedBox(width: 10.w),
-            Text(
-              text,
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Colors.white,
-                  ),
+            10.horizontalSpaceRadius,
+            Padding(
+              padding: EdgeInsets.only(bottom: 2.r),
+              child: Text(
+                text,
+                style: Get.textTheme.headlineSmall!.copyWith(
+                  color: Colors.white,
+                ),
+              ),
             ),
           ],
         ),

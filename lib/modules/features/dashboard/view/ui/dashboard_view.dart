@@ -28,20 +28,20 @@ class DashboardView extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(30.w)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
         child: Obx(
           () => BottomNavigationBar(
             onTap: DashboardController.to.changeTabIndex,
             currentIndex: DashboardController.to.tabIndex.value,
             backgroundColor: darkColor2,
-            selectedLabelStyle: Theme.of(context).textTheme.labelSmall,
-            unselectedLabelStyle: Theme.of(context).textTheme.labelSmall,
+            selectedLabelStyle: Get.textTheme.labelSmall,
+            unselectedLabelStyle: Get.textTheme.labelSmall,
             selectedItemColor: Colors.white,
             unselectedItemColor: greyColor2,
             items: [
               BottomNavigationBarItem(
                 icon: Padding(
-                  padding: EdgeInsets.only(bottom: 5.h),
+                  padding: EdgeInsets.only(bottom: 5.r),
                   child: SvgPicture.asset(
                     AssetConst.iconHome,
                     color: greyColor2,
@@ -50,7 +50,7 @@ class DashboardView extends StatelessWidget {
                   ),
                 ),
                 activeIcon: Padding(
-                  padding: EdgeInsets.only(bottom: 5.h),
+                  padding: EdgeInsets.only(bottom: 5.r),
                   child: SvgPicture.asset(
                     AssetConst.iconHome,
                     color: Colors.white,
@@ -62,7 +62,7 @@ class DashboardView extends StatelessWidget {
               ),
               BottomNavigationBarItem(
                 icon: Padding(
-                  padding: EdgeInsets.only(bottom: 5.h),
+                  padding: EdgeInsets.only(bottom: 5.r),
                   child: SvgPicture.asset(
                     AssetConst.iconOrder,
                     color: greyColor2,
@@ -71,7 +71,7 @@ class DashboardView extends StatelessWidget {
                   ),
                 ),
                 activeIcon: Padding(
-                  padding: EdgeInsets.only(bottom: 5.h),
+                  padding: EdgeInsets.only(bottom: 5.r),
                   child: SvgPicture.asset(
                     AssetConst.iconOrder,
                     color: Colors.white,
@@ -83,7 +83,7 @@ class DashboardView extends StatelessWidget {
               ),
               BottomNavigationBarItem(
                 icon: Padding(
-                  padding: EdgeInsets.only(bottom: 5.h),
+                  padding: EdgeInsets.only(bottom: 5.r),
                   child: SvgPicture.asset(
                     AssetConst.iconProfile,
                     color: greyColor2,
@@ -92,7 +92,7 @@ class DashboardView extends StatelessWidget {
                   ),
                 ),
                 activeIcon: Padding(
-                  padding: EdgeInsets.only(bottom: 5.h),
+                  padding: EdgeInsets.only(bottom: 5.r),
                   child: SvgPicture.asset(
                     AssetConst.iconProfile,
                     color: Colors.white,

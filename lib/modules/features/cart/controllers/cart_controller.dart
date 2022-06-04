@@ -100,11 +100,13 @@ class CartController extends GetxController {
   /// Get discount for user
   Future<void> getVouchers() async {
     voucherStatus.value = 'loading';
-    var listVoucherList = await VoucherRepository.getAll();
+    var listVoucherRes = await VoucherRepository.getAll();
 
-    if (listVoucherList.status_code == 200) {
+    if (listVoucherRes.status_code == 200) {
       voucherStatus.value = 'success';
-      vouchers.value = listVoucherList.data!;
+      vouchers.value = listVoucherRes.data!;
+    } else if (listVoucherRes.status_code == 204) {
+      voucherStatus.value = 'empty';
     } else {
       voucherStatus.value = 'error';
     }
@@ -127,6 +129,7 @@ class CartController extends GetxController {
 
   void setVoucher(Voucher? voucher) {
     selectedVoucher.value = voucher;
+    vouchers.refresh();
   }
 
   /// Cart calculator using getter

@@ -14,25 +14,22 @@ class NoteBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 19.h),
+      padding: EdgeInsets.symmetric(horizontal: 17.r, vertical: 19.r),
       child: Wrap(
         children: [
           const HolderBottomSheet(),
-          SizedBox(height: 13.h),
-          Text(
-            'Create note'.tr,
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-          SizedBox(height: 13.h),
+          13.verticalSpacingRadius,
+          Text('Create note'.tr, style: Get.textTheme.headlineSmall),
+          13.verticalSpacingRadius,
           Row(
             children: [
               Expanded(
                 child: TextField(
                   controller: noteController,
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: Get.textTheme.bodySmall,
                   decoration: InputDecoration(
                     hintText: 'Add note'.tr,
-                    hintStyle: Theme.of(context).textTheme.bodySmall,
+                    hintStyle: Get.textTheme.bodySmall,
                     enabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(color: blueColor, width: 2),
                     ),
@@ -43,7 +40,7 @@ class NoteBottomSheet extends StatelessWidget {
                   maxLength: 100,
                 ),
               ),
-              SizedBox(height: 12.w),
+              12.verticalSpacingRadius,
               IconButton(
                 icon: const Icon(Icons.check_circle),
                 splashRadius: 20.r,

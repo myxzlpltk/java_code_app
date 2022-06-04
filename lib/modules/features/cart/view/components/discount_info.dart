@@ -12,47 +12,40 @@ class DiscountInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            'Info discount'.tr,
-            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          'Info discount'.tr,
+          style: Get.textTheme.headlineMedium!.copyWith(
+            color: Get.theme.colorScheme.primary,
+          ),
+        ),
+        30.verticalSpacingRadius,
+        ...discounts.map<Widget>(
+          (discount) => Padding(
+            padding: EdgeInsets.only(bottom: 7.r),
+            child: Row(
+              children: [
+                15.horizontalSpaceRadius,
+                Expanded(
+                  child: Text(
+                    discount.nama.toTitleCase(),
+                    style: Get.textTheme.bodyLarge,
+                  ),
                 ),
-          ),
-          SizedBox(height: 30.h),
-          ...discounts.map<Widget>(
-            (discount) => Padding(
-              padding: EdgeInsets.only(bottom: 7.h),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      discount.nama.toTitleCase(),
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  ),
-                  Text(
-                    '${discount.nominal}%',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                ],
-              ),
+                Text('${discount.nominal}%', style: Get.textTheme.titleSmall),
+                15.horizontalSpaceRadius,
+              ],
             ),
           ),
-          SizedBox(height: 30.h),
-          SizedBox(
-            width: 168.w,
-            child: PrimaryButton(
-              text: 'Okay'.tr,
-              onPressed: () => Get.back(),
-            ),
-          ),
-        ],
-      ),
+        ),
+        30.verticalSpacingRadius,
+        SizedBox(
+          width: 168.r,
+          child: PrimaryButton(text: 'Okay'.tr, onPressed: () => Get.back()),
+        ),
+      ],
     );
   }
 }

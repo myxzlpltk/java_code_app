@@ -10,8 +10,8 @@ class HolderBottomSheet extends StatelessWidget {
     return Center(
       child: Container(
         color: greyColor3.withOpacity(0.5),
-        height: 4.h,
-        width: 104.w,
+        height: 4.r,
+        width: 104.r,
       ),
     );
   }

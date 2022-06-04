@@ -15,6 +15,7 @@ class AssetConst {
   static const String iconLevel = 'assets/svg/ic_level.svg';
   static const String iconList = 'assets/svg/ic_list.svg';
   static const String iconLocation = 'assets/images/ic_location.png';
+  static const String iconNoData = 'assets/svg/ic_no_data.svg';
   static const String iconNoInternet = 'assets/svg/ic_no_internet.svg';
   static const String iconNote = 'assets/svg/ic_note.svg';
   static const String iconOrder = 'assets/svg/ic_order.svg';

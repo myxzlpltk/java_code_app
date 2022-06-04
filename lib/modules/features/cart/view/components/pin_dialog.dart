@@ -31,10 +31,10 @@ class PinDialog extends StatelessWidget {
     final defaultPinTheme = PinTheme(
       width: 50,
       height: 50,
-      textStyle: Theme.of(context).textTheme.titleLarge,
+      textStyle: Get.textTheme.titleLarge,
       decoration: BoxDecoration(
         border: Border.all(color: blueColor),
-        borderRadius: BorderRadius.circular(10.w),
+        borderRadius: BorderRadius.circular(10.r),
       ),
     );
 
@@ -43,20 +43,17 @@ class PinDialog extends StatelessWidget {
       children: [
         Text(
           'Verify order'.tr,
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: Get.textTheme.headlineMedium,
         ),
         Text(
           'Enter PIN code'.tr,
-          style: Theme.of(context)
-              .textTheme
-              .bodySmall!
-              .copyWith(color: greyColor2),
+          style: Get.textTheme.bodySmall!.copyWith(color: greyColor2),
         ),
-        SizedBox(height: 24.h),
+        24.verticalSpacingRadius,
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(width: 48.r),
+            48.horizontalSpaceRadius,
             Obx(
               () => Expanded(
                 child: Pinput(
@@ -70,7 +67,7 @@ class PinDialog extends StatelessWidget {
                   onSubmitted: processPin,
                   onCompleted: processPin,
                 ),
-                  ),
+              ),
             ),
             Obx(
                   () => IconButton(
@@ -94,13 +91,10 @@ class PinDialog extends StatelessWidget {
             context: context,
             conditionBuilder: (context) => errorText.value != null,
             widgetBuilder: (context) => Padding(
-              padding: EdgeInsets.only(left: 15.w, right: 15.w, top: 10.h),
+              padding: EdgeInsets.only(left: 15.r, right: 15.r, top: 10.r),
               child: Text(
                 errorText.value!,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .copyWith(color: redColor),
+                style: Get.textTheme.bodySmall!.copyWith(color: redColor),
                 textAlign: TextAlign.center,
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -36,15 +37,15 @@ class MenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(10.w),
+      borderRadius: BorderRadius.circular(10.r),
       child: Ink(
-        padding: EdgeInsets.all(7.w),
+        padding: EdgeInsets.all(7.r),
         decoration: BoxDecoration(
           color: lightColor2,
-          borderRadius: BorderRadius.circular(10.w),
+          borderRadius: BorderRadius.circular(10.r),
           boxShadow: [
             BoxShadow(
-              color: darkColor2.withOpacity(0.35),
+              color: darkColor2.withOpacity(0.2),
               offset: const Offset(0, 2),
               blurRadius: 8,
               spreadRadius: -1,
@@ -55,26 +56,27 @@ class MenuCard extends StatelessWidget {
           children: [
             /* Image */
             Container(
-              height: 75.w,
-              width: 75.w,
-              padding: EdgeInsets.all(5.w),
+              height: 75.r,
+              width: 75.r,
+              margin: EdgeInsets.only(right: 12.r),
+              padding: EdgeInsets.all(5.r),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.w),
+                borderRadius: BorderRadius.circular(10.r),
                 color: lightColor,
               ),
               child: Hero(
-                tag: 'menu-photo-${menu.id_menu}',
+                tag: 'menu-${menu.id_menu}',
                 child: Image.network(
                   menu.foto,
                   fit: BoxFit.contain,
-                  height: 75.w,
-                  width: 75.w,
+                  height: 75.r,
+                  width: 75.r,
                 ),
               ),
             ),
-            SizedBox(width: 12.w),
             Expanded(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -83,15 +85,16 @@ class MenuCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
-                  SizedBox(height: 4.h),
                   Text(
                     (price ?? menu.harga).toRupiah(),
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: blueColor, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 4.h),
-                  if (!simple)
-                    Row(
+                  Conditional.single(
+                    context: context,
+                    conditionBuilder: (context) => !simple,
+                    widgetBuilder: (context) => Row(
                       children: [
                         SvgPicture.asset(AssetConst.iconEdit, height: 12.h),
                         SizedBox(width: 7.w),
@@ -109,18 +112,29 @@ class MenuCard extends StatelessWidget {
                         ),
                       ],
                     ),
+                    fallbackBuilder: (context) => const SizedBox(),
+                  ),
                 ],
               ),
             ),
-            SizedBox(width: 12.w),
-            if (!simple) ...[
-              QuantityCounter(
-                quantity: quantity,
-                onIncrement: onIncrement,
-                onDecrement: onDecrement,
+            Conditional.single(
+              context: context,
+              conditionBuilder: (context) => !simple,
+              widgetBuilder: (context) => Container(
+                height: 75.r,
+                padding: EdgeInsets.only(left: 12.r, right: 5.r),
+                child: InkWell(
+                  onTap: () {},
+                  splashFactory: NoSplash.splashFactory,
+                  child: QuantityCounter(
+                    quantity: quantity,
+                    onIncrement: onIncrement,
+                    onDecrement: onDecrement,
+                  ),
+                ),
               ),
-              SizedBox(width: 5.w),
-            ]
+              fallbackBuilder: (context) => const SizedBox(),
+            ),
           ],
         ),
       ),

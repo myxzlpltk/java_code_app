@@ -6,7 +6,6 @@ import 'package:java_code_app/modules/features/cart/view/ui/cart_view.dart';
 import 'package:java_code_app/modules/features/cart/view/ui/choose_voucher_view.dart';
 import 'package:java_code_app/modules/features/cart/view/ui/detail_voucher_view.dart';
 import 'package:java_code_app/modules/features/dashboard/view/ui/dashboard_view.dart';
-import 'package:java_code_app/modules/features/dashboard/view/ui/get_location_view.dart';
 import 'package:java_code_app/modules/features/login/view/ui/login_view.dart';
 import 'package:java_code_app/modules/features/menu/view/ui/detail_menu_view.dart';
 import 'package:java_code_app/modules/features/promo/view/ui/detail_promo_view.dart';
@@ -32,10 +31,6 @@ class AppPages {
       GetPage(
         name: AppRoutes.dashboardView,
         page: () => DashboardView(),
-      ),
-      GetPage(
-        name: AppRoutes.getLocationView,
-        page: () => GetLocationView(),
       ),
 
       /// Menu dan Promo

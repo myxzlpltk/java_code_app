@@ -22,7 +22,7 @@ final lightTheme = ThemeData(
       height: 1.219,
     ),
     displaySmall: GoogleFonts.montserrat(
-      fontSize: 26.sp,
+      fontSize: 25.sp,
       fontWeight: FontWeight.w600,
       color: darkColor,
       height: 1.219,

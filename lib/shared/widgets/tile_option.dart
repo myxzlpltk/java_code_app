@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 
@@ -42,13 +43,13 @@ class TileOption extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.h),
+          padding: EdgeInsets.symmetric(vertical: 10.r),
           child: Row(
             children: [
               Conditional.single(
                 context: context,
                 conditionBuilder: (context) => icon == null,
-                widgetBuilder: (context) => SizedBox(width: 5.w),
+                widgetBuilder: (context) => 5.horizontalSpaceRadius,
                 fallbackBuilder: (context) => Container(
                   constraints: BoxConstraints(minWidth: (iconSize ?? 20.r) * 2),
                   child: SvgPicture.asset(
@@ -60,27 +61,32 @@ class TileOption extends StatelessWidget {
               ),
               Text(
                 title,
-                style: titleStyle ?? Theme.of(context).textTheme.titleSmall,
+                style: titleStyle ?? Get.textTheme.titleSmall,
               ),
-              if (subtitle != null)
-                Text(
+              Conditional.single(
+                context: context,
+                conditionBuilder: (context) => subtitle != null,
+                widgetBuilder: (context) => Text(
                   ' ${subtitle!}',
-                  style: subtitleStyle ?? Theme.of(context).textTheme.bodyLarge,
+                  style: subtitleStyle ?? Get.textTheme.bodyLarge,
                 ),
-              SizedBox(width: 10.w),
+                fallbackBuilder: (context) => const SizedBox(),
+              ),
+              10.horizontalSpaceRadius,
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
                       message,
-                      style:
-                          messageStyle ?? Theme.of(context).textTheme.bodyLarge,
+                      style: messageStyle ?? Get.textTheme.bodyLarge,
                       textAlign: TextAlign.end,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    if (messageSubtitle != null)
-                      Text(
+                    Conditional.single(
+                      context: context,
+                      conditionBuilder: (context) => messageSubtitle != null,
+                      widgetBuilder: (context) => Text(
                         messageSubtitle!,
                         textAlign: TextAlign.end,
                         style: messageSubtitleStyle ??
@@ -91,13 +97,20 @@ class TileOption extends StatelessWidget {
                               height: 1.219,
                             ),
                       ),
+                      fallbackBuilder: (context) => const SizedBox(),
+                    ),
                   ],
                 ),
               ),
-              if (onTap == null)
-                SizedBox(width: 5.w)
-              else
-                const Icon(Icons.chevron_right, color: greyColor),
+              Conditional.single(
+                context: context,
+                conditionBuilder: (context) => onTap == null,
+                widgetBuilder: (context) => 5.horizontalSpaceRadius,
+                fallbackBuilder: (context) => const Icon(
+                  Icons.chevron_right,
+                  color: greyColor,
+                ),
+              ),
             ],
           ),
         ),

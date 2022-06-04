@@ -11,24 +11,24 @@ class SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 10.w),
+      padding: EdgeInsets.symmetric(vertical: 8.r, horizontal: 10.r),
       decoration: BoxDecoration(
         border: Border.all(color: blueColor),
-        borderRadius: BorderRadius.circular(30.w),
+        borderRadius: BorderRadius.circular(30.r),
       ),
       child: Row(
         children: [
-          const Icon(Icons.search, color: blueColor, size: 26),
-          SizedBox(width: 10.w),
+          Icon(Icons.search, color: blueColor, size: 30.r),
+          10.horizontalSpaceRadius,
           Expanded(
             child: TextField(
               onChanged: onChanged,
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: Get.textTheme.headlineSmall,
               decoration: InputDecoration.collapsed(
                 hintText: 'Search'.tr,
-                hintStyle: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      color: const Color(0xFFAAAAAA),
-                    ),
+                hintStyle: Get.textTheme.headlineSmall!.copyWith(
+                  color: const Color(0xFFAAAAAA),
+                ),
               ),
               textInputAction: TextInputAction.search,
             ),

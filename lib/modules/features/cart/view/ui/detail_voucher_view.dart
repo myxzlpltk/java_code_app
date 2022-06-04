@@ -9,6 +9,7 @@ import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/cart/controllers/cart_controller.dart';
 import 'package:java_code_app/modules/models/voucher.dart';
+import 'package:java_code_app/shared/styles/shapes.dart';
 import 'package:java_code_app/shared/widgets/danger_button.dart';
 import 'package:java_code_app/shared/widgets/primary_button.dart';
 import 'package:java_code_app/shared/widgets/tile_option.dart';
@@ -26,19 +27,13 @@ class DetailVoucherView extends StatelessWidget {
         elevation: 2,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.chevron_left, color: Colors.black, size: 32.w),
+          splashRadius: 30.r,
+          icon: Icon(Icons.chevron_left, color: Colors.black, size: 36.r),
           onPressed: () => Get.back(),
         ),
         centerTitle: true,
-        title: Text(
-          'Detail voucher'.tr,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30.w),
-          ),
-        ),
+        title: Text('Detail voucher'.tr, style: Get.textTheme.titleMedium),
+        shape: CustomShape.bottomRoundedShape,
       ),
       body: Column(
         children: [
@@ -46,26 +41,15 @@ class DetailVoucherView extends StatelessWidget {
             padding: EdgeInsets.all(20.r),
             child: Hero(
               tag: 'voucher-image-${voucher.id_voucher}',
-              child: Material(
-                child: Ink(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.w),
-                    image: DecorationImage(
-                      image: NetworkImage(voucher.info_voucher),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: const AspectRatio(aspectRatio: 379 / 177),
-                ),
-              ),
+              child: Image.network(voucher.info_voucher, fit: BoxFit.fitWidth),
             ),
           ),
           Expanded(
             child: Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 45.h),
+              padding: EdgeInsets.symmetric(horizontal: 25.r, vertical: 45.r),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(30.w)),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
                 color: Colors.white,
               ),
               child: Column(
@@ -73,17 +57,17 @@ class DetailVoucherView extends StatelessWidget {
                 children: [
                   Text(
                     voucher.nama,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium!
-                        .copyWith(color: blueColor),
+                    style:
+                        Get.textTheme.titleMedium!.copyWith(color: blueColor),
                   ),
-                  if (voucher.catatan != null)
-                    Html(
+                  Conditional.single(
+                    context: context,
+                    conditionBuilder: (context) => voucher.catatan != null,
+                    widgetBuilder: (context) => Html(
                       data: voucher.catatan,
                       style: {
                         '*': Style.fromTextStyle(
-                          Theme.of(context).textTheme.labelMedium!,
+                          Get.textTheme.labelMedium!,
                         ),
                         'body': Style(
                           margin: EdgeInsets.zero,
@@ -91,17 +75,19 @@ class DetailVoucherView extends StatelessWidget {
                         ),
                       },
                     ),
-                  SizedBox(height: 40.h),
+                    fallbackBuilder: (context) => const SizedBox(),
+                  ),
+                  40.verticalSpacingRadius,
                   Divider(color: darkColor2.withOpacity(0.25), height: 1),
                   TileOption(
                     icon: AssetConst.iconDate,
                     title: 'Valid date'.tr,
                     message:
                         '${DateFormat('dd/MM/yyyy').format(voucher.periode_mulai)} - ${DateFormat('dd/MM/yyyy').format(voucher.periode_selesai)}',
-                    titleStyle: Theme.of(context).textTheme.headlineSmall,
-                    messageStyle: Theme.of(context).textTheme.bodyMedium,
+                    titleStyle: Get.textTheme.headlineSmall,
+                    messageStyle: Get.textTheme.bodyMedium,
                   ),
-                  Divider(color: darkColor2.withOpacity(0.25), height: 2),
+                  Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
                 ],
               ),
             ),
@@ -111,9 +97,9 @@ class DetailVoucherView extends StatelessWidget {
       bottomNavigationBar: Container(
         color: Colors.white,
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 22.w),
+          padding: EdgeInsets.symmetric(vertical: 10.r, horizontal: 22.r),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(30.w)),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
             color: Colors.white,
             boxShadow: [
               BoxShadow(

@@ -27,7 +27,7 @@ class LoginController extends GetxController {
     } else if (userRes.status_code == 422 || userRes.status_code == 204) {
       Get.showSnackbar(GetSnackBar(
         title: 'Something went wrong'.tr,
-        message: 'account_incorrect'.tr,
+        message: 'Email or password is incorrect'.tr,
         duration: const Duration(seconds: 2),
       ));
     } else {

@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/promo/controllers/detail_promo_controller.dart';
+import 'package:java_code_app/shared/styles/shapes.dart';
 import 'package:java_code_app/shared/widgets/promo_card.dart';
 import 'package:java_code_app/shared/widgets/rect_shimmer.dart';
 import 'package:java_code_app/utils/extensions/string_case_extension.dart';
@@ -24,60 +25,64 @@ class DetailPromoView extends StatelessWidget {
         elevation: 2,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.chevron_left, color: Colors.black, size: 32.w),
+          splashRadius: 30.r,
+          icon: Icon(Icons.chevron_left, color: Colors.black, size: 36.r),
           onPressed: () => Get.back(),
         ),
         centerTitle: true,
         title: Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            SvgPicture.asset(AssetConst.iconPromo, width: 23.w),
-            SizedBox(width: 10.w),
-            Text('Promo'.tr, style: Theme.of(context).textTheme.titleMedium),
+            SvgPicture.asset(AssetConst.iconPromo, width: 23.r),
+            10.horizontalSpaceRadius,
+            Text('Promo'.tr, style: Get.textTheme.titleMedium),
           ],
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30.w),
-          ),
-        ),
+        shape: CustomShape.bottomRoundedShape,
       ),
       backgroundColor: lightColor3,
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(25.w),
-            child: Obx(
-              () => Conditional.single(
-                context: context,
-                conditionBuilder: (context) =>
-                    DetailPromoController.to.status.value == 'success',
-                widgetBuilder: (context) => Screenshot(
-                  controller: DetailPromoController.to.screenshotController,
-                  child: PromoCard(
-                    promo: DetailPromoController.to.promo.value!,
-                    width: 378.w,
-                    height: 181.h,
-                    shadow: true,
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(25.r),
+              child: Obx(
+                () => Conditional.single(
+                  context: context,
+                  conditionBuilder: (context) =>
+                      DetailPromoController.to.status.value == 'success',
+                  widgetBuilder: (context) => Screenshot(
+                    controller: DetailPromoController.to.screenshotController,
+                    child: AspectRatio(
+                      aspectRatio: 378 / 181,
+                      child: PromoCard(
+                        promo: DetailPromoController.to.promo.value!,
+                        shadow: true,
+                      ),
+                    ),
                   ),
-                ),
-                fallbackBuilder: (context) => RectShimmer(
-                  width: 378.w,
-                  height: 181.h,
-                  radius: 15.w,
+                  fallbackBuilder: (context) => AspectRatio(
+                    aspectRatio: 378 / 181,
+                    child: RectShimmer(
+                      width: 378.r,
+                      height: 181.r,
+                      radius: 15.r,
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
-          Expanded(
+          SliverFillRemaining(
+            hasScrollBody: false,
             child: Container(
               clipBehavior: Clip.antiAlias,
+              padding: EdgeInsets.symmetric(horizontal: 22.r, vertical: 45.r),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(30.w)),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
               ),
-              child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 45.h),
+              child: Column(
                 children: [
                   Obx(
                     () => Conditional.single(
@@ -92,37 +97,35 @@ class DetailPromoView extends StatelessWidget {
                             child: Text(
                               DetailPromoController.to.promo.value!.nama
                                   .toTitleCase(),
-                              style: Theme.of(context).textTheme.titleMedium,
+                              style: Get.textTheme.titleMedium,
                             ),
                           ),
-                          SizedBox(width: 25.w),
+                          25.horizontalSpaceRadius,
                           Text(
                             DetailPromoController
                                 .to.promo.value!.typeAmountLabel,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
+                            style: Get.textTheme.titleMedium!
                                 .copyWith(color: blueColor),
                           ),
                         ],
                       ),
-                      fallbackBuilder: (context) => RectShimmer(height: 25.h),
+                      fallbackBuilder: (context) => RectShimmer(height: 25.r),
                     ),
                   ),
-                  SizedBox(height: 17.h),
+                  17.verticalSpacingRadius,
                   Divider(color: const Color(0xFF2E2E2E).withOpacity(0.25)),
-                  SizedBox(height: 13.h),
+                  13.verticalSpacingRadius,
                   Row(
                     children: [
                       const Icon(Icons.list, color: blueColor),
-                      SizedBox(width: 14.w),
+                      14.horizontalSpaceRadius,
                       Text(
                         'Terms and conditions'.tr,
-                        style: Theme.of(context).textTheme.titleSmall,
+                        style: Get.textTheme.titleSmall,
                       ),
                     ],
                   ),
-                  SizedBox(height: 10.h),
+                  10.verticalSpacingRadius,
                   Obx(
                     () => Conditional.single(
                       context: context,
@@ -133,7 +136,7 @@ class DetailPromoView extends StatelessWidget {
                             .to.promo.value!.syarat_ketentuan,
                         style: {
                           '*': Style.fromTextStyle(
-                            Theme.of(context).textTheme.labelMedium!,
+                            Get.textTheme.labelMedium!,
                           ),
                           'body': Style(
                             margin: EdgeInsets.zero,
@@ -141,7 +144,7 @@ class DetailPromoView extends StatelessWidget {
                           ),
                         },
                       ),
-                      fallbackBuilder: (context) => RectShimmer(height: 100.h),
+                      fallbackBuilder: (context) => RectShimmer(height: 100.r),
                     ),
                   ),
                 ],
@@ -153,8 +156,8 @@ class DetailPromoView extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: blueColor,
         foregroundColor: Colors.white,
+        onPressed: DetailPromoController.to.sharePromo,
         child: const Icon(Icons.share),
-        onPressed: () => DetailPromoController.to.sharePromo(),
       ),
     );
   }

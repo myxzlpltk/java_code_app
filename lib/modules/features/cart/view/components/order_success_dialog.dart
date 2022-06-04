@@ -12,28 +12,25 @@ class OrderSuccessDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      padding: EdgeInsets.symmetric(horizontal: 15.r),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: 28.h),
+          28.verticalSpacingRadius,
           SvgPicture.asset(AssetConst.iconOrderSuccess),
-          SizedBox(height: 28.h),
+          28.verticalSpacingRadius,
           Text(
             'Order is being prepared'.tr,
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Get.textTheme.headlineMedium,
           ),
-          SizedBox(height: 14.h),
+          14.verticalSpacingRadius,
           Text(
             'You can track your order in order history'.tr,
-            style: Theme.of(context)
-                .textTheme
-                .bodySmall!
-                .copyWith(color: greyColor2),
+            style: Get.textTheme.bodySmall!.copyWith(color: greyColor2),
           ),
-          SizedBox(height: 14.h),
+          14.verticalSpacingRadius,
           SizedBox(
-            width: 168.w,
+            width: 168.r,
             child: PrimaryButton(
               onPressed: () => Get.back(),
               text: 'Okay'.tr,

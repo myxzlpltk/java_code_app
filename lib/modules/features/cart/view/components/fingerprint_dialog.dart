@@ -12,36 +12,30 @@ class FingerprintDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      padding: EdgeInsets.symmetric(horizontal: 15.r),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             'Verify order'.tr,
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Get.textTheme.headlineMedium,
           ),
           Text(
             'Press your fingerprint'.tr,
-            style: Theme.of(context)
-                .textTheme
-                .bodySmall!
-                .copyWith(color: greyColor2),
+            style: Get.textTheme.bodySmall!.copyWith(color: greyColor2),
           ),
-          SizedBox(height: 30.h),
+          30.verticalSpacingRadius,
           GestureDetector(
             child: SvgPicture.asset(AssetConst.iconFingerprint),
             onTap: () => Get.back<String>(result: 'fingerprint'),
           ),
-          SizedBox(height: 30.h),
+          30.verticalSpacingRadius,
           DividerWithText('or'.tr),
           TextButton(
             onPressed: () => Get.back<String>(result: 'pin'),
             child: Text(
               'Verify using PIN code'.tr,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleSmall!
-                  .copyWith(color: blueColor),
+              style: Get.textTheme.titleSmall!.copyWith(color: blueColor),
             ),
           ),
         ],

@@ -26,7 +26,7 @@ class DangerButton extends StatelessWidget {
           color: Colors.white,
           height: 1.219,
         ),
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.h),
+        padding: EdgeInsets.symmetric(horizontal: 24.r, vertical: 14.r),
         shape: RoundedRectangleBorder(
           side: const BorderSide(color: darkRedColor, width: 1),
           borderRadius: BorderRadius.circular(24),

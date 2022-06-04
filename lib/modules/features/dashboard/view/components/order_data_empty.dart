@@ -4,8 +4,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 
-class ServerErrorListView extends StatelessWidget {
-  const ServerErrorListView({Key? key}) : super(key: key);
+class OrderDataEmpty extends StatelessWidget {
+  final String title;
+  final String? subtitle;
+
+  const OrderDataEmpty({
+    Key? key,
+    required this.title,
+    this.subtitle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +26,13 @@ class ServerErrorListView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SvgPicture.asset(
-                AssetConst.iconServerError,
-                width: 250.r,
+                AssetConst.iconNote,
+                width: 150.r,
               ),
               25.verticalSpacingRadius,
               Text(
-                'Server error'.tr,
-                style: Get.textTheme.bodyMedium,
+                title,
+                style: Get.textTheme.bodyLarge,
                 textAlign: TextAlign.center,
               ),
             ],
