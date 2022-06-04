@@ -105,10 +105,10 @@ class DetailMenuView extends StatelessWidget {
                     ),
                   ),
                   Obx(
-                        () => Conditional.single(
+                    () => Conditional.single(
                       context: context,
                       conditionBuilder: (context) =>
-                      DetailMenuController.to.levels.isNotEmpty,
+                          DetailMenuController.to.levels.isNotEmpty,
                       widgetBuilder: (context) => Wrap(
                         children: [
                           Divider(
@@ -130,7 +130,7 @@ class DetailMenuView extends StatelessWidget {
                         () => Conditional.single(
                       context: context,
                       conditionBuilder: (context) =>
-                      DetailMenuController.to.toppings.isNotEmpty,
+                          DetailMenuController.to.toppings.isNotEmpty,
                       widgetBuilder: (context) => Wrap(
                         children: [
                           Divider(

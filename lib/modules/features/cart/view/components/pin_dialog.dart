@@ -70,7 +70,7 @@ class PinDialog extends StatelessWidget {
               ),
             ),
             Obx(
-                  () => IconButton(
+              () => IconButton(
                 padding: EdgeInsets.zero,
                 visualDensity: VisualDensity.compact,
                 splashRadius: 24.r,

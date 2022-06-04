@@ -62,7 +62,7 @@ class OrderView extends StatelessWidget {
                           title: 'Already Ordered?\nTrack the order here.'.tr,
                         ),
                     'loading': (context) => ListView.separated(
-                      padding: EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                             horizontal: 25.r,
                             vertical: 25.r,
                           ),
@@ -72,7 +72,7 @@ class OrderView extends StatelessWidget {
                             child: RectShimmer(radius: 10.r),
                           ),
                           separatorBuilder: (_, i) => 16.verticalSpacingRadius,
-                        )
+                        ),
                   },
                   fallbackBuilder: (context) => OrderDataEmpty(
                     title: 'Already Ordered?\nTrack the order here.'.tr,
