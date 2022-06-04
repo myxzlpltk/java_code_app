@@ -55,7 +55,7 @@ class CartView extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     AssetConst.iconEmptyCart,
-                    width: MediaQuery.of(context).size.width * 0.8,
+                    width: 0.8.sw,
                   ),
                   Text(
                     'Empty cart'.tr,
@@ -91,20 +91,20 @@ class CartView extends StatelessWidget {
                     runSpacing: 17.r,
                     children: CartController.to.foodItems
                         .map<Widget>(
-                          (orderDetail) => MenuCard(
-                            menu: orderDetail.menu,
-                            price: orderDetail.price,
-                            quantity: orderDetail.quantity,
-                            note: orderDetail.note,
+                          (cartItem) => MenuCard(
+                            menu: cartItem.menu,
+                            price: cartItem.price,
+                            quantity: cartItem.quantity,
+                            note: cartItem.note,
                             onIncrement: () =>
-                                CartController.to.increment(orderDetail),
+                                CartController.to.increment(cartItem),
                             onDecrement: () =>
-                                CartController.to.decrement(orderDetail),
-                            onNoteChanged: (value) => CartController.to
-                                .updateNote(orderDetail, value),
+                                CartController.to.decrement(cartItem),
+                            onNoteChanged: (value) =>
+                                CartController.to.updateNote(cartItem, value),
                             onTap: () => Get.toNamed(
                               AppRoutes.detailMenuView,
-                              arguments: orderDetail.menu,
+                              arguments: cartItem.menu,
                             ),
                           ),
                         )
@@ -137,20 +137,20 @@ class CartView extends StatelessWidget {
                     runSpacing: 17.r,
                     children: CartController.to.drinkItems
                         .map<Widget>(
-                          (orderDetail) => MenuCard(
-                            menu: orderDetail.menu,
-                            price: orderDetail.price,
-                            quantity: orderDetail.quantity,
-                            note: orderDetail.note,
+                          (cartItem) => MenuCard(
+                            menu: cartItem.menu,
+                            price: cartItem.price,
+                            quantity: cartItem.quantity,
+                            note: cartItem.note,
                             onIncrement: () =>
-                                CartController.to.increment(orderDetail),
+                                CartController.to.increment(cartItem),
                             onDecrement: () =>
-                                CartController.to.decrement(orderDetail),
-                            onNoteChanged: (value) => CartController.to
-                                .updateNote(orderDetail, value),
+                                CartController.to.decrement(cartItem),
+                            onNoteChanged: (value) =>
+                                CartController.to.updateNote(cartItem, value),
                             onTap: () => Get.toNamed(
                               AppRoutes.detailMenuView,
-                              arguments: orderDetail.menu,
+                              arguments: cartItem.menu,
                             ),
                           ),
                         )

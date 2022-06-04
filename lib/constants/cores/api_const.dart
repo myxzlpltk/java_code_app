@@ -10,9 +10,9 @@ class ApiConst {
 
   /// Home
   static const String allPromo = '$apiBaseUrl/promo/all';
-  static const String promo = '$apiBaseUrl/promo/detail';
+  static const String detailPromo = '$apiBaseUrl/promo/detail';
   static const String allMenu = '$apiBaseUrl/menu/all';
-  static const String menu = '$apiBaseUrl/menu/detail';
+  static const String detailMenu = '$apiBaseUrl/menu/detail';
 
   /// Cart
   static const String allDiscount = '$apiBaseUrl/diskon/all';
@@ -21,4 +21,5 @@ class ApiConst {
   /// Order
   static const String addOrder = '$apiBaseUrl/order/add';
   static const String onGoingOrder = '$apiBaseUrl/order/user';
+  static const String detailOrder = '$apiBaseUrl/order/detail';
 }

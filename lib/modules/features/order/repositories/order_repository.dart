@@ -8,7 +8,7 @@ import 'package:java_code_app/utils/services/local_db_services.dart';
 class OrderRepository {
   OrderRepository._();
 
-  /// Memanggil API untuk mendapatkan semua menu
+  /// Memanggil API untuk mendapatkan semua order aktif
   static Future<ListOrderRes> getOnGoing() async {
     try {
       var dio = ApiServices.dioCall(token: await LocalDBServices.getToken());
@@ -18,6 +18,18 @@ class OrderRepository {
       return ListOrderRes.fromJson(response.data);
     } on DioError {
       return const ListOrderRes(status_code: 500);
+    }
+  }
+
+  /// Memanggil API untuk mendapatkan order berdasarkan ID
+  static Future<OrderRes> getFromId(int id) async {
+    try {
+      var dio = ApiServices.dioCall(token: await LocalDBServices.getToken());
+      var response = await dio.get('${ApiConst.detailOrder}/$id');
+
+      return OrderRes.fromJson(response.data);
+    } on DioError {
+      return const OrderRes(status_code: 500);
     }
   }
 }

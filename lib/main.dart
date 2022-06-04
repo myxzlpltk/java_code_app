@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:java_code_app/configs/localizations/localization.dart';
 import 'package:java_code_app/configs/pages/app_pages.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ValidationBuilder.setLocale(Get.locale?.languageCode ?? 'id');
+    initializeDateFormatting();
 
     return ScreenUtilInit(
       designSize: appDesignSize,

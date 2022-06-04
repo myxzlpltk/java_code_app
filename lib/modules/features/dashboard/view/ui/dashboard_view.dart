@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/dashboard/controllers/dashboard_controller.dart';
-import 'package:java_code_app/modules/features/dashboard/view/ui/home_view.dart';
-import 'package:java_code_app/modules/features/dashboard/view/ui/order_view.dart';
 import 'package:java_code_app/modules/features/dashboard/view/ui/profile_view.dart';
+import 'package:java_code_app/modules/features/home/view/ui/home_view.dart';
+import 'package:java_code_app/modules/features/order/view/ui/order_view.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({Key? key}) : super(key: key);

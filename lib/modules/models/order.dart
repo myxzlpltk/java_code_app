@@ -30,6 +30,8 @@ class Order extends Equatable {
     required this.menu,
   });
 
+  int get total => total_bayar + potongan;
+
   /// From json
   factory Order.fromJson(Map<String, dynamic> json) {
     return Order(
@@ -70,5 +72,29 @@ class ListOrderRes {
           ? json['data'].map<Order>((e) => Order.fromJson(e)).toList()
           : null,
     );
+  }
+}
+
+class OrderRes {
+  final int status_code;
+  final Order? data;
+
+  const OrderRes({
+    required this.status_code,
+    this.data,
+  });
+
+  /// From json
+  factory OrderRes.fromJson(Map<String, dynamic> json) {
+    if (json['status_code'] == 200) {
+      json['data']['order']['menu'] = json['data']['detail'];
+
+      return OrderRes(
+        status_code: json['status_code'] as int,
+        data: Order.fromJson(json['data']['order']),
+      );
+    } else {
+      return OrderRes(status_code: json['status_code'] as int);
+    }
   }
 }

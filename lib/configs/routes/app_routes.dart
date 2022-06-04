@@ -17,4 +17,7 @@ class AppRoutes {
   static const String cartView = '/cart';
   static const String chooseVoucherView = '/cart/choose-voucher';
   static const String detailVoucherView = '/cart/choose-voucher/detail-voucher';
+
+  /// Order
+  static const String detailOrderView = '/order/detail-order';
 }

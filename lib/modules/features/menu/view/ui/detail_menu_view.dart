@@ -99,7 +99,7 @@ class DetailMenuView extends StatelessWidget {
                       icon: AssetConst.iconPrice,
                       title: 'Price'.tr,
                       message:
-                          DetailMenuController.to.orderDetail.price.toRupiah(),
+                          DetailMenuController.to.detailOrder.price.toRupiah(),
                       messageStyle: Get.textTheme.headlineSmall!
                           .copyWith(color: blueColor),
                     ),

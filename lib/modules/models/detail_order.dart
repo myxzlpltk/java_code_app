@@ -1,11 +1,12 @@
 import 'package:equatable/equatable.dart';
+import 'package:java_code_app/constants/commons/constants.dart';
 
 class DetailOrder extends Equatable {
   final int id_menu;
   final String kategori;
   final String topping;
   final String nama;
-  final String foto;
+  final String? foto;
   final int jumlah;
   final String harga;
   final int total;
@@ -23,6 +24,12 @@ class DetailOrder extends Equatable {
     required this.catatan,
   });
 
+  /// Getter untuk makanan
+  bool get isFood => kategori == foodCategory;
+
+  /// Getter untuk minuman
+  bool get isDrink => kategori == drinkCategory;
+
   /// From json
   factory DetailOrder.fromJson(Map<String, dynamic> json) {
     return DetailOrder(
@@ -30,7 +37,7 @@ class DetailOrder extends Equatable {
       kategori: json['kategori'] as String,
       topping: json['topping'] as String,
       nama: json['nama'] as String,
-      foto: json['foto'] as String,
+      foto: json['foto'] as String?,
       jumlah: json['jumlah'] as int,
       harga: json['harga'] as String,
       total: json['total'] as int,

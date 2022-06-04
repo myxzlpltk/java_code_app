@@ -1,8 +1,8 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/constants/commons/constants.dart';
-import 'package:java_code_app/modules/features/dashboard/repositories/menu_repository.dart';
-import 'package:java_code_app/modules/features/dashboard/repositories/promo_repository.dart';
+import 'package:java_code_app/modules/features/home/repositories/menu_repository.dart';
+import 'package:java_code_app/modules/features/home/repositories/promo_repository.dart';
 import 'package:java_code_app/modules/models/menu.dart';
 import 'package:java_code_app/modules/models/promo.dart';
 

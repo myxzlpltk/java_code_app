@@ -39,35 +39,35 @@ class CartController extends GetxController {
   RxList<CartItem> cart = RxList<CartItem>();
 
   /// add item to cart
-  void add(CartItem orderDetail) {
-    cart.remove(orderDetail);
-    cart.add(orderDetail);
+  void add(CartItem cartItem) {
+    cart.remove(cartItem);
+    cart.add(cartItem);
   }
 
   /// Remove item from cart
-  void remove(CartItem orderDetail) {
-    cart.remove(orderDetail);
+  void remove(CartItem cartItem) {
+    cart.remove(cartItem);
   }
 
   /// Increment item quantity
-  void increment(CartItem orderDetail) {
-    orderDetail.quantity++;
+  void increment(CartItem cartItem) {
+    cartItem.quantity++;
     cart.refresh();
   }
 
   /// Decrement item quantity
-  void decrement(CartItem orderDetail) {
-    if (orderDetail.quantity > 1) {
-      orderDetail.quantity--;
+  void decrement(CartItem cartItem) {
+    if (cartItem.quantity > 1) {
+      cartItem.quantity--;
       cart.refresh();
     } else {
-      cart.remove(orderDetail);
+      cart.remove(cartItem);
     }
   }
 
   /// Update note
-  void updateNote(CartItem orderDetail, String note) {
-    orderDetail.note = note;
+  void updateNote(CartItem cartItem, String note) {
+    cartItem.note = note;
   }
 
   /// Getter for food items

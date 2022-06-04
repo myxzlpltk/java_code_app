@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:java_code_app/modules/features/dashboard/repositories/order_repository.dart';
+import 'package:java_code_app/modules/features/order/repositories/order_repository.dart';
 import 'package:java_code_app/modules/models/order.dart';
 
 class OrderController extends GetxController {

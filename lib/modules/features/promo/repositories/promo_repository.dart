@@ -12,7 +12,7 @@ class PromoRepository {
   static Future<PromoRes> getFromId(int id_promo) async {
     try {
       var dio = ApiServices.dioCall(token: await LocalDBServices.getToken());
-      var response = await dio.get('${ApiConst.promo}/$id_promo');
+      var response = await dio.get('${ApiConst.detailPromo}/$id_promo');
 
       return PromoRes.fromJson(response.data);
     } on DioError {

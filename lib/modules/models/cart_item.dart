@@ -78,7 +78,7 @@ class CartReq {
   });
 
   Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = {
+    return {
       'order': {
         'id_user': user.id_user,
         'id_voucher': voucher?.id_voucher,
@@ -101,7 +101,5 @@ class CartReq {
               })
           .toList(),
     };
-
-    return map;
   }
 }

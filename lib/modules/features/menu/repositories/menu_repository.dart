@@ -12,7 +12,7 @@ class MenuRepository {
   static Future<MenuRes> getFromId(int id_menu) async {
     try {
       var dio = ApiServices.dioCall(token: await LocalDBServices.getToken());
-      var response = await dio.get('${ApiConst.menu}/$id_menu');
+      var response = await dio.get('${ApiConst.detailMenu}/$id_menu');
 
       return MenuRes.fromJson(response.data);
     } on DioError {

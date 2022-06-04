@@ -51,7 +51,6 @@ class PinDialog extends StatelessWidget {
         ),
         24.verticalSpacingRadius,
         Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             48.horizontalSpaceRadius,
             Obx(

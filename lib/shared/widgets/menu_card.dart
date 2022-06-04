@@ -56,8 +56,8 @@ class MenuCard extends StatelessWidget {
           children: [
             /* Image */
             Container(
-              height: 75.r,
-              width: 75.r,
+              height: simple ? 75.r : 90.r,
+              width: simple ? 75.r : 90.r,
               margin: EdgeInsets.only(right: 12.r),
               padding: EdgeInsets.all(5.r),
               decoration: BoxDecoration(
@@ -69,8 +69,6 @@ class MenuCard extends StatelessWidget {
                 child: Image.network(
                   menu.foto,
                   fit: BoxFit.contain,
-                  height: 75.r,
-                  width: 75.r,
                 ),
               ),
             ),
@@ -81,28 +79,27 @@ class MenuCard extends StatelessWidget {
                 children: [
                   Text(
                     menu.nama,
-                    style: Theme.of(context).textTheme.titleMedium,
+                    style: Get.textTheme.titleMedium,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
                   Text(
                     (price ?? menu.harga).toRupiah(),
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    style: Get.textTheme.bodyMedium!.copyWith(
                         color: blueColor, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 4.h),
+                  SizedBox(height: 5.r),
                   Conditional.single(
                     context: context,
                     conditionBuilder: (context) => !simple,
                     widgetBuilder: (context) => Row(
                       children: [
-                        SvgPicture.asset(AssetConst.iconEdit, height: 12.h),
-                        SizedBox(width: 7.w),
-                        SizedBox(
-                          width: 150.w,
+                        SvgPicture.asset(AssetConst.iconEdit, height: 12.r),
+                        SizedBox(width: 7.r),
+                        Expanded(
                           child: TextFormField(
                             initialValue: note,
-                            style: Theme.of(context).textTheme.labelMedium,
+                            style: Get.textTheme.labelMedium,
                             decoration: InputDecoration.collapsed(
                               hintText: 'Add note'.tr,
                               border: InputBorder.none,

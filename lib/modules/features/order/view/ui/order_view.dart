@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
-import 'package:java_code_app/modules/features/dashboard/controllers/order_controller.dart';
-import 'package:java_code_app/modules/features/dashboard/view/components/order_data_empty.dart';
+import 'package:java_code_app/modules/features/order/controllers/order_controller.dart';
+import 'package:java_code_app/modules/features/order/view/components/order_card.dart';
+import 'package:java_code_app/modules/features/order/view/components/order_data_empty.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
 import 'package:java_code_app/shared/widgets/rect_shimmer.dart';
 import 'package:java_code_app/shared/widgets/server_error_list_view.dart';
@@ -62,20 +64,33 @@ class OrderView extends StatelessWidget {
                           title: 'Already Ordered?\nTrack the order here.'.tr,
                         ),
                     'loading': (context) => ListView.separated(
-                          padding: EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                             horizontal: 25.r,
                             vertical: 25.r,
                           ),
+                          separatorBuilder: (_, i) => 16.verticalSpacingRadius,
                           itemCount: 5,
                           itemBuilder: (_, i) => AspectRatio(
                             aspectRatio: 378 / 138,
                             child: RectShimmer(radius: 10.r),
                           ),
-                          separatorBuilder: (_, i) => 16.verticalSpacingRadius,
                         ),
                   },
-                  fallbackBuilder: (context) => OrderDataEmpty(
-                    title: 'Already Ordered?\nTrack the order here.'.tr,
+                  fallbackBuilder: (context) => ListView.separated(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 25.r,
+                      vertical: 25.r,
+                    ),
+                    separatorBuilder: (_, index) => 16.verticalSpacingRadius,
+                    itemCount: OrderController.to.onGoingOrders.length,
+                    itemBuilder: (_, index) => OrderCard(
+                      order: OrderController.to.onGoingOrders.elementAt(index),
+                      onTap: () => Get.toNamed(
+                        AppRoutes.detailOrderView,
+                        arguments:
+                            OrderController.to.onGoingOrders.elementAt(index),
+                      ),
+                    ),
                   ),
                 ),
               ),

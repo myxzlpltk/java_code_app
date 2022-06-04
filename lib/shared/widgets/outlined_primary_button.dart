@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 
-class PrimaryButton extends StatelessWidget {
+class OutlinedPrimaryButton extends StatelessWidget {
   final String text;
   final void Function()? onPressed;
   final VisualDensity? visualDensity;
   final bool isCompact;
 
-  const PrimaryButton({
+  const OutlinedPrimaryButton({
     Key? key,
     required this.text,
     this.onPressed,
@@ -17,7 +17,7 @@ class PrimaryButton extends StatelessWidget {
   })  : isCompact = false,
         super(key: key);
 
-  const PrimaryButton.compact({
+  const OutlinedPrimaryButton.compact({
     Key? key,
     required this.text,
     this.onPressed,
@@ -31,12 +31,11 @@ class PrimaryButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         visualDensity: visualDensity,
-        primary: blueColor,
+        primary: Colors.white,
         elevation: 3,
         textStyle: GoogleFonts.montserrat(
           fontSize: isCompact ? 10.sp : 14.sp,
           fontWeight: FontWeight.w800,
-          color: Colors.white,
           height: 1.219,
         ),
         padding: EdgeInsets.symmetric(
@@ -48,7 +47,7 @@ class PrimaryButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
         ),
       ),
-      child: Text(text),
+      child: Text(text, style: const TextStyle(color: blueColor)),
     );
   }
 }

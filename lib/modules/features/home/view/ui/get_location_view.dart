@@ -16,8 +16,8 @@ class GetLocationView extends StatelessWidget {
         onWillPop: () async => false,
         child: Container(
           alignment: Alignment.center,
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: double.infinity,
+          height: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage(AssetConst.bgPattern2),
