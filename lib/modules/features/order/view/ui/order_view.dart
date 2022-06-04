@@ -64,7 +64,7 @@ class OrderView extends StatelessWidget {
                           title: 'Already Ordered?\nTrack the order here.'.tr,
                         ),
                     'loading': (context) => ListView.separated(
-                      padding: EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                             horizontal: 25.r,
                             vertical: 25.r,
                           ),

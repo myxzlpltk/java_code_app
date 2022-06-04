@@ -10,7 +10,7 @@ class OrderRepository {
   OrderRepository._();
 
   /// Memanggil API untuk mendapatkan semua menu
-  static Future<int> add(CartReq cartReq) async {
+  static Future<Response?> add(CartReq cartReq) async {
     try {
       var dio = ApiServices.dioCall(token: await LocalDBServices.getToken());
       var response = await dio.post(
@@ -18,9 +18,9 @@ class OrderRepository {
         data: json.encode(cartReq.toMap()),
       );
 
-      return response.data['status_code'];
+      return response;
     } on DioError {
-      return 500;
+      return null;
     }
   }
 }

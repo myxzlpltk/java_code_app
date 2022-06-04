@@ -182,10 +182,12 @@ class CartController extends GetxController {
       totalPrice: grandTotalPrice,
     );
 
-    int statusCode = await OrderRepository.add(cartReq);
+    final response = await OrderRepository.add(cartReq);
 
-    if (statusCode == 200) {
-      openOrderSuccessDialog();
+    if (response != null &&
+        response.statusCode == 200 &&
+        response.data['status_code'] == 200) {
+      openOrderSuccessDialog(response.data['data']['id_order']);
     } else {
       Get.until(ModalRoute.withName(AppRoutes.cartView));
       Get.showSnackbar(GetSnackBar(
@@ -281,7 +283,7 @@ class CartController extends GetxController {
   }
 
   /// Open order success dialog
-  void openOrderSuccessDialog() async {
+  void openOrderSuccessDialog(int id) async {
     Get.until(ModalRoute.withName(AppRoutes.cartView));
     await Get.defaultDialog(
       title: '',
@@ -289,9 +291,12 @@ class CartController extends GetxController {
       content: const OrderSuccessDialog(),
     );
 
-    /// TODO: redirect to detail order in dashboard -> orders -> detail order
     DashboardController.to.tabIndex.value = 1;
-    Get.until(ModalRoute.withName(AppRoutes.dashboardView));
+    Get.offNamedUntil(
+      AppRoutes.detailOrderView,
+      ModalRoute.withName(AppRoutes.dashboardView),
+      arguments: id,
+    );
 
     cart.clear();
     selectedVoucher.value = null;
