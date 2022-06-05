@@ -63,11 +63,11 @@ class DetailOrderCard extends StatelessWidget {
                   style: Get.textTheme.bodyMedium!
                       .copyWith(color: blueColor, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 5.r),
+                5.verticalSpacingRadius,
                 Row(
                   children: [
                     SvgPicture.asset(AssetConst.iconEdit, height: 12.r),
-                    SizedBox(width: 7.r),
+                    7.horizontalSpaceRadius,
                     Expanded(
                       child: TextFormField(
                         initialValue: detailOrder.catatan,

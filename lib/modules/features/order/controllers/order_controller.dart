@@ -45,10 +45,41 @@ class OrderController extends GetxController {
   void setFilter({String? category, DateTimeRange? dateRange}) {
     selectedCategory = category ?? 'all';
     selectedDateRange = dateRange ?? selectedDateRange;
+    historyOrders.refresh();
+  }
+
+  List<Order> get historyOrderFiltered {
+    List<Order> list = historyOrders.toList();
+
+    /// Filter category
+    if (selectedCategory == 'canceled') {
+      list.removeWhere((e) => e.status != 4);
+    } else if (selectedCategory == 'completed') {
+      list.removeWhere((e) => e.status != 3);
+    }
+
+    /// Filter date
+    list.removeWhere((e) =>
+        e.tanggal.isBefore(selectedDateRange.start) ||
+        e.tanggal.isAfter(selectedDateRange.end));
+
+    /// Sort based on date
+    list.sort((a, b) => b.tanggal.compareTo(a.tanggal));
+
+    return list;
   }
 
   Future<void> fetchHistory() async {
-    await Future.delayed(const Duration(seconds: 2));
-    historyStatus.value = 'success';
+    historyStatus.value = 'loading';
+    ListOrderRes listOrderRes = await OrderRepository.getHistory();
+
+    if (listOrderRes.status_code == 200) {
+      historyStatus.value = 'success';
+      historyOrders.value = listOrderRes.data!;
+    } else if (listOrderRes.status_code == 204) {
+      historyStatus.value = 'empty';
+    } else {
+      historyStatus.value = 'error';
+    }
   }
 }

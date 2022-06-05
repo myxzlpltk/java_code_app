@@ -61,6 +61,12 @@ class OrderCard extends StatelessWidget {
                       fit: BoxFit.contain,
                       height: 75.r,
                       width: 75.r,
+                      errorBuilder: (context, _, __) => Image.network(
+                        defaultMenuPhoto,
+                        fit: BoxFit.contain,
+                        height: 75.r,
+                        width: 75.r,
+                      ),
                     ),
                   ),
                 ),
@@ -189,13 +195,19 @@ class OrderCard extends StatelessWidget {
                       spacing: 15.r,
                       children: [
                         if (order.status == 3)
-                          OutlinedPrimaryButton.compact(
-                            text: 'Give rating'.tr,
+                          Padding(
+                            padding: EdgeInsets.only(top: 10.r),
+                            child: OutlinedPrimaryButton.compact(
+                              text: 'Give rating'.tr,
+                              onPressed: () {},
+                            ),
+                          ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 10.r),
+                          child: PrimaryButton.compact(
+                            text: 'Order again'.tr,
                             onPressed: () {},
                           ),
-                        PrimaryButton.compact(
-                          text: 'Order again'.tr,
-                          onPressed: () {},
                         ),
                       ],
                     ),

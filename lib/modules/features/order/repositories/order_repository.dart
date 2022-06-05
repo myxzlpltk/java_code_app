@@ -21,6 +21,23 @@ class OrderRepository {
     }
   }
 
+  /// Memanggil API untuk mendapatkan semua riwayat order
+  static Future<ListOrderRes> getHistory() async {
+    try {
+      var dio = ApiServices.dioCall(token: await LocalDBServices.getToken());
+      var user = await LocalDBServices.getUser() as User;
+      var response = await dio.post('${ApiConst.historyOrder}/${user.id_user}');
+
+      if (response.data['status_code'] == 200) {
+        response.data['data'] = response.data['data']['listData'];
+      }
+
+      return ListOrderRes.fromJson(response.data);
+    } on DioError {
+      return const ListOrderRes(status_code: 500);
+    }
+  }
+
   /// Memanggil API untuk mendapatkan order berdasarkan ID
   static Future<OrderRes> getFromId(int id) async {
     try {

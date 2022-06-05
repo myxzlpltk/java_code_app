@@ -37,7 +37,7 @@ class Order extends Equatable {
     return Order(
       id_order: json['id_order'] as int,
       no_struk: json['no_struk'] as String,
-      nama: json['nama'] as String,
+      nama: (json['nama'] ?? '') as String,
       id_voucher: (json['id_voucher'] ?? 0) as int,
       nama_voucher: (json['nama_voucher'] ?? '') as String,
       diskon: (json['diskon'] ?? 0) as int,

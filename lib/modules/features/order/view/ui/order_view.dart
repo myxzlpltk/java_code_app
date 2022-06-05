@@ -10,6 +10,7 @@ import 'package:java_code_app/modules/features/order/view/components/dropdown_st
 import 'package:java_code_app/modules/features/order/view/components/order_card.dart';
 import 'package:java_code_app/modules/features/order/view/components/order_data_empty.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
+import 'package:java_code_app/shared/widgets/empty_data_vertical.dart';
 import 'package:java_code_app/shared/widgets/rect_shimmer.dart';
 import 'package:java_code_app/shared/widgets/server_error_list_view.dart';
 
@@ -162,17 +163,30 @@ class OrderView extends StatelessWidget {
                 ],
               ),
               25.verticalSpacingRadius,
-              ...OrderController.to.historyOrders.map(
-                (order) => Padding(
-                  padding: EdgeInsets.only(bottom: 16.r),
-                  child: OrderCard(
-                    order: order,
-                    onTap: () => Get.toNamed(
-                      AppRoutes.detailOrderView,
-                      arguments: order,
-                    ),
-                  ),
-                ),
+              ...Conditional.list(
+                context: context,
+                conditionBuilder: (context) =>
+                    OrderController.to.historyOrderFiltered.isEmpty,
+                widgetBuilder: (context) => [
+                  100.verticalSpacingRadius,
+                  const EmptyDataVertical(),
+                  100.verticalSpacingRadius,
+                ],
+                fallbackBuilder: (context) =>
+                    OrderController.to.historyOrderFiltered
+                        .map(
+                          (order) => Padding(
+                            padding: EdgeInsets.only(bottom: 16.r),
+                            child: OrderCard(
+                              order: order,
+                              onTap: () => Get.toNamed(
+                                AppRoutes.detailOrderView,
+                                arguments: order,
+                              ),
+                            ),
+                          ),
+                        )
+                        .toList(),
               ),
             ],
           ),

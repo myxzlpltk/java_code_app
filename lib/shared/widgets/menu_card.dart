@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
+import 'package:java_code_app/constants/commons/constants.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/models/menu.dart';
 import 'package:java_code_app/shared/widgets/quantity_counter.dart';
@@ -69,6 +70,10 @@ class MenuCard extends StatelessWidget {
                 child: Image.network(
                   menu.foto,
                   fit: BoxFit.contain,
+                  errorBuilder: (context, _, __) => Image.network(
+                    defaultMenuPhoto,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ),
@@ -88,14 +93,14 @@ class MenuCard extends StatelessWidget {
                     style: Get.textTheme.bodyMedium!.copyWith(
                         color: blueColor, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 5.r),
+                  5.verticalSpacingRadius,
                   Conditional.single(
                     context: context,
                     conditionBuilder: (context) => !simple,
                     widgetBuilder: (context) => Row(
                       children: [
                         SvgPicture.asset(AssetConst.iconEdit, height: 12.r),
-                        SizedBox(width: 7.r),
+                        7.horizontalSpaceRadius,
                         Expanded(
                           child: TextFormField(
                             initialValue: note,

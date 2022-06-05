@@ -39,6 +39,8 @@ class PrimaryButton extends StatelessWidget {
           color: Colors.white,
           height: 1.219,
         ),
+        tapTargetSize: isCompact ? MaterialTapTargetSize.shrinkWrap : null,
+        minimumSize: isCompact ? Size(100.r, 40.r) : null,
         padding: EdgeInsets.symmetric(
           horizontal: isCompact ? 18.r : 24.r,
           vertical: isCompact ? 0.r : 14.r,
