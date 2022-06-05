@@ -27,7 +27,7 @@ class HomeController extends GetxController {
   Future<void> getListPromo() async {
     statusPromo.value = 'loading';
 
-    var listPromoRes = await PromoRepository.getAll();
+    var listPromoRes = await PromoRepository.getAllByUser();
 
     if (listPromoRes.status_code == 200) {
       statusPromo.value = 'success';

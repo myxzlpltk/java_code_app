@@ -127,7 +127,7 @@ class DetailMenuView extends StatelessWidget {
                     ),
                   ),
                   Obx(
-                        () => Conditional.single(
+                    () => Conditional.single(
                       context: context,
                       conditionBuilder: (context) =>
                           DetailMenuController.to.toppings.isNotEmpty,

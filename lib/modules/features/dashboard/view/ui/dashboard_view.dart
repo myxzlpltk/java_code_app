@@ -20,7 +20,7 @@ class DashboardView extends StatelessWidget {
 
     return Scaffold(
       body: Obx(
-            () => IndexedStack(
+        () => IndexedStack(
           index: DashboardController.to.tabIndex.value,
           children: const [
             HomeView(),

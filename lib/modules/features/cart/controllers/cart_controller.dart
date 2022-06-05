@@ -91,9 +91,9 @@ class CartController extends GetxController {
     var listDiscountRes = await DiscountRepository.getAll();
 
     if (listDiscountRes.status_code == 200) {
-      listDiscountRes.data!.shuffle();
-      // TODO: Update this code
-      discounts.value = listDiscountRes.data!.sublist(0, 2);
+      discounts.value = listDiscountRes.data!;
+    } else {
+      discounts.value = [];
     }
   }
 

@@ -143,7 +143,10 @@ class HomeView extends StatelessWidget {
                     separatorBuilder: (context, _) => 25.horizontalSpaceRadius,
                   ),
                 ),
-            'empty': (context) => const EmptyDataVertical(),
+            'empty': (context) => Padding(
+                  padding: EdgeInsets.only(bottom: 15.r),
+                  child: EmptyDataVertical(width: 100.r),
+                ),
             'error': (context) => CustomErrorVertical(
                   message: HomeController.to.messagePromo.value,
                 ),
@@ -234,7 +237,7 @@ class HomeView extends StatelessWidget {
                     (i) => RectShimmer(height: 89.r, radius: 10.r),
                   ),
                 ),
-            'empty': (context) => const EmptyDataVertical(),
+            'empty': (context) => EmptyDataVertical(width: 100.r),
             'error': (context) => Center(
                   child: Text(
                     HomeController.to.messageMenu.value,
@@ -297,7 +300,7 @@ class HomeView extends StatelessWidget {
                     (i) => RectShimmer(height: 89.r, radius: 10.r),
                   ),
                 ),
-            'empty': (context) => const EmptyDataVertical(),
+            'empty': (context) => EmptyDataVertical(width: 100.r),
             'error': (context) => Center(
                   child: Text(
                     HomeController.to.messageMenu.value,
