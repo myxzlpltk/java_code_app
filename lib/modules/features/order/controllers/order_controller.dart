@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/modules/features/order/repositories/order_repository.dart';
 import 'package:java_code_app/modules/models/order.dart';
@@ -10,8 +11,10 @@ class OrderController extends GetxController {
     super.onInit();
 
     fetchOnGoing();
+    fetchHistory();
   }
 
+  /// On going orders
   RxString onGoingStatus = RxString('loading');
   RxList<Order> onGoingOrders = RxList<Order>();
 
@@ -27,5 +30,25 @@ class OrderController extends GetxController {
     } else {
       onGoingStatus.value = 'error';
     }
+  }
+
+  /// History orders
+  RxString historyStatus = RxString('loading');
+  RxList<Order> historyOrders = RxList<Order>();
+
+  String selectedCategory = 'all';
+  DateTimeRange selectedDateRange = DateTimeRange(
+    start: DateTime.now().subtract(const Duration(days: 7)),
+    end: DateTime.now(),
+  );
+
+  void setFilter({String? category, DateTimeRange? dateRange}) {
+    selectedCategory = category ?? 'all';
+    selectedDateRange = dateRange ?? selectedDateRange;
+  }
+
+  Future<void> fetchHistory() async {
+    await Future.delayed(const Duration(seconds: 2));
+    historyStatus.value = 'success';
   }
 }

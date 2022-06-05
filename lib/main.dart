@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:java_code_app/configs/localizations/localization.dart';
 import 'package:java_code_app/configs/pages/app_pages.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
@@ -19,21 +18,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ValidationBuilder.setLocale(Get.locale?.languageCode ?? 'id');
-    initializeDateFormatting();
-
     return ScreenUtilInit(
       designSize: appDesignSize,
-      builder: (context, _) => GetMaterialApp(
+      builder: (context, child) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         initialBinding: GlobalBinding(),
         title: appName,
         initialRoute: AppRoutes.splashView,
         getPages: AppPages.pages(),
         translations: Localization(),
-        locale: const Locale('id', 'ID'),
-        fallbackLocale: const Locale('en', 'US'),
+        locale: Localization.locale,
+        fallbackLocale: Localization.fallbackLocale,
         theme: lightTheme,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: Localization.locales,
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
+import 'package:java_code_app/configs/localizations/localization.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 
 class TextFieldEmail extends StatelessWidget {
@@ -33,7 +34,11 @@ class TextFieldEmail extends StatelessWidget {
       ),
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
-      validator: ValidationBuilder().email().required().build(),
+      validator:
+          ValidationBuilder(localeName: Localization.currentLocale.languageCode)
+              .email()
+              .required()
+              .build(),
     );
   }
 }

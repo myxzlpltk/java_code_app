@@ -1,191 +1,48 @@
-// @formatter:off
-
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:java_code_app/configs/localizations/langs/en_us.dart';
+import 'package:java_code_app/configs/localizations/langs/id_id.dart';
 
 class Localization extends Translations {
+  /// Default locale
+  static const locale = Locale('id', 'ID');
+  static const fallbackLocale = Locale('en', 'US');
+
+  /// Supported languages
+  static const langs = [
+    'English',
+    'Indonesia',
+  ];
+
+  /// Supported locales
+  static const locales = [
+    Locale('en', 'US'),
+    Locale('id', 'ID'),
+  ];
+
+  /// Translations
   @override
   Map<String, Map<String, String>> get keys => {
-        'en_US': {
-          'Add note': 'Add note',
-          'Add to order': 'Add to order',
-          'All menu': 'All menu',
-          'Already Ordered?\nTrack the order here.': 'Already Ordered?\nTrack the order here.',
-          'Available promo': 'Available promo',
-          'Canceled': 'Canceled',
-          'Choose discount': 'Choose discount',
-          'Choose level': 'Choose level',
-          'Choose topping': 'Choose topping',
-          'Choose voucher': 'Choose voucher',
-          'Completed': 'Completed',
-          'Connected to the internet': 'Connected to the internet',
-          'Continue to sign in': 'Continue to sign in',
-          'Create note': 'Create note',
-          'Delete from order': 'Delete from Order',
-          'Detail menu': 'Detail menu',
-          'Detail voucher': 'Detail voucher',
-          'Discount can not be combined': 'Discount can not be combined',
-          'Discount': 'Discount',
-          'Distance not close': 'Distance not close',
-          'Drink': 'Drink',
-          'Email or password is incorrect': 'Email or password is incorrect',
-          'Email': 'Email',
-          'Empty cart': 'Empty cart',
-          'Enter PIN code': 'Enter PIN code',
-          'Error': 'Error',
-          'Food': 'Food',
-          'Get this promo': 'Get this promo! Access this link\n@link',
-          'Give rating': 'Give rating',
-          'History': 'History',
-          'Home Page': 'Home Page',
-          'Home': 'Home',
-          'In queue': 'In queue',
-          'Info discount': 'Info discount',
-          'Level': 'Level',
-          'Loading...': 'Loading...',
-          'Location permission not granted forever': 'Location permission not granted forever',
-          'Location permission not granted': 'Location permission not granted',
-          'Location service not enabled': 'Location service not enabled',
-          'Login with': 'Login with',
-          'Login': 'Login',
-          'No data': 'No data',
-          'No discount': 'No discount',
-          'Not connected to the internet': 'Not connected to the internet',
-          'Note': 'Note',
-          'Okay': 'Okay',
-          'On going': 'On going',
-          'Open settings': 'Open settings',
-          'Order accepted': 'Order accepted',
-          'Order again': 'Order again',
-          'Order completed': 'Order completed',
-          'Order is being prepared': 'Order is being prepared',
-          'Order now': 'Order now',
-          'Order': 'Order',
-          'PIN already wrong 3 times. Please try again later.': 'PIN already wrong 3 times. Please try again later.',
-          'PIN wrong! n chances left.': 'PIN wrong! @n chances left.',
-          'Password': 'Password',
-          'Payment': 'Payment',
-          'Please authenticate to confirm order': 'Please authenticate to confirm order',
-          'Please take it': 'Please take it',
-          'Preparing': 'Preparing',
-          'Press your fingerprint': 'Press your fingerprint',
-          'Price': 'Price',
-          'Profile': 'Profile',
-          'Promo': 'Promo',
-          'Ready': 'Ready',
-          'Search': 'Search',
-          'Searching location...': 'Searching location...',
-          'Server error': 'Server error. Please try again later.',
-          'Something went wrong': 'Something went wrong',
-          'Terms and conditions': 'Terms and conditions',
-          'The use of vouchers cannot be combined with a discount': 'The use of vouchers cannot be combined with a discount',
-          'Topping': 'Topping',
-          'Total orders': 'Total orders',
-          'Total payment': 'Total payment',
-          'Unknown error': 'Unknown error',
-          'Unknown location': 'Unknown location',
-          'Update to order': 'Update to Order',
-          'Use voucher later': 'Use voucher later',
-          'Use voucher': 'Use voucher',
-          'Valid date': 'Valid date',
-          'Verify order': 'Verify order',
-          'Verify using PIN code': 'Verify using PIN code',
-          'Voucher': 'Voucher',
-          'You can track your order in order history': 'You can track your order in order history',
-          'diskon': 'Discount',
-          'employee reward program': 'employee reward program',
-          'or': 'or',
-          'voucher': 'Voucher',
-        },
-        'id_ID': {
-          'Add note': 'Tambahkan catatan',
-          'Add to order': 'Tambahkan ke pesanan',
-          'All menu': 'Semua menu',
-          'Already Ordered?\nTrack the order here.': 'Sudah Pesan?\nLacak pesananmu di sini.',
-          'Available promo': 'Promo yang tersedia',
-          'Canceled': 'Dibatalkan',
-          'Choose discount': 'Pilih diskon',
-          'Choose level': 'Pilih level',
-          'Choose topping': 'Pilih toping',
-          'Choose voucher': 'Pilih voucher',
-          'Completed': 'Sudah diambil',
-          'Connected to the internet': 'Terhubung ke internet',
-          'Continue to sign in': 'Masuk untuk melanjutkan!',
-          'Create note': 'Buat catatan',
-          'Delete from order': 'Hapus dari pesanan',
-          'Detail menu': 'Detail menu',
-          'Detail voucher': 'Detail voucher',
-          'Discount can not be combined': 'Diskon tidak dapat digabung',
-          'Discount': 'Diskon',
-          'Distance not close': 'Jarak tidak dekat dengan Java Code',
-          'Drink': 'Minuman',
-          'Email or password is incorrect': 'Email atau kata sandi salah',
-          'Email': 'Email',
-          'Empty cart': 'Keranjang kosong',
-          'Enter PIN code': 'Masukkan PIN',
-          'Error': 'Terjadi kesalahan',
-          'Food': 'Makanan',
-          'Get this promo': 'Dapatkan promo ini! Akses link berikut\n@link',
-          'Give rating': 'Beri penilaian',
-          'History': 'Riwayat',
-          'Home Page': 'Halaman utama',
-          'Home': 'Beranda',
-          'In queue': 'Dalam antrian',
-          'Info discount': 'Info diskon',
-          'Level': 'Level',
-          'Loading...': 'Memuat...',
-          'Location permission not granted forever': 'Izin lokasi tidak diberikan secara permanen.',
-          'Location permission not granted': 'Izin lokasi tidak diberikan.',
-          'Location service not enabled': 'Layanan lokasi dimatikan.',
-          'Login with': 'Masuk menggunakan',
-          'Login': 'Masuk',
-          'No data': 'Tidak ada data',
-          'No discount': 'Tidak ada diskon',
-          'Not connected to the internet': 'Tidak terhubung ke internet',
-          'Note': 'Catatan',
-          'Okay': 'Oke',
-          'On going': 'Sedang berjalan',
-          'Open settings': 'Buka pengaturan',
-          'Order accepted': 'Pesanan diterima',
-          'Order again': 'Pesan lagi',
-          'Order completed': 'Pesanan selesai',
-          'Order is being prepared': 'Pesanan sedang diproses',
-          'Order now': 'Pesan sekarang',
-          'Order': 'Pesanan',
-          'PIN already wrong 3 times. Please try again later.': 'PIN salah 3 kali. Silahkan coba lagi nanti.',
-          'PIN wrong! n chances left.': 'PIN salah! Sisa @n kesempatan.',
-          'Password': 'Kata Sandi',
-          'Payment': 'Pembayaran',
-          'Please authenticate to confirm order': 'Harap otentikasi untuk konfirmasi pesanan',
-          'Please take it': 'Silahkan diambil',
-          'Preparing': 'Sedang siapkan',
-          'Press your fingerprint': 'Tekan fingerprint Anda',
-          'Price': 'Harga',
-          'Profile': 'Profil',
-          'Promo': 'Promo',
-          'Ready': 'Bisa diambil',
-          'Search': 'Pencarian',
-          'Searching location...': 'Mencari lokasimu...',
-          'Server error': 'Kesalahan server. Silahkan coba lagi nanti.',
-          'Something went wrong': 'Terjadi kesalahan',
-          'Terms and conditions': 'Syarat dan ketentuan',
-          'The use of vouchers cannot be combined with a discount': 'Penggunaan voucher tidak dapat digabung dengan diskon',
-          'Topping': 'Toping',
-          'Total payment': 'Total pembayaran',
-          'Unknown error': 'Kesalahan tidak diketahui',
-          'Unknown location': 'Lokasi tidak diketahui',
-          'Update to order': 'Perbarui ke pesanan',
-          'Use voucher later': 'Pakai voucher nanti',
-          'Use voucher': 'Pakai voucher',
-          'Valid date': 'Tanggal valid',
-          'Verify order': 'Verifikasi pesanan',
-          'Voucher': 'Voucher',
-          'You can track your order in order history': 'Kamu dapat melacak pesananmu di fitur Pesanan',
-          'diskon': 'Diskon',
-          'employee reward program': 'employee reward program',
-          'or': 'atau',
-          'total_orders': 'Total pesanan',
-          'verify_using_pin': 'Verifikasi menggunakan PIN',
-          'voucher': 'Voucher',
-        },
+        'en_US': enUS,
+        'id_ID': idID,
       };
+
+  /// Change locale
+  static void changeLocale(String lang) {
+    final locale = _getLocaleFromLanguage(lang);
+    Get.updateLocale(locale);
+  }
+
+  /// Finds language in `langs` list and returns it as Locale
+  static Locale _getLocaleFromLanguage(String lang) {
+    for (int i = 0; i < langs.length; i++) {
+      if (lang == langs[i]) return locales[i];
+    }
+    return currentLocale;
+  }
+
+  /// Returns current language
+  static Locale get currentLocale {
+    return Get.locale ?? fallbackLocale;
+  }
 }

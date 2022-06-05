@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
+import 'package:java_code_app/configs/localizations/localization.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 
 class TextFieldPassword extends StatelessWidget {
@@ -33,7 +34,11 @@ class TextFieldPassword extends StatelessWidget {
       ),
       obscureText: true,
       keyboardType: TextInputType.visiblePassword,
-      validator: ValidationBuilder().required().minLength(5).build(),
+      validator:
+          ValidationBuilder(localeName: Localization.currentLocale.languageCode)
+              .required()
+              .minLength(5)
+              .build(),
     );
   }
 }

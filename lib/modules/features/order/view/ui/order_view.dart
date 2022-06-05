@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/modules/features/order/controllers/order_controller.dart';
+import 'package:java_code_app/modules/features/order/view/components/date_picker.dart';
+import 'package:java_code_app/modules/features/order/view/components/dropdown_status.dart';
 import 'package:java_code_app/modules/features/order/view/components/order_card.dart';
 import 'package:java_code_app/modules/features/order/view/components/order_data_empty.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
@@ -51,54 +53,129 @@ class OrderView extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            RefreshIndicator(
-              onRefresh: OrderController.to.fetchOnGoing,
-              child: Obx(
-                () => ConditionalSwitch.single(
-                  context: context,
-                  valueBuilder: (context) =>
-                      OrderController.to.onGoingStatus.value,
-                  caseBuilders: {
-                    'error': (context) => const ServerErrorListView(),
-                    'empty': (context) => OrderDataEmpty(
-                          title: 'Already Ordered?\nTrack the order here.'.tr,
-                        ),
-                    'loading': (context) => ListView.separated(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 25.r,
-                            vertical: 25.r,
-                          ),
-                          separatorBuilder: (_, i) => 16.verticalSpacingRadius,
-                          itemCount: 5,
-                          itemBuilder: (_, i) => AspectRatio(
-                            aspectRatio: 378 / 138,
-                            child: RectShimmer(radius: 10.r),
-                          ),
-                        ),
-                  },
-                  fallbackBuilder: (context) => ListView.separated(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 25.r,
-                      vertical: 25.r,
+            _onGoingOrders(context),
+            _historyOrders(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _onGoingOrders(BuildContext context) {
+    return RefreshIndicator(
+      onRefresh: OrderController.to.fetchOnGoing,
+      child: Obx(
+        () => ConditionalSwitch.single(
+          context: context,
+          valueBuilder: (context) => OrderController.to.onGoingStatus.value,
+          caseBuilders: {
+            'error': (context) => const ServerErrorListView(),
+            'empty': (context) => OrderDataEmpty(
+                  title: 'Already Ordered? Track the order here.'.tr,
+                ),
+            'loading': (context) => ListView.separated(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 25.r,
+                    vertical: 25.r,
+                  ),
+                  separatorBuilder: (_, i) => 16.verticalSpacingRadius,
+                  itemCount: 5,
+                  itemBuilder: (_, i) => AspectRatio(
+                    aspectRatio: 378 / 138,
+                    child: RectShimmer(radius: 10.r),
+                  ),
+                ),
+          },
+          fallbackBuilder: (context) => ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 25.r, vertical: 25.r),
+            separatorBuilder: (_, index) => 16.verticalSpacingRadius,
+            itemCount: OrderController.to.onGoingOrders.length,
+            itemBuilder: (_, index) => OrderCard(
+              order: OrderController.to.onGoingOrders.elementAt(index),
+              onTap: () => Get.toNamed(
+                AppRoutes.detailOrderView,
+                arguments: OrderController.to.onGoingOrders.elementAt(index),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _historyOrders(BuildContext context) {
+    final Map<String, String> filterStatus = {
+      'all': 'All status'.tr,
+      'completed': 'Completed'.tr,
+      'canceled': 'Canceled'.tr,
+    };
+
+    return RefreshIndicator(
+      onRefresh: OrderController.to.fetchHistory,
+      child: Obx(
+        () => ConditionalSwitch.single(
+          context: context,
+          valueBuilder: (context) => OrderController.to.historyStatus.value,
+          caseBuilders: {
+            'error': (context) => const ServerErrorListView(),
+            'empty': (context) => OrderDataEmpty(
+                  title: 'Start placing orders.'.tr,
+                  subtitle:
+                      'The food you ordered will appear here so you can find your favorite menu again!'
+                          .tr,
+                ),
+            'loading': (context) => ListView.separated(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 25.r,
+                    vertical: 25.r,
+                  ),
+                  separatorBuilder: (_, i) => 16.verticalSpacingRadius,
+                  itemCount: 5,
+                  itemBuilder: (_, i) => AspectRatio(
+                    aspectRatio: 378 / 138,
+                    child: RectShimmer(radius: 10.r),
+                  ),
+                ),
+          },
+          fallbackBuilder: (context) => ListView(
+            padding: EdgeInsets.symmetric(horizontal: 25.r, vertical: 25.r),
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: DropdownStatus(
+                      items: filterStatus,
+                      selectedItem: OrderController.to.selectedCategory,
+                      onChanged: (value) =>
+                          OrderController.to.setFilter(category: value),
                     ),
-                    separatorBuilder: (_, index) => 16.verticalSpacingRadius,
-                    itemCount: OrderController.to.onGoingOrders.length,
-                    itemBuilder: (_, index) => OrderCard(
-                      order: OrderController.to.onGoingOrders.elementAt(index),
-                      onTap: () => Get.toNamed(
-                        AppRoutes.detailOrderView,
-                        arguments:
-                            OrderController.to.onGoingOrders.elementAt(index),
-                      ),
+                  ),
+                  22.horizontalSpaceRadius,
+                  Expanded(
+                    child: DatePicker(
+                      selectedDate: OrderController.to.selectedDateRange,
+                      onChanged: (value) =>
+                          OrderController.to.setFilter(dateRange: value),
+                    ),
+                  ),
+                ],
+              ),
+              25.verticalSpacingRadius,
+              ...OrderController.to.historyOrders.map(
+                (order) => Padding(
+                  padding: EdgeInsets.only(bottom: 16.r),
+                  child: OrderCard(
+                    order: order,
+                    onTap: () => Get.toNamed(
+                      AppRoutes.detailOrderView,
+                      arguments: order,
                     ),
                   ),
                 ),
               ),
-            ),
-            Center(
-              child: Text('History'.tr),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
