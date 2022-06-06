@@ -9,6 +9,7 @@ class ApiConst {
   static const String login = '$apiBaseUrl/auth/login';
 
   /// Home
+  static const String allPromo = '$apiBaseUrl/promo/all';
   static const String allPromoPerUser = '$apiBaseUrl/promo/user';
   static const String detailPromo = '$apiBaseUrl/promo/detail';
   static const String allMenu = '$apiBaseUrl/menu/all';
