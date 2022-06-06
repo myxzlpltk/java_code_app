@@ -20,7 +20,7 @@ class LoginRepository {
         'password': password,
       });
 
-      return UserRes.fromJson(response.data);
+      return UserRes.fromLoginJson(response.data);
     } on DioError {
       return UserRes(status_code: 500, message: 'Server error'.tr);
     }
@@ -37,7 +37,7 @@ class LoginRepository {
         'is_google': 'is_google',
       });
 
-      return UserRes.fromJson(response.data);
+      return UserRes.fromLoginJson(response.data);
     } on DioError {
       return UserRes(status_code: 500, message: 'Server error'.tr);
     }

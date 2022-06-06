@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/modules/models/discount.dart';
 import 'package:java_code_app/shared/widgets/primary_button.dart';
-import 'package:java_code_app/utils/extensions/string_case_extension.dart';
+import 'package:java_code_app/utils/extensions/string_extension.dart';
 
 class DiscountInfo extends StatelessWidget {
   final List<Discount> discounts;

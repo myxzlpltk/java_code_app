@@ -25,7 +25,7 @@ class AssetConst {
   static const String iconPrice = 'assets/svg/ic_price.svg';
   static const String iconProfile = 'assets/svg/ic_profile.svg';
   static const String iconPromo = 'assets/svg/ic_promo.svg';
-  static const String iconRating = 'assets/svg/ic_rating.svg';
+  static const String iconReview = 'assets/svg/ic_review.svg';
   static const String iconServerError = 'assets/svg/ic_server_error.svg';
   static const String iconTopping = 'assets/svg/ic_topping.svg';
   static const String iconVoucher = 'assets/svg/ic_voucher.svg';

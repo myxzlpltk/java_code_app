@@ -5,6 +5,7 @@ const String appName = 'Java Code App';
 const Size appDesignSize = Size(428, 926);
 const String appLink = 'https://promo.trainee.landa.id';
 const String appDeepLink = 'landa://javacode.app';
+const String appVersion = '1.0.0';
 
 /// Informasi lokasi
 const double locationLatitude = -7.9423;

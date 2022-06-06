@@ -3,7 +3,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/utils/extensions/currency_extension.dart';
-import 'package:java_code_app/utils/extensions/string_case_extension.dart';
+import 'package:java_code_app/utils/extensions/string_extension.dart';
 
 class Promo extends Equatable {
   final int id_promo;

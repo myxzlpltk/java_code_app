@@ -23,4 +23,10 @@ class ApiConst {
   static const String onGoingOrder = '$apiBaseUrl/order/user';
   static const String historyOrder = '$apiBaseUrl/order/history';
   static const String detailOrder = '$apiBaseUrl/order/detail';
+
+  /// Profile
+  static const String detailUser = '$apiBaseUrl/user/detail';
+  static const String updateUser = '$apiBaseUrl/user/update';
+  static const String updateUserPhoto = '$apiBaseUrl/user/profil';
+  static const String updateUserKTP = '$apiBaseUrl/user/ktp';
 }

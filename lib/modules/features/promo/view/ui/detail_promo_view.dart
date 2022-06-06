@@ -10,7 +10,7 @@ import 'package:java_code_app/modules/features/promo/controllers/detail_promo_co
 import 'package:java_code_app/shared/styles/shapes.dart';
 import 'package:java_code_app/shared/widgets/promo_card.dart';
 import 'package:java_code_app/shared/widgets/rect_shimmer.dart';
-import 'package:java_code_app/utils/extensions/string_case_extension.dart';
+import 'package:java_code_app/utils/extensions/string_extension.dart';
 import 'package:screenshot/screenshot.dart';
 
 class DetailPromoView extends StatelessWidget {

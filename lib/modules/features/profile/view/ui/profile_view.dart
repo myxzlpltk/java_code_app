@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
+import 'package:java_code_app/constants/commons/constants.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/profile/controllers/profile_controller.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
 import 'package:java_code_app/shared/widgets/primary_button.dart';
 import 'package:java_code_app/shared/widgets/tile_option.dart';
+import 'package:java_code_app/utils/extensions/string_extension.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -42,47 +46,94 @@ class ProfileView extends StatelessWidget {
                 child: Container(
                   width: 170.r,
                   height: 170.r,
-                  alignment: Alignment.bottomCenter,
                   clipBehavior: Clip.antiAlias,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: AssetImage(AssetConst.bgProfile),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Material(
-                    color: blueColor,
-                    child: InkWell(
-                      onTap: () {},
-                      child: Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.only(top: 10.r, bottom: 15.r),
-                        child: Text(
-                          'Ubah',
-                          style: Get.textTheme.labelMedium!
-                              .copyWith(color: Colors.white),
-                          textAlign: TextAlign.center,
+                  decoration: const BoxDecoration(shape: BoxShape.circle),
+                  child: Stack(
+                    children: [
+                      Obx(
+                        () => Conditional.single(
+                          context: context,
+                          conditionBuilder: (context) =>
+                              ProfileController.to.user.value.foto != null,
+                          widgetBuilder: (context) => Image.network(
+                            ProfileController.to.user.value.foto!,
+                            width: 170.r,
+                            height: 170.r,
+                            fit: BoxFit.cover,
+                          ),
+                          fallbackBuilder: (context) => Image.asset(
+                            AssetConst.bgProfile,
+                            width: 170.r,
+                            height: 170.r,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Material(
+                          color: blueColor,
+                          child: InkWell(
+                            onTap: ProfileController.to.openUpdatePhotoDialog,
+                            child: Container(
+                              width: double.infinity,
+                              padding: EdgeInsets.only(top: 10.r, bottom: 15.r),
+                              child: Text(
+                                'Change'.tr,
+                                style: Get.textTheme.labelMedium!
+                                    .copyWith(color: Colors.white),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
               20.verticalSpacingRadius,
 
               /// Verifikasi KTP
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.check, color: greenColor, size: 20.r),
-                  8.horizontalSpaceRadius,
-                  Text(
-                    'Kamu sudah verifikasi KTP',
-                    style:
-                        Get.textTheme.labelMedium!.copyWith(color: blueColor),
+              Obx(
+                () => Conditional.single(
+                  context: context,
+                  conditionBuilder: (context) =>
+                      ProfileController.to.user.value.ktp != null,
+                  widgetBuilder: (context) => Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.check, color: greenColor, size: 20.r),
+                      8.horizontalSpaceRadius,
+                      Text(
+                        'You have verified your ID card'.tr,
+                        style: Get.textTheme.labelMedium!
+                            .copyWith(color: greenColor),
+                      ),
+                    ],
                   ),
-                ],
+                  fallbackBuilder: (context) => Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.close, color: redColor, size: 20.r),
+                          8.horizontalSpaceRadius,
+                          Text(
+                            'You have not verified your ID card'.tr,
+                            style: Get.textTheme.labelMedium!
+                                .copyWith(color: redColor),
+                          ),
+                        ],
+                      ),
+                      10.verticalSpacingRadius,
+                      PrimaryButton.compact(
+                        onPressed: ProfileController.to.openVerifyIDDialog,
+                        text: 'Verify ID Card'.tr,
+                      ),
+                    ],
+                  ),
+                ),
               ),
               20.verticalSpacingRadius,
 
@@ -90,7 +141,7 @@ class ProfileView extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 20.r),
                 child: Text(
-                  'Info akun',
+                  'Account info'.tr,
                   style: Get.textTheme.titleMedium!.copyWith(color: blueColor),
                 ),
               ),
@@ -103,35 +154,52 @@ class ProfileView extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    TileOption(
-                      title: 'Nama',
-                      message: 'Fajar',
-                      onTap: () {},
+                    Obx(
+                      () => TileOption(
+                        title: 'Name'.tr,
+                        message: ProfileController.to.user.value.nama,
+                        onTap: () {},
+                      ),
                     ),
-                    TileOption(
-                      title: 'Tanggal Lahir',
-                      message: '01/03/1993',
-                      onTap: () {},
+                    Obx(
+                      () => TileOption(
+                        title: 'Birth date'.tr,
+                        message:
+                            ProfileController.to.user.value.tgl_lahir != null
+                                ? DateFormat('dd/MM/yyyy').format(
+                                    ProfileController.to.user.value.tgl_lahir!)
+                                : '-',
+                        onTap: () {},
+                      ),
                     ),
-                    TileOption(
-                      title: 'No.Telepon',
-                      message: '0822-4111-400',
-                      onTap: () {},
+                    Obx(
+                      () => TileOption(
+                        title: 'Phone number'.tr,
+                        message: ProfileController.to.user.value.telepon ?? '-',
+                        onTap: () {},
+                      ),
                     ),
-                    TileOption(
-                      title: 'Email',
-                      message: 'lorem.ipsum@gmail.com',
-                      onTap: () {},
+                    Obx(
+                      () => TileOption(
+                        title: 'Email'.tr,
+                        message: ProfileController.to.user.value.email,
+                        onTap: () {},
+                      ),
                     ),
-                    TileOption(
-                      title: 'Ubah PIN',
-                      message: '*********',
-                      onTap: () {},
+                    Obx(
+                      () => TileOption(
+                        title: 'Change PIN'.tr,
+                        message:
+                            ProfileController.to.user.value.pin.toObscure(),
+                        onTap: () {},
+                      ),
                     ),
-                    TileOption(
-                      title: 'Ganti Bahasa',
-                      message: 'Indonesia',
-                      onTap: () {},
+                    Obx(
+                      () => TileOption(
+                        title: 'Change language'.tr,
+                        message: ProfileController.to.currentLanguage.value,
+                        onTap: () {},
+                      ),
                     ),
                   ],
                 ),
@@ -147,12 +215,12 @@ class ProfileView extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    SvgPicture.asset(AssetConst.iconRating),
+                    SvgPicture.asset(AssetConst.iconReview),
                     8.horizontalSpaceRadius,
-                    Text('Penilaian', style: Get.textTheme.titleSmall),
+                    Text('Review'.tr, style: Get.textTheme.titleSmall),
                     const Spacer(),
                     PrimaryButton.compact(
-                      text: 'Nilai Sekarang',
+                      text: 'Review now'.tr,
                       onPressed: () {},
                     ),
                   ],
@@ -164,7 +232,7 @@ class ProfileView extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 20.r),
                 child: Text(
-                  'Info Lainnya',
+                  'More info'.tr,
                   style: Get.textTheme.titleMedium!.copyWith(color: blueColor),
                 ),
               ),
@@ -177,14 +245,13 @@ class ProfileView extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    TileOption(
-                      title: 'Device Info',
-                      message: 'Iphone 13',
+                    Obx(
+                      () => TileOption(
+                        title: 'Device info'.tr,
+                        message: ProfileController.to.deviceInfo.value,
+                      ),
                     ),
-                    TileOption(
-                      title: 'Version',
-                      message: '1.3',
-                    ),
+                    TileOption(title: 'Version'.tr, message: appVersion),
                   ],
                 ),
               ),
@@ -195,8 +262,8 @@ class ProfileView extends StatelessWidget {
                 child: SizedBox(
                   width: 204,
                   child: PrimaryButton(
-                    text: 'Log Out',
-                    onPressed: () {},
+                    text: 'Log out'.tr,
+                    onPressed: ProfileController.to.logout,
                   ),
                 ),
               ),

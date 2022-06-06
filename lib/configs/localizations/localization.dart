@@ -45,4 +45,8 @@ class Localization extends Translations {
   static Locale get currentLocale {
     return Get.locale ?? fallbackLocale;
   }
+
+  static String get currentLanguage {
+    return langs.elementAt(locales.indexOf(currentLocale));
+  }
 }

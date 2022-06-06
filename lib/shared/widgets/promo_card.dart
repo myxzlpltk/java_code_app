@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/models/promo.dart';
-import 'package:java_code_app/utils/extensions/string_case_extension.dart';
+import 'package:java_code_app/utils/extensions/string_extension.dart';
 
 class PromoCard extends StatelessWidget {
   final Promo promo;

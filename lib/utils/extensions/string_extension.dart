@@ -1,4 +1,4 @@
-extension StringCaseExtension on String {
+extension StringExtension on String {
   String toCapitalized() =>
       length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
 
@@ -6,4 +6,6 @@ extension StringCaseExtension on String {
       .split(' ')
       .map((str) => str.toCapitalized())
       .join(' ');
+
+  String toObscure() => '*' * length;
 }
