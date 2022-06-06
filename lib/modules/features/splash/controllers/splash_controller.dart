@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:java_code_app/configs/localizations/localization.dart';
 import 'package:java_code_app/modules/global_controllers/global_controller.dart';
 import 'package:java_code_app/utils/services/local_db_services.dart';
 import 'package:uni_links/uni_links.dart';
@@ -14,6 +15,11 @@ class SplashController extends GetxController {
     var user = await LocalDBServices.getUser();
     var token = await LocalDBServices.getToken();
     var uri = await getInitialUri();
+    var language = await LocalDBServices.getLanguage();
+
+    if (language != null) {
+      Localization.changeLocale(language);
+    }
 
     if (!GlobalController.to.internetStatus.value) {
       await GlobalController.to.showAlert();

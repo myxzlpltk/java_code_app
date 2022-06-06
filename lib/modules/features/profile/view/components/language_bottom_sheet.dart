@@ -5,6 +5,7 @@ import 'package:java_code_app/configs/localizations/localization.dart';
 import 'package:java_code_app/modules/features/menu/view/components/holder_bottom_sheet.dart';
 import 'package:java_code_app/modules/features/profile/view/components/locale_card.dart';
 import 'package:java_code_app/utils/extensions/list_extensions.dart';
+import 'package:java_code_app/utils/services/local_db_services.dart';
 
 class LanguageBottomSheet extends StatefulWidget {
   const LanguageBottomSheet({Key? key}) : super(key: key);
@@ -41,6 +42,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
                       onTap: () {
                         selectedLocale.value = Localization.locales[i];
                         Localization.changeLocale(Localization.langs[i]);
+                        LocalDBServices.setLanguage(Localization.langs[i]);
                         Get.back();
                       }),
                 )

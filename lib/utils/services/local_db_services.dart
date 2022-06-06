@@ -39,4 +39,20 @@ class LocalDBServices {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('token');
   }
+
+  /// Set, Get, Clear Language
+  static Future<void> setLanguage(String language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('language', language);
+  }
+
+  static Future<String?> getLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('language');
+  }
+
+  static Future<void> clearLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('language');
+  }
 }
