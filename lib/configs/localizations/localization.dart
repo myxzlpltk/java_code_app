@@ -36,12 +36,12 @@ class Localization extends Translations {
 
   /// Change locale
   static void changeLocale(String lang) {
-    final locale = _getLocaleFromLanguage(lang);
+    final locale = getLocaleFromLanguage(lang);
     Get.updateLocale(locale);
   }
 
   /// Finds language in `langs` list and returns it as Locale
-  static Locale _getLocaleFromLanguage(String lang) {
+  static Locale getLocaleFromLanguage(String lang) {
     for (int i = 0; i < langs.length; i++) {
       if (lang == langs[i]) return locales[i];
     }

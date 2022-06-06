@@ -143,11 +143,17 @@ class ProfileController extends GetxController {
 
   /// Language dialog
   void openLanguageDialog() async {
-    Get.bottomSheet(
+    String? language = await Get.bottomSheet(
       const LanguageBottomSheet(),
       backgroundColor: Colors.white,
       shape: CustomShape.topRoundedShape,
       isScrollControlled: true,
     );
+
+    if (language != null) {
+      Localization.changeLocale(language);
+      LocalDBServices.setLanguage(language);
+      currentLanguage.value = language;
+    }
   }
 }
