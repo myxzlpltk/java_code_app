@@ -85,7 +85,6 @@ class DetailVoucherView extends StatelessWidget {
                     message:
                         '${DateFormat('dd/MM/yyyy').format(voucher.periode_mulai)} - ${DateFormat('dd/MM/yyyy').format(voucher.periode_selesai)}',
                     titleStyle: Get.textTheme.headlineSmall,
-                    messageStyle: Get.textTheme.bodyMedium,
                   ),
                   Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
                 ],

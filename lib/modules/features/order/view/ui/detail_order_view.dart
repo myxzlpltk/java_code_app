@@ -165,7 +165,6 @@ class DetailOrderView extends StatelessWidget {
                   titleStyle: Get.textTheme.headlineSmall,
                   messageStyle:
                       Get.textTheme.labelLarge!.copyWith(color: blueColor),
-                  color: lightColor2,
                 ),
                 Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
 
@@ -185,7 +184,6 @@ class DetailOrderView extends StatelessWidget {
                       titleStyle: Get.textTheme.headlineSmall,
                       messageStyle:
                           Get.textTheme.bodySmall!.copyWith(color: redColor),
-                      color: lightColor2,
                     ),
                     Divider(
                       color: darkColor2.withOpacity(0.25),
@@ -212,7 +210,6 @@ class DetailOrderView extends StatelessWidget {
                       titleStyle: Get.textTheme.headlineSmall,
                       messageStyle:
                           Get.textTheme.bodySmall!.copyWith(color: redColor),
-                      color: lightColor2,
                     ),
                     Divider(
                       color: darkColor2.withOpacity(0.25),
@@ -230,7 +227,6 @@ class DetailOrderView extends StatelessWidget {
                   message: 'Pay Later',
                   titleStyle: Get.textTheme.headlineSmall,
                   messageStyle: Get.textTheme.bodySmall,
-                  color: lightColor2,
                 ),
                 Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
 
@@ -243,7 +239,6 @@ class DetailOrderView extends StatelessWidget {
                   titleStyle: Get.textTheme.headlineSmall,
                   messageStyle:
                       Get.textTheme.headlineSmall!.copyWith(color: blueColor),
-                  color: lightColor2,
                 ),
                 Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
                 24.verticalSpacingRadius,

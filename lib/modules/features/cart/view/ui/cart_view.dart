@@ -189,7 +189,6 @@ class CartView extends StatelessWidget {
                       titleStyle: Get.textTheme.headlineSmall,
                       messageStyle:
                           Get.textTheme.labelLarge!.copyWith(color: blueColor),
-                      color: lightColor2,
                     ),
                     Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
 
@@ -207,7 +206,6 @@ class CartView extends StatelessWidget {
                             : 'Discount can not be combined'.tr,
                         titleStyle: Get.textTheme.headlineSmall,
                         messageStyle: Get.textTheme.bodySmall,
-                        color: lightColor2,
                       ),
                       fallbackBuilder: (context) => TileOption(
                         icon: AssetConst.iconDiscount,
@@ -217,7 +215,6 @@ class CartView extends StatelessWidget {
                         titleStyle: Get.textTheme.headlineSmall,
                         messageStyle:
                             Get.textTheme.bodySmall!.copyWith(color: redColor),
-                        color: lightColor2,
                         onTap: CartController.to.openDiscountDialog,
                       ),
                     ),
@@ -235,7 +232,6 @@ class CartView extends StatelessWidget {
                         message: 'Choose voucher'.tr,
                         titleStyle: Get.textTheme.headlineSmall,
                         messageStyle: Get.textTheme.bodySmall,
-                        color: lightColor2,
                         onTap: CartController.to.openVoucherDialog,
                       ),
                       fallbackBuilder: (context) => TileOption(
@@ -248,7 +244,6 @@ class CartView extends StatelessWidget {
                         titleStyle: Get.textTheme.headlineSmall,
                         messageStyle:
                             Get.textTheme.bodySmall!.copyWith(color: redColor),
-                        color: lightColor2,
                         onTap: CartController.to.openVoucherDialog,
                       ),
                     ),
@@ -262,7 +257,6 @@ class CartView extends StatelessWidget {
                       message: 'Pay Later',
                       titleStyle: Get.textTheme.headlineSmall,
                       messageStyle: Get.textTheme.bodySmall,
-                      color: lightColor2,
                     ),
                   ],
                 ),

@@ -17,7 +17,6 @@ class TileOption extends StatelessWidget {
   final TextStyle? messageStyle;
   final TextStyle? messageSubtitleStyle;
   final void Function()? onTap;
-  final Color color;
   final double? iconSize;
 
   const TileOption({
@@ -32,14 +31,13 @@ class TileOption extends StatelessWidget {
     this.messageStyle,
     this.messageSubtitleStyle,
     this.onTap,
-    this.color = Colors.white,
     this.iconSize,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: color,
+      color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
         child: Padding(
@@ -79,7 +77,7 @@ class TileOption extends StatelessWidget {
                   children: [
                     Text(
                       message,
-                      style: messageStyle ?? Get.textTheme.bodyLarge,
+                      style: messageStyle ?? Get.textTheme.bodyMedium,
                       textAlign: TextAlign.end,
                       overflow: TextOverflow.ellipsis,
                     ),
