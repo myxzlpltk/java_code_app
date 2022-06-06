@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:java_code_app/configs/routes/app_routes.dart';
+import 'package:java_code_app/modules/features/cart/controllers/cart_controller.dart';
+import 'package:java_code_app/modules/features/home/controllers/home_controller.dart';
 import 'package:java_code_app/modules/features/order/repositories/order_repository.dart';
+import 'package:java_code_app/modules/models/cart_item.dart';
 import 'package:java_code_app/modules/models/order.dart';
 
 class OrderController extends GetxController {
@@ -81,5 +85,24 @@ class OrderController extends GetxController {
     } else {
       historyStatus.value = 'error';
     }
+  }
+
+  void onOrderAgain(Order order) {
+    for (var detail in order.menu) {
+      var menu = HomeController.to.listMenu
+          .firstWhereOrNull((e) => e.id_menu == detail.id_menu);
+
+      if (menu != null) {
+        CartController.to.add(CartItem(
+          menu: menu,
+          quantity: detail.jumlah,
+          note: '',
+          level: null,
+          toppings: null,
+        ));
+      }
+    }
+
+    Get.toNamed(AppRoutes.cartView);
   }
 }

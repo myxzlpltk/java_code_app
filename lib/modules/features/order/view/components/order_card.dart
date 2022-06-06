@@ -13,11 +13,13 @@ import 'package:java_code_app/utils/extensions/currency_extension.dart';
 class OrderCard extends StatelessWidget {
   final Order order;
   final void Function()? onTap;
+  final void Function()? onOrderAgain;
 
   const OrderCard({
     Key? key,
     required this.order,
     this.onTap,
+    this.onOrderAgain,
   }) : super(key: key);
 
   @override
@@ -85,7 +87,7 @@ class OrderCard extends StatelessWidget {
                     children: [
                       ConditionalSwitch.single<int>(
                         context: context,
-                        valueBuilder: (context) => 2,
+                        valueBuilder: (context) => order.status,
                         caseBuilders: {
                           0: (context) => Icon(
                                 Icons.access_time,
@@ -206,7 +208,7 @@ class OrderCard extends StatelessWidget {
                           padding: EdgeInsets.only(top: 10.r),
                           child: PrimaryButton.compact(
                             text: 'Order again'.tr,
-                            onPressed: () {},
+                            onPressed: onOrderAgain,
                           ),
                         ),
                       ],

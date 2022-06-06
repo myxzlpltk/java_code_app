@@ -179,6 +179,8 @@ class OrderView extends StatelessWidget {
                             padding: EdgeInsets.only(bottom: 16.r),
                             child: OrderCard(
                               order: order,
+                              onOrderAgain: () =>
+                                  OrderController.to.onOrderAgain(order),
                               onTap: () => Get.toNamed(
                                 AppRoutes.detailOrderView,
                                 arguments: order,

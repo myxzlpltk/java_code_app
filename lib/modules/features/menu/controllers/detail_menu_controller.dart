@@ -132,7 +132,7 @@ class DetailMenuController extends GetxController {
       ? selectedToppings.map((topping) => topping.keterangan).join(', ')
       : 'Choose topping'.tr;
 
-  CartItem get detailOrder => CartItem(
+  CartItem get cartItem => CartItem(
       menu: menu.value!,
       quantity: quantity.value,
       note: note.value,
@@ -143,7 +143,7 @@ class DetailMenuController extends GetxController {
   void addToCart() {
     if (status.value == 'success' &&
         (selectedLevel.value != null || levels.isEmpty)) {
-      CartController.to.add(detailOrder);
+      CartController.to.add(cartItem);
       Get.offNamedUntil(
         AppRoutes.cartView,
         ModalRoute.withName(AppRoutes.dashboardView),
@@ -152,7 +152,7 @@ class DetailMenuController extends GetxController {
   }
 
   void deleteFromCart() {
-    CartController.to.remove(detailOrder);
+    CartController.to.remove(cartItem);
     Get.offNamedUntil(
       AppRoutes.cartView,
       ModalRoute.withName(AppRoutes.dashboardView),

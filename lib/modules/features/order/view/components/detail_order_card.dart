@@ -45,6 +45,10 @@ class DetailOrderCard extends StatelessWidget {
             child: Image.network(
               detailOrder.foto ?? defaultMenuPhoto,
               fit: BoxFit.contain,
+              errorBuilder: (context, _, __) => Image.network(
+                defaultMenuPhoto,
+                fit: BoxFit.contain,
+              ),
             ),
           ),
           Expanded(
