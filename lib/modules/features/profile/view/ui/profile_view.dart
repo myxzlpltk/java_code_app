@@ -198,7 +198,7 @@ class ProfileView extends StatelessWidget {
                       () => TileOption(
                         title: 'Change language'.tr,
                         message: ProfileController.to.currentLanguage.value,
-                        onTap: () {},
+                        onTap: ProfileController.to.openLanguageDialog,
                       ),
                     ),
                   ],

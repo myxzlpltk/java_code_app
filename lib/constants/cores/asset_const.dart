@@ -1,4 +1,6 @@
 class AssetConst {
+  AssetConst._();
+
   /// Icon
   static const String iconApple = 'assets/svg/ic_apple.svg';
   static const String iconCart = 'assets/svg/ic_cart.svg';
@@ -35,4 +37,8 @@ class AssetConst {
   static const String bgPattern2 = 'assets/images/bg_pattern_2.png';
   static const String bgProfile = 'assets/images/bg_profile.png';
   static const String bgPromo = 'assets/images/bg_promo.png';
+
+  /// Flag
+  static const String flagID = 'assets/svg/flag_id.svg';
+  static const String flagEN = 'assets/svg/flag_en.svg';
 }

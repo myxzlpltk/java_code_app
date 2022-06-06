@@ -10,7 +10,9 @@ import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/modules/features/profile/repositories/user_repository.dart';
 import 'package:java_code_app/modules/features/profile/view/components/image_picker_dialog.dart';
+import 'package:java_code_app/modules/features/profile/view/components/language_bottom_sheet.dart';
 import 'package:java_code_app/modules/models/user.dart';
+import 'package:java_code_app/shared/styles/shapes.dart';
 import 'package:java_code_app/utils/services/local_db_services.dart';
 
 class ProfileController extends GetxController {
@@ -137,5 +139,15 @@ class ProfileController extends GetxController {
       user.value = userRes.user!;
       await LocalDBServices.setUser(userRes.user!);
     }
+  }
+
+  /// Language dialog
+  void openLanguageDialog() async {
+    Get.bottomSheet(
+      const LanguageBottomSheet(),
+      backgroundColor: Colors.white,
+      shape: CustomShape.topRoundedShape,
+      isScrollControlled: true,
+    );
   }
 }

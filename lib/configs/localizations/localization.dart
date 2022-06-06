@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/localizations/langs/en_us.dart';
 import 'package:java_code_app/configs/localizations/langs/id_id.dart';
+import 'package:java_code_app/constants/cores/asset_const.dart';
 
 class Localization extends Translations {
   /// Default locale
@@ -12,6 +13,12 @@ class Localization extends Translations {
   static const langs = [
     'English',
     'Indonesia',
+  ];
+
+  /// Supported languages flag
+  static const flags = [
+    AssetConst.flagEN,
+    AssetConst.flagID,
   ];
 
   /// Supported locales

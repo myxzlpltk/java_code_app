@@ -32,7 +32,7 @@ class DashboardView extends StatelessWidget {
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
         child: Obx(
-              () => BottomNavigationBar(
+          () => BottomNavigationBar(
             onTap: DashboardController.to.changeTabIndex,
             currentIndex: DashboardController.to.tabIndex.value,
             backgroundColor: darkColor2,
