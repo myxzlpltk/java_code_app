@@ -157,7 +157,7 @@ class DetailOrderView extends StatelessWidget {
               children: [
                 /// Total orders
                 TileOption(
-                  title: 'total_orders'.tr,
+                  title: 'Total orders'.tr,
                   subtitle:
                       '(${DetailOrderController.to.order.value!.menu.length} Menu):',
                   message:

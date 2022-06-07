@@ -218,8 +218,6 @@ class ProfileController extends GetxController {
       content: const PinDialog(),
     );
 
-    print(pin);
-
     if (pin != null && pin.isNotEmpty) {
       await updateUser(pin: pin);
     }

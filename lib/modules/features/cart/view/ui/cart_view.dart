@@ -183,7 +183,7 @@ class CartView extends StatelessWidget {
                   children: [
                     /// Total orders
                     TileOption(
-                      title: 'total_orders'.tr,
+                      title: 'Total orders'.tr,
                       subtitle: '(${CartController.to.cart.length} Menu):',
                       message: CartController.to.totalPrice.toRupiah(),
                       titleStyle: Get.textTheme.headlineSmall,
