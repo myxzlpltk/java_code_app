@@ -62,7 +62,7 @@ class LoginController extends GetxController {
       await LocalDBServices.setToken(userRes.token!);
 
       /// Pergi ke halaman dashboard
-      Get.offNamed('/dashboard');
+      Get.offAllNamed('/dashboard');
     } else {
       Get.showSnackbar(GetSnackBar(
         title: 'Something went wrong'.tr,
