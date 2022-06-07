@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:equatable/equatable.dart';
+import 'package:java_code_app/utils/extensions/date_extension.dart';
 
 class User extends Equatable {
   final int id_user;
@@ -31,7 +32,9 @@ class User extends Equatable {
       id_user: json['id_user'] as int,
       email: json['email'] as String,
       nama: json['nama'] as String,
-      tgl_lahir: json['tgl_lahir'] as DateTime?,
+      tgl_lahir: json['tgl_lahir'] != null
+          ? DateTime.parse(json['tgl_lahir'] as String)
+          : null,
       alamat: json['alamat'] as String?,
       telepon: json['telepon'] as String?,
       ktp: json['ktp'] as String?,
@@ -46,7 +49,7 @@ class User extends Equatable {
       'id_user': id_user,
       'email': email,
       'nama': nama,
-      'tgl_lahir': tgl_lahir,
+      'tgl_lahir': tgl_lahir == null ? null : tgl_lahir!.toDateString(),
       'alamat': alamat,
       'tele pon': telepon,
       'ktp': ktp,

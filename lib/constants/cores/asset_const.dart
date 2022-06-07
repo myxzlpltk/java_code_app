@@ -14,6 +14,7 @@ class AssetConst {
   static const String iconGoogle = 'assets/svg/ic_google.svg';
   static const String iconHome = 'assets/svg/ic_home.svg';
   static const String iconJavaCode = 'assets/images/ic_java_code.png';
+  static const String iconKtp = 'assets/svg/ic_ktp.svg';
   static const String iconLevel = 'assets/svg/ic_level.svg';
   static const String iconList = 'assets/svg/ic_list.svg';
   static const String iconLoading = 'assets/svg/ic_loading.svg';

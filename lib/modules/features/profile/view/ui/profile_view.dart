@@ -108,30 +108,39 @@ class ProfileView extends StatelessWidget {
                       Text(
                         'You have verified your ID card'.tr,
                         style: Get.textTheme.labelMedium!
-                            .copyWith(color: greenColor),
+                            .copyWith(color: blueColor),
                       ),
                     ],
                   ),
-                  fallbackBuilder: (context) => Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.close, color: redColor, size: 20.r),
-                          8.horizontalSpaceRadius,
-                          Text(
-                            'You have not verified your ID card'.tr,
-                            style: Get.textTheme.labelMedium!
-                                .copyWith(color: redColor),
-                          ),
-                        ],
+                  fallbackBuilder: (context) => Center(
+                    child: InkWell(
+                      onTap: ProfileController.to.openVerifyIDDialog,
+                      borderRadius: BorderRadius.circular(5.r),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 5.r,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SvgPicture.asset(
+                              AssetConst.iconKtp,
+                              width: 18.r,
+                              height: 18.r,
+                              color: blueColor,
+                            ),
+                            8.horizontalSpaceRadius,
+                            Text(
+                              'Verify your ID card now!'.tr,
+                              style: Get.textTheme.labelMedium!
+                                  .copyWith(color: blueColor),
+                            ),
+                          ],
+                        ),
                       ),
-                      10.verticalSpacingRadius,
-                      PrimaryButton.compact(
-                        onPressed: ProfileController.to.openVerifyIDDialog,
-                        text: 'Verify ID Card'.tr,
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
@@ -158,7 +167,7 @@ class ProfileView extends StatelessWidget {
                       () => TileOption(
                         title: 'Name'.tr,
                         message: ProfileController.to.user.value.nama,
-                        onTap: () {},
+                        onTap: ProfileController.to.openUpdateNameDialog,
                       ),
                     ),
                     Obx(
@@ -169,21 +178,21 @@ class ProfileView extends StatelessWidget {
                                 ? DateFormat('dd/MM/yyyy').format(
                                     ProfileController.to.user.value.tgl_lahir!)
                                 : '-',
-                        onTap: () {},
+                        onTap: ProfileController.to.openUpdateBirthDateDialog,
                       ),
                     ),
                     Obx(
                       () => TileOption(
                         title: 'Phone number'.tr,
                         message: ProfileController.to.user.value.telepon ?? '-',
-                        onTap: () {},
+                        onTap: ProfileController.to.openUpdatePhoneDialog,
                       ),
                     ),
                     Obx(
                       () => TileOption(
                         title: 'Email'.tr,
                         message: ProfileController.to.user.value.email,
-                        onTap: () {},
+                        onTap: ProfileController.to.openUpdateEmailDialog,
                       ),
                     ),
                     Obx(
@@ -191,7 +200,7 @@ class ProfileView extends StatelessWidget {
                         title: 'Change PIN'.tr,
                         message:
                             ProfileController.to.user.value.pin.toObscure(),
-                        onTap: () {},
+                        onTap: ProfileController.to.openUpdatePINDialog,
                       ),
                     ),
                     Obx(

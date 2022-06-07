@@ -2,14 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
-import 'package:java_code_app/modules/features/menu/controllers/detail_menu_controller.dart';
 import 'package:java_code_app/modules/features/menu/view/components/holder_bottom_sheet.dart';
 
-class NoteBottomSheet extends StatelessWidget {
-  final TextEditingController noteController =
-      TextEditingController(text: DetailMenuController.to.note.value);
+class NameBottomSheet extends StatefulWidget {
+  final String nama;
 
-  NoteBottomSheet({Key? key}) : super(key: key);
+  const NameBottomSheet({Key? key, required this.nama}) : super(key: key);
+
+  @override
+  State<NameBottomSheet> createState() => _NameBottomSheetState();
+}
+
+class _NameBottomSheetState extends State<NameBottomSheet> {
+  late final TextEditingController controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = TextEditingController(text: widget.nama);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +31,16 @@ class NoteBottomSheet extends StatelessWidget {
         children: [
           const HolderBottomSheet(),
           13.verticalSpacingRadius,
-          Text('Create note'.tr, style: Get.textTheme.headlineSmall),
+          Text('Name'.tr, style: Get.textTheme.headlineSmall),
           13.verticalSpacingRadius,
           Row(
             children: [
               Expanded(
                 child: TextField(
-                  controller: noteController,
+                  controller: controller,
                   style: Get.textTheme.bodySmall,
                   decoration: InputDecoration(
-                    hintText: 'Add note'.tr,
+                    hintText: 'Name'.tr,
                     hintStyle: Get.textTheme.bodySmall,
                     enabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(color: blueColor, width: 2),
@@ -46,9 +58,7 @@ class NoteBottomSheet extends StatelessWidget {
                 icon: const Icon(Icons.check_circle),
                 splashRadius: 20.r,
                 color: blueColor,
-                onPressed: () {
-                  DetailMenuController.to.setNote(noteController.text);
-                },
+                onPressed: () => Get.back(result: controller.text),
               ),
             ],
           ),

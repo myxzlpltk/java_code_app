@@ -2,14 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
-import 'package:java_code_app/modules/features/menu/controllers/detail_menu_controller.dart';
 import 'package:java_code_app/modules/features/menu/view/components/holder_bottom_sheet.dart';
 
-class NoteBottomSheet extends StatelessWidget {
-  final TextEditingController noteController =
-      TextEditingController(text: DetailMenuController.to.note.value);
+class EmailBottomSheet extends StatefulWidget {
+  final String email;
 
-  NoteBottomSheet({Key? key}) : super(key: key);
+  const EmailBottomSheet({Key? key, required this.email}) : super(key: key);
+
+  @override
+  State<EmailBottomSheet> createState() => _EmailBottomSheetState();
+}
+
+class _EmailBottomSheetState extends State<EmailBottomSheet> {
+  late final TextEditingController controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = TextEditingController(text: widget.email);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +31,16 @@ class NoteBottomSheet extends StatelessWidget {
         children: [
           const HolderBottomSheet(),
           13.verticalSpacingRadius,
-          Text('Create note'.tr, style: Get.textTheme.headlineSmall),
+          Text('Email'.tr, style: Get.textTheme.headlineSmall),
           13.verticalSpacingRadius,
           Row(
             children: [
               Expanded(
                 child: TextField(
-                  controller: noteController,
+                  controller: controller,
                   style: Get.textTheme.bodySmall,
                   decoration: InputDecoration(
-                    hintText: 'Add note'.tr,
+                    hintText: 'Email'.tr,
                     hintStyle: Get.textTheme.bodySmall,
                     enabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(color: blueColor, width: 2),
@@ -38,6 +50,7 @@ class NoteBottomSheet extends StatelessWidget {
                     ),
                   ),
                   maxLength: 100,
+                  keyboardType: TextInputType.emailAddress,
                   autofocus: true,
                 ),
               ),
@@ -46,9 +59,7 @@ class NoteBottomSheet extends StatelessWidget {
                 icon: const Icon(Icons.check_circle),
                 splashRadius: 20.r,
                 color: blueColor,
-                onPressed: () {
-                  DetailMenuController.to.setNote(noteController.text);
-                },
+                onPressed: () => Get.back(result: controller.text),
               ),
             ],
           ),

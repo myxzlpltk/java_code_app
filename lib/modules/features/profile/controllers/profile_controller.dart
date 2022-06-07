@@ -9,10 +9,15 @@ import 'package:java_code_app/configs/localizations/localization.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/modules/features/profile/repositories/user_repository.dart';
+import 'package:java_code_app/modules/features/profile/view/components/email_bottom_sheet.dart';
 import 'package:java_code_app/modules/features/profile/view/components/image_picker_dialog.dart';
 import 'package:java_code_app/modules/features/profile/view/components/language_bottom_sheet.dart';
+import 'package:java_code_app/modules/features/profile/view/components/name_bottom_sheet.dart';
+import 'package:java_code_app/modules/features/profile/view/components/phone_bottom_sheet.dart';
+import 'package:java_code_app/modules/features/profile/view/components/pin_dialog.dart';
 import 'package:java_code_app/modules/models/user.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
+import 'package:java_code_app/utils/extensions/date_extension.dart';
 import 'package:java_code_app/utils/services/local_db_services.dart';
 
 class ProfileController extends GetxController {
@@ -127,10 +132,19 @@ class ProfileController extends GetxController {
   }
 
   /// Update user data
-  Future<void> updateUser({String? foto}) async {
+  Future<void> updateUser(
+      {String? nama,
+      DateTime? tgl_lahir,
+      String? telepon,
+      String? email,
+      String? pin}) async {
     Map<String, String> data = {};
 
-    if (foto != null) data['foto'] = foto;
+    if (nama != null) data['nama'] = nama;
+    if (tgl_lahir != null) data['tgl_lahir'] = tgl_lahir.toDateString();
+    if (telepon != null) data['telepon'] = telepon;
+    if (email != null) data['email'] = email;
+    if (pin != null) data['pin'] = pin;
 
     UserRes userRes = await UserRepository.update(data);
 
@@ -138,6 +152,76 @@ class ProfileController extends GetxController {
       user.value = User.dummy;
       user.value = userRes.user!;
       await LocalDBServices.setUser(userRes.user!);
+    }
+  }
+
+  /// Update nama dialog
+  void openUpdateNameDialog() async {
+    String? nama = await Get.bottomSheet(
+      NameBottomSheet(nama: user.value.nama),
+      backgroundColor: Colors.white,
+      shape: CustomShape.topRoundedShape,
+      isScrollControlled: true,
+    );
+
+    if (nama != null && nama.isNotEmpty) {
+      await updateUser(nama: nama);
+    }
+  }
+
+  /// Update tanggal lahir dialog
+  void openUpdateBirthDateDialog() async {
+    DateTime? tgl_lahir = await showDatePicker(
+      context: Get.context!,
+      initialDate: user.value.tgl_lahir ?? DateTime(DateTime.now().year - 21),
+      firstDate: DateTime(DateTime.now().year - 100),
+      lastDate: DateTime.now(),
+    );
+
+    if (tgl_lahir != null) {
+      await updateUser(tgl_lahir: tgl_lahir);
+    }
+  }
+
+  /// Update phone number dialog
+  void openUpdatePhoneDialog() async {
+    String? telepon = await Get.bottomSheet(
+      PhoneBottomSheet(telepon: user.value.telepon ?? ''),
+      backgroundColor: Colors.white,
+      shape: CustomShape.topRoundedShape,
+      isScrollControlled: true,
+    );
+
+    if (telepon != null && telepon.isNotEmpty) {
+      await updateUser(telepon: telepon);
+    }
+  }
+
+  /// Update email dialog
+  void openUpdateEmailDialog() async {
+    String? email = await Get.bottomSheet(
+      EmailBottomSheet(email: user.value.email),
+      backgroundColor: Colors.white,
+      shape: CustomShape.topRoundedShape,
+      isScrollControlled: true,
+    );
+
+    if (email != null && email.isNotEmpty) {
+      await updateUser(email: email);
+    }
+  }
+
+  void openUpdatePINDialog() async {
+    String? pin = await Get.defaultDialog(
+      title: '',
+      titleStyle: const TextStyle(fontSize: 0),
+      content: const PinDialog(),
+    );
+
+    print(pin);
+
+    if (pin != null && pin.isNotEmpty) {
+      await updateUser(pin: pin);
     }
   }
 
