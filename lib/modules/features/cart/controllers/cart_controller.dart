@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
-import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/modules/features/cart/repositories/discount_repository.dart';
 import 'package:java_code_app/modules/features/cart/repositories/order_repository.dart';
 import 'package:java_code_app/modules/features/cart/repositories/voucher_repository.dart';
@@ -17,6 +16,7 @@ import 'package:java_code_app/modules/models/cart_item.dart';
 import 'package:java_code_app/modules/models/discount.dart';
 import 'package:java_code_app/modules/models/user.dart';
 import 'package:java_code_app/modules/models/voucher.dart';
+import 'package:java_code_app/shared/customs/error_snack_bar.dart';
 import 'package:java_code_app/utils/services/local_db_services.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -27,7 +27,9 @@ class CartController extends GetxController {
   void onInit() {
     super.onInit();
 
+    /// Ambil data diskon dan voucher dari API
     getDiscounts();
+    getVouchers();
   }
 
   /// Basic cart functions :
@@ -164,8 +166,8 @@ class CartController extends GetxController {
   /// Cart action functions
   /// - Order
   /// - Verify fingerprint or PIN
-
   void order() async {
+    /// Tutup modal
     Get.until(ModalRoute.withName(AppRoutes.cartView));
     Get.defaultDialog(
       title: '',
@@ -173,6 +175,7 @@ class CartController extends GetxController {
       content: const CircularProgressIndicator(),
     );
 
+    /// Buat model order
     final cartReq = CartReq(
       user: await LocalDBServices.getUser() as User,
       cart: cart,
@@ -182,35 +185,39 @@ class CartController extends GetxController {
       totalPrice: grandTotalPrice,
     );
 
+    /// Kirim request ke API
     final response = await OrderRepository.add(cartReq);
 
     if (response != null &&
         response.statusCode == 200 &&
         response.data['status_code'] == 200) {
+      /// Jika sukses, buka dialog sukses
       openOrderSuccessDialog(response.data['data']['id_order']);
     } else {
+      /// Jika gagal, buka dialog error
       Get.until(ModalRoute.withName(AppRoutes.cartView));
-      Get.showSnackbar(GetSnackBar(
+      Get.showSnackbar(ErrorSnackBar(
         title: 'Error'.tr,
         message: 'Server error'.tr,
-        duration: const Duration(seconds: 2),
-        backgroundColor: redColor,
       ));
     }
   }
 
   /// Verify fingerprint or PIN
   void verify() async {
+    /// Mencari tahu jenis otentikasi yang tersedia
     final LocalAuthentication auth = LocalAuthentication();
-
     final bool isBiometricSupported = await auth.isDeviceSupported();
     final bool canCheckBiometrics = await auth.canCheckBiometrics;
 
     /// Bisa menggunakan biometrik
     if (isBiometricSupported && canCheckBiometrics) {
       try {
+        /// Buka modal fingerprint
         final status = await openFingerprintDialog();
+
         if (status == 'fingerprint') {
+          /// Jika pengguna memilih fingerprint, lanjutkan fingerprint
           final bool didAuthenticate = await auth.authenticate(
             localizedReason: 'Please authenticate to confirm order'.tr,
             options: const AuthenticationOptions(
@@ -218,13 +225,16 @@ class CartController extends GetxController {
             ),
           );
 
+          /// Jika fingerprint berhasil, lanjutkan order
           if (didAuthenticate) {
             order();
           }
         } else if (status == 'pin') {
-          openPinDialog();
+          /// Jika pengguna memilih PIN, lanjutkan PIN
+          await openPinDialog();
         }
       } on PlatformException {
+        /// Jika terjadi error, lanjutkan PIN
         await openPinDialog();
       }
     } else {
@@ -234,6 +244,7 @@ class CartController extends GetxController {
 
   /// Open fingerprint dialog
   Future<String?> openFingerprintDialog() async {
+    /// Tutup semua modal, buka modal fingerprint
     Get.until(ModalRoute.withName(AppRoutes.cartView));
     final arguments = await Get.defaultDialog(
       title: '',
@@ -246,32 +257,40 @@ class CartController extends GetxController {
 
   /// Open pin dialog
   Future<void> openPinDialog() async {
+    /// Tutup semua modal
     Get.until(ModalRoute.withName(AppRoutes.cartView));
 
+    /// Inisialisasi jumlah percobaan
     int tries = 0;
+
+    /// Ambil data user
     final User user = await LocalDBServices.getUser() as User;
 
+    /// Buka modal pin
     await Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
       content: PinDialog(
         onCheckPin: (String? pin) {
           if (pin == user.pin) {
+            /// Jika pin benar lanjutkan order
             order();
             return null;
           } else {
+            /// Jika pin salah coba lagi
             tries++;
+
             if (tries >= 3) {
+              /// Jika sudah 3 kali salah, buka dialog error
               Get.until(ModalRoute.withName(AppRoutes.cartView));
-              Get.showSnackbar(GetSnackBar(
+              Get.showSnackbar(ErrorSnackBar(
                 title: 'Error'.tr,
                 message:
                     'PIN already wrong 3 times. Please try again later.'.tr,
-                backgroundColor: Colors.red,
-                duration: const Duration(seconds: 3),
               ));
               return null;
             } else {
+              /// Tampilkan jumlah kesempatan
               return 'PIN wrong! n chances left.'.trParams({
                 'n': (3 - tries).toString(),
               });
@@ -284,6 +303,7 @@ class CartController extends GetxController {
 
   /// Open order success dialog
   void openOrderSuccessDialog(int id) async {
+    /// Tutup semua modal
     Get.until(ModalRoute.withName(AppRoutes.cartView));
     await Get.defaultDialog(
       title: '',
@@ -291,13 +311,17 @@ class CartController extends GetxController {
       content: const OrderSuccessDialog(),
     );
 
+    /// Atur dasbor ke halaman order
     DashboardController.to.tabIndex.value = 1;
+
+    /// Navigasi ke halaman order
     Get.offNamedUntil(
       AppRoutes.detailOrderView,
       ModalRoute.withName(AppRoutes.dashboardView),
       arguments: id,
     );
 
+    /// Hapus data keranjang
     cart.clear();
     selectedVoucher.value = null;
   }

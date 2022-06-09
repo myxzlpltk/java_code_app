@@ -11,6 +11,7 @@ class EmptyDataListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        /// List view
         ListView(),
         Center(
           child: Column(
@@ -18,11 +19,14 @@ class EmptyDataListView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              /// Icon no data
               SvgPicture.asset(
                 AssetConst.iconNoData,
                 width: 250.r,
               ),
               25.verticalSpacingRadius,
+
+              /// Pesan no data
               Text(
                 'No data'.tr,
                 style: Get.textTheme.bodyMedium,

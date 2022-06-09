@@ -54,10 +54,13 @@ class Promo extends Equatable {
     };
   }
 
+  /// Mendapatkan jenis promo
   String get typeLabel => type.tr.toTitleCase();
 
+  /// Mendapatkan besaran promo
   String get amountLabel => type == 'diskon' ? '$diskon%' : nominal!.toShortK();
 
+  /// Mendapatkan jenis dan besaran promo
   String get typeAmountLabel => '$typeLabel $amountLabel';
 
   @override

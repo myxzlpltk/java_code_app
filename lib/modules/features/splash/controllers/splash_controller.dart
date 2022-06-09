@@ -11,27 +11,35 @@ class SplashController extends GetxController {
   void onInit() async {
     super.onInit();
 
+    /// Delay 1 detik
     await Future.delayed(const Duration(seconds: 1));
-    var user = await LocalDBServices.getUser();
-    var token = await LocalDBServices.getToken();
-    var uri = await getInitialUri();
-    var language = await LocalDBServices.getLanguage();
 
+    /// Mendapatkan bahasa saat ini
+    var language = await LocalDBServices.getLanguage();
     if (language != null) {
       Localization.changeLocale(language);
     }
 
+    /// Cek koneksi internet
     if (!GlobalController.to.internetStatus.value) {
       await GlobalController.to.showAlert();
     }
 
+    /// Mendapatkan user dan token dari local DB service
+    var user = await LocalDBServices.getUser();
+    var token = await LocalDBServices.getToken();
+
+    /// Mendapatkan uri saat ini
+    var uri = await getInitialUri();
+
+    /// Jika ada sesi login
     if (user != null && token != null) {
+      /// Ke halaman utama
+      Get.offAllNamed('/dashboard');
+
       if (uri != null) {
-        Get.offAllNamed('/dashboard');
+        /// Jika ada uri, proses uni links
         GlobalController.to.processUniLinks(uri);
-      } else {
-        /// Jika ada sesi ke halaman dashboard
-        Get.offAllNamed('/dashboard');
       }
     } else {
       /// Jika tidak ada sesi ke halaman login

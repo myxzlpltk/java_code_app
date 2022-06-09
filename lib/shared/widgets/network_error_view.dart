@@ -16,15 +16,22 @@ class NetworkErrorView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          /// Judul error
           Text('Error'.tr, style: Get.textTheme.headlineSmall),
           15.verticalSpacingRadius,
+
+          /// Icon no internet
           SvgPicture.asset(AssetConst.iconNoInternet, width: 0.6.sw),
+
+          /// Pesan error
           Text(
             'Not connected to the internet'.tr,
             style: Get.textTheme.titleSmall,
             textAlign: TextAlign.center,
           ),
           15.verticalSpacingRadius,
+
+          /// Button konfirmasi
           ElevatedButton(
             onPressed: () => AppSettings.openDeviceSettings(),
             style: ElevatedButton.styleFrom(

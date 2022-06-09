@@ -11,6 +11,7 @@ class ServerErrorListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        /// Listview
         ListView(),
         Center(
           child: Column(
@@ -18,11 +19,14 @@ class ServerErrorListView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              /// Icon server error
               SvgPicture.asset(
                 AssetConst.iconServerError,
                 width: 250.r,
               ),
               25.verticalSpacingRadius,
+
+              /// Teks server error
               Text(
                 'Server error'.tr,
                 style: Get.textTheme.bodyMedium,

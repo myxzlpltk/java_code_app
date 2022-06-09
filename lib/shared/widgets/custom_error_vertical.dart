@@ -20,11 +20,14 @@ class CustomErrorVertical extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          /// Icon server error
           SvgPicture.asset(
             AssetConst.iconServerError,
             width: 250.r,
           ),
           15.verticalSpacingRadius,
+
+          /// Pesan error
           Text(
             message,
             style: Get.textTheme.bodyMedium,

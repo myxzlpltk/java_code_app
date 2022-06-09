@@ -22,13 +22,13 @@ class CartItem extends Equatable {
     required this.toppings,
   });
 
-  /// Getter untuk makanan
+  /// Apakah menu ini adalah makanan
   bool get isFood => menu.kategori == foodCategory;
 
-  /// Getter untuk minuman
+  /// Apakah menu ini adalah minuman
   bool get isDrink => menu.kategori == drinkCategory;
 
-  /// Total level price
+  /// Mendapatkan harga dari level yang digunakan
   int get totalLevelPrice {
     if (level == null) {
       return 0;
@@ -37,7 +37,7 @@ class CartItem extends Equatable {
     }
   }
 
-  /// Total topping price
+  /// Mendapatkan harga dari topping yang digunakan
   int get totalToppingsPrice {
     if (toppings == null) {
       return 0;
@@ -46,12 +46,12 @@ class CartItem extends Equatable {
     }
   }
 
-  /// Price per item with level or topping
+  /// Mendapatkan harga dari menu beserta level dan topping
   int get price {
     return menu.harga + totalLevelPrice + totalToppingsPrice;
   }
 
-  /// Total price = price * quantity
+  /// Mendapakan harga total dari menu dikali dengan jumlah yang dipesan
   int get totalPrice {
     return price * quantity;
   }

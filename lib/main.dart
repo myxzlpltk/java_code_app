@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// Screen Util Init berdasarkan ukuran desain aplikasi
     return ScreenUtilInit(
       designSize: appDesignSize,
       builder: (context, child) => GetMaterialApp(

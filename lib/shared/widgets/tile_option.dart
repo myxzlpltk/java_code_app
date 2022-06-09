@@ -44,6 +44,7 @@ class TileOption extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 10.r),
           child: Row(
             children: [
+              /// Icon
               Conditional.single(
                 context: context,
                 conditionBuilder: (context) => icon == null,
@@ -57,10 +58,14 @@ class TileOption extends StatelessWidget {
                   ),
                 ),
               ),
+
+              /// Teks title
               Text(
                 title,
                 style: titleStyle ?? Get.textTheme.titleSmall,
               ),
+
+              /// Teks subtitle
               Conditional.single(
                 context: context,
                 conditionBuilder: (context) => subtitle != null,
@@ -71,6 +76,8 @@ class TileOption extends StatelessWidget {
                 fallbackBuilder: (context) => const SizedBox(),
               ),
               10.horizontalSpaceRadius,
+
+              /// Teks message
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -100,6 +107,8 @@ class TileOption extends StatelessWidget {
                   ],
                 ),
               ),
+
+              /// Icon right chevron
               Conditional.single(
                 context: context,
                 conditionBuilder: (context) => onTap == null,

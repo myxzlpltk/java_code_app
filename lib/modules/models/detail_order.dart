@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:equatable/equatable.dart';
 import 'package:java_code_app/constants/commons/constants.dart';
 
@@ -24,10 +26,10 @@ class DetailOrder extends Equatable {
     required this.catatan,
   });
 
-  /// Getter untuk makanan
+  /// Apakah menu ini adalah makanan
   bool get isFood => kategori == foodCategory;
 
-  /// Getter untuk minuman
+  /// Apakah menu ini adalah minuman
   bool get isDrink => kategori == drinkCategory;
 
   /// From json

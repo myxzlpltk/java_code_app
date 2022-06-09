@@ -4,43 +4,46 @@ import 'package:java_code_app/configs/localizations/langs/en_us.dart';
 import 'package:java_code_app/configs/localizations/langs/id_id.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 
+/// Class localization
 class Localization extends Translations {
-  /// Default locale
+  /// Mengatur default locale
   static const locale = Locale('id', 'ID');
+
+  /// Mengatur fallback locale
   static const fallbackLocale = Locale('en', 'US');
 
-  /// Supported languages
+  /// Daftar bahasa yang didukung
   static const langs = [
     'English',
     'Indonesia',
   ];
 
-  /// Supported languages flag
+  /// Daftar path asset dari bahasa yang didukung
   static const flags = [
     AssetConst.flagEN,
     AssetConst.flagID,
   ];
 
-  /// Supported locales
+  /// Daftar locale dari bahasa yang didukung
   static const locales = [
     Locale('en', 'US'),
     Locale('id', 'ID'),
   ];
 
-  /// Translations
+  /// Peta lokalisasi bahasa
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': enUS,
         'id_ID': idID,
       };
 
-  /// Change locale
+  /// Mengubah lokale
   static void changeLocale(String lang) {
     final locale = getLocaleFromLanguage(lang);
     Get.updateLocale(locale);
   }
 
-  /// Finds language in `langs` list and returns it as Locale
+  /// Mencari bahasa dan mengembalikan locale
   static Locale getLocaleFromLanguage(String lang) {
     for (int i = 0; i < langs.length; i++) {
       if (lang == langs[i]) return locales[i];
@@ -48,11 +51,12 @@ class Localization extends Translations {
     return currentLocale;
   }
 
-  /// Returns current language
+  /// Mengembalikan locale saat ini
   static Locale get currentLocale {
     return Get.locale ?? fallbackLocale;
   }
 
+  /// Mengembalikan bahasa saat ini
   static String get currentLanguage {
     return langs.elementAt(locales.indexOf(currentLocale));
   }

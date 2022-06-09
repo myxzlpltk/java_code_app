@@ -41,10 +41,13 @@ class PinDialog extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        /// Judul
         Text(
           'Verify order'.tr,
           style: Get.textTheme.headlineMedium,
         ),
+
+        /// Subjudul
         Text(
           'Enter PIN code'.tr,
           style: Get.textTheme.bodySmall!.copyWith(color: greyColor2),
@@ -55,6 +58,7 @@ class PinDialog extends StatelessWidget {
             48.horizontalSpaceRadius,
             Obx(
               () => Expanded(
+                /// Input PIN
                 child: Pinput(
                   controller: controller,
                   showCursor: false,
@@ -68,6 +72,8 @@ class PinDialog extends StatelessWidget {
                 ),
               ),
             ),
+
+            /// Tombol untuk menampilkan PIN
             Obx(
               () => IconButton(
                 padding: EdgeInsets.zero,
@@ -85,6 +91,8 @@ class PinDialog extends StatelessWidget {
             ),
           ],
         ),
+
+        /// Pesan error
         Obx(
           () => Conditional.single(
             context: context,

@@ -16,21 +16,28 @@ class FingerprintDialog extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          /// Judul
           Text(
             'Verify order'.tr,
             style: Get.textTheme.headlineMedium,
           ),
+
+          /// Subjudul
           Text(
             'Press your fingerprint'.tr,
             style: Get.textTheme.bodySmall!.copyWith(color: greyColor2),
           ),
           30.verticalSpacingRadius,
+
+          /// Icon fingerprint
           GestureDetector(
             child: SvgPicture.asset(AssetConst.iconFingerprint),
             onTap: () => Get.back<String>(result: 'fingerprint'),
           ),
           30.verticalSpacingRadius,
           DividerWithText('or'.tr),
+
+          /// Opsi menggunakan PIN
           TextButton(
             onPressed: () => Get.back<String>(result: 'pin'),
             child: Text(

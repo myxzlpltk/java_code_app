@@ -17,13 +17,19 @@ class OrderSuccessDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           28.verticalSpacingRadius,
+
+          /// Icon
           SvgPicture.asset(AssetConst.iconOrderSuccess),
           28.verticalSpacingRadius,
+
+          /// Judul
           Text(
             'Order is being prepared'.tr,
             style: Get.textTheme.headlineMedium,
           ),
           14.verticalSpacingRadius,
+
+          /// Subjudul
           Text(
             'You can track your order in order history'.tr,
             style: Get.textTheme.bodySmall!.copyWith(color: greyColor2),

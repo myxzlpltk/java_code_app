@@ -13,7 +13,7 @@ import 'package:java_code_app/utils/extensions/currency_extension.dart';
 class MenuCard extends StatelessWidget {
   final Menu menu;
   final int? price;
-  final bool simple;
+  final bool isSimple;
   final int quantity;
   final String note;
   final void Function()? onTap;
@@ -25,14 +25,27 @@ class MenuCard extends StatelessWidget {
     Key? key,
     required this.menu,
     this.price,
-    this.simple = false,
     this.quantity = 0,
     this.note = '',
     this.onTap,
     this.onIncrement,
     this.onDecrement,
     this.onNoteChanged,
-  }) : super(key: key);
+  })  : isSimple = false,
+        super(key: key);
+
+  const MenuCard.simple({
+    Key? key,
+    required this.menu,
+    this.price,
+    this.quantity = 0,
+    this.note = '',
+    this.onTap,
+    this.onIncrement,
+    this.onDecrement,
+    this.onNoteChanged,
+  })  : isSimple = true,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +68,11 @@ class MenuCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            /* Image */
+
+            /// Gambar menu
             Container(
-              height: simple ? 75.r : 90.r,
-              width: simple ? 75.r : 90.r,
+              height: isSimple ? 75.r : 90.r,
+              width: isSimple ? 75.r : 90.r,
               margin: EdgeInsets.only(right: 12.r),
               padding: EdgeInsets.all(5.r),
               decoration: BoxDecoration(
@@ -77,30 +91,40 @@ class MenuCard extends StatelessWidget {
                 ),
               ),
             ),
+
+            /// Informasi menu
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  /// Nama menu
                   Text(
                     menu.nama,
                     style: Get.textTheme.titleMedium,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
+
+                  /// Harga menu
                   Text(
                     (price ?? menu.harga).toRupiah(),
                     style: Get.textTheme.bodyMedium!.copyWith(
                         color: blueColor, fontWeight: FontWeight.bold),
                   ),
                   5.verticalSpacingRadius,
+
+                  /// Catatan menu
                   Conditional.single(
                     context: context,
-                    conditionBuilder: (context) => !simple,
+                    conditionBuilder: (context) => !isSimple,
                     widgetBuilder: (context) => Row(
                       children: [
+                        /// Icon edit
                         SvgPicture.asset(AssetConst.iconEdit, height: 12.r),
                         7.horizontalSpaceRadius,
+
+                        /// Text field
                         Expanded(
                           child: TextFormField(
                             initialValue: note,
@@ -119,9 +143,11 @@ class MenuCard extends StatelessWidget {
                 ],
               ),
             ),
+
+            /// Informasi counter kuantitas
             Conditional.single(
               context: context,
-              conditionBuilder: (context) => !simple,
+              conditionBuilder: (context) => !isSimple,
               widgetBuilder: (context) => Container(
                 height: 75.r,
                 padding: EdgeInsets.only(left: 12.r, right: 5.r),

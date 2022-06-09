@@ -20,7 +20,6 @@ class VoucherCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    imageCache.clear();
     return Material(
       color: lightColor2,
       elevation: 3,
@@ -35,6 +34,8 @@ class VoucherCard extends StatelessWidget {
             Row(
               children: [
                 15.horizontalSpaceRadius,
+
+                /// Nama voucher
                 Expanded(
                   child: Text(
                     voucher.nama,
@@ -43,6 +44,8 @@ class VoucherCard extends StatelessWidget {
                   ),
                 ),
                 10.horizontalSpaceRadius,
+
+                /// Checkbox
                 Checkbox(
                   value: isSelected,
                   onChanged: onChanged,
@@ -61,6 +64,8 @@ class VoucherCard extends StatelessWidget {
               ],
             ),
             12.verticalSpacingRadius,
+
+            /// Gambar voucher
             Hero(
               tag: 'voucher-image-${voucher.id_voucher}',
               child: Material(

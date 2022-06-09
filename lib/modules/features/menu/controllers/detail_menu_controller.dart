@@ -13,13 +13,16 @@ import 'package:java_code_app/shared/styles/shapes.dart';
 class DetailMenuController extends GetxController {
   static DetailMenuController get to => Get.find();
 
+  /// Status menu
   RxString status = RxString('loading');
   RxBool isExistsInCart = RxBool(false);
 
+  /// Data menu, level, dan topping
   Rxn<Menu> menu = Rxn<Menu>();
   RxList<MenuVariant> levels = RxList<MenuVariant>();
   RxList<MenuVariant> toppings = RxList<MenuVariant>();
 
+  /// Data keranjang
   RxInt quantity = RxInt(1);
   Rxn<MenuVariant> selectedLevel = Rxn<MenuVariant>();
   RxList<MenuVariant> selectedToppings = RxList<MenuVariant>();
@@ -29,10 +32,10 @@ class DetailMenuController extends GetxController {
   void onInit() {
     super.onInit();
 
-    /// Set menu from argument
+    /// Atur menu dari argumen
     menu.value = Get.arguments as Menu;
 
-    /// Set menu from API
+    /// Lengkapi data menu dari API
     MenuRepository.getFromId(menu.value!.id_menu).then((menuRes) {
       /// Jika request API sukses
       if (menuRes.status_code == 200) {
@@ -40,7 +43,8 @@ class DetailMenuController extends GetxController {
         levels.value = menuRes.level;
         toppings.value = menuRes.topping;
 
-        if (levels.isNotEmpty) {
+        /// Atur level ke default
+        if (levels.isNotEmpty && selectedLevel.value == null) {
           selectedLevel.value = levels.first;
         }
       } else {
@@ -49,10 +53,10 @@ class DetailMenuController extends GetxController {
     });
 
     /// Cari apakah sudah ada dikeranjang
-    final cartOrderDetail =
-        CartController.to.cart.firstWhereOrNull((e) => e.menu == menu.value);
+    final cartOrderDetail = CartController.to.cart
+        .firstWhereOrNull((e) => e.menu.id_menu == menu.value?.id_menu);
 
-    /// Jika ada dikeranjang
+    /// Jika ada dikeranjang, update data keranjang
     if (cartOrderDetail != null) {
       isExistsInCart.value = true;
       selectedLevel.value = cartOrderDetail.level;
@@ -69,6 +73,7 @@ class DetailMenuController extends GetxController {
 
   /// On decrement quantity
   void onDecrement() {
+    /// Jika quantity lebih dari 1, maka decrement
     if (quantity > 0) quantity.value--;
   }
 
@@ -120,10 +125,14 @@ class DetailMenuController extends GetxController {
   /// Set topping
   void toggleTopping(MenuVariant topping) {
     if (selectedToppings.contains(topping)) {
+      /// Jika topping sudah ada, hapus dari list
       selectedToppings.remove(topping);
     } else {
+      /// Jika topping belum ada, tambahkan ke list
       selectedToppings.add(topping);
     }
+
+    /// Sorting list topping berdasarkan nama
     selectedToppings.sort((a, b) => a.keterangan.compareTo(b.keterangan));
   }
 
@@ -132,6 +141,7 @@ class DetailMenuController extends GetxController {
       ? selectedToppings.map((topping) => topping.keterangan).join(', ')
       : 'Choose topping'.tr;
 
+  /// Getter untuk Cart Item
   CartItem get cartItem => CartItem(
       menu: menu.value!,
       quantity: quantity.value,
@@ -139,7 +149,7 @@ class DetailMenuController extends GetxController {
       level: selectedLevel.value,
       toppings: toppings.isEmpty ? null : selectedToppings.toList());
 
-  /// On add to cart
+  /// Tambahkan menu ke keranjang
   void addToCart() {
     if (status.value == 'success' &&
         (selectedLevel.value != null || levels.isEmpty)) {
@@ -151,6 +161,7 @@ class DetailMenuController extends GetxController {
     }
   }
 
+  /// Hapus dari keranjang
   void deleteFromCart() {
     CartController.to.remove(cartItem);
     Get.offNamedUntil(

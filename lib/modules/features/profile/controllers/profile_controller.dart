@@ -23,6 +23,7 @@ import 'package:java_code_app/utils/services/local_db_services.dart';
 class ProfileController extends GetxController {
   static ProfileController get to => Get.find();
 
+  /// Data user
   Rx<User> user = Rx<User>(User.dummy);
   Rx<String> currentLanguage = RxString(Localization.currentLanguage);
   RxString deviceInfo = RxString('');
@@ -43,10 +44,13 @@ class ProfileController extends GetxController {
     });
   }
 
+  /// Load user data
   Future<void> loadData() async {
+    /// Fetch data user dari API
     UserRes userRes = await UserRepository.get();
 
     if (userRes.status_code == 200) {
+      /// Jika berhasil, simpan data
       user.value = User.dummy;
       user.value = userRes.user!;
       await LocalDBServices.setUser(userRes.user!);
@@ -62,12 +66,14 @@ class ProfileController extends GetxController {
 
   /// Update photo
   void openUpdatePhotoDialog() async {
+    /// Buka dialog pilih sumber gambar
     ImageSource? imageSource = await Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
       content: const ImagePickerDialog(),
     );
 
+    /// Jika pilih sumber gambar, buka dialog ambil gambar sesuai sumber
     if (imageSource == null) return;
     var image = await ImagePicker().pickImage(
       source: imageSource,
@@ -76,6 +82,7 @@ class ProfileController extends GetxController {
       imageQuality: 75,
     );
 
+    /// Jika gambar diambil, buka dialog crop gambar
     if (image == null) return;
     final CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: image.path,
@@ -91,11 +98,14 @@ class ProfileController extends GetxController {
       ],
     );
 
+    /// Jika gambar dicrop, encode gambar ke base64
     if (croppedFile == null) return;
     final base64Image = base64Encode(await croppedFile.readAsBytes());
 
+    /// Simpan gambar melalui API
     UserRes userRes = await UserRepository.updatePhoto(base64Image);
 
+    /// Update data user
     if (userRes.status_code == 200) {
       user.value = User.dummy;
       user.value = userRes.user!;
@@ -105,12 +115,14 @@ class ProfileController extends GetxController {
 
   /// Update KTP
   void openVerifyIDDialog() async {
+    /// Buka dialog input sumber gambar
     ImageSource? imageSource = await Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
       content: const ImagePickerDialog(),
     );
 
+    /// Jika pilih sumber gambar, buka dialog ambil gambar sesuai sumber
     if (imageSource == null) return;
     var image = await ImagePicker().pickImage(
       source: imageSource,
@@ -119,11 +131,14 @@ class ProfileController extends GetxController {
       imageQuality: 90,
     );
 
+    /// Jika gambar diambil, encode gambar ke base64
     if (image == null) return;
     final base64Image = base64Encode(await image.readAsBytes());
 
+    /// Simpan gambar melalui API
     UserRes userRes = await UserRepository.updateKTP(base64Image);
 
+    /// Update data user
     if (userRes.status_code == 200) {
       user.value = User.dummy;
       user.value = userRes.user!;

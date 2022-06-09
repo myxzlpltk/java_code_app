@@ -13,15 +13,20 @@ class GlobalController extends GetxController {
   /// Instance dari connectivity_plus
   final Connectivity _connectivity = Connectivity();
 
+  /// Status internet
   RxBool internetStatus = RxBool(true);
 
   @override
   void onInit() {
     super.onInit();
 
+    /// Cek konektivitas
     checkConnectivity();
+
+    /// Listen dari perubahan konektivitas
     _connectivity.onConnectivityChanged.listen(_updateConnectivity);
 
+    /// Inisialisasi uni links
     initUniLinks();
   }
 
@@ -35,9 +40,13 @@ class GlobalController extends GetxController {
     switch (result) {
       case ConnectivityResult.mobile:
       case ConnectivityResult.wifi:
+
+        /// Jika koneksi internet berhasil
         internetStatus.value = true;
         break;
       default:
+
+        /// Jika koneksi internet gagal
         internetStatus.value = false;
         if (Get.currentRoute != AppRoutes.splashView) {
           showAlert();
@@ -56,13 +65,13 @@ class GlobalController extends GetxController {
   }
 
   Future<void> initUniLinks() async {
-    /// Background process
+    /// Listen dari perubahan uni link
     uriLinkStream.listen(processUniLinks);
   }
 
   void processUniLinks(Uri? uri) async {
     if (uri != null && uri.queryParameters['id_promo'] != null) {
-      /// Navigate to detail promo
+      /// Navigasi ke detail promo
       await Get.toNamed(
         AppRoutes.detailPromoView,
         arguments: int.parse(uri.queryParameters['id_promo']!),

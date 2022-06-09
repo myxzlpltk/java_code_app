@@ -15,6 +15,7 @@ class DiscountInfo extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        /// Title
         Text(
           'Info discount'.tr,
           style: Get.textTheme.headlineMedium!.copyWith(
@@ -22,25 +23,30 @@ class DiscountInfo extends StatelessWidget {
           ),
         ),
         30.verticalSpacingRadius,
+
+        /// Daftar info diskon
         ...discounts.map<Widget>(
           (discount) => Padding(
-            padding: EdgeInsets.only(bottom: 7.r),
+            padding: EdgeInsets.fromLTRB(15.r, 0.r, 15.r, 7.r),
             child: Row(
               children: [
-                15.horizontalSpaceRadius,
+                /// Nama diskon
                 Expanded(
                   child: Text(
                     discount.nama.toTitleCase(),
                     style: Get.textTheme.bodyLarge,
                   ),
                 ),
+
+                /// Nominal diskon
                 Text('${discount.nominal}%', style: Get.textTheme.titleSmall),
-                15.horizontalSpaceRadius,
               ],
             ),
           ),
         ),
         30.verticalSpacingRadius,
+
+        /// Tombol OK
         SizedBox(
           width: 168.r,
           child: PrimaryButton(text: 'Okay'.tr, onPressed: () => Get.back()),

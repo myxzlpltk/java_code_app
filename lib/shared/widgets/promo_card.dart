@@ -28,6 +28,7 @@ class PromoCard extends StatelessWidget {
         width: 282.r,
         height: 158.r,
         decoration: BoxDecoration(
+          color: blueColor.withOpacity(0.9),
           image: DecorationImage(
             image: promo.foto == null
                 ? const AssetImage(AssetConst.bgPromo)
@@ -58,6 +59,8 @@ class PromoCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+
+                  /// Nominal promo
                   Conditional.single(
                     context: context,
                     conditionBuilder: (context) => promo.type == 'diskon',
@@ -106,6 +109,8 @@ class PromoCard extends StatelessWidget {
                     ),
                   ),
                   5.verticalSpacingRadius,
+
+                  /// Judul diskon atau voucher
                   Text(
                     promo.nama.toTitleCase(),
                     style: Get.textTheme.labelMedium!.copyWith(

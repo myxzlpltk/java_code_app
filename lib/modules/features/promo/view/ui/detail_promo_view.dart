@@ -43,6 +43,7 @@ class DetailPromoView extends StatelessWidget {
       backgroundColor: lightColor3,
       body: CustomScrollView(
         slivers: [
+          /// Kartu promo
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(25.r),
@@ -73,6 +74,8 @@ class DetailPromoView extends StatelessWidget {
               ),
             ),
           ),
+
+          /// Info promo
           SliverFillRemaining(
             hasScrollBody: false,
             child: Container(
@@ -93,6 +96,7 @@ class DetailPromoView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          /// Judul promo
                           Expanded(
                             child: Text(
                               DetailPromoController.to.promo.value!.nama
@@ -101,6 +105,8 @@ class DetailPromoView extends StatelessWidget {
                             ),
                           ),
                           25.horizontalSpaceRadius,
+
+                          /// Nominal promo
                           Text(
                             DetailPromoController
                                 .to.promo.value!.typeAmountLabel,
@@ -115,6 +121,8 @@ class DetailPromoView extends StatelessWidget {
                   17.verticalSpacingRadius,
                   Divider(color: const Color(0xFF2E2E2E).withOpacity(0.25)),
                   13.verticalSpacingRadius,
+
+                  /// Judul syarat dan ketentuan
                   Row(
                     children: [
                       const Icon(Icons.list, color: blueColor),
@@ -126,6 +134,8 @@ class DetailPromoView extends StatelessWidget {
                     ],
                   ),
                   10.verticalSpacingRadius,
+
+                  /// Informasi syarat dan ketentuan
                   Obx(
                     () => Conditional.single(
                       context: context,
@@ -153,6 +163,8 @@ class DetailPromoView extends StatelessWidget {
           ),
         ],
       ),
+
+      /// Tombol share
       floatingActionButton: FloatingActionButton(
         backgroundColor: blueColor,
         foregroundColor: Colors.white,

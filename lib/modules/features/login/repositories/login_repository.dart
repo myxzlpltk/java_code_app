@@ -10,11 +10,9 @@ class LoginRepository {
   static final Dio _dio = ApiServices.dioCall();
 
   /// Memanggil API untuk login dengan email dan kata sandi
-  /// @author: Saddam Azy (myxzlpltk@gmail.com)
-  static Future<UserRes> getUserWithEmailAndPassword(
-      String email, String password) async {
-    /// Memanggil API login dengan method POST
+  static Future<UserRes> getUser(String email, String password) async {
     try {
+      /// Memanggil API login dengan method POST
       var response = await _dio.post(ApiConst.login, data: {
         'email': email,
         'password': password,
@@ -27,10 +25,9 @@ class LoginRepository {
   }
 
   /// Memanggil API untuk login dengan email google dan kata sandi
-  /// @author: Saddam Azy (myxzlpltk@gmail.com)
   static Future<UserRes> getUserFromGoogle(String nama, String email) async {
-    /// Memanggil API login dengan method POST
     try {
+      /// Memanggil API login dengan method POST
       var response = await _dio.post(ApiConst.login, data: {
         'nama': nama,
         'email': email,

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
@@ -10,11 +12,12 @@ import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/cart/controllers/cart_controller.dart';
 import 'package:java_code_app/modules/features/home/controllers/home_controller.dart';
 import 'package:java_code_app/modules/features/home/view/components/filter_menu.dart';
+import 'package:java_code_app/modules/features/home/view/components/loading_menu_list.dart';
+import 'package:java_code_app/modules/features/home/view/components/menu_list.dart';
 import 'package:java_code_app/modules/features/home/view/components/search_bar.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
 import 'package:java_code_app/shared/widgets/custom_error_vertical.dart';
 import 'package:java_code_app/shared/widgets/empty_data_vertical.dart';
-import 'package:java_code_app/shared/widgets/menu_card.dart';
 import 'package:java_code_app/shared/widgets/promo_card.dart';
 import 'package:java_code_app/shared/widgets/rect_shimmer.dart';
 
@@ -33,7 +36,8 @@ class HomeView extends StatelessWidget {
           children: [
             Expanded(
               child: SearchBar(
-                onChanged: HomeController.to.setFilterMenu,
+                controller: HomeController.to.searchController,
+                onChanged: HomeController.to.setQueryMenu,
               ),
             ),
             IconButton(
@@ -41,7 +45,7 @@ class HomeView extends StatelessWidget {
               splashRadius: 30.r,
               visualDensity: VisualDensity.compact,
               icon: Obx(
-                () => Badge(
+                    () => Badge(
                   showBadge: CartController.to.cart.isNotEmpty,
                   badgeColor: blueColor,
                   badgeContent: Text(
@@ -59,10 +63,7 @@ class HomeView extends StatelessWidget {
         shape: CustomShape.bottomRoundedShape,
       ),
       body: RefreshIndicator(
-        onRefresh: () => Future.any([
-          HomeController.to.getListPromo(),
-          HomeController.to.getListMenu(),
-        ]),
+        onRefresh: HomeController.to.reload,
         child: ListView(
           children: [
             /// Promo section
@@ -76,7 +77,7 @@ class HomeView extends StatelessWidget {
               () => Conditional.single(
                 context: context,
                 conditionBuilder: (context) =>
-                    HomeController.to.categoryMenu.value != 'drink',
+                HomeController.to.categoryMenu.value != 'drink',
                 widgetBuilder: (context) => Column(
                   mainAxisSize: MainAxisSize.min,
                   children: foodSection(context),
@@ -86,10 +87,10 @@ class HomeView extends StatelessWidget {
             ),
 
             Obx(
-              () => Conditional.single(
+                  () => Conditional.single(
                 context: context,
                 conditionBuilder: (context) =>
-                    HomeController.to.categoryMenu.value != 'food',
+                HomeController.to.categoryMenu.value != 'food',
                 widgetBuilder: (context) => Column(
                   mainAxisSize: MainAxisSize.min,
                   children: drinkSection(context),
@@ -122,34 +123,34 @@ class HomeView extends StatelessWidget {
 
       /// Promo Section - List
       Obx(
-        () => ConditionalSwitch.single<String>(
+            () => ConditionalSwitch.single<String>(
           context: context,
           valueBuilder: (context) => HomeController.to.statusPromo.value,
           caseBuilders: {
             'loading': (context) => SizedBox(
-                  height: 188.r,
-                  child: ListView.separated(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 25.r,
-                      vertical: 15.r,
-                    ),
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, _) => RectShimmer(
-                      width: 282.r,
-                      height: 158.r,
-                      radius: 15.r,
-                    ),
-                    itemCount: 5,
-                    separatorBuilder: (context, _) => 25.horizontalSpaceRadius,
-                  ),
+              height: 188.r,
+              child: ListView.separated(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 25.r,
+                  vertical: 15.r,
                 ),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, _) => RectShimmer(
+                  width: 282.r,
+                  height: 158.r,
+                  radius: 15.r,
+                ),
+                itemCount: 5,
+                separatorBuilder: (context, _) => 25.horizontalSpaceRadius,
+              ),
+            ),
             'empty': (context) => Padding(
-                  padding: EdgeInsets.only(bottom: 15.r),
-                  child: EmptyDataVertical(width: 100.r),
-                ),
+              padding: EdgeInsets.only(bottom: 15.r),
+              child: EmptyDataVertical(width: 100.r),
+            ),
             'error': (context) => CustomErrorVertical(
-                  message: HomeController.to.messagePromo.value,
-                ),
+              message: HomeController.to.messagePromo.value,
+            ),
           },
           fallbackBuilder: (context) => SizedBox(
             height: 188.r,
@@ -188,9 +189,9 @@ class HomeView extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: 25.r, vertical: 5.r),
         itemBuilder: (context, index) => Obx(
-          () => FilterMenu(
+              () => FilterMenu(
             isSelected:
-                HomeController.to.categoryMenu.value == filters[index]['value'],
+            HomeController.to.categoryMenu.value == filters[index]['value'],
             onTap: () =>
                 HomeController.to.setCategoryMenu(filters[index]['value']!),
             iconPath: filters[index]['icon']!,
@@ -230,34 +231,14 @@ class HomeView extends StatelessWidget {
           context: context,
           valueBuilder: (context) => HomeController.to.statusMenu.value,
           caseBuilders: {
-            'loading': (context) => Wrap(
-                  runSpacing: 17.r,
-                  children: List.generate(
-                    2,
-                    (i) => RectShimmer(height: 89.r, radius: 10.r),
-                  ),
-                ),
+            'loading': (context) => const LoadingMenuList(),
             'empty': (context) => EmptyDataVertical(width: 100.r),
-            'error': (context) => Center(
-                  child: Text(
-                    HomeController.to.messageMenu.value,
-                    textAlign: TextAlign.center,
-                  ),
+            'error': (context) => CustomErrorVertical(
+                  message: HomeController.to.messageMenu.value,
                 ),
           },
-          fallbackBuilder: (context) => Wrap(
-            runSpacing: 17.r,
-            children: HomeController.to.foodMenu
-                .map<Widget>(
-                  (menu) => MenuCard(
-                    menu: menu,
-                    simple: true,
-                    onTap: () {
-                      Get.toNamed(AppRoutes.detailMenuView, arguments: menu);
-                    },
-                  ),
-                )
-                .toList(),
+          fallbackBuilder: (context) => MenuList(
+            data: HomeController.to.foodMenu,
           ),
         ),
       ),
@@ -293,34 +274,14 @@ class HomeView extends StatelessWidget {
           context: context,
           valueBuilder: (context) => HomeController.to.statusMenu.value,
           caseBuilders: {
-            'loading': (context) => Wrap(
-                  runSpacing: 17.r,
-                  children: List.generate(
-                    2,
-                    (i) => RectShimmer(height: 89.r, radius: 10.r),
-                  ),
-                ),
+            'loading': (context) => const LoadingMenuList(),
             'empty': (context) => EmptyDataVertical(width: 100.r),
-            'error': (context) => Center(
-                  child: Text(
-                    HomeController.to.messageMenu.value,
-                    textAlign: TextAlign.center,
-                  ),
+            'error': (context) => CustomErrorVertical(
+                  message: HomeController.to.messageMenu.value,
                 ),
           },
-          fallbackBuilder: (context) => Wrap(
-            runSpacing: 17.r,
-            children: HomeController.to.drinkMenu
-                .map<Widget>(
-                  (menu) => MenuCard(
-                    menu: menu,
-                    simple: true,
-                    onTap: () {
-                      Get.toNamed(AppRoutes.detailMenuView, arguments: menu);
-                    },
-                  ),
-                )
-                .toList(),
+          fallbackBuilder: (context) => MenuList(
+            data: HomeController.to.drinkMenu,
           ),
         ),
       ),

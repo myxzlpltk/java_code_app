@@ -14,19 +14,24 @@ class OrderController extends GetxController {
   void onInit() {
     super.onInit();
 
+    /// Ambil data pesanan yang sedang berjalan dan riwayat pesanan
     fetchOnGoing();
     fetchHistory();
   }
 
-  /// On going orders
+  /// Data pesanan yang sedang berjalan
   RxString onGoingStatus = RxString('loading');
   RxList<Order> onGoingOrders = RxList<Order>();
 
+  /// Ambil data pesanan yang sedang berjalan
   Future<void> fetchOnGoing() async {
     onGoingStatus.value = 'loading';
+
+    /// Fetch data pesanan yang sedang berjalan
     ListOrderRes listOrderRes = await OrderRepository.getOnGoing();
 
     if (listOrderRes.status_code == 200) {
+      /// Jika berhasil, tampilkan data
       onGoingStatus.value = 'success';
       onGoingOrders.value = listOrderRes.data!;
     } else if (listOrderRes.status_code == 204) {
@@ -36,22 +41,25 @@ class OrderController extends GetxController {
     }
   }
 
-  /// History orders
+  /// Data riwayat pesanan
   RxString historyStatus = RxString('loading');
   RxList<Order> historyOrders = RxList<Order>();
 
+  /// Data filter riwayat pesanan
   String selectedCategory = 'all';
   DateTimeRange selectedDateRange = DateTimeRange(
     start: DateTime.now().subtract(const Duration(days: 7)),
     end: DateTime.now(),
   );
 
+  /// Atur filter riwayat pesanan
   void setFilter({String? category, DateTimeRange? dateRange}) {
     selectedCategory = category ?? 'all';
     selectedDateRange = dateRange ?? selectedDateRange;
     historyOrders.refresh();
   }
 
+  /// Filter riwayat pesanan
   List<Order> get historyOrderFiltered {
     List<Order> list = historyOrders.toList();
 
@@ -73,11 +81,15 @@ class OrderController extends GetxController {
     return list;
   }
 
+  /// Ambil data riwayat pesanan
   Future<void> fetchHistory() async {
     historyStatus.value = 'loading';
+
+    /// Fetch data riwayat pesanan
     ListOrderRes listOrderRes = await OrderRepository.getHistory();
 
     if (listOrderRes.status_code == 200) {
+      /// Jika berhasil, tampilkan data
       historyStatus.value = 'success';
       historyOrders.value = listOrderRes.data!;
     } else if (listOrderRes.status_code == 204) {
@@ -87,12 +99,15 @@ class OrderController extends GetxController {
     }
   }
 
+  /// Memesan menu lagi
   void onOrderAgain(Order order) {
     for (var detail in order.menu) {
+      /// Apakah data menu masih ada
       var menu = HomeController.to.listMenu
           .firstWhereOrNull((e) => e.id_menu == detail.id_menu);
 
       if (menu != null) {
+        /// Jika menu ada, tambahkan ke cart
         CartController.to.add(CartItem(
           menu: menu,
           quantity: detail.jumlah,
@@ -103,6 +118,7 @@ class OrderController extends GetxController {
       }
     }
 
+    /// Kembali ke halaman keranjang
     Get.toNamed(AppRoutes.cartView);
   }
 }

@@ -30,6 +30,7 @@ class Order extends Equatable {
     required this.menu,
   });
 
+  /// Mendapatkan total harga tanpa potongan
   int get total => total_bayar + potongan;
 
   /// From json

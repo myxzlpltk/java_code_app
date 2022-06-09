@@ -8,6 +8,7 @@ import 'package:java_code_app/modules/models/order.dart';
 class DetailOrderController extends GetxController {
   static DetailOrderController get to => Get.find();
 
+  /// Data pesanan
   RxString status = RxString('loading');
   Rxn<Order> order = Rxn();
   Timer? timer;
@@ -16,17 +17,22 @@ class DetailOrderController extends GetxController {
   void onInit() {
     super.onInit();
 
+    /// Ambil data pesanan, dan jika berhasil, ambil data detail pesanan
+    /// Atur timer untuk mengambil data detail pesanan secara berkala
     fetch().then((_) {
-      timer = Timer.periodic(const Duration(seconds: 5), (_) => fetch());
+      timer = Timer.periodic(const Duration(seconds: 10), (_) => fetch());
     });
   }
 
   @override
   void onClose() {
     super.onClose();
+
+    /// Hentikan timer
     timer?.cancel();
   }
 
+  /// Ambil data pesanan
   Future<void> fetch() async {
     if (order.value != null) {
       status.value = 'update';
@@ -37,10 +43,11 @@ class DetailOrderController extends GetxController {
     } else if (Get.arguments is Order) {
       order.value = Get.arguments as Order;
       status.value = 'update';
-      await fetchOrderFromId((Get.arguments as Order).id_order);
+      await fetchOrderFromId(order.value!.id_order);
     }
   }
 
+  /// Ambil data pesanan dari id pesanan
   Future<void> fetchOrderFromId(int id) async {
     OrderRes orderRes = await OrderRepository.getFromId(id);
 

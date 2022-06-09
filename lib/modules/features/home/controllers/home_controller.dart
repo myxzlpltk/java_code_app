@@ -1,4 +1,5 @@
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/constants/commons/constants.dart';
 import 'package:java_code_app/modules/features/home/repositories/menu_repository.dart';
@@ -9,6 +10,8 @@ import 'package:java_code_app/modules/models/promo.dart';
 class HomeController extends GetxController {
   static HomeController get to => Get.find();
 
+  TextEditingController searchController = TextEditingController();
+
   @override
   void onInit() {
     super.onInit();
@@ -16,6 +19,22 @@ class HomeController extends GetxController {
     /// Mendapatkan promo dan menu
     getListPromo();
     getListMenu();
+  }
+
+  /// Reload data
+  Future<void> reload() async {
+    /// Bersihkan pencarian
+    searchController.clear();
+    setQueryMenu('');
+
+    /// Bersihkan filter kategori
+    setCategoryMenu('all');
+
+    /// Fetch data
+    await Future.any([
+      HomeController.to.getListPromo(),
+      HomeController.to.getListMenu(),
+    ]);
   }
 
   /// Promo
@@ -27,14 +46,18 @@ class HomeController extends GetxController {
   Future<void> getListPromo() async {
     statusPromo.value = 'loading';
 
+    /// Ambil data dari API
     var listPromoRes = await PromoRepository.getAllByUser();
 
     if (listPromoRes.status_code == 200) {
+      /// Jika request API sukses
       statusPromo.value = 'success';
       listPromo.value = listPromoRes.data!;
     } else if (listPromoRes.status_code == 204) {
+      /// Jika request API kosong
       statusPromo.value = 'empty';
     } else {
+      /// Jika request API gagal, tampilkan pesan error
       statusPromo.value = 'error';
       messagePromo.value = listPromoRes.message ?? 'Unknown error'.tr;
     }
@@ -42,7 +65,7 @@ class HomeController extends GetxController {
 
   /// Menu
   RxString categoryMenu = RxString('all');
-  RxString filterMenu = RxString('');
+  RxString queryMenu = RxString('');
   RxString statusMenu = RxString('loading');
   RxString messageMenu = RxString('');
   RxList<Menu> listMenu = RxList<Menu>();
@@ -53,9 +76,9 @@ class HomeController extends GetxController {
   }
 
   /// Update search filter menu
-  Future<void> setFilterMenu(String value) async {
+  Future<void> setQueryMenu(String value) async {
     EasyDebounce.debounce('search-menu', const Duration(milliseconds: 500), () {
-      filterMenu.value = value.trim();
+      queryMenu.value = value.trim();
     });
   }
 
@@ -86,7 +109,7 @@ class HomeController extends GetxController {
     return listMenu
         .where((e) =>
             e.kategori == category &&
-            e.nama.toLowerCase().contains(filterMenu.value.toLowerCase()))
+            e.nama.toLowerCase().contains(queryMenu.value.toLowerCase()))
         .toList();
   }
 }

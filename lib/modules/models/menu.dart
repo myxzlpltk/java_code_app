@@ -22,9 +22,10 @@ class Menu extends Equatable {
     required this.status,
   });
 
-  /// Getter untuk kategori
+  /// Apakah menu ini adalah makanan
   bool get isFood => kategori == foodCategory;
 
+  /// Apakah menu ini adalah minuman
   bool get isDrink => kategori == drinkCategory;
 
   /// From json

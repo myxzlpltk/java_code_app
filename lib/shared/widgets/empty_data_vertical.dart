@@ -7,10 +7,7 @@ import 'package:java_code_app/constants/cores/asset_const.dart';
 class EmptyDataVertical extends StatelessWidget {
   final double? width;
 
-  const EmptyDataVertical({
-    Key? key,
-    this.width,
-  }) : super(key: key);
+  const EmptyDataVertical({Key? key, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +17,14 @@ class EmptyDataVertical extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          /// Icon no data
           SvgPicture.asset(
             AssetConst.iconNoData,
             width: width ?? 250.r,
           ),
           15.verticalSpacingRadius,
+
+          /// Pesan no data
           Text(
             'No data'.tr,
             style: Get.textTheme.bodyMedium,

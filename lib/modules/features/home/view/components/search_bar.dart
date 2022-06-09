@@ -4,9 +4,14 @@ import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 
 class SearchBar extends StatelessWidget {
+  final TextEditingController controller;
   final Function(String)? onChanged;
 
-  const SearchBar({Key? key, this.onChanged}) : super(key: key);
+  const SearchBar({
+    Key? key,
+    required this.controller,
+    required this.onChanged,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +27,7 @@ class SearchBar extends StatelessWidget {
           10.horizontalSpaceRadius,
           Expanded(
             child: TextField(
+              controller: controller,
               onChanged: onChanged,
               style: Get.textTheme.headlineSmall,
               decoration: InputDecoration.collapsed(

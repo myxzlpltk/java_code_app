@@ -48,6 +48,7 @@ class CartView extends StatelessWidget {
           () => Conditional.single(
             context: context,
             conditionBuilder: (context) => CartController.to.cart.isEmpty,
+            /// Jika keranjang kosong
             widgetBuilder: (context) => SizedBox(
               width: double.infinity,
               child: Column(
@@ -65,6 +66,8 @@ class CartView extends StatelessWidget {
                 ],
               ),
             ),
+
+            /// Jika keranjang tidak kosong
             fallbackBuilder: (context) => ListView(
               padding: EdgeInsets.symmetric(horizontal: 25.r, vertical: 28.r),
               children: [

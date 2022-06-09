@@ -20,6 +20,7 @@ class QuantityCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        /// Tombol minus
         Conditional.single(
           context: context,
           conditionBuilder: (context) => quantity > 0,
@@ -39,6 +40,8 @@ class QuantityCounter extends StatelessWidget {
           ),
           fallbackBuilder: (context) => const SizedBox(),
         ),
+
+        /// Jumlah pesanan
         Container(
           constraints: BoxConstraints(minWidth: 30.r),
           padding: EdgeInsets.symmetric(horizontal: 10.r),
@@ -50,6 +53,8 @@ class QuantityCounter extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
+
+        /// Tombol plus
         Material(
           clipBehavior: Clip.antiAlias,
           borderRadius: BorderRadius.circular(4),
