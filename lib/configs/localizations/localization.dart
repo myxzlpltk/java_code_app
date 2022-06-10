@@ -33,8 +33,8 @@ class Localization extends Translations {
   /// Peta lokalisasi bahasa
   @override
   Map<String, Map<String, String>> get keys => {
-        'en_US': enUS,
-        'id_ID': idID,
+        'en_US': translations_en_US,
+        'id_ID': translations_id_ID,
       };
 
   /// Mengubah lokale

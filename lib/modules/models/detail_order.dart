@@ -27,10 +27,10 @@ class DetailOrder extends Equatable {
   });
 
   /// Apakah menu ini adalah makanan
-  bool get isFood => kategori == foodCategory;
+  bool get isFood => kategori == AppConst.foodCategory;
 
   /// Apakah menu ini adalah minuman
-  bool get isDrink => kategori == drinkCategory;
+  bool get isDrink => kategori == AppConst.drinkCategory;
 
   /// From json
   factory DetailOrder.fromJson(Map<String, dynamic> json) {

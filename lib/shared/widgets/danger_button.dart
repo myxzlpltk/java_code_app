@@ -18,7 +18,7 @@ class DangerButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        primary: redColor,
+        primary: AppColor.redColor,
         elevation: 3,
         textStyle: GoogleFonts.montserrat(
           fontSize: 14.sp,
@@ -28,7 +28,7 @@ class DangerButton extends StatelessWidget {
         ),
         padding: EdgeInsets.symmetric(horizontal: 24.r, vertical: 14.r),
         shape: RoundedRectangleBorder(
-          side: const BorderSide(color: darkRedColor, width: 1),
+          side: const BorderSide(color: AppColor.darkRedColor, width: 1),
           borderRadius: BorderRadius.circular(24),
         ),
       ),

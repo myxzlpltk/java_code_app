@@ -108,7 +108,8 @@ class ChooseVoucherView extends StatelessWidget {
             Row(
               children: [
                 10.horizontalSpaceRadius,
-                Icon(Icons.check_circle_outline, color: blueColor, size: 24.r),
+                Icon(Icons.check_circle_outline,
+                    color: AppColor.blueColor, size: 24.r),
                 10.horizontalSpaceRadius,
                 Expanded(
                   child: RichText(
@@ -124,7 +125,7 @@ class ChooseVoucherView extends StatelessWidget {
                         TextSpan(
                           text: ' ${'employee reward program'.tr}',
                           style: Get.textTheme.labelLarge!
-                              .copyWith(color: blueColor),
+                              .copyWith(color: AppColor.blueColor),
                         ),
                       ],
                     ),

@@ -63,7 +63,7 @@ class DetailPromoController extends GetxController {
     await Share.shareFiles(
       [path],
       text: 'Get this promo'.trParams({
-        'link': '$appDeepLink?id_promo=${promo.value!.id_promo}',
+        'link': '${AppConst.appDeepLink}?id_promo=${promo.value!.id_promo}',
       }),
     );
 

@@ -22,14 +22,14 @@ class TextFieldEmail extends StatelessWidget {
         labelStyle: Get.textTheme.bodySmall,
         hintText: 'Lorem.ipsum@gmail.com',
         hintStyle: Get.textTheme.bodySmall!.copyWith(
-          color: darkColor.withOpacity(0.25),
+          color: AppColor.darkColor.withOpacity(0.25),
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: blueColor, width: 1),
+          borderSide: BorderSide(color: AppColor.blueColor, width: 1),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: blueColor, width: 1),
+          borderSide: BorderSide(color: AppColor.blueColor, width: 1),
         ),
       ),
       keyboardType: TextInputType.emailAddress,

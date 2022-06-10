@@ -9,7 +9,7 @@ class HolderBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        color: greyColor3.withOpacity(0.5),
+        color: AppColor.greyColor3.withOpacity(0.5),
         height: 4.r,
         width: 104.r,
       ),

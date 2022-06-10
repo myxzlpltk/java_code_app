@@ -98,7 +98,7 @@ class TileOption extends StatelessWidget {
                             GoogleFonts.montserrat(
                               fontSize: 10.sp,
                               fontWeight: FontWeight.w400,
-                              color: darkColor2,
+                              color: AppColor.darkColor2,
                               height: 1.219,
                             ),
                       ),
@@ -115,7 +115,7 @@ class TileOption extends StatelessWidget {
                 widgetBuilder: (context) => 5.horizontalSpaceRadius,
                 fallbackBuilder: (context) => const Icon(
                   Icons.chevron_right,
-                  color: greyColor,
+                  color: AppColor.greyColor,
                 ),
               ),
             ],

@@ -30,14 +30,14 @@ class OrderCard extends StatelessWidget {
       child: Ink(
         padding: EdgeInsets.all(7.r),
         decoration: BoxDecoration(
-          color: lightColor2,
+          color: AppColor.lightColor2,
           borderRadius: BorderRadius.circular(10.r),
           boxShadow: [
             BoxShadow(
               offset: const Offset(0, 2),
               blurRadius: 8,
               spreadRadius: -1,
-              color: darkColor2.withOpacity(0.3),
+              color: AppColor.darkColor2.withOpacity(0.3),
             ),
           ],
         ),
@@ -54,17 +54,17 @@ class OrderCard extends StatelessWidget {
                     padding: EdgeInsets.all(10.r),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),
-                      color: lightColor,
+                      color: AppColor.lightColor,
                     ),
                     child: Image.network(
                       order.menu.isNotEmpty
-                          ? order.menu.first.foto ?? defaultMenuPhoto
-                          : defaultMenuPhoto,
+                          ? order.menu.first.foto ?? AppConst.defaultMenuPhoto
+                          : AppConst.defaultMenuPhoto,
                       fit: BoxFit.contain,
                       height: 75.r,
                       width: 75.r,
                       errorBuilder: (context, _, __) => Image.network(
-                        defaultMenuPhoto,
+                        AppConst.defaultMenuPhoto,
                         fit: BoxFit.contain,
                         height: 75.r,
                         width: 75.r,
@@ -90,28 +90,28 @@ class OrderCard extends StatelessWidget {
                         valueBuilder: (context) => order.status,
                         caseBuilders: {
                           0: (context) => Icon(
-                                Icons.access_time,
-                                color: yellowColor,
+                            Icons.access_time,
+                                color: AppColor.yellowColor,
                                 size: 16.r,
                               ),
                           1: (context) => Icon(
-                                Icons.access_time,
-                                color: yellowColor,
+                            Icons.access_time,
+                                color: AppColor.yellowColor,
                                 size: 16.r,
                               ),
                           2: (context) => Icon(
-                                Icons.access_time,
-                                color: yellowColor,
+                            Icons.access_time,
+                                color: AppColor.yellowColor,
                                 size: 16.r,
                               ),
                           3: (context) => Icon(
-                                Icons.check,
-                                color: greenColor,
+                            Icons.check,
+                                color: AppColor.greenColor,
                                 size: 16.r,
                               ),
                           4: (context) => Icon(
-                                Icons.close,
-                                color: redColor,
+                            Icons.close,
+                                color: AppColor.redColor,
                                 size: 16.r,
                               ),
                         },
@@ -124,29 +124,29 @@ class OrderCard extends StatelessWidget {
                           valueBuilder: (context) => order.status,
                           caseBuilders: {
                             0: (context) => Text(
-                                  'In queue'.tr,
+                              'In queue'.tr,
                                   style: Get.textTheme.labelMedium!
-                                      .copyWith(color: yellowColor),
+                                      .copyWith(color: AppColor.yellowColor),
                                 ),
                             1: (context) => Text(
-                                  'Preparing'.tr,
+                              'Preparing'.tr,
                                   style: Get.textTheme.labelMedium!
-                                      .copyWith(color: yellowColor),
+                                      .copyWith(color: AppColor.yellowColor),
                                 ),
                             2: (context) => Text(
-                                  'Ready'.tr,
+                              'Ready'.tr,
                                   style: Get.textTheme.labelMedium!
-                                      .copyWith(color: yellowColor),
+                                      .copyWith(color: AppColor.yellowColor),
                                 ),
                             3: (context) => Text(
-                                  'Completed'.tr,
+                              'Completed'.tr,
                                   style: Get.textTheme.labelMedium!
-                                      .copyWith(color: greenColor),
+                                      .copyWith(color: AppColor.greenColor),
                                 ),
                             4: (context) => Text(
-                                  'Canceled'.tr,
+                              'Canceled'.tr,
                                   style: Get.textTheme.labelMedium!
-                                      .copyWith(color: redColor),
+                                      .copyWith(color: AppColor.redColor),
                                 ),
                           },
                           fallbackBuilder: (context) => const SizedBox(),
@@ -155,7 +155,7 @@ class OrderCard extends StatelessWidget {
                       Text(
                         DateFormat('dd MMMM yyyy', 'id').format(order.tanggal),
                         style: Get.textTheme.labelMedium!
-                            .copyWith(color: greyColor),
+                            .copyWith(color: AppColor.greyColor),
                       ),
                     ],
                   ),
@@ -177,13 +177,13 @@ class OrderCard extends StatelessWidget {
                       Text(
                         order.total_bayar.toRupiah(),
                         style: Get.textTheme.labelLarge!
-                            .copyWith(color: blueColor),
+                            .copyWith(color: AppColor.blueColor),
                       ),
                       5.horizontalSpaceRadius,
                       Text(
                         '(${order.menu.length} Menu)',
                         style: Get.textTheme.labelLarge!
-                            .copyWith(color: greyColor),
+                            .copyWith(color: AppColor.greyColor),
                       ),
                     ],
                   ),

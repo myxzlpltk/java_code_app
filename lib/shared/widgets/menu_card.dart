@@ -55,11 +55,11 @@ class MenuCard extends StatelessWidget {
       child: Ink(
         padding: EdgeInsets.all(7.r),
         decoration: BoxDecoration(
-          color: lightColor2,
+          color: AppColor.lightColor2,
           borderRadius: BorderRadius.circular(10.r),
           boxShadow: [
             BoxShadow(
-              color: darkColor2.withOpacity(0.2),
+              color: AppColor.darkColor2.withOpacity(0.2),
               offset: const Offset(0, 2),
               blurRadius: 8,
               spreadRadius: -1,
@@ -68,7 +68,6 @@ class MenuCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-
             /// Gambar menu
             Container(
               height: isSimple ? 75.r : 90.r,
@@ -77,7 +76,7 @@ class MenuCard extends StatelessWidget {
               padding: EdgeInsets.all(5.r),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.r),
-                color: lightColor,
+                color: AppColor.lightColor,
               ),
               child: Hero(
                 tag: 'menu-${menu.id_menu}',
@@ -85,7 +84,7 @@ class MenuCard extends StatelessWidget {
                   menu.foto,
                   fit: BoxFit.contain,
                   errorBuilder: (context, _, __) => Image.network(
-                    defaultMenuPhoto,
+                    AppConst.defaultMenuPhoto,
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -110,7 +109,7 @@ class MenuCard extends StatelessWidget {
                   Text(
                     (price ?? menu.harga).toRupiah(),
                     style: Get.textTheme.bodyMedium!.copyWith(
-                        color: blueColor, fontWeight: FontWeight.bold),
+                        color: AppColor.blueColor, fontWeight: FontWeight.bold),
                   ),
                   5.verticalSpacingRadius,
 

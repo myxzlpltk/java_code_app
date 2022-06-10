@@ -35,18 +35,18 @@ class DashboardView extends StatelessWidget {
           () => BottomNavigationBar(
             onTap: DashboardController.to.changeTabIndex,
             currentIndex: DashboardController.to.tabIndex.value,
-            backgroundColor: darkColor2,
+            backgroundColor: AppColor.darkColor2,
             selectedLabelStyle: Get.textTheme.labelSmall,
             unselectedLabelStyle: Get.textTheme.labelSmall,
             selectedItemColor: Colors.white,
-            unselectedItemColor: greyColor2,
+            unselectedItemColor: AppColor.greyColor2,
             items: [
               BottomNavigationBarItem(
                 icon: Padding(
                   padding: EdgeInsets.only(bottom: 5.r),
                   child: SvgPicture.asset(
                     AssetConst.iconHome,
-                    color: greyColor2,
+                    color: AppColor.greyColor2,
                     height: 27.r,
                     width: 27.r,
                   ),
@@ -68,7 +68,7 @@ class DashboardView extends StatelessWidget {
                   child: Obx(
                     () => Badge(
                       showBadge: OrderController.to.onGoingOrders.isNotEmpty,
-                      badgeColor: blueColor,
+                      badgeColor: AppColor.blueColor,
                       badgeContent: Text(
                         OrderController.to.onGoingOrders.length.toString(),
                         style: Get.textTheme.labelMedium!
@@ -76,7 +76,7 @@ class DashboardView extends StatelessWidget {
                       ),
                       child: SvgPicture.asset(
                         AssetConst.iconOrder,
-                        color: greyColor2,
+                        color: AppColor.greyColor2,
                         height: 27.r,
                         width: 27.r,
                       ),
@@ -88,7 +88,7 @@ class DashboardView extends StatelessWidget {
                   child: Obx(
                     () => Badge(
                       showBadge: OrderController.to.onGoingOrders.isNotEmpty,
-                      badgeColor: blueColor,
+                      badgeColor: AppColor.blueColor,
                       badgeContent: Text(
                         OrderController.to.onGoingOrders.length.toString(),
                         style: Get.textTheme.labelMedium!
@@ -110,7 +110,7 @@ class DashboardView extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 5.r),
                   child: SvgPicture.asset(
                     AssetConst.iconProfile,
-                    color: greyColor2,
+                    color: AppColor.greyColor2,
                     height: 27.r,
                     width: 27.r,
                   ),

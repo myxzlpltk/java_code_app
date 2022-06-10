@@ -100,10 +100,10 @@ class HomeController extends GetxController {
   }
 
   /// Get food list
-  List<Menu> get foodMenu => _getListMenuByFilter(foodCategory);
+  List<Menu> get foodMenu => _getListMenuByFilter(AppConst.foodCategory);
 
   /// Get drink list
-  List<Menu> get drinkMenu => _getListMenuByFilter(drinkCategory);
+  List<Menu> get drinkMenu => _getListMenuByFilter(AppConst.drinkCategory);
 
   List<Menu> _getListMenuByFilter(String category) {
     return listMenu

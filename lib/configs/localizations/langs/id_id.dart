@@ -1,6 +1,7 @@
 // @formatter:off
+// ignore_for_file: constant_identifier_names
 
-const Map<String, String> idID = {
+const Map<String, String> translations_id_ID = {
   'Account info': 'Info akun',
   'Add note': 'Tambahkan catatan',
   'Add to order': 'Tambahkan ke pesanan',

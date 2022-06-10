@@ -45,7 +45,7 @@ class NetworkErrorView extends StatelessWidget {
             child: Row(
               children: [
                 const Spacer(),
-                const Icon(Icons.settings, color: darkColor),
+                const Icon(Icons.settings, color: AppColor.darkColor),
                 16.horizontalSpaceRadius,
                 Text(
                   'Open settings'.tr,

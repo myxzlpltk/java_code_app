@@ -32,7 +32,8 @@ class OrderSuccessDialog extends StatelessWidget {
           /// Subjudul
           Text(
             'You can track your order in order history'.tr,
-            style: Get.textTheme.bodySmall!.copyWith(color: greyColor2),
+            style:
+                Get.textTheme.bodySmall!.copyWith(color: AppColor.greyColor2),
           ),
           14.verticalSpacingRadius,
           SizedBox(

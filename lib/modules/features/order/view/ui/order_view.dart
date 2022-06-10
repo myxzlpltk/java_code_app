@@ -33,10 +33,10 @@ class OrderView extends StatelessWidget {
             shape: CustomShape.bottomRoundedShape,
             child: SafeArea(
               child: TabBar(
-                indicatorColor: blueColor,
+                indicatorColor: AppColor.blueColor,
                 indicatorWeight: 2.r,
-                unselectedLabelColor: darkColor2,
-                labelColor: blueColor,
+                unselectedLabelColor: AppColor.darkColor2,
+                labelColor: AppColor.blueColor,
                 labelStyle: Get.textTheme.titleSmall,
                 tabs: [
                   Padding(

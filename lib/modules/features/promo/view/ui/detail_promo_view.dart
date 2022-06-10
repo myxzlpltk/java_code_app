@@ -40,7 +40,7 @@ class DetailPromoView extends StatelessWidget {
         ),
         shape: CustomShape.bottomRoundedShape,
       ),
-      backgroundColor: lightColor3,
+      backgroundColor: AppColor.lightColor3,
       body: CustomScrollView(
         slivers: [
           /// Kartu promo
@@ -111,7 +111,7 @@ class DetailPromoView extends StatelessWidget {
                             DetailPromoController
                                 .to.promo.value!.typeAmountLabel,
                             style: Get.textTheme.titleMedium!
-                                .copyWith(color: blueColor),
+                                .copyWith(color: AppColor.blueColor),
                           ),
                         ],
                       ),
@@ -125,7 +125,7 @@ class DetailPromoView extends StatelessWidget {
                   /// Judul syarat dan ketentuan
                   Row(
                     children: [
-                      const Icon(Icons.list, color: blueColor),
+                      const Icon(Icons.list, color: AppColor.blueColor),
                       14.horizontalSpaceRadius,
                       Text(
                         'Terms and conditions'.tr,
@@ -166,7 +166,7 @@ class DetailPromoView extends StatelessWidget {
 
       /// Tombol share
       floatingActionButton: FloatingActionButton(
-        backgroundColor: blueColor,
+        backgroundColor: AppColor.blueColor,
         foregroundColor: Colors.white,
         onPressed: DetailPromoController.to.sharePromo,
         child: const Icon(Icons.share),

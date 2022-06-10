@@ -23,10 +23,10 @@ class CartItem extends Equatable {
   });
 
   /// Apakah menu ini adalah makanan
-  bool get isFood => menu.kategori == foodCategory;
+  bool get isFood => menu.kategori == AppConst.foodCategory;
 
   /// Apakah menu ini adalah minuman
-  bool get isDrink => menu.kategori == drinkCategory;
+  bool get isDrink => menu.kategori == AppConst.drinkCategory;
 
   /// Mendapatkan harga dari level yang digunakan
   int get totalLevelPrice {

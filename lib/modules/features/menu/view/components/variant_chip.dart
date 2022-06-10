@@ -26,8 +26,8 @@ class VariantChip extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 12.r, vertical: 5.r),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.r),
-            color: isSelected ? blueColor : Colors.white,
-            border: Border.all(color: blueColor),
+            color: isSelected ? AppColor.blueColor : Colors.white,
+            border: Border.all(color: AppColor.blueColor),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -35,7 +35,7 @@ class VariantChip extends StatelessWidget {
               Text(
                 text,
                 style: Get.textTheme.labelMedium!.copyWith(
-                  color: isSelected ? Colors.white : darkColor2,
+                  color: isSelected ? Colors.white : AppColor.darkColor2,
                 ),
               ),
               if (isSelected) ...[

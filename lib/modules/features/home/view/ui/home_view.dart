@@ -45,9 +45,9 @@ class HomeView extends StatelessWidget {
               splashRadius: 30.r,
               visualDensity: VisualDensity.compact,
               icon: Obx(
-                    () => Badge(
+                () => Badge(
                   showBadge: CartController.to.cart.isNotEmpty,
-                  badgeColor: blueColor,
+                  badgeColor: AppColor.blueColor,
                   badgeContent: Text(
                     CartController.to.cart.length.toString(),
                     style: Get.textTheme.labelMedium!
@@ -77,7 +77,7 @@ class HomeView extends StatelessWidget {
               () => Conditional.single(
                 context: context,
                 conditionBuilder: (context) =>
-                HomeController.to.categoryMenu.value != 'drink',
+                    HomeController.to.categoryMenu.value != 'drink',
                 widgetBuilder: (context) => Column(
                   mainAxisSize: MainAxisSize.min,
                   children: foodSection(context),
@@ -90,7 +90,7 @@ class HomeView extends StatelessWidget {
                   () => Conditional.single(
                 context: context,
                 conditionBuilder: (context) =>
-                HomeController.to.categoryMenu.value != 'food',
+                    HomeController.to.categoryMenu.value != 'food',
                 widgetBuilder: (context) => Column(
                   mainAxisSize: MainAxisSize.min,
                   children: drinkSection(context),
@@ -128,29 +128,29 @@ class HomeView extends StatelessWidget {
           valueBuilder: (context) => HomeController.to.statusPromo.value,
           caseBuilders: {
             'loading': (context) => SizedBox(
-              height: 188.r,
-              child: ListView.separated(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 25.r,
-                  vertical: 15.r,
+                  height: 188.r,
+                  child: ListView.separated(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 25.r,
+                      vertical: 15.r,
+                    ),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, _) => RectShimmer(
+                      width: 282.r,
+                      height: 158.r,
+                      radius: 15.r,
+                    ),
+                    itemCount: 5,
+                    separatorBuilder: (context, _) => 25.horizontalSpaceRadius,
+                  ),
                 ),
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, _) => RectShimmer(
-                  width: 282.r,
-                  height: 158.r,
-                  radius: 15.r,
-                ),
-                itemCount: 5,
-                separatorBuilder: (context, _) => 25.horizontalSpaceRadius,
-              ),
-            ),
             'empty': (context) => Padding(
-              padding: EdgeInsets.only(bottom: 15.r),
-              child: EmptyDataVertical(width: 100.r),
-            ),
+                  padding: EdgeInsets.only(bottom: 15.r),
+                  child: EmptyDataVertical(width: 100.r),
+                ),
             'error': (context) => CustomErrorVertical(
-              message: HomeController.to.messagePromo.value,
-            ),
+                  message: HomeController.to.messagePromo.value,
+                ),
           },
           fallbackBuilder: (context) => SizedBox(
             height: 188.r,
@@ -191,7 +191,7 @@ class HomeView extends StatelessWidget {
         itemBuilder: (context, index) => Obx(
               () => FilterMenu(
             isSelected:
-            HomeController.to.categoryMenu.value == filters[index]['value'],
+                HomeController.to.categoryMenu.value == filters[index]['value'],
             onTap: () =>
                 HomeController.to.setCategoryMenu(filters[index]['value']!),
             iconPath: filters[index]['icon']!,
@@ -214,12 +214,13 @@ class HomeView extends StatelessWidget {
             AssetConst.iconFood,
             width: 20.r,
             height: 20.r,
-            color: blueColor,
+            color: AppColor.blueColor,
           ),
           10.horizontalSpaceRadius,
           Text(
             'Food'.tr,
-            style: Get.textTheme.titleMedium!.copyWith(color: blueColor),
+            style:
+                Get.textTheme.titleMedium!.copyWith(color: AppColor.blueColor),
           ),
         ],
       ),
@@ -256,12 +257,13 @@ class HomeView extends StatelessWidget {
             AssetConst.iconDrink,
             width: 20.r,
             height: 20.r,
-            color: blueColor,
+            color: AppColor.blueColor,
           ),
           10.horizontalSpaceRadius,
           Text(
             'Drink'.tr,
-            style: Get.textTheme.titleMedium!.copyWith(color: blueColor),
+            style:
+                Get.textTheme.titleMedium!.copyWith(color: AppColor.blueColor),
           ),
           25.horizontalSpaceRadius,
         ],

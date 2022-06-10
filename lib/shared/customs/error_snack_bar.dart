@@ -18,7 +18,7 @@ class ErrorSnackBar extends GetSnackBar {
             style: Get.textTheme.labelMedium!.copyWith(color: Colors.white),
           ),
           duration: const Duration(seconds: 2),
-          backgroundColor: redColor,
+          backgroundColor: AppColor.redColor,
           isDismissible: true,
         );
 }

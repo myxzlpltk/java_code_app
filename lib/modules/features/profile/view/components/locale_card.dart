@@ -29,7 +29,7 @@ class LocaleCard extends StatelessWidget {
         onTap: onTap,
         child: Ink(
           padding: EdgeInsets.all(10.r),
-          color: isSelected ? blueColor : Colors.white,
+          color: isSelected ? AppColor.blueColor : Colors.white,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -42,8 +42,8 @@ class LocaleCard extends StatelessWidget {
               9.horizontalSpaceRadius,
               Text(
                 language,
-                style: Get.textTheme.labelMedium!
-                    .copyWith(color: isSelected ? Colors.white : darkColor),
+                style: Get.textTheme.labelMedium!.copyWith(
+                    color: isSelected ? Colors.white : AppColor.darkColor),
               ),
               ...Conditional.list(
                 context: context,

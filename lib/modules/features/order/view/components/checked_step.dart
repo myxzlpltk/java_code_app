@@ -10,7 +10,7 @@ class CheckedStep extends StatelessWidget {
     return Container(
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
-        color: blueColor,
+        color: AppColor.blueColor,
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(

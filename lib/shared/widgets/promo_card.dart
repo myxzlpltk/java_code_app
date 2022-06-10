@@ -28,14 +28,14 @@ class PromoCard extends StatelessWidget {
         width: 282.r,
         height: 158.r,
         decoration: BoxDecoration(
-          color: blueColor.withOpacity(0.9),
+          color: AppColor.blueColor.withOpacity(0.9),
           image: DecorationImage(
             image: promo.foto == null
                 ? const AssetImage(AssetConst.bgPromo)
                 : NetworkImage(promo.foto!) as ImageProvider<Object>,
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-              blueColor.withOpacity(0.9),
+              AppColor.blueColor.withOpacity(0.9),
               BlendMode.srcATop,
             ),
           ),
@@ -59,7 +59,6 @@ class PromoCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-
                   /// Nominal promo
                   Conditional.single(
                     context: context,

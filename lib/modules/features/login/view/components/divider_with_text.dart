@@ -17,7 +17,7 @@ class DividerWithText extends StatelessWidget {
         Text(
           text.tr,
           style: Get.textTheme.bodySmall!.copyWith(
-            color: darkColor.withOpacity(0.25),
+            color: AppColor.darkColor.withOpacity(0.25),
           ),
         ),
         15.horizontalSpaceRadius,

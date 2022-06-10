@@ -72,11 +72,11 @@ class LocationServices {
     double distanceInMeters = Geolocator.distanceBetween(
       position.latitude,
       position.longitude,
-      locationLatitude,
-      locationLongitude,
+      AppConst.locationLatitude,
+      AppConst.locationLongitude,
     );
 
     /// Apakah jarak lokasi dekat dengan lokasi Java Code dalam radius yang ditentukan?
-    return distanceInMeters <= maximumDistance;
+    return distanceInMeters <= AppConst.maximumDistance;
   }
 }

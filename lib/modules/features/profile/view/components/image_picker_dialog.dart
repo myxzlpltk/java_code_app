@@ -19,7 +19,7 @@ class ImagePickerDialog extends StatelessWidget {
             onPressed: () => Get.back(result: ImageSource.gallery),
             child: Row(
               children: [
-                const Icon(Icons.image, color: darkColor),
+                const Icon(Icons.image, color: AppColor.darkColor),
                 16.horizontalSpaceRadius,
                 Text('Gallery'.tr, style: Get.textTheme.bodySmall),
               ],
@@ -29,7 +29,7 @@ class ImagePickerDialog extends StatelessWidget {
             onPressed: () => Get.back(result: ImageSource.camera),
             child: Row(
               children: [
-                const Icon(Icons.camera, color: darkColor),
+                const Icon(Icons.camera, color: AppColor.darkColor),
                 16.horizontalSpaceRadius,
                 Text('Camera'.tr, style: Get.textTheme.bodySmall),
               ],

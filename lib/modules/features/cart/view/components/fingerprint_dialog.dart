@@ -25,7 +25,8 @@ class FingerprintDialog extends StatelessWidget {
           /// Subjudul
           Text(
             'Press your fingerprint'.tr,
-            style: Get.textTheme.bodySmall!.copyWith(color: greyColor2),
+            style:
+                Get.textTheme.bodySmall!.copyWith(color: AppColor.greyColor2),
           ),
           30.verticalSpacingRadius,
 
@@ -42,7 +43,8 @@ class FingerprintDialog extends StatelessWidget {
             onPressed: () => Get.back<String>(result: 'pin'),
             child: Text(
               'Verify using PIN code'.tr,
-              style: Get.textTheme.titleSmall!.copyWith(color: blueColor),
+              style:
+                  Get.textTheme.titleSmall!.copyWith(color: AppColor.blueColor),
             ),
           ),
         ],

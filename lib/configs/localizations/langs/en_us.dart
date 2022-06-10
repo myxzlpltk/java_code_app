@@ -1,6 +1,7 @@
 // @formatter:off
+// ignore_for_file: constant_identifier_names
 
-const Map<String, String> enUS = {
+const Map<String, String> translations_en_US = {
   'Account info': 'Account info',
   'Add note': 'Add note',
   'Add to order': 'Add to order',

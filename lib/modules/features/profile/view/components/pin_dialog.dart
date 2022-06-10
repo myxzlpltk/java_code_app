@@ -22,7 +22,7 @@ class _PinDialogState extends State<PinDialog> {
       height: 50,
       textStyle: Get.textTheme.titleLarge,
       decoration: BoxDecoration(
-        border: Border.all(color: blueColor),
+        border: Border.all(color: AppColor.blueColor),
         borderRadius: BorderRadius.circular(10.r),
       ),
     );
@@ -44,8 +44,8 @@ class _PinDialogState extends State<PinDialog> {
                   autofocus: true,
                   closeKeyboardWhenCompleted: false,
                   defaultPinTheme: defaultPinTheme,
-                  errorTextStyle:
-                      Get.textTheme.bodySmall!.copyWith(color: redColor),
+                  errorTextStyle: Get.textTheme.bodySmall!
+                      .copyWith(color: AppColor.redColor),
                   obscureText: obscure.value,
                   validator: (String? pin) {
                     if (pin?.length != 6) {
@@ -68,7 +68,7 @@ class _PinDialogState extends State<PinDialog> {
                 splashRadius: 24.r,
                 icon: Icon(
                   obscure.value ? Icons.visibility : Icons.visibility_off,
-                  color: blueColor,
+                  color: AppColor.blueColor,
                   size: 20.r,
                 ),
                 onPressed: () => obscure.value = !obscure.value,

@@ -20,17 +20,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     /// Screen Util Init berdasarkan ukuran desain aplikasi
     return ScreenUtilInit(
-      designSize: appDesignSize,
+      designSize: AppConst.appDesignSize,
       builder: (context, child) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         initialBinding: GlobalBinding(),
-        title: appName,
+        title: AppConst.appName,
         initialRoute: AppRoutes.splashView,
         getPages: AppPages.pages(),
         translations: Localization(),
         locale: Localization.locale,
         fallbackLocale: Localization.fallbackLocale,
-        theme: lightTheme,
+        theme: AppTheme.lightTheme,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

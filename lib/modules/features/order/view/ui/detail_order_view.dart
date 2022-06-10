@@ -39,7 +39,7 @@ class DetailOrderView extends StatelessWidget {
             SvgPicture.asset(
               AssetConst.iconOrder,
               width: 23.r,
-              color: blueColor,
+              color: AppColor.blueColor,
             ),
             10.horizontalSpaceRadius,
             Text('Order'.tr, style: Get.textTheme.titleMedium),
@@ -77,13 +77,13 @@ class DetailOrderView extends StatelessWidget {
                         AssetConst.iconFood,
                         width: 20.r,
                         height: 20.r,
-                        color: blueColor,
+                        color: AppColor.blueColor,
                       ),
                       10.horizontalSpaceRadius,
                       Text(
                         'Food'.tr,
                         style: Get.textTheme.titleMedium!
-                            .copyWith(color: blueColor),
+                            .copyWith(color: AppColor.blueColor),
                       ),
                     ],
                   ),
@@ -107,13 +107,13 @@ class DetailOrderView extends StatelessWidget {
                         AssetConst.iconDrink,
                         width: 20.r,
                         height: 20.r,
-                        color: blueColor,
+                        color: AppColor.blueColor,
                       ),
                       10.horizontalSpaceRadius,
                       Text(
                         'Drink'.tr,
                         style: Get.textTheme.titleMedium!
-                            .copyWith(color: blueColor),
+                            .copyWith(color: AppColor.blueColor),
                       ),
                       25.horizontalSpaceRadius,
                     ],
@@ -146,7 +146,7 @@ class DetailOrderView extends StatelessWidget {
           fallbackBuilder: (context) => Container(
             padding: EdgeInsets.all(25.r),
             decoration: BoxDecoration(
-              color: lightColor2,
+              color: AppColor.lightColor2,
               borderRadius: BorderRadius.vertical(
                 top: Radius.circular(30.r),
               ),
@@ -163,10 +163,11 @@ class DetailOrderView extends StatelessWidget {
                   message:
                       DetailOrderController.to.order.value!.total.toRupiah(),
                   titleStyle: Get.textTheme.headlineSmall,
-                  messageStyle:
-                      Get.textTheme.labelLarge!.copyWith(color: blueColor),
+                  messageStyle: Get.textTheme.labelLarge!
+                      .copyWith(color: AppColor.blueColor),
                 ),
-                Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
+                Divider(
+                    color: AppColor.darkColor2.withOpacity(0.25), height: 2.r),
 
                 /// Discount
                 ...Conditional.list(
@@ -182,11 +183,11 @@ class DetailOrderView extends StatelessWidget {
                       message: DetailOrderController.to.order.value!.potongan
                           .toRupiah(),
                       titleStyle: Get.textTheme.headlineSmall,
-                      messageStyle:
-                          Get.textTheme.bodySmall!.copyWith(color: redColor),
+                      messageStyle: Get.textTheme.bodySmall!
+                          .copyWith(color: AppColor.redColor),
                     ),
                     Divider(
-                      color: darkColor2.withOpacity(0.25),
+                      color: AppColor.darkColor2.withOpacity(0.25),
                       height: 2.r,
                     ),
                   ],
@@ -208,11 +209,11 @@ class DetailOrderView extends StatelessWidget {
                       messageSubtitle:
                           DetailOrderController.to.order.value!.nama_voucher,
                       titleStyle: Get.textTheme.headlineSmall,
-                      messageStyle:
-                          Get.textTheme.bodySmall!.copyWith(color: redColor),
+                      messageStyle: Get.textTheme.bodySmall!
+                          .copyWith(color: AppColor.redColor),
                     ),
                     Divider(
-                      color: darkColor2.withOpacity(0.25),
+                      color: AppColor.darkColor2.withOpacity(0.25),
                       height: 2.r,
                     ),
                   ],
@@ -228,7 +229,8 @@ class DetailOrderView extends StatelessWidget {
                   titleStyle: Get.textTheme.headlineSmall,
                   messageStyle: Get.textTheme.bodySmall,
                 ),
-                Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
+                Divider(
+                    color: AppColor.darkColor2.withOpacity(0.25), height: 2.r),
 
                 /// Total pay
                 TileOption(
@@ -237,10 +239,11 @@ class DetailOrderView extends StatelessWidget {
                   message: DetailOrderController.to.order.value!.total_bayar
                       .toRupiah(),
                   titleStyle: Get.textTheme.headlineSmall,
-                  messageStyle:
-                      Get.textTheme.headlineSmall!.copyWith(color: blueColor),
+                  messageStyle: Get.textTheme.headlineSmall!
+                      .copyWith(color: AppColor.blueColor),
                 ),
-                Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
+                Divider(
+                    color: AppColor.darkColor2.withOpacity(0.25), height: 2.r),
                 24.verticalSpacingRadius,
 
                 /// Status order
@@ -270,7 +273,7 @@ class DetailOrderView extends StatelessWidget {
                       flex: 42,
                       child: Container(
                         height: 4.r,
-                        color: darkColor2.withOpacity(0.25),
+                        color: AppColor.darkColor2.withOpacity(0.25),
                       ),
                     ),
                     const Spacer(flex: 3),
@@ -289,7 +292,7 @@ class DetailOrderView extends StatelessWidget {
                       flex: 42,
                       child: Container(
                         height: 4.r,
-                        color: darkColor2.withOpacity(0.25),
+                        color: AppColor.darkColor2.withOpacity(0.25),
                       ),
                     ),
                     const Spacer(flex: 3),

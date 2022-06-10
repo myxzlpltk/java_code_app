@@ -72,7 +72,7 @@ class ProfileView extends StatelessWidget {
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Material(
-                          color: blueColor,
+                          color: AppColor.blueColor,
                           child: InkWell(
                             onTap: ProfileController.to.openUpdatePhotoDialog,
                             child: Container(
@@ -103,12 +103,12 @@ class ProfileView extends StatelessWidget {
                   widgetBuilder: (context) => Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.check, color: greenColor, size: 20.r),
+                      Icon(Icons.check, color: AppColor.greenColor, size: 20.r),
                       8.horizontalSpaceRadius,
                       Text(
                         'You have verified your ID card'.tr,
                         style: Get.textTheme.labelMedium!
-                            .copyWith(color: blueColor),
+                            .copyWith(color: AppColor.blueColor),
                       ),
                     ],
                   ),
@@ -129,13 +129,13 @@ class ProfileView extends StatelessWidget {
                               AssetConst.iconKtp,
                               width: 18.r,
                               height: 18.r,
-                              color: blueColor,
+                              color: AppColor.blueColor,
                             ),
                             8.horizontalSpaceRadius,
                             Text(
                               'Verify your ID card now!'.tr,
                               style: Get.textTheme.labelMedium!
-                                  .copyWith(color: blueColor),
+                                  .copyWith(color: AppColor.blueColor),
                             ),
                           ],
                         ),
@@ -151,7 +151,8 @@ class ProfileView extends StatelessWidget {
                 padding: EdgeInsets.only(left: 20.r),
                 child: Text(
                   'Account info'.tr,
-                  style: Get.textTheme.titleMedium!.copyWith(color: blueColor),
+                  style: Get.textTheme.titleMedium!
+                      .copyWith(color: AppColor.blueColor),
                 ),
               ),
               14.verticalSpacingRadius,
@@ -159,7 +160,7 @@ class ProfileView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20.r, vertical: 30.r),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30.r),
-                  color: lightColor2,
+                  color: AppColor.lightColor2,
                 ),
                 child: Column(
                   children: [
@@ -220,7 +221,7 @@ class ProfileView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20.r, vertical: 16.r),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30.r),
-                  color: lightColor2,
+                  color: AppColor.lightColor2,
                 ),
                 child: Row(
                   children: [
@@ -242,7 +243,8 @@ class ProfileView extends StatelessWidget {
                 padding: EdgeInsets.only(left: 20.r),
                 child: Text(
                   'More info'.tr,
-                  style: Get.textTheme.titleMedium!.copyWith(color: blueColor),
+                  style: Get.textTheme.titleMedium!
+                      .copyWith(color: AppColor.blueColor),
                 ),
               ),
               14.verticalSpacingRadius,
@@ -250,7 +252,7 @@ class ProfileView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20.r, vertical: 30.r),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30.r),
-                  color: lightColor2,
+                  color: AppColor.lightColor2,
                 ),
                 child: Column(
                   children: [
@@ -260,7 +262,10 @@ class ProfileView extends StatelessWidget {
                         message: ProfileController.to.deviceInfo.value,
                       ),
                     ),
-                    TileOption(title: 'Version'.tr, message: appVersion),
+                    TileOption(
+                      title: 'Version'.tr,
+                      message: AppConst.appVersion,
+                    ),
                   ],
                 ),
               ),

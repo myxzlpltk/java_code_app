@@ -43,10 +43,12 @@ class _PhoneBottomSheetState extends State<PhoneBottomSheet> {
                     hintText: 'Phone number'.tr,
                     hintStyle: Get.textTheme.bodySmall,
                     enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: blueColor, width: 2),
+                      borderSide:
+                          BorderSide(color: AppColor.blueColor, width: 2),
                     ),
                     focusedBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: blueColor, width: 2),
+                      borderSide:
+                          BorderSide(color: AppColor.blueColor, width: 2),
                     ),
                   ),
                   maxLength: 100,
@@ -58,7 +60,7 @@ class _PhoneBottomSheetState extends State<PhoneBottomSheet> {
               IconButton(
                 icon: const Icon(Icons.check_circle),
                 splashRadius: 20.r,
-                color: blueColor,
+                color: AppColor.blueColor,
                 onPressed: () => Get.back(result: controller.text),
               ),
             ],

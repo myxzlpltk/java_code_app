@@ -34,15 +34,15 @@ class DropdownStatus extends StatelessWidget {
             contentPadding: EdgeInsets.symmetric(vertical: 4.r),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.r),
-              borderSide: BorderSide(color: blueColor, width: 1.r),
+              borderSide: BorderSide(color: AppColor.blueColor, width: 1.r),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.r),
-              borderSide: BorderSide(color: blueColor, width: 1.r),
+              borderSide: BorderSide(color: AppColor.blueColor, width: 1.r),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.r),
-              borderSide: BorderSide(color: blueColor, width: 1.r),
+              borderSide: BorderSide(color: AppColor.blueColor, width: 1.r),
             ),
           ),
           items: items.entries

@@ -21,7 +21,7 @@ class VoucherCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: lightColor2,
+      color: AppColor.lightColor2,
       elevation: 3,
       clipBehavior: Clip.antiAlias,
       borderRadius: BorderRadius.circular(15.r),
@@ -49,13 +49,14 @@ class VoucherCard extends StatelessWidget {
                 Checkbox(
                   value: isSelected,
                   onChanged: onChanged,
-                  checkColor: blueColor,
-                  fillColor: MaterialStateProperty.all(lightColor2),
+                  checkColor: AppColor.blueColor,
+                  fillColor: MaterialStateProperty.all(AppColor.lightColor2),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(4.r),
                   ),
                   side: MaterialStateBorderSide.resolveWith(
-                    (_) => const BorderSide(color: darkColor2, width: 1),
+                    (_) =>
+                        const BorderSide(color: AppColor.darkColor2, width: 1),
                   ),
                   visualDensity: VisualDensity.compact,
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

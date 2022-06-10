@@ -22,7 +22,7 @@ class DetailVoucherView extends StatelessWidget {
     final Voucher voucher = Get.arguments as Voucher;
 
     return Scaffold(
-      backgroundColor: lightColor3,
+      backgroundColor: AppColor.lightColor3,
       appBar: AppBar(
         elevation: 2,
         backgroundColor: Colors.white,
@@ -57,8 +57,8 @@ class DetailVoucherView extends StatelessWidget {
                 children: [
                   Text(
                     voucher.nama,
-                    style:
-                        Get.textTheme.titleMedium!.copyWith(color: blueColor),
+                    style: Get.textTheme.titleMedium!
+                        .copyWith(color: AppColor.blueColor),
                   ),
                   Conditional.single(
                     context: context,
@@ -78,7 +78,8 @@ class DetailVoucherView extends StatelessWidget {
                     fallbackBuilder: (context) => const SizedBox(),
                   ),
                   40.verticalSpacingRadius,
-                  Divider(color: darkColor2.withOpacity(0.25), height: 1),
+                  Divider(
+                      color: AppColor.darkColor2.withOpacity(0.25), height: 1),
                   TileOption(
                     icon: AssetConst.iconDate,
                     title: 'Valid date'.tr,
@@ -86,7 +87,9 @@ class DetailVoucherView extends StatelessWidget {
                         '${DateFormat('dd/MM/yyyy').format(voucher.periode_mulai)} - ${DateFormat('dd/MM/yyyy').format(voucher.periode_selesai)}',
                     titleStyle: Get.textTheme.headlineSmall,
                   ),
-                  Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
+                  Divider(
+                      color: AppColor.darkColor2.withOpacity(0.25),
+                      height: 2.r),
                 ],
               ),
             ),

@@ -33,7 +33,7 @@ class PinDialog extends StatelessWidget {
       height: 50,
       textStyle: Get.textTheme.titleLarge,
       decoration: BoxDecoration(
-        border: Border.all(color: blueColor),
+        border: Border.all(color: AppColor.blueColor),
         borderRadius: BorderRadius.circular(10.r),
       ),
     );
@@ -50,7 +50,7 @@ class PinDialog extends StatelessWidget {
         /// Subjudul
         Text(
           'Enter PIN code'.tr,
-          style: Get.textTheme.bodySmall!.copyWith(color: greyColor2),
+          style: Get.textTheme.bodySmall!.copyWith(color: AppColor.greyColor2),
         ),
         24.verticalSpacingRadius,
         Row(
@@ -81,7 +81,7 @@ class PinDialog extends StatelessWidget {
                 splashRadius: 24.r,
                 icon: Icon(
                   obscure.value ? Icons.visibility : Icons.visibility_off,
-                  color: blueColor,
+                  color: AppColor.blueColor,
                   size: 20.r,
                 ),
                 onPressed: () {
@@ -101,7 +101,8 @@ class PinDialog extends StatelessWidget {
               padding: EdgeInsets.only(left: 15.r, right: 15.r, top: 10.r),
               child: Text(
                 errorText.value!,
-                style: Get.textTheme.bodySmall!.copyWith(color: redColor),
+                style:
+                    Get.textTheme.bodySmall!.copyWith(color: AppColor.redColor),
                 textAlign: TextAlign.center,
               ),
             ),

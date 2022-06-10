@@ -23,10 +23,10 @@ class Menu extends Equatable {
   });
 
   /// Apakah menu ini adalah makanan
-  bool get isFood => kategori == foodCategory;
+  bool get isFood => kategori == AppConst.foodCategory;
 
   /// Apakah menu ini adalah minuman
-  bool get isDrink => kategori == drinkCategory;
+  bool get isDrink => kategori == AppConst.drinkCategory;
 
   /// From json
   factory Menu.fromJson(Map<String, dynamic> json) {
@@ -36,7 +36,7 @@ class Menu extends Equatable {
       kategori: json['kategori'] as String,
       harga: json['harga'] as int,
       deskripsi: json['deskripsi'] as String,
-      foto: (json['foto'] ?? defaultMenuPhoto) as String,
+      foto: (json['foto'] ?? AppConst.defaultMenuPhoto) as String,
       status: json['status'] as int,
     );
   }

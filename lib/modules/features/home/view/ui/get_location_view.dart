@@ -33,7 +33,7 @@ class GetLocationView extends StatelessWidget {
               Text(
                 'Searching location...'.tr,
                 style: Get.textTheme.titleLarge!.copyWith(
-                  color: darkColor.withOpacity(0.5),
+                  color: AppColor.darkColor.withOpacity(0.5),
                 ),
                 textAlign: TextAlign.center,
               ),

@@ -19,11 +19,11 @@ class DetailOrderCard extends StatelessWidget {
     return Ink(
       padding: EdgeInsets.all(7.r),
       decoration: BoxDecoration(
-        color: lightColor2,
+        color: AppColor.lightColor2,
         borderRadius: BorderRadius.circular(10.r),
         boxShadow: [
           BoxShadow(
-            color: darkColor2.withOpacity(0.2),
+            color: AppColor.darkColor2.withOpacity(0.2),
             offset: const Offset(0, 2),
             blurRadius: 8,
             spreadRadius: -1,
@@ -40,13 +40,13 @@ class DetailOrderCard extends StatelessWidget {
             padding: EdgeInsets.all(5.r),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.r),
-              color: lightColor,
+              color: AppColor.lightColor,
             ),
             child: Image.network(
-              detailOrder.foto ?? defaultMenuPhoto,
+              detailOrder.foto ?? AppConst.defaultMenuPhoto,
               fit: BoxFit.contain,
               errorBuilder: (context, _, __) => Image.network(
-                defaultMenuPhoto,
+                AppConst.defaultMenuPhoto,
                 fit: BoxFit.contain,
               ),
             ),
@@ -64,8 +64,8 @@ class DetailOrderCard extends StatelessWidget {
                 ),
                 Text(
                   int.parse(detailOrder.harga).toRupiah(),
-                  style: Get.textTheme.bodyMedium!
-                      .copyWith(color: blueColor, fontWeight: FontWeight.bold),
+                  style: Get.textTheme.bodyMedium!.copyWith(
+                      color: AppColor.blueColor, fontWeight: FontWeight.bold),
                 ),
                 5.verticalSpacingRadius,
                 Row(

@@ -16,7 +16,7 @@ class LoginButtonApple extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        primary: darkColor,
+        primary: AppColor.darkColor,
         elevation: 4,
         padding: EdgeInsets.symmetric(horizontal: 36.r, vertical: 14.r),
         shape: RoundedRectangleBorder(

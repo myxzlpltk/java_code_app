@@ -45,11 +45,11 @@ class OutlinedPrimaryButton extends StatelessWidget {
           vertical: isCompact ? 0.r : 14.r,
         ),
         shape: RoundedRectangleBorder(
-          side: const BorderSide(color: darkBlueColor, width: 1),
+          side: const BorderSide(color: AppColor.darkBlueColor, width: 1),
           borderRadius: BorderRadius.circular(24),
         ),
       ),
-      child: Text(text, style: const TextStyle(color: blueColor)),
+      child: Text(text, style: const TextStyle(color: AppColor.blueColor)),
     );
   }
 }

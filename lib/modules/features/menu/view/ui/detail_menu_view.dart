@@ -32,7 +32,7 @@ class DetailMenuView extends StatelessWidget {
         title: Text('Detail menu'.tr, style: Get.textTheme.titleMedium),
         shape: CustomShape.bottomRoundedShape,
       ),
-      backgroundColor: lightColor3,
+      backgroundColor: AppColor.lightColor3,
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -71,7 +71,7 @@ class DetailMenuView extends StatelessWidget {
                         child: Text(
                           DetailMenuController.to.menu.value!.nama,
                           style: Get.textTheme.titleMedium!
-                              .copyWith(color: blueColor),
+                              .copyWith(color: AppColor.blueColor),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),
@@ -93,7 +93,9 @@ class DetailMenuView extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                   40.verticalSpacingRadius,
-                  Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
+                  Divider(
+                      color: AppColor.darkColor2.withOpacity(0.25),
+                      height: 2.r),
                   Obx(
                     () => TileOption(
                       icon: AssetConst.iconPrice,
@@ -101,7 +103,7 @@ class DetailMenuView extends StatelessWidget {
                       message:
                           DetailMenuController.to.cartItem.price.toRupiah(),
                       messageStyle: Get.textTheme.headlineSmall!
-                          .copyWith(color: blueColor),
+                          .copyWith(color: AppColor.blueColor),
                     ),
                   ),
                   Obx(
@@ -112,7 +114,7 @@ class DetailMenuView extends StatelessWidget {
                       widgetBuilder: (context) => Wrap(
                         children: [
                           Divider(
-                            color: darkColor2.withOpacity(0.25),
+                            color: AppColor.darkColor2.withOpacity(0.25),
                             height: 2.r,
                           ),
                           TileOption(
@@ -134,7 +136,7 @@ class DetailMenuView extends StatelessWidget {
                       widgetBuilder: (context) => Wrap(
                         children: [
                           Divider(
-                            color: darkColor2.withOpacity(0.25),
+                            color: AppColor.darkColor2.withOpacity(0.25),
                             height: 2.r,
                           ),
                           TileOption(
@@ -150,7 +152,9 @@ class DetailMenuView extends StatelessWidget {
                       fallbackBuilder: (context) => const SizedBox(),
                     ),
                   ),
-                  Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
+                  Divider(
+                      color: AppColor.darkColor2.withOpacity(0.25),
+                      height: 2.r),
                   Obx(
                     () => TileOption(
                       icon: AssetConst.iconEdit,
@@ -161,7 +165,9 @@ class DetailMenuView extends StatelessWidget {
                       onTap: DetailMenuController.to.openNoteBottomSheet,
                     ),
                   ),
-                  Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
+                  Divider(
+                      color: AppColor.darkColor2.withOpacity(0.25),
+                      height: 2.r),
                   40.verticalSpacingRadius,
                   Obx(
                     () => Conditional.single(

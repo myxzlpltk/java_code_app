@@ -32,9 +32,10 @@ class QuantityCounter extends StatelessWidget {
               child: Ink(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4.r),
-                  border: Border.all(color: blueColor, width: 2.r),
+                  border: Border.all(color: AppColor.blueColor, width: 2.r),
                 ),
-                child: Icon(Icons.remove, size: 20.r, color: blueColor),
+                child:
+                    Icon(Icons.remove, size: 20.r, color: AppColor.blueColor),
               ),
             ),
           ),
@@ -62,7 +63,7 @@ class QuantityCounter extends StatelessWidget {
             onTap: onIncrement,
             child: Ink(
               padding: EdgeInsets.all(2.r),
-              color: blueColor,
+              color: AppColor.blueColor,
               child: Icon(Icons.add, size: 20.r, color: Colors.white),
             ),
           ),

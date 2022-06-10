@@ -64,7 +64,7 @@ class _DatePickerState extends State<DatePicker> {
           color: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30.r),
-            side: BorderSide(color: blueColor, width: 1.r),
+            side: BorderSide(color: AppColor.blueColor, width: 1.r),
           ),
         ),
         child: Row(
@@ -80,7 +80,7 @@ class _DatePickerState extends State<DatePicker> {
               ),
             ),
             5.horizontalSpaceRadius,
-            Icon(Icons.date_range, size: 24.r, color: blueColor),
+            Icon(Icons.date_range, size: 24.r, color: AppColor.blueColor),
           ],
         ),
       ),

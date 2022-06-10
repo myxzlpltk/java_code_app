@@ -34,7 +34,7 @@ class CartView extends StatelessWidget {
             SvgPicture.asset(
               AssetConst.iconOrder,
               width: 23.r,
-              color: blueColor,
+              color: AppColor.blueColor,
             ),
             10.horizontalSpaceRadius,
             Text('Order'.tr, style: Get.textTheme.titleMedium),
@@ -48,6 +48,7 @@ class CartView extends StatelessWidget {
           () => Conditional.single(
             context: context,
             conditionBuilder: (context) => CartController.to.cart.isEmpty,
+
             /// Jika keranjang kosong
             widgetBuilder: (context) => SizedBox(
               width: double.infinity,
@@ -79,13 +80,13 @@ class CartView extends StatelessWidget {
                         AssetConst.iconFood,
                         width: 20.r,
                         height: 20.r,
-                        color: blueColor,
+                        color: AppColor.blueColor,
                       ),
                       10.horizontalSpaceRadius,
                       Text(
                         'Food'.tr,
                         style: Get.textTheme.titleMedium!
-                            .copyWith(color: blueColor),
+                            .copyWith(color: AppColor.blueColor),
                       ),
                     ],
                   ),
@@ -124,13 +125,13 @@ class CartView extends StatelessWidget {
                         AssetConst.iconDrink,
                         width: 20.r,
                         height: 20.r,
-                        color: blueColor,
+                        color: AppColor.blueColor,
                       ),
                       10.horizontalSpaceRadius,
                       Text(
                         'Drink'.tr,
                         style: Get.textTheme.titleMedium!
-                            .copyWith(color: blueColor),
+                            .copyWith(color: AppColor.blueColor),
                       ),
                       25.horizontalSpaceRadius,
                     ],
@@ -176,7 +177,7 @@ class CartView extends StatelessWidget {
               Container(
                 padding: EdgeInsets.symmetric(vertical: 25.r, horizontal: 22.r),
                 decoration: BoxDecoration(
-                  color: lightColor2,
+                  color: AppColor.lightColor2,
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(30.r),
                   ),
@@ -190,10 +191,12 @@ class CartView extends StatelessWidget {
                       subtitle: '(${CartController.to.cart.length} Menu):',
                       message: CartController.to.totalPrice.toRupiah(),
                       titleStyle: Get.textTheme.headlineSmall,
-                      messageStyle:
-                          Get.textTheme.labelLarge!.copyWith(color: blueColor),
+                      messageStyle: Get.textTheme.labelLarge!
+                          .copyWith(color: AppColor.blueColor),
                     ),
-                    Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
+                    Divider(
+                        color: AppColor.darkColor2.withOpacity(0.25),
+                        height: 2.r),
 
                     /// Discount
                     Conditional.single(
@@ -216,12 +219,14 @@ class CartView extends StatelessWidget {
                         title: 'Discount'.tr,
                         message: CartController.to.discountPrice.toRupiah(),
                         titleStyle: Get.textTheme.headlineSmall,
-                        messageStyle:
-                            Get.textTheme.bodySmall!.copyWith(color: redColor),
+                        messageStyle: Get.textTheme.bodySmall!
+                            .copyWith(color: AppColor.redColor),
                         onTap: CartController.to.openDiscountDialog,
                       ),
                     ),
-                    Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
+                    Divider(
+                        color: AppColor.darkColor2.withOpacity(0.25),
+                        height: 2.r),
 
                     /// Vouchers
                     Conditional.single(
@@ -245,12 +250,14 @@ class CartView extends StatelessWidget {
                         messageSubtitle:
                             CartController.to.selectedVoucher.value!.nama,
                         titleStyle: Get.textTheme.headlineSmall,
-                        messageStyle:
-                            Get.textTheme.bodySmall!.copyWith(color: redColor),
+                        messageStyle: Get.textTheme.bodySmall!
+                            .copyWith(color: AppColor.redColor),
                         onTap: CartController.to.openVoucherDialog,
                       ),
                     ),
-                    Divider(color: darkColor2.withOpacity(0.25), height: 2.r),
+                    Divider(
+                        color: AppColor.darkColor2.withOpacity(0.25),
+                        height: 2.r),
 
                     /// Payment options
                     TileOption(
@@ -267,7 +274,7 @@ class CartView extends StatelessWidget {
 
               /// Actions
               Container(
-                color: lightColor2,
+                color: AppColor.lightColor2,
                 child: Container(
                   padding: EdgeInsets.symmetric(
                     vertical: 10.r,
@@ -306,7 +313,7 @@ class CartView extends StatelessWidget {
                             Text(
                               CartController.to.grandTotalPrice.toRupiah(),
                               style: Get.textTheme.titleMedium!
-                                  .copyWith(color: blueColor),
+                                  .copyWith(color: AppColor.blueColor),
                             ),
                           ],
                         ),

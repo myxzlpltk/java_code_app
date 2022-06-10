@@ -90,7 +90,7 @@ class ProfileController extends GetxController {
       uiSettings: [
         AndroidUiSettings(
           toolbarTitle: 'Cropper'.tr,
-          toolbarColor: blueColor,
+          toolbarColor: AppColor.blueColor,
           toolbarWidgetColor: Colors.white,
           initAspectRatio: CropAspectRatioPreset.square,
           lockAspectRatio: true,

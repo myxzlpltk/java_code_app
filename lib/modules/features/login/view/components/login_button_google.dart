@@ -32,7 +32,7 @@ class LoginButtonGoogle extends StatelessWidget {
             style: GoogleFonts.montserrat(
               fontSize: 14.sp,
               fontWeight: FontWeight.w400,
-              color: darkColor,
+              color: AppColor.darkColor,
               height: 1.219,
             ),
           ),
@@ -41,7 +41,7 @@ class LoginButtonGoogle extends StatelessWidget {
             style: GoogleFonts.montserrat(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
-              color: darkColor,
+              color: AppColor.darkColor,
               height: 1.219,
             ),
           ),
