@@ -36,7 +36,6 @@ dependencies:
   connectivity_plus: ^2.3.0
   device_info_plus: ^3.2.3
   dio: ^4.0.6
-  easy_debounce: ^2.0.2+1
   equatable: ^2.0.3
   flutter_conditional_rendering: ^2.0.0
   flutter_html: ^3.0.0-alpha.3

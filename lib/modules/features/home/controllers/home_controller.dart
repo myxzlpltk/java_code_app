@@ -1,6 +1,6 @@
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 import 'package:java_code_app/constants/commons/constants.dart';
 import 'package:java_code_app/modules/features/home/repositories/menu_repository.dart';
 import 'package:java_code_app/modules/features/home/repositories/promo_repository.dart';
@@ -10,7 +10,9 @@ import 'package:java_code_app/modules/models/promo.dart';
 class HomeController extends GetxController {
   static HomeController get to => Get.find();
 
-  TextEditingController searchController = TextEditingController();
+  final TextEditingController searchController = TextEditingController();
+  final Debouncer debouncer =
+      Debouncer(delay: const Duration(milliseconds: 500));
 
   @override
   void onInit() {
@@ -19,6 +21,13 @@ class HomeController extends GetxController {
     /// Mendapatkan promo dan menu
     getListPromo();
     getListMenu();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    debouncer.cancel();
+    searchController.dispose();
   }
 
   /// Reload data
@@ -77,7 +86,7 @@ class HomeController extends GetxController {
 
   /// Update search filter menu
   Future<void> setQueryMenu(String value) async {
-    EasyDebounce.debounce('search-menu', const Duration(milliseconds: 500), () {
+    debouncer.call(() {
       queryMenu.value = value.trim();
     });
   }
