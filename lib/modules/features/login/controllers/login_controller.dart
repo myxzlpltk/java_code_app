@@ -47,7 +47,7 @@ class LoginController extends GetxController {
     GoogleSignInAccount? account = await googleSignIn.signIn();
 
     /// Jika akun yang disediakan null
-    if (account == null) throw Exception('error');
+    if (account == null) return;
 
     /// Memanggil API repository
     UserRes userRes = await LoginRepository.getUserFromGoogle(

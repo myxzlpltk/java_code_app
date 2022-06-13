@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/shared/widgets/network_error_view.dart';
+import 'package:java_code_app/utils/services/local_db_services.dart';
 import 'package:uni_links/uni_links.dart';
 
 class GlobalController extends GetxController {
@@ -71,11 +72,17 @@ class GlobalController extends GetxController {
 
   void processUniLinks(Uri? uri) async {
     if (uri != null && uri.queryParameters['id_promo'] != null) {
-      /// Navigasi ke detail promo
-      await Get.toNamed(
-        AppRoutes.detailPromoView,
-        arguments: int.parse(uri.queryParameters['id_promo']!),
-      );
+      /// Mendapatkan user dan token dari local DB service
+      var user = await LocalDBServices.getUser();
+      var token = await LocalDBServices.getToken();
+
+      if (user != null && token != null) {
+        /// Navigasi ke detail promo jika sudah login
+        await Get.toNamed(
+          AppRoutes.detailPromoView,
+          arguments: int.parse(uri.queryParameters['id_promo']!),
+        );
+      }
     }
   }
 }

@@ -29,14 +29,13 @@ class SplashController extends GetxController {
     var user = await LocalDBServices.getUser();
     var token = await LocalDBServices.getToken();
 
-    /// Mendapatkan uri saat ini
-    var uri = await getInitialUri();
-
     /// Jika ada sesi login
     if (user != null && token != null) {
       /// Ke halaman utama
       Get.offAllNamed('/dashboard');
 
+      /// Mendapatkan uri saat ini
+      var uri = await getInitialUri();
       if (uri != null) {
         /// Jika ada uri, proses uni links
         GlobalController.to.processUniLinks(uri);
