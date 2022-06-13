@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -68,6 +69,7 @@ class MenuCard extends StatelessWidget {
         ),
         child: Row(
           children: [
+
             /// Gambar menu
             Container(
               height: isSimple ? 75.r : 90.r,
@@ -80,11 +82,11 @@ class MenuCard extends StatelessWidget {
               ),
               child: Hero(
                 tag: 'menu-${menu.id_menu}',
-                child: Image.network(
-                  menu.foto,
+                child: CachedNetworkImage(
+                  imageUrl: menu.foto,
                   fit: BoxFit.contain,
-                  errorBuilder: (context, _, __) => Image.network(
-                    AppConst.defaultMenuPhoto,
+                  errorWidget: (context, _, __) => CachedNetworkImage(
+                    imageUrl: AppConst.defaultMenuPhoto,
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -97,6 +99,7 @@ class MenuCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
                   /// Nama menu
                   Text(
                     menu.nama,
@@ -119,6 +122,7 @@ class MenuCard extends StatelessWidget {
                     conditionBuilder: (context) => !isSimple,
                     widgetBuilder: (context) => Row(
                       children: [
+
                         /// Icon edit
                         SvgPicture.asset(AssetConst.iconEdit, height: 12.r),
                         7.horizontalSpaceRadius,

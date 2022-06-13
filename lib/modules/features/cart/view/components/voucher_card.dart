@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -55,8 +56,8 @@ class VoucherCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4.r),
                   ),
                   side: MaterialStateBorderSide.resolveWith(
-                    (_) =>
-                        const BorderSide(color: AppColor.darkColor2, width: 1),
+                        (_) =>
+                    const BorderSide(color: AppColor.darkColor2, width: 1),
                   ),
                   visualDensity: VisualDensity.compact,
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -74,7 +75,7 @@ class VoucherCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.r),
                     image: DecorationImage(
-                      image: NetworkImage(voucher.info_voucher),
+                      image: CachedNetworkImageProvider(voucher.info_voucher),
                       fit: BoxFit.cover,
                     ),
                   ),

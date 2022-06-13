@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -41,7 +42,10 @@ class DetailVoucherView extends StatelessWidget {
             padding: EdgeInsets.all(20.r),
             child: Hero(
               tag: 'voucher-image-${voucher.id_voucher}',
-              child: Image.network(voucher.info_voucher, fit: BoxFit.fitWidth),
+              child: CachedNetworkImage(
+                imageUrl: voucher.info_voucher,
+                fit: BoxFit.fitWidth,
+              ),
             ),
           ),
           Expanded(
@@ -84,7 +88,7 @@ class DetailVoucherView extends StatelessWidget {
                     icon: AssetConst.iconDate,
                     title: 'Valid date'.tr,
                     message:
-                        '${DateFormat('dd/MM/yyyy').format(voucher.periode_mulai)} - ${DateFormat('dd/MM/yyyy').format(voucher.periode_selesai)}',
+                    '${DateFormat('dd/MM/yyyy').format(voucher.periode_mulai)} - ${DateFormat('dd/MM/yyyy').format(voucher.periode_selesai)}',
                     titleStyle: Get.textTheme.headlineSmall,
                   ),
                   Divider(
@@ -115,7 +119,7 @@ class DetailVoucherView extends StatelessWidget {
           child: Conditional.single(
             context: context,
             conditionBuilder: (context) =>
-                voucher != CartController.to.selectedVoucher.value,
+            voucher != CartController.to.selectedVoucher.value,
             widgetBuilder: (context) => PrimaryButton(
               text: 'Use voucher'.tr,
               onPressed: () {

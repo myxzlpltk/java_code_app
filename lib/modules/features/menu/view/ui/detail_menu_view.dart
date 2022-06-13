@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,8 +42,8 @@ class DetailMenuView extends StatelessWidget {
               child: Center(
                 child: Hero(
                   tag: 'menu-${DetailMenuController.to.menu.value!.id_menu}',
-                  child: Image.network(
-                    DetailMenuController.to.menu.value!.foto,
+                  child: CachedNetworkImage(
+                    imageUrl: DetailMenuController.to.menu.value!.foto,
                     height: 181.r,
                     width: 234.r,
                     fit: BoxFit.contain,
@@ -78,7 +79,7 @@ class DetailMenuView extends StatelessWidget {
                       ),
                       10.horizontalSpaceRadius,
                       Obx(
-                        () => QuantityCounter(
+                            () => QuantityCounter(
                           quantity: DetailMenuController.to.quantity.value,
                           onIncrement: DetailMenuController.to.onIncrement,
                           onDecrement: DetailMenuController.to.onDecrement,
@@ -97,20 +98,20 @@ class DetailMenuView extends StatelessWidget {
                       color: AppColor.darkColor2.withOpacity(0.25),
                       height: 2.r),
                   Obx(
-                    () => TileOption(
+                        () => TileOption(
                       icon: AssetConst.iconPrice,
                       title: 'Price'.tr,
                       message:
-                          DetailMenuController.to.cartItem.price.toRupiah(),
+                      DetailMenuController.to.cartItem.price.toRupiah(),
                       messageStyle: Get.textTheme.headlineSmall!
                           .copyWith(color: AppColor.blueColor),
                     ),
                   ),
                   Obx(
-                    () => Conditional.single(
+                        () => Conditional.single(
                       context: context,
                       conditionBuilder: (context) =>
-                          DetailMenuController.to.levels.isNotEmpty,
+                      DetailMenuController.to.levels.isNotEmpty,
                       widgetBuilder: (context) => Wrap(
                         children: [
                           Divider(
@@ -129,10 +130,10 @@ class DetailMenuView extends StatelessWidget {
                     ),
                   ),
                   Obx(
-                    () => Conditional.single(
+                        () => Conditional.single(
                       context: context,
                       conditionBuilder: (context) =>
-                          DetailMenuController.to.toppings.isNotEmpty,
+                      DetailMenuController.to.toppings.isNotEmpty,
                       widgetBuilder: (context) => Wrap(
                         children: [
                           Divider(
@@ -143,9 +144,9 @@ class DetailMenuView extends StatelessWidget {
                             icon: AssetConst.iconTopping,
                             title: 'Topping'.tr,
                             message:
-                                DetailMenuController.to.selectedToppingsText,
+                            DetailMenuController.to.selectedToppingsText,
                             onTap:
-                                DetailMenuController.to.openToppingBottomSheet,
+                            DetailMenuController.to.openToppingBottomSheet,
                           ),
                         ],
                       ),
@@ -156,7 +157,7 @@ class DetailMenuView extends StatelessWidget {
                       color: AppColor.darkColor2.withOpacity(0.25),
                       height: 2.r),
                   Obx(
-                    () => TileOption(
+                        () => TileOption(
                       icon: AssetConst.iconEdit,
                       title: 'Note'.tr,
                       message: DetailMenuController.to.note.isNotEmpty
@@ -170,16 +171,16 @@ class DetailMenuView extends StatelessWidget {
                       height: 2.r),
                   40.verticalSpacingRadius,
                   Obx(
-                    () => Conditional.single(
+                        () => Conditional.single(
                       context: context,
                       conditionBuilder: (context) =>
-                          DetailMenuController.to.status.value == 'success',
+                      DetailMenuController.to.status.value == 'success',
                       widgetBuilder: (context) => SizedBox(
                         width: double.infinity,
                         child: Conditional.single(
                           context: context,
                           conditionBuilder: (context) =>
-                              DetailMenuController.to.quantity > 0,
+                          DetailMenuController.to.quantity > 0,
                           widgetBuilder: (context) => PrimaryButton(
                             text: DetailMenuController.to.isExistsInCart.value
                                 ? 'Update to order'.tr

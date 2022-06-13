@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,6 +42,7 @@ class ProfileView extends StatelessWidget {
           child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 16.r, vertical: 25.r),
             children: [
+
               /// Profile icon
               Center(
                 child: Container(
@@ -51,12 +53,12 @@ class ProfileView extends StatelessWidget {
                   child: Stack(
                     children: [
                       Obx(
-                        () => Conditional.single(
+                            () => Conditional.single(
                           context: context,
                           conditionBuilder: (context) =>
                               ProfileController.to.user.value.foto != null,
-                          widgetBuilder: (context) => Image.network(
-                            ProfileController.to.user.value.foto!,
+                          widgetBuilder: (context) => CachedNetworkImage(
+                            imageUrl: ProfileController.to.user.value.foto!,
                             width: 170.r,
                             height: 170.r,
                             fit: BoxFit.cover,
@@ -96,10 +98,10 @@ class ProfileView extends StatelessWidget {
 
               /// Verifikasi KTP
               Obx(
-                () => Conditional.single(
+                    () => Conditional.single(
                   context: context,
                   conditionBuilder: (context) =>
-                      ProfileController.to.user.value.ktp != null,
+                  ProfileController.to.user.value.ktp != null,
                   widgetBuilder: (context) => Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -165,47 +167,47 @@ class ProfileView extends StatelessWidget {
                 child: Column(
                   children: [
                     Obx(
-                      () => TileOption(
+                          () => TileOption(
                         title: 'Name'.tr,
                         message: ProfileController.to.user.value.nama,
                         onTap: ProfileController.to.openUpdateNameDialog,
                       ),
                     ),
                     Obx(
-                      () => TileOption(
+                          () => TileOption(
                         title: 'Birth date'.tr,
                         message:
-                            ProfileController.to.user.value.tgl_lahir != null
-                                ? DateFormat('dd/MM/yyyy').format(
-                                    ProfileController.to.user.value.tgl_lahir!)
-                                : '-',
+                        ProfileController.to.user.value.tgl_lahir != null
+                            ? DateFormat('dd/MM/yyyy').format(
+                            ProfileController.to.user.value.tgl_lahir!)
+                            : '-',
                         onTap: ProfileController.to.openUpdateBirthDateDialog,
                       ),
                     ),
                     Obx(
-                      () => TileOption(
+                          () => TileOption(
                         title: 'Phone number'.tr,
                         message: ProfileController.to.user.value.telepon ?? '-',
                         onTap: ProfileController.to.openUpdatePhoneDialog,
                       ),
                     ),
                     Obx(
-                      () => TileOption(
+                          () => TileOption(
                         title: 'Email'.tr,
                         message: ProfileController.to.user.value.email,
                         onTap: ProfileController.to.openUpdateEmailDialog,
                       ),
                     ),
                     Obx(
-                      () => TileOption(
+                          () => TileOption(
                         title: 'Change PIN'.tr,
                         message:
-                            ProfileController.to.user.value.pin.toObscure(),
+                        ProfileController.to.user.value.pin.toObscure(),
                         onTap: ProfileController.to.openUpdatePINDialog,
                       ),
                     ),
                     Obx(
-                      () => TileOption(
+                          () => TileOption(
                         title: 'Change language'.tr,
                         message: ProfileController.to.currentLanguage.value,
                         onTap: ProfileController.to.openLanguageDialog,
@@ -257,7 +259,7 @@ class ProfileView extends StatelessWidget {
                 child: Column(
                   children: [
                     Obx(
-                      () => TileOption(
+                          () => TileOption(
                         title: 'Device info'.tr,
                         message: ProfileController.to.deviceInfo.value,
                       ),

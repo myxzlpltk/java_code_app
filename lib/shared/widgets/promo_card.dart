@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +33,8 @@ class PromoCard extends StatelessWidget {
           image: DecorationImage(
             image: promo.foto == null
                 ? const AssetImage(AssetConst.bgPromo)
-                : NetworkImage(promo.foto!) as ImageProvider<Object>,
+                : CachedNetworkImageProvider(promo.foto!)
+                    as ImageProvider<Object>,
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
               AppColor.blueColor.withOpacity(0.9),
@@ -59,6 +61,7 @@ class PromoCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+
                   /// Nominal promo
                   Conditional.single(
                     context: context,

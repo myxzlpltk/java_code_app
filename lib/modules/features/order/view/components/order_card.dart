@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -56,15 +57,15 @@ class OrderCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.r),
                       color: AppColor.lightColor,
                     ),
-                    child: Image.network(
-                      order.menu.isNotEmpty
+                    child: CachedNetworkImage(
+                      imageUrl: order.menu.isNotEmpty
                           ? order.menu.first.foto ?? AppConst.defaultMenuPhoto
                           : AppConst.defaultMenuPhoto,
                       fit: BoxFit.contain,
                       height: 75.r,
                       width: 75.r,
-                      errorBuilder: (context, _, __) => Image.network(
-                        AppConst.defaultMenuPhoto,
+                      errorWidget: (context, _, __) => CachedNetworkImage(
+                        imageUrl: AppConst.defaultMenuPhoto,
                         fit: BoxFit.contain,
                         height: 75.r,
                         width: 75.r,
@@ -192,7 +193,7 @@ class OrderCard extends StatelessWidget {
                   Conditional.single(
                     context: context,
                     conditionBuilder: (context) =>
-                        order.status == 3 || order.status == 4,
+                    order.status == 3 || order.status == 4,
                     widgetBuilder: (context) => Wrap(
                       spacing: 15.r,
                       children: [
