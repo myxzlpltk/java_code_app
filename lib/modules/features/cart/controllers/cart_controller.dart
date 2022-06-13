@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/modules/features/cart/repositories/discount_repository.dart';
@@ -233,9 +232,12 @@ class CartController extends GetxController {
           /// Jika pengguna memilih PIN, lanjutkan PIN
           await openPinDialog();
         }
-      } on PlatformException {
-        /// Jika terjadi error, lanjutkan PIN
-        await openPinDialog();
+      } catch (e) {
+        /// Jika terjadi error, show error
+        Get.showSnackbar(ErrorSnackBar(
+          title: 'Error'.tr,
+          message: 'Fingerprint not available'.tr,
+        ));
       }
     } else {
       await openPinDialog();

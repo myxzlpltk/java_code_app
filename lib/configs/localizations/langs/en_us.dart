@@ -35,6 +35,7 @@ const Map<String, String> translations_en_US = {
   'Empty cart': 'Empty cart',
   'Enter PIN code': 'Enter PIN code',
   'Error': 'Error',
+  'Fingerprint not available': 'Fingerprint not available',
   'Food': 'Food',
   'Get this promo': 'Get this promo! Access this link\n@link',
   'Give rating': 'Give rating',

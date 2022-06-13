@@ -35,6 +35,7 @@ const Map<String, String> translations_id_ID = {
   'Empty cart': 'Keranjang kosong',
   'Enter PIN code': 'Masukkan PIN',
   'Error': 'Terjadi kesalahan',
+  'Fingerprint not available': 'Fingerprint tidak tersedia',
   'Food': 'Makanan',
   'Get this promo': 'Dapatkan promo ini! Akses link berikut\n@link',
   'Give rating': 'Beri penilaian',
