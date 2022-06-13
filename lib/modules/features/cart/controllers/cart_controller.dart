@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
+import 'package:java_code_app/constants/commons/constants.dart';
 import 'package:java_code_app/modules/features/cart/repositories/discount_repository.dart';
 import 'package:java_code_app/modules/features/cart/repositories/order_repository.dart';
 import 'package:java_code_app/modules/features/cart/repositories/voucher_repository.dart';
@@ -215,7 +216,7 @@ class CartController extends GetxController {
         /// Buka modal fingerprint
         final status = await openFingerprintDialog();
 
-        if (status == 'fingerprint') {
+        if (status == AppConst.fingerprint) {
           /// Jika pengguna memilih fingerprint, lanjutkan fingerprint
           final bool didAuthenticate = await auth.authenticate(
             localizedReason: 'Please authenticate to confirm order'.tr,
@@ -228,7 +229,7 @@ class CartController extends GetxController {
           if (didAuthenticate) {
             order();
           }
-        } else if (status == 'pin') {
+        } else if (status == AppConst.pin) {
           /// Jika pengguna memilih PIN, lanjutkan PIN
           await openPinDialog();
         }

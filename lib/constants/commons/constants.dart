@@ -21,4 +21,8 @@ class AppConst {
       'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png';
   static const String foodCategory = 'makanan';
   static const String drinkCategory = 'minuman';
+
+  /// Informasi kondisi
+  static const String fingerprint = 'fingerprint';
+  static const String pin = 'pin';
 }
