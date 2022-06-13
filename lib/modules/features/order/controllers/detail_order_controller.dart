@@ -26,10 +26,10 @@ class DetailOrderController extends GetxController {
 
   @override
   void onClose() {
-    super.onClose();
-
     /// Hentikan timer
     timer?.cancel();
+
+    super.onClose();
   }
 
   /// Ambil data pesanan

@@ -25,9 +25,11 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
-    super.onClose();
+    /// Hentikan timer dan hapus text editing controller
     debouncer.cancel();
     searchController.dispose();
+
+    super.onClose();
   }
 
   /// Reload data
