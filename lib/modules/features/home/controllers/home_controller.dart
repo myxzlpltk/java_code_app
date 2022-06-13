@@ -10,13 +10,15 @@ import 'package:java_code_app/modules/models/promo.dart';
 class HomeController extends GetxController {
   static HomeController get to => Get.find();
 
-  final TextEditingController searchController = TextEditingController();
-  final Debouncer debouncer =
-      Debouncer(delay: const Duration(milliseconds: 500));
+  late TextEditingController searchController;
+  late Debouncer debouncer;
 
   @override
   void onInit() {
     super.onInit();
+
+    searchController = TextEditingController();
+    debouncer = Debouncer(delay: const Duration(milliseconds: 500));
 
     /// Mendapatkan promo dan menu
     getListPromo();
