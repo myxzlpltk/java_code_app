@@ -212,33 +212,25 @@ class CartController extends GetxController {
 
     /// Bisa menggunakan biometrik
     if (isBiometricSupported && canCheckBiometrics) {
-      try {
-        /// Buka modal fingerprint
-        final status = await openFingerprintDialog();
+      /// Buka modal fingerprint
+      final status = await openFingerprintDialog();
 
-        if (status == AppConst.fingerprint) {
-          /// Jika pengguna memilih fingerprint, lanjutkan fingerprint
-          final bool didAuthenticate = await auth.authenticate(
-            localizedReason: 'Please authenticate to confirm order'.tr,
-            options: const AuthenticationOptions(
-              biometricOnly: true,
-            ),
-          );
+      if (status == AppConst.fingerprint) {
+        /// Jika pengguna memilih fingerprint, lanjutkan fingerprint
+        final bool didAuthenticate = await auth.authenticate(
+          localizedReason: 'Please authenticate to confirm order'.tr,
+          options: const AuthenticationOptions(
+            biometricOnly: true,
+          ),
+        );
 
-          /// Jika fingerprint berhasil, lanjutkan order
-          if (didAuthenticate) {
-            order();
-          }
-        } else if (status == AppConst.pin) {
-          /// Jika pengguna memilih PIN, lanjutkan PIN
-          await openPinDialog();
+        /// Jika fingerprint berhasil, lanjutkan order
+        if (didAuthenticate) {
+          order();
         }
-      } catch (e) {
-        /// Jika terjadi error, show error
-        Get.showSnackbar(ErrorSnackBar(
-          title: 'Error'.tr,
-          message: 'Fingerprint not available'.tr,
-        ));
+      } else if (status == AppConst.pin) {
+        /// Jika pengguna memilih PIN, lanjutkan PIN
+        await openPinDialog();
       }
     } else {
       await openPinDialog();
@@ -263,45 +255,27 @@ class CartController extends GetxController {
     /// Tutup semua modal
     Get.until(ModalRoute.withName(AppRoutes.cartView));
 
-    /// Inisialisasi jumlah percobaan
-    int tries = 0;
-
     /// Ambil data user
     final User user = await LocalDBServices.getUser() as User;
 
     /// Buka modal pin
-    await Get.defaultDialog(
+    final bool didAuthenticate = await Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
-      content: PinDialog(
-        onCheckPin: (String? pin) {
-          if (pin == user.pin) {
-            /// Jika pin benar lanjutkan order
-            order();
-            return null;
-          } else {
-            /// Jika pin salah coba lagi
-            tries++;
-
-            if (tries >= 3) {
-              /// Jika sudah 3 kali salah, buka dialog error
-              Get.until(ModalRoute.withName(AppRoutes.cartView));
-              Get.showSnackbar(ErrorSnackBar(
-                title: 'Error'.tr,
-                message:
-                    'PIN already wrong 3 times. Please try again later.'.tr,
-              ));
-              return null;
-            } else {
-              /// Tampilkan jumlah kesempatan
-              return 'PIN wrong! n chances left.'.trParams({
-                'n': (3 - tries).toString(),
-              });
-            }
-          }
-        },
-      ),
+      content: PinDialog(pin: user.pin),
     );
+
+    if (didAuthenticate) {
+      /// Jika pin berhasil, lanjutkan order
+      order();
+    } else {
+      /// Jika sudah 3 kali salah, buka dialog error
+      Get.until(ModalRoute.withName(AppRoutes.cartView));
+      Get.showSnackbar(ErrorSnackBar(
+        title: 'Error'.tr,
+        message: 'PIN already wrong 3 times. Please try again later.'.tr,
+      ));
+    }
   }
 
   /// Open order success dialog

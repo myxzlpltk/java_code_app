@@ -5,24 +5,44 @@ import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:pinput/pinput.dart';
 
-class PinDialog extends StatelessWidget {
+class PinDialog extends StatefulWidget {
+  final String pin;
+
+  const PinDialog({
+    Key? key,
+    required this.pin,
+  }) : super(key: key);
+
+  @override
+  State<PinDialog> createState() => _PinDialogState();
+}
+
+class _PinDialogState extends State<PinDialog> {
   final RxBool obscure = RxBool(true);
   final RxnString errorText = RxnString();
   final TextEditingController controller = TextEditingController();
-  final String? Function(String?) onCheckPin;
-
-  PinDialog({
-    Key? key,
-    required this.onCheckPin,
-  }) : super(key: key);
+  int tries = 0;
 
   void processPin(String? pin) async {
     await Future.delayed(const Duration(milliseconds: 500));
 
-    errorText.value = onCheckPin(pin);
+    if (pin == widget.pin) {
+      /// Jika pin benar, tutup dialog
+      Get.back<bool>(result: true);
+    } else {
+      /// Jika pin salah coba lagi
+      tries++;
 
-    if (errorText.value != null) {
-      controller.clear();
+      if (tries >= 3) {
+        /// Jika 3 kali salah, tutup dialog
+        Get.back<bool>(result: false);
+      } else {
+        /// Tampilkan jumlah kesempatan
+        controller.clear();
+        errorText.value = 'PIN wrong! n chances left.'.trParams({
+          'n': (3 - tries).toString(),
+        });
+      }
     }
   }
 
