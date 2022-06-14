@@ -29,7 +29,6 @@ class HomeController extends GetxController {
   void onClose() {
     /// Hentikan timer dan hapus text editing controller
     debouncer.cancel();
-    searchController.dispose();
 
     super.onClose();
   }
