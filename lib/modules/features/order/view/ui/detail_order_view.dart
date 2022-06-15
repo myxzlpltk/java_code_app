@@ -28,7 +28,7 @@ class DetailOrderView extends StatelessWidget {
         leading: IconButton(
           splashRadius: 30.r,
           icon: Icon(Icons.chevron_left, color: Colors.black, size: 36.r),
-          onPressed: () => Get.back(),
+          onPressed: () => Get.back(closeOverlays: true),
         ),
         centerTitle: true,
         title: Wrap(
