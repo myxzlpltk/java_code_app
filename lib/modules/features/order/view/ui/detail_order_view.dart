@@ -44,6 +44,31 @@ class DetailOrderView extends StatelessWidget {
           ],
         ),
         shape: CustomShape.bottomRoundedShape,
+        actions: [
+          Obx(
+            () => Conditional.single(
+              context: context,
+              conditionBuilder: (context) =>
+                  DetailOrderController.to.order.value?.status == 0,
+              widgetBuilder: (context) => Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.r, horizontal: 10.r),
+                child: TextButton(
+                  onPressed: DetailOrderController.to.cancel,
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    visualDensity: VisualDensity.compact,
+                  ),
+                  child: Text(
+                    'Cancel'.tr,
+                    style: Get.textTheme.labelMedium
+                        ?.copyWith(color: AppColor.redColor),
+                  ),
+                ),
+              ),
+              fallbackBuilder: (context) => const SizedBox(),
+            ),
+          ),
+        ],
       ),
       body: RefreshIndicator(
         onRefresh: DetailOrderController.to.fetch,

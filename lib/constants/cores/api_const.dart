@@ -24,6 +24,7 @@ class ApiConst {
   static const String onGoingOrder = '$apiBaseUrl/order/user';
   static const String historyOrder = '$apiBaseUrl/order/history';
   static const String detailOrder = '$apiBaseUrl/order/detail';
+  static const String cancelOrder = '$apiBaseUrl/order/batal';
 
   /// Profile
   static const String detailUser = '$apiBaseUrl/user/detail';

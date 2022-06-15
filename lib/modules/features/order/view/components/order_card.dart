@@ -91,27 +91,27 @@ class OrderCard extends StatelessWidget {
                         valueBuilder: (context) => order.status,
                         caseBuilders: {
                           0: (context) => Icon(
-                            Icons.access_time,
+                                Icons.access_time,
                                 color: AppColor.yellowColor,
                                 size: 16.r,
                               ),
                           1: (context) => Icon(
-                            Icons.access_time,
+                                Icons.access_time,
                                 color: AppColor.yellowColor,
                                 size: 16.r,
                               ),
                           2: (context) => Icon(
-                            Icons.access_time,
+                                Icons.access_time,
                                 color: AppColor.yellowColor,
                                 size: 16.r,
                               ),
                           3: (context) => Icon(
-                            Icons.check,
+                                Icons.check,
                                 color: AppColor.greenColor,
                                 size: 16.r,
                               ),
                           4: (context) => Icon(
-                            Icons.close,
+                                Icons.close,
                                 color: AppColor.redColor,
                                 size: 16.r,
                               ),
@@ -125,27 +125,27 @@ class OrderCard extends StatelessWidget {
                           valueBuilder: (context) => order.status,
                           caseBuilders: {
                             0: (context) => Text(
-                              'In queue'.tr,
+                                  'In queue'.tr,
                                   style: Get.textTheme.labelMedium!
                                       .copyWith(color: AppColor.yellowColor),
                                 ),
                             1: (context) => Text(
-                              'Preparing'.tr,
+                                  'Preparing'.tr,
                                   style: Get.textTheme.labelMedium!
                                       .copyWith(color: AppColor.yellowColor),
                                 ),
                             2: (context) => Text(
-                              'Ready'.tr,
+                                  'Ready'.tr,
                                   style: Get.textTheme.labelMedium!
                                       .copyWith(color: AppColor.yellowColor),
                                 ),
                             3: (context) => Text(
-                              'Completed'.tr,
+                                  'Completed'.tr,
                                   style: Get.textTheme.labelMedium!
                                       .copyWith(color: AppColor.greenColor),
                                 ),
                             4: (context) => Text(
-                              'Canceled'.tr,
+                                  'Canceled'.tr,
                                   style: Get.textTheme.labelMedium!
                                       .copyWith(color: AppColor.redColor),
                                 ),
@@ -193,20 +193,20 @@ class OrderCard extends StatelessWidget {
                   Conditional.single(
                     context: context,
                     conditionBuilder: (context) =>
-                    order.status == 3 || order.status == 4,
+                        order.status == 3 || order.status == 4,
                     widgetBuilder: (context) => Wrap(
                       spacing: 15.r,
                       children: [
                         if (order.status == 3)
                           Padding(
-                            padding: EdgeInsets.only(top: 10.r),
+                            padding: EdgeInsets.only(top: 10.r, bottom: 5.r),
                             child: OutlinedPrimaryButton.compact(
                               text: 'Give rating'.tr,
                               onPressed: () {},
                             ),
                           ),
                         Padding(
-                          padding: EdgeInsets.only(top: 10.r),
+                          padding: EdgeInsets.only(top: 10.r, bottom: 5.r),
                           child: PrimaryButton.compact(
                             text: 'Order again'.tr,
                             onPressed: onOrderAgain,

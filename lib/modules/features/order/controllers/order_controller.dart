@@ -33,7 +33,8 @@ class OrderController extends GetxController {
     if (listOrderRes.status_code == 200) {
       /// Jika berhasil, tampilkan data
       onGoingStatus.value = 'success';
-      onGoingOrders.value = listOrderRes.data!;
+      onGoingOrders.value =
+          listOrderRes.data!.where((e) => e.status != 4).toList();
     } else if (listOrderRes.status_code == 204) {
       onGoingStatus.value = 'empty';
     } else {
@@ -48,7 +49,7 @@ class OrderController extends GetxController {
   /// Data filter riwayat pesanan
   String selectedCategory = 'all';
   DateTimeRange selectedDateRange = DateTimeRange(
-    start: DateTime.now().subtract(const Duration(days: 7)),
+    start: DateTime.now().subtract(const Duration(days: 30)),
     end: DateTime.now(),
   );
 

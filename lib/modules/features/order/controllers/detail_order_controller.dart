@@ -1,9 +1,14 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:java_code_app/configs/themes/colors.dart';
+import 'package:java_code_app/modules/features/order/controllers/order_controller.dart';
 import 'package:java_code_app/modules/features/order/repositories/order_repository.dart';
 import 'package:java_code_app/modules/models/detail_order.dart';
 import 'package:java_code_app/modules/models/order.dart';
+import 'package:java_code_app/shared/customs/error_snack_bar.dart';
+import 'package:java_code_app/shared/customs/success_snack_bar.dart';
 
 class DetailOrderController extends GetxController {
   static DetailOrderController get to => Get.find();
@@ -59,6 +64,62 @@ class DetailOrderController extends GetxController {
       status.value = 'empty';
     } else {
       status.value = 'error';
+    }
+  }
+
+  Future<void> cancel() async {
+    final result = await Get.dialog(AlertDialog(
+      title: Text(
+        'Warning'.tr,
+        style: Get.textTheme.titleMedium?.copyWith(color: AppColor.redColor),
+      ),
+      content: Text(
+        'Are you sure want to cancel order?'.tr,
+        style: Get.textTheme.bodyMedium,
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Get.back<bool>(result: false),
+          child: Text(
+            'No'.tr,
+            style:
+                Get.textTheme.labelLarge?.copyWith(color: AppColor.greenColor),
+          ),
+        ),
+        TextButton(
+          onPressed: () => Get.back<bool>(result: true),
+          child: Text(
+            'Yes'.tr,
+            style: Get.textTheme.labelLarge?.copyWith(color: AppColor.redColor),
+          ),
+        ),
+      ],
+    ));
+
+    if (result == true) {
+      /// Fetch api batal order
+      final statusCode = await OrderRepository.cancel(order.value!.id_order);
+
+      if (statusCode == 200) {
+        /// Fetch data baru
+        await fetch();
+
+        /// Tampilkan snackbar sukses
+        Get.showSnackbar(SuccessSnackBar(
+          title: 'Success!'.tr,
+          message: 'Your order has been canceled'.tr,
+        ));
+
+        /// Reload tampilan daftar order
+        OrderController.to.fetchOnGoing();
+        OrderController.to.fetchHistory();
+      } else {
+        /// Tampilkan snackbar error tidak diketahui
+        Get.showSnackbar(ErrorSnackBar(
+          title: 'Something went wrong'.tr,
+          message: 'Unknown error'.tr,
+        ));
+      }
     }
   }
 

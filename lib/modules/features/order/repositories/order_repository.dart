@@ -49,4 +49,16 @@ class OrderRepository {
       return const OrderRes(status_code: 500);
     }
   }
+
+  /// Memanggil API untuk membatalkan pesanan
+  static Future<int> cancel(int id) async {
+    try {
+      var dio = ApiServices.dioCall(token: await LocalDBServices.getToken());
+      var response = await dio.post('${ApiConst.cancelOrder}/$id');
+
+      return response.data['status_code'];
+    } on DioError {
+      return 500;
+    }
+  }
 }
