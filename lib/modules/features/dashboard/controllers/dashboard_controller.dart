@@ -1,19 +1,10 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:java_code_app/modules/features/cart/controllers/cart_controller.dart';
 import 'package:java_code_app/modules/features/home/view/ui/get_location_view.dart';
 import 'package:java_code_app/utils/services/location_services.dart';
 
 class DashboardController extends GetxController {
   static DashboardController get to => Get.find();
-
-  @override
-  void onInit() {
-    super.onInit();
-
-    /// Inisialisasi cart controller
-    Get.put<CartController>(CartController());
-  }
 
   @override
   void onReady() {

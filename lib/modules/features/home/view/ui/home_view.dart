@@ -26,8 +26,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeController());
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -87,7 +85,7 @@ class HomeView extends StatelessWidget {
             ),
 
             Obx(
-                  () => Conditional.single(
+              () => Conditional.single(
                 context: context,
                 conditionBuilder: (context) =>
                     HomeController.to.categoryMenu.value != 'food',
@@ -123,7 +121,7 @@ class HomeView extends StatelessWidget {
 
       /// Promo Section - List
       Obx(
-            () => ConditionalSwitch.single<String>(
+        () => ConditionalSwitch.single<String>(
           context: context,
           valueBuilder: (context) => HomeController.to.statusPromo.value,
           caseBuilders: {
@@ -189,7 +187,7 @@ class HomeView extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: 25.r, vertical: 5.r),
         itemBuilder: (context, index) => Obx(
-              () => FilterMenu(
+          () => FilterMenu(
             isSelected:
                 HomeController.to.categoryMenu.value == filters[index]['value'],
             onTap: () =>

@@ -18,8 +18,6 @@ class DetailPromoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(DetailPromoController());
-
     return Scaffold(
       appBar: AppBar(
         elevation: 2,

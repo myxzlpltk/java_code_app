@@ -19,8 +19,6 @@ class OrderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(OrderController());
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(

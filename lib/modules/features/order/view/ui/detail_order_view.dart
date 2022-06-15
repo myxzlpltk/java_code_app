@@ -21,8 +21,6 @@ class DetailOrderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(DetailOrderController());
-
     return Scaffold(
       appBar: AppBar(
         elevation: 2,

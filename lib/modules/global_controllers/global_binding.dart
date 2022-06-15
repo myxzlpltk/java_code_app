@@ -5,6 +5,6 @@ class GlobalBinding extends Bindings {
   @override
   void dependencies() {
     /// Inisialisasi global controller
-    Get.put<GlobalController>(GlobalController(), permanent: true);
+    Get.put(GlobalController(), permanent: true);
   }
 }

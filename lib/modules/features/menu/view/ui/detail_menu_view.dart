@@ -18,8 +18,6 @@ class DetailMenuView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(DetailMenuController());
-
     return Scaffold(
       appBar: AppBar(
         elevation: 2,

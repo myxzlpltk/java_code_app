@@ -19,8 +19,6 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(LoginController());
-
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(

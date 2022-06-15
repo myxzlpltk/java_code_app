@@ -19,8 +19,6 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ProfileController());
-
     return Scaffold(
       appBar: AppBar(
         elevation: 2,
@@ -42,7 +40,6 @@ class ProfileView extends StatelessWidget {
           child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 16.r, vertical: 25.r),
             children: [
-
               /// Profile icon
               Center(
                 child: Container(
@@ -53,7 +50,7 @@ class ProfileView extends StatelessWidget {
                   child: Stack(
                     children: [
                       Obx(
-                            () => Conditional.single(
+                        () => Conditional.single(
                           context: context,
                           conditionBuilder: (context) =>
                               ProfileController.to.user.value.foto != null,
@@ -98,10 +95,10 @@ class ProfileView extends StatelessWidget {
 
               /// Verifikasi KTP
               Obx(
-                    () => Conditional.single(
+                () => Conditional.single(
                   context: context,
                   conditionBuilder: (context) =>
-                  ProfileController.to.user.value.ktp != null,
+                      ProfileController.to.user.value.ktp != null,
                   widgetBuilder: (context) => Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -167,47 +164,47 @@ class ProfileView extends StatelessWidget {
                 child: Column(
                   children: [
                     Obx(
-                          () => TileOption(
+                      () => TileOption(
                         title: 'Name'.tr,
                         message: ProfileController.to.user.value.nama,
                         onTap: ProfileController.to.openUpdateNameDialog,
                       ),
                     ),
                     Obx(
-                          () => TileOption(
+                      () => TileOption(
                         title: 'Birth date'.tr,
                         message:
-                        ProfileController.to.user.value.tgl_lahir != null
-                            ? DateFormat('dd/MM/yyyy').format(
-                            ProfileController.to.user.value.tgl_lahir!)
-                            : '-',
+                            ProfileController.to.user.value.tgl_lahir != null
+                                ? DateFormat('dd/MM/yyyy').format(
+                                    ProfileController.to.user.value.tgl_lahir!)
+                                : '-',
                         onTap: ProfileController.to.openUpdateBirthDateDialog,
                       ),
                     ),
                     Obx(
-                          () => TileOption(
+                      () => TileOption(
                         title: 'Phone number'.tr,
                         message: ProfileController.to.user.value.telepon ?? '-',
                         onTap: ProfileController.to.openUpdatePhoneDialog,
                       ),
                     ),
                     Obx(
-                          () => TileOption(
+                      () => TileOption(
                         title: 'Email'.tr,
                         message: ProfileController.to.user.value.email,
                         onTap: ProfileController.to.openUpdateEmailDialog,
                       ),
                     ),
                     Obx(
-                          () => TileOption(
+                      () => TileOption(
                         title: 'Change PIN'.tr,
                         message:
-                        ProfileController.to.user.value.pin.toObscure(),
+                            ProfileController.to.user.value.pin.toObscure(),
                         onTap: ProfileController.to.openUpdatePINDialog,
                       ),
                     ),
                     Obx(
-                          () => TileOption(
+                      () => TileOption(
                         title: 'Change language'.tr,
                         message: ProfileController.to.currentLanguage.value,
                         onTap: ProfileController.to.openLanguageDialog,
@@ -259,7 +256,7 @@ class ProfileView extends StatelessWidget {
                 child: Column(
                   children: [
                     Obx(
-                          () => TileOption(
+                      () => TileOption(
                         title: 'Device info'.tr,
                         message: ProfileController.to.deviceInfo.value,
                       ),

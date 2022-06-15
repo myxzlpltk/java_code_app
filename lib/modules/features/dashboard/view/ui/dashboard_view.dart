@@ -16,8 +16,6 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(DashboardController());
-
     return Scaffold(
       body: Obx(
         () => IndexedStack(
