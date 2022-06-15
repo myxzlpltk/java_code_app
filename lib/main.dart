@@ -14,7 +14,7 @@ import 'package:java_code_app/modules/global_controllers/global_binding.dart';
 void main() {
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode,
+      enabled: kProfileMode,
       builder: (context) => const MyApp(), // Wrap your app
     ),
   );
