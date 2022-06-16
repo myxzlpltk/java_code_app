@@ -1,4 +1,5 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,8 +11,15 @@ import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/configs/themes/light_theme.dart';
 import 'package:java_code_app/constants/commons/constants.dart';
 import 'package:java_code_app/modules/global_controllers/global_binding.dart';
+import 'package:java_code_app/utils/services/notification_services.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  /// Firebase
+  await Firebase.initializeApp();
+  await NotificationServices.init();
+
   runApp(
     DevicePreview(
       enabled: kProfileMode,
