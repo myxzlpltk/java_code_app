@@ -39,7 +39,10 @@ class HomeView extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () => Get.toNamed(AppRoutes.cartView),
+              onPressed: () {
+                FocusScope.of(context).unfocus();
+                Get.toNamed(AppRoutes.cartView);
+              },
               splashRadius: 30.r,
               visualDensity: VisualDensity.compact,
               icon: Obx(
@@ -158,10 +161,13 @@ class HomeView extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => PromoCard(
                 promo: HomeController.to.listPromo.elementAt(index),
-                onTap: () => Get.toNamed(
-                  AppRoutes.detailPromoView,
-                  arguments: HomeController.to.listPromo.elementAt(index),
-                ),
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                  Get.toNamed(
+                    AppRoutes.detailPromoView,
+                    arguments: HomeController.to.listPromo.elementAt(index),
+                  );
+                },
               ),
               itemCount: HomeController.to.listPromo.length,
               separatorBuilder: (context, index) => 25.horizontalSpaceRadius,

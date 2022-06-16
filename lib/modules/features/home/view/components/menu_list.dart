@@ -22,7 +22,10 @@ class MenuList extends StatelessWidget {
         children: data.map<Widget>((menu) {
           return MenuCard.simple(
             menu: menu,
-            onTap: () => Get.toNamed(AppRoutes.detailMenuView, arguments: menu),
+            onTap: () {
+              FocusScope.of(context).unfocus();
+              Get.toNamed(AppRoutes.detailMenuView, arguments: menu);
+            },
           );
         }).toList(),
       ),

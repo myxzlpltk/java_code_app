@@ -106,10 +106,13 @@ class CartView extends StatelessWidget {
                                 CartController.to.decrement(cartItem),
                             onNoteChanged: (value) =>
                                 CartController.to.updateNote(cartItem, value),
-                            onTap: () => Get.toNamed(
-                              AppRoutes.detailMenuView,
-                              arguments: cartItem.menu,
-                            ),
+                            onTap: () {
+                              FocusScope.of(context).unfocus();
+                              Get.toNamed(
+                                AppRoutes.detailMenuView,
+                                arguments: cartItem.menu,
+                              );
+                            },
                           ),
                         )
                         .toList(),
@@ -152,10 +155,13 @@ class CartView extends StatelessWidget {
                                 CartController.to.decrement(cartItem),
                             onNoteChanged: (value) =>
                                 CartController.to.updateNote(cartItem, value),
-                            onTap: () => Get.toNamed(
-                              AppRoutes.detailMenuView,
-                              arguments: cartItem.menu,
-                            ),
+                            onTap: () {
+                              FocusScope.of(context).unfocus();
+                              Get.toNamed(
+                                AppRoutes.detailMenuView,
+                                arguments: cartItem.menu,
+                              );
+                            },
                           ),
                         )
                         .toList(),
