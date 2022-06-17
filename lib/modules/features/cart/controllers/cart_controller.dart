@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
+import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/commons/constants.dart';
 import 'package:java_code_app/modules/features/cart/repositories/discount_repository.dart';
 import 'package:java_code_app/modules/features/cart/repositories/order_repository.dart';
@@ -172,7 +173,9 @@ class CartController extends GetxController {
     Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
-      content: const CircularProgressIndicator(),
+      content: const CircularProgressIndicator(
+        color: AppColor.blueColor,
+      ),
     );
 
     /// Buat model order

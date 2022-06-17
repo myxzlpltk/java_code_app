@@ -15,6 +15,8 @@ class DetailMenuController extends GetxController {
 
   /// Status menu
   RxString status = RxString('loading');
+  RxString statusLevels = RxString('loading');
+  RxString statusToppings = RxString('loading');
   RxBool isExistsInCart = RxBool(false);
 
   /// Data menu, level, dan topping
@@ -48,15 +50,27 @@ class DetailMenuController extends GetxController {
       /// Jika request API sukses
       if (menuRes.status_code == 200) {
         status.value = 'success';
-        levels.value = menuRes.level;
-        toppings.value = menuRes.topping;
 
-        /// Atur level ke default
-        if (levels.isNotEmpty && selectedLevel.value == null) {
-          selectedLevel.value = levels.first;
+        if (menuRes.level.isNotEmpty) {
+          statusLevels.value = 'success';
+          levels.value = menuRes.level;
+
+          /// Atur level ke default
+          selectedLevel.value ??= levels.first;
+        } else {
+          statusLevels.value = 'empty';
+        }
+
+        if (menuRes.topping.isNotEmpty) {
+          statusToppings.value = 'success';
+          toppings.value = menuRes.topping;
+        } else {
+          statusToppings.value = 'empty';
         }
       } else {
         status.value = 'error';
+        statusLevels.value = 'error';
+        statusToppings.value = 'error';
       }
     });
   }

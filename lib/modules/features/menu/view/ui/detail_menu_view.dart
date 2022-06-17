@@ -10,6 +10,7 @@ import 'package:java_code_app/shared/styles/shapes.dart';
 import 'package:java_code_app/shared/widgets/danger_button.dart';
 import 'package:java_code_app/shared/widgets/primary_button.dart';
 import 'package:java_code_app/shared/widgets/quantity_counter.dart';
+import 'package:java_code_app/shared/widgets/rect_shimmer.dart';
 import 'package:java_code_app/shared/widgets/tile_option.dart';
 import 'package:java_code_app/utils/extensions/currency_extension.dart';
 
@@ -106,48 +107,78 @@ class DetailMenuView extends StatelessWidget {
                     ),
                   ),
                   Obx(
-                    () => Conditional.single(
+                    () => ConditionalSwitch.single(
                       context: context,
-                      conditionBuilder: (context) =>
-                          DetailMenuController.to.levels.isNotEmpty,
-                      widgetBuilder: (context) => Wrap(
-                        children: [
-                          Divider(
-                            color: AppColor.darkColor2.withOpacity(0.25),
-                            height: 2.r,
-                          ),
-                          TileOption(
-                            icon: AssetConst.iconLevel,
-                            title: 'Level'.tr,
-                            message: DetailMenuController.to.selectedLevelText,
-                            onTap: DetailMenuController.to.openLevelBottomSheet,
-                          ),
-                        ],
-                      ),
+                      valueBuilder: (context) =>
+                          DetailMenuController.to.statusLevels.value,
+                      caseBuilders: {
+                        'success': (context) => Wrap(
+                              children: [
+                                Divider(
+                                  color: AppColor.darkColor2.withOpacity(0.25),
+                                  height: 2.r,
+                                ),
+                                TileOption(
+                                  icon: AssetConst.iconLevel,
+                                  title: 'Level'.tr,
+                                  message:
+                                      DetailMenuController.to.selectedLevelText,
+                                  onTap: DetailMenuController
+                                      .to.openLevelBottomSheet,
+                                ),
+                              ],
+                            ),
+                        'loading': (context) => Wrap(
+                              children: [
+                                Divider(
+                                  color: AppColor.darkColor2.withOpacity(0.25),
+                                  height: 2.r,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 8.r),
+                                  child: RectShimmer(height: 32.r),
+                                ),
+                              ],
+                            ),
+                      },
                       fallbackBuilder: (context) => const SizedBox(),
                     ),
                   ),
                   Obx(
-                    () => Conditional.single(
+                    () => ConditionalSwitch.single(
                       context: context,
-                      conditionBuilder: (context) =>
-                          DetailMenuController.to.toppings.isNotEmpty,
-                      widgetBuilder: (context) => Wrap(
-                        children: [
-                          Divider(
-                            color: AppColor.darkColor2.withOpacity(0.25),
-                            height: 2.r,
-                          ),
-                          TileOption(
-                            icon: AssetConst.iconTopping,
-                            title: 'Topping'.tr,
-                            message:
-                                DetailMenuController.to.selectedToppingsText,
-                            onTap:
-                                DetailMenuController.to.openToppingBottomSheet,
-                          ),
-                        ],
-                      ),
+                      valueBuilder: (context) =>
+                          DetailMenuController.to.statusLevels.value,
+                      caseBuilders: {
+                        'success': (context) => Wrap(
+                              children: [
+                                Divider(
+                                  color: AppColor.darkColor2.withOpacity(0.25),
+                                  height: 2.r,
+                                ),
+                                TileOption(
+                                  icon: AssetConst.iconTopping,
+                                  title: 'Topping'.tr,
+                                  message: DetailMenuController
+                                      .to.selectedToppingsText,
+                                  onTap: DetailMenuController
+                                      .to.openToppingBottomSheet,
+                                ),
+                              ],
+                            ),
+                        'loading': (context) => Wrap(
+                              children: [
+                                Divider(
+                                  color: AppColor.darkColor2.withOpacity(0.25),
+                                  height: 2.r,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 8.r),
+                                  child: RectShimmer(height: 32.r),
+                                ),
+                              ],
+                            ),
+                      },
                       fallbackBuilder: (context) => const SizedBox(),
                     ),
                   ),
@@ -169,28 +200,36 @@ class DetailMenuView extends StatelessWidget {
                       height: 2.r),
                   40.verticalSpacingRadius,
                   Obx(
-                    () => Conditional.single(
+                    () => ConditionalSwitch.single(
                       context: context,
-                      conditionBuilder: (context) =>
-                          DetailMenuController.to.status.value == 'success',
-                      widgetBuilder: (context) => SizedBox(
-                        width: double.infinity,
-                        child: Conditional.single(
-                          context: context,
-                          conditionBuilder: (context) =>
-                              DetailMenuController.to.quantity > 0,
-                          widgetBuilder: (context) => PrimaryButton(
-                            text: DetailMenuController.to.isExistsInCart.value
-                                ? 'Update to order'.tr
-                                : 'Add to order'.tr,
-                            onPressed: DetailMenuController.to.addToCart,
-                          ),
-                          fallbackBuilder: (context) => DangerButton(
-                            text: 'Delete from order'.tr,
-                            onPressed: DetailMenuController.to.deleteFromCart,
-                          ),
+                      valueBuilder: (context) =>
+                          DetailMenuController.to.status.value,
+                      caseBuilders: {
+                        'loading': (context) => RectShimmer(
+                          height: 50.r,
+                          radius: 30.r,
                         ),
-                      ),
+                        'success': (context) => SizedBox(
+                              width: double.infinity,
+                              child: Conditional.single(
+                                context: context,
+                                conditionBuilder: (context) =>
+                                    DetailMenuController.to.quantity > 0,
+                                widgetBuilder: (context) => PrimaryButton(
+                                  text: DetailMenuController
+                                          .to.isExistsInCart.value
+                                      ? 'Update to order'.tr
+                                      : 'Add to order'.tr,
+                                  onPressed: DetailMenuController.to.addToCart,
+                                ),
+                                fallbackBuilder: (context) => DangerButton(
+                                  text: 'Delete from order'.tr,
+                                  onPressed:
+                                      DetailMenuController.to.deleteFromCart,
+                                ),
+                              ),
+                            ),
+                      },
                       fallbackBuilder: (context) => const SizedBox(),
                     ),
                   ),

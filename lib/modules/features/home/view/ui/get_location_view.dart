@@ -65,8 +65,9 @@ class GetLocationView extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                   },
-                  fallbackBuilder: (context) =>
-                      const CircularProgressIndicator(),
+                  fallbackBuilder: (context) => const CircularProgressIndicator(
+                    color: AppColor.blueColor,
+                  ),
                 ),
               ),
             ],
