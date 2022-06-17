@@ -32,9 +32,14 @@ class OrderController extends GetxController {
 
     if (listOrderRes.status_code == 200) {
       /// Jika berhasil, tampilkan data
-      onGoingStatus.value = 'success';
       onGoingOrders.value =
           listOrderRes.data!.where((e) => e.status != 4).toList();
+
+      if (onGoingOrders.value.isEmpty) {
+        onGoingStatus.value = 'empty';
+      } else {
+        onGoingStatus.value = 'success';
+      }
     } else if (listOrderRes.status_code == 204) {
       onGoingStatus.value = 'empty';
     } else {
