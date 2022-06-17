@@ -35,6 +35,14 @@ class DetailMenuController extends GetxController {
     /// Atur menu dari argumen
     menu.value = Get.arguments as Menu;
 
+    /// Fetch data
+    fetch();
+
+    /// Update data from cart
+    updateDataFromCart();
+  }
+
+  void fetch() {
     /// Lengkapi data menu dari API
     MenuRepository.getFromId(menu.value!.id_menu).then((menuRes) {
       /// Jika request API sukses
@@ -51,7 +59,9 @@ class DetailMenuController extends GetxController {
         status.value = 'error';
       }
     });
+  }
 
+  void updateDataFromCart() {
     /// Cari apakah sudah ada dikeranjang
     final cartOrderDetail = CartController.to.cart
         .firstWhereOrNull((e) => e.menu.id_menu == menu.value?.id_menu);
