@@ -149,14 +149,14 @@ class ProfileController extends GetxController {
   /// Update user data
   Future<void> updateUser(
       {String? nama,
-      DateTime? tgl_lahir,
+      DateTime? tglLahir,
       String? telepon,
       String? email,
       String? pin}) async {
     Map<String, String> data = {};
 
     if (nama != null) data['nama'] = nama;
-    if (tgl_lahir != null) data['tgl_lahir'] = tgl_lahir.toDateString();
+    if (tglLahir != null) data['tgl_lahir'] = tglLahir.toDateString();
     if (telepon != null) data['telepon'] = telepon;
     if (email != null) data['email'] = email;
     if (pin != null) data['pin'] = pin;
@@ -186,15 +186,15 @@ class ProfileController extends GetxController {
 
   /// Update tanggal lahir dialog
   void openUpdateBirthDateDialog() async {
-    DateTime? tgl_lahir = await showDatePicker(
+    DateTime? tglLahir = await showDatePicker(
       context: Get.context!,
       initialDate: user.value.tgl_lahir ?? DateTime(DateTime.now().year - 21),
       firstDate: DateTime(DateTime.now().year - 100),
       lastDate: DateTime.now(),
     );
 
-    if (tgl_lahir != null) {
-      await updateUser(tgl_lahir: tgl_lahir);
+    if (tglLahir != null) {
+      await updateUser(tglLahir: tglLahir);
     }
   }
 

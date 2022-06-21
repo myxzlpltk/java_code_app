@@ -9,10 +9,10 @@ class PromoRepository {
   PromoRepository._();
 
   /// Memanggil API untuk mendapatkan promo berdasarkan id
-  static Future<PromoRes> getFromId(int id_promo) async {
+  static Future<PromoRes> getFromId(int idPromo) async {
     try {
       var dio = ApiServices.dioCall(token: await LocalDBServices.getToken());
-      var response = await dio.get('${ApiConst.detailPromo}/$id_promo');
+      var response = await dio.get('${ApiConst.detailPromo}/$idPromo');
 
       return PromoRes.fromJson(response.data);
     } on DioError {

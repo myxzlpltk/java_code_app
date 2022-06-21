@@ -9,10 +9,10 @@ class MenuRepository {
   MenuRepository._();
 
   /// Memanggil API untuk mendapatkan menu berdasarkan id
-  static Future<MenuRes> getFromId(int id_menu) async {
+  static Future<MenuRes> getFromId(int idMenu) async {
     try {
       var dio = ApiServices.dioCall(token: await LocalDBServices.getToken());
-      var response = await dio.get('${ApiConst.detailMenu}/$id_menu');
+      var response = await dio.get('${ApiConst.detailMenu}/$idMenu');
 
       return MenuRes.fromJson(response.data);
     } on DioError {
