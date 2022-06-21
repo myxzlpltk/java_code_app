@@ -346,7 +346,7 @@ class DetailOrderView extends StatelessWidget {
                     const Spacer(),
                     Expanded(
                       child: Text(
-                        'Please take it'.tr,
+                        'Please take your order'.tr,
                         style: Get.textTheme.labelMedium,
                         textAlign: TextAlign.center,
                       ),

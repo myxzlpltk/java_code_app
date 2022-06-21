@@ -13,12 +13,14 @@ import 'package:java_code_app/modules/features/cart/view/components/fingerprint_
 import 'package:java_code_app/modules/features/cart/view/components/order_success_dialog.dart';
 import 'package:java_code_app/modules/features/cart/view/components/pin_dialog.dart';
 import 'package:java_code_app/modules/features/dashboard/controllers/dashboard_controller.dart';
+import 'package:java_code_app/modules/features/order/controllers/order_controller.dart';
 import 'package:java_code_app/modules/models/cart_item.dart';
 import 'package:java_code_app/modules/models/discount.dart';
 import 'package:java_code_app/modules/models/user.dart';
 import 'package:java_code_app/modules/models/voucher.dart';
 import 'package:java_code_app/shared/customs/error_snack_bar.dart';
 import 'package:java_code_app/utils/services/local_db_services.dart';
+import 'package:java_code_app/utils/services/notification_services.dart';
 import 'package:local_auth/local_auth.dart';
 
 class CartController extends GetxController {
@@ -283,6 +285,13 @@ class CartController extends GetxController {
 
   /// Open order success dialog
   void openOrderSuccessDialog(int id) async {
+    /// Kirim notifikasi
+    NotificationServices.sendNotification(
+      'Order accepted'.tr,
+      'Order is being prepared'.tr,
+      {'id_order': id},
+    );
+
     /// Tutup semua modal
     Get.until(ModalRoute.withName(AppRoutes.cartView));
     await Get.defaultDialog(
@@ -291,8 +300,9 @@ class CartController extends GetxController {
       content: const OrderSuccessDialog(),
     );
 
-    /// Atur dasbor ke halaman order
+    /// Atur dasbor ke halaman order dan reload data
     DashboardController.to.tabIndex.value = 1;
+    OrderController.to.fetchOnGoing();
 
     /// Navigasi ke halaman order
     Get.offNamedUntil(

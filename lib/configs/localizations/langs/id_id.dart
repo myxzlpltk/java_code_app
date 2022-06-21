@@ -77,7 +77,7 @@ const Map<String, String> translations_id_ID = {
   'Payment': 'Pembayaran',
   'Phone number': 'No. telepon',
   'Please authenticate to confirm order': 'Harap otentikasi untuk konfirmasi pesanan',
-  'Please take it': 'Silahkan diambil',
+  'Please take your order': 'Silahkan diambil',
   'Preparing': 'Sedang siapkan',
   'Press your fingerprint': 'Tekan fingerprint Anda',
   'Price': 'Harga',

@@ -1,10 +1,15 @@
 import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
+import 'package:java_code_app/constants/commons/constants.dart';
+import 'package:java_code_app/constants/cores/api_const.dart';
+import 'package:java_code_app/modules/features/dashboard/controllers/dashboard_controller.dart';
+import 'package:java_code_app/utils/services/api_services.dart';
 import 'package:java_code_app/utils/services/local_db_services.dart';
 
 class NotificationServices {
@@ -69,10 +74,28 @@ class NotificationServices {
             var token = await LocalDBServices.getToken();
 
             if (user != null && token != null) {
+              DashboardController.to.tabIndex.value = 0;
+
               /// Navigasi ke detail promo jika sudah login
-              await Get.toNamed(
+              await Get.offNamedUntil(
                 AppRoutes.detailPromoView,
+                ModalRoute.withName(AppRoutes.dashboardView),
                 arguments: int.parse(data['id_promo'].toString()),
+              );
+            }
+          } else if (data['id_order'] != null) {
+            /// Mendapatkan user dan token dari local DB service
+            var user = await LocalDBServices.getUser();
+            var token = await LocalDBServices.getToken();
+
+            if (user != null && token != null) {
+              DashboardController.to.tabIndex.value = 1;
+
+              /// Navigasi ke detail promo jika sudah login
+              await Get.offNamedUntil(
+                AppRoutes.detailOrderView,
+                ModalRoute.withName(AppRoutes.dashboardView),
+                arguments: int.parse(data['id_order'].toString()),
               );
             }
           }
@@ -111,6 +134,26 @@ class NotificationServices {
       message.notification!.body,
       platformChannelSpecifics,
       payload: json.encode(message.data),
+    );
+  }
+
+  static void sendNotification(
+      String title, String body, Map<String, dynamic> data) async {
+    /// Cek FCM token
+    final String? fcmToken = await FirebaseMessaging.instance.getToken();
+    if (fcmToken == null) return;
+
+    /// Kirim notifikasi
+    await ApiServices.dioCall(
+      authorization: 'key=${AppConst.firebaseCloudMessagingKey}',
+    ).post(
+      ApiConst.firebaseCloudMessaging,
+      data: {
+        'notification': {'title': title, 'body': body},
+        'priority': 'high',
+        'data': data,
+        'to': fcmToken,
+      },
     );
   }
 }

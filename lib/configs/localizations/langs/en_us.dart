@@ -77,7 +77,7 @@ const Map<String, String> translations_en_US = {
   'Payment': 'Payment',
   'Phone number': 'Phone number',
   'Please authenticate to confirm order': 'Please authenticate to confirm order',
-  'Please take it': 'Please take it',
+  'Please take your order': 'Please take your order',
   'Preparing': 'Preparing',
   'Press your fingerprint': 'Press your fingerprint',
   'Price': 'Price',

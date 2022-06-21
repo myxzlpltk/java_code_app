@@ -10,6 +10,8 @@ class AppConst {
   static const String appLink = 'https://promo.trainee.landa.id';
   static const String appDeepLink = 'landa://javacode.app';
   static const String appVersion = '1.0.0';
+  static const String firebaseCloudMessagingKey =
+      'AAAA17gfCJY:APA91bEaXVcZNiyh-932cP0aEvbEx4pA9yV6qqU6Nr3Xh_CNqJ8XzgeOx4gCkRU5c13EgLRjZPygoOgemnCkilf8GPoyUWyRXgN1gtApPE9Mk440FMWansSH12cq5BilS6_dwujy2ZMj';
 
   /// Informasi lokasi
   static const double locationLatitude = -7.9423;

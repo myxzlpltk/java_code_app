@@ -7,7 +7,7 @@ class ApiServices {
   ApiServices._();
 
   /// Mendapatkan object dio berdasarkan timeout dan tokennya
-  static Dio dioCall({int timeout = 20000, String? token}) {
+  static Dio dioCall({int timeout = 20000, String? token, String? authorization}) {
     var headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -15,6 +15,10 @@ class ApiServices {
 
     if (token != null) {
       headers['token'] = token;
+    }
+
+    if (authorization != null) {
+      headers['Authorization'] = authorization;
     }
 
     var dio = Dio(
