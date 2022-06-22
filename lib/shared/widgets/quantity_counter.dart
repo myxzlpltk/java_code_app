@@ -24,18 +24,24 @@ class QuantityCounter extends StatelessWidget {
         Conditional.single(
           context: context,
           conditionBuilder: (context) => quantity > 0,
-          widgetBuilder: (context) => Material(
-            clipBehavior: Clip.antiAlias,
-            borderRadius: BorderRadius.circular(4),
-            child: InkWell(
-              onTap: onDecrement,
-              child: Ink(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.r),
-                  border: Border.all(color: AppColor.blueColor, width: 2.r),
+          widgetBuilder: (context) => Visibility(
+            visible: onDecrement != null,
+            maintainState: true,
+            maintainAnimation: true,
+            maintainSize: true,
+            child: Material(
+              clipBehavior: Clip.antiAlias,
+              borderRadius: BorderRadius.circular(4),
+              child: InkWell(
+                onTap: onDecrement,
+                child: Ink(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4.r),
+                    border: Border.all(color: AppColor.blueColor, width: 2.r),
+                  ),
+                  child:
+                      Icon(Icons.remove, size: 20.r, color: AppColor.blueColor),
                 ),
-                child:
-                    Icon(Icons.remove, size: 20.r, color: AppColor.blueColor),
               ),
             ),
           ),
@@ -56,15 +62,21 @@ class QuantityCounter extends StatelessWidget {
         ),
 
         /// Tombol plus
-        Material(
-          clipBehavior: Clip.antiAlias,
-          borderRadius: BorderRadius.circular(4),
-          child: InkWell(
-            onTap: onIncrement,
-            child: Ink(
-              padding: EdgeInsets.all(2.r),
-              color: AppColor.blueColor,
-              child: Icon(Icons.add, size: 20.r, color: Colors.white),
+        Visibility(
+          visible: onIncrement != null,
+          maintainState: true,
+          maintainAnimation: true,
+          maintainSize: true,
+          child: Material(
+            clipBehavior: Clip.antiAlias,
+            borderRadius: BorderRadius.circular(4),
+            child: InkWell(
+              onTap: onIncrement,
+              child: Ink(
+                padding: EdgeInsets.all(2.r),
+                color: AppColor.blueColor,
+                child: Icon(Icons.add, size: 20.r, color: Colors.white),
+              ),
             ),
           ),
         ),

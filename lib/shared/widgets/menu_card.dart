@@ -69,7 +69,6 @@ class MenuCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-
             /// Gambar menu
             Container(
               height: isSimple ? 75.r : 90.r,
@@ -99,7 +98,6 @@ class MenuCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   /// Nama menu
                   Text(
                     menu.nama,
@@ -122,7 +120,6 @@ class MenuCard extends StatelessWidget {
                     conditionBuilder: (context) => !isSimple,
                     widgetBuilder: (context) => Row(
                       children: [
-
                         /// Icon edit
                         SvgPicture.asset(AssetConst.iconEdit, height: 12.r),
                         7.horizontalSpaceRadius,
