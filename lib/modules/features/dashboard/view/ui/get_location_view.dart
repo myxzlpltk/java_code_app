@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -54,10 +55,42 @@ class GetLocationView extends StatelessWidget {
                   valueBuilder: (context) =>
                       DashboardController.to.statusLocation.value,
                   caseBuilders: {
-                    'error': (context) => Text(
-                          DashboardController.to.messageLocation.value,
-                          style: Get.textTheme.titleLarge,
-                          textAlign: TextAlign.center,
+                    'error': (context) => Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              DashboardController.to.messageLocation.value,
+                              style: Get.textTheme.titleLarge,
+                              textAlign: TextAlign.center,
+                            ),
+                            24.verticalSpacingRadius,
+                            ElevatedButton(
+                              onPressed: () =>
+                                  AppSettings.openLocationSettings(),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                                elevation: 2,
+                                padding: EdgeInsets.zero,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(24.r),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.settings,
+                                    color: AppColor.darkColor,
+                                  ),
+                                  16.horizontalSpaceRadius,
+                                  Text(
+                                    'Open settings'.tr,
+                                    style: Get.textTheme.bodySmall,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                     'success': (context) => Text(
                           DashboardController.to.address.value!,

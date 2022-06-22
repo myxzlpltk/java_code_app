@@ -1,6 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:java_code_app/modules/features/home/view/ui/get_location_view.dart';
+import 'package:java_code_app/modules/features/dashboard/view/ui/get_location_view.dart';
 import 'package:java_code_app/utils/services/location_services.dart';
 
 class DashboardController extends GetxController {
@@ -11,10 +11,8 @@ class DashboardController extends GetxController {
     super.onReady();
 
     /// Mencari lokasi
-    Future.delayed(const Duration(milliseconds: 500), () async {
-      Get.dialog(const GetLocationView(), barrierDismissible: false);
-      await getLocation();
-    });
+    Future.delayed(const Duration(milliseconds: 500), getLocation);
+    LocationServices.streamService.listen((status) => getLocation());
   }
 
   /// Navigation bar
@@ -33,13 +31,19 @@ class DashboardController extends GetxController {
 
   /// Get current location if location not exists
   Future<void> getLocation() async {
+    if (Get.isDialogOpen == false) {
+      Get.dialog(const GetLocationView(), barrierDismissible: false);
+    }
+
     try {
       /// Mendapatkan lokasi saat ini
-      position.value = await LocationServices.getCurrentPosition();
+      statusLocation.value = 'loading';
+      final locationResult = await LocationServices.getCurrentPosition();
 
-      if (LocationServices.isDistanceClose(position.value!)) {
+      if (locationResult.success) {
         /// Jika jarak lokasi cukup dekat, dapatkan informasi alamat
-        address.value = await LocationServices.getAddress(position.value!);
+        position.value = locationResult.position;
+        address.value = locationResult.address;
         statusLocation.value = 'success';
 
         await Future.delayed(const Duration(seconds: 1));
@@ -47,7 +51,7 @@ class DashboardController extends GetxController {
       } else {
         /// Jika jarak lokasi tidak cukup dekat, tampilkan pesan
         statusLocation.value = 'error';
-        messageLocation.value = 'Distance not close'.tr;
+        messageLocation.value = locationResult.message!;
       }
     } catch (e) {
       /// Jika terjadi kesalahan server
