@@ -43,7 +43,6 @@ class OrderCard extends StatelessWidget {
           ],
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Flexible(
               flex: 3,
