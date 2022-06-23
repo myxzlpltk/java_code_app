@@ -9,6 +9,7 @@ const Map<String, String> translations_en_US = {
   'All status': 'All status',
   'Already Ordered? Track the order here.': 'Already Ordered?\nTrack the order here.',
   'Are you sure want to cancel order?': 'Are you sure want to cancel order?',
+  'Are you sure want to logout?': 'Are you sure want to logout?',
   'Available promo': 'Available promo',
   'Birth date': 'Birth date',
   'Camera': 'Camera',

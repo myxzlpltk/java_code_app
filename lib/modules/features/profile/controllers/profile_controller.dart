@@ -12,6 +12,7 @@ import 'package:java_code_app/modules/features/profile/repositories/user_reposit
 import 'package:java_code_app/modules/features/profile/view/components/email_bottom_sheet.dart';
 import 'package:java_code_app/modules/features/profile/view/components/image_picker_dialog.dart';
 import 'package:java_code_app/modules/features/profile/view/components/language_bottom_sheet.dart';
+import 'package:java_code_app/modules/features/profile/view/components/logout_dialog.dart';
 import 'package:java_code_app/modules/features/profile/view/components/name_bottom_sheet.dart';
 import 'package:java_code_app/modules/features/profile/view/components/phone_bottom_sheet.dart';
 import 'package:java_code_app/modules/features/profile/view/components/pin_dialog.dart';
@@ -59,9 +60,13 @@ class ProfileController extends GetxController {
 
   /// Logout user
   Future<void> logout() async {
-    await LocalDBServices.clearToken();
-    await LocalDBServices.clearUser();
-    Get.offAllNamed(AppRoutes.loginView);
+    final result = await Get.dialog(const LogoutDialog());
+
+    if (result == true) {
+      await LocalDBServices.clearToken();
+      await LocalDBServices.clearUser();
+      Get.offAllNamed(AppRoutes.loginView);
+    }
   }
 
   /// Update photo

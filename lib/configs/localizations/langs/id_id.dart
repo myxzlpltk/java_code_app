@@ -9,6 +9,7 @@ const Map<String, String> translations_id_ID = {
   'All status': 'Semua status',
   'Already Ordered? Track the order here.': 'Sudah Pesan?\nLacak pesananmu di sini.',
   'Are you sure want to cancel order?': 'Apakah kamu yakin ingin membatalkan pesanan?',
+  'Are you sure want to logout?': 'Apakah kamu yakin ingin keluar?',
   'Available promo': 'Promo yang tersedia',
   'Birth date': 'Tanggal lahir',
   'Camera': 'Kamera',
