@@ -1,7 +1,11 @@
+import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/modules/features/dashboard/view/ui/get_location_view.dart';
+import 'package:java_code_app/modules/global_controllers/global_controller.dart';
 import 'package:java_code_app/utils/services/location_services.dart';
+import 'package:uni_links/uni_links.dart';
 
 class DashboardController extends GetxController {
   static DashboardController get to => Get.find();
@@ -11,7 +15,7 @@ class DashboardController extends GetxController {
     super.onReady();
 
     /// Mencari lokasi
-    Future.delayed(const Duration(milliseconds: 500), getLocation);
+    getLocation().then((_) => uniLinksCheck());
     LocationServices.streamService.listen((status) => getLocation());
   }
 
@@ -47,7 +51,7 @@ class DashboardController extends GetxController {
         statusLocation.value = 'success';
 
         await Future.delayed(const Duration(seconds: 1));
-        Get.until((route) => Get.isDialogOpen == false);
+        Get.until(ModalRoute.withName(AppRoutes.dashboardView));
       } else {
         /// Jika jarak lokasi tidak cukup dekat, tampilkan pesan
         statusLocation.value = 'error';
@@ -57,6 +61,15 @@ class DashboardController extends GetxController {
       /// Jika terjadi kesalahan server
       statusLocation.value = 'error';
       messageLocation.value = 'Server error'.tr;
+    }
+  }
+
+  Future<void> uniLinksCheck() async {
+    /// Mendapatkan uri saat ini
+    var uri = await getInitialUri();
+    if (uri != null) {
+      /// Jika ada uri, proses uni links
+      GlobalController.to.processUniLinks(uri);
     }
   }
 }
