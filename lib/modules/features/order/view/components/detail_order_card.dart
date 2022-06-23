@@ -79,7 +79,7 @@ class DetailOrderCard extends StatelessWidget {
                         style: Get.textTheme.labelMedium,
                         enabled: false,
                         decoration: InputDecoration.collapsed(
-                          hintText: 'Add note'.tr,
+                          hintText: 'No notes'.tr,
                           border: InputBorder.none,
                         ),
                       ),

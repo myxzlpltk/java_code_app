@@ -63,6 +63,7 @@ const Map<String, String> translations_id_ID = {
   'Name': 'Nama',
   'No data': 'Tidak ada data',
   'No discount': 'Tidak ada diskon',
+  'No notes': 'Tidak ada catatan',
   'No': 'Tidak',
   'Not connected to the internet': 'Tidak terhubung ke internet',
   'Note': 'Catatan',

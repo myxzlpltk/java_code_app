@@ -63,6 +63,7 @@ const Map<String, String> translations_en_US = {
   'Name': 'Name',
   'No data': 'No data',
   'No discount': 'No discount',
+  'No notes': 'No notes',
   'No': 'No',
   'Not connected to the internet': 'Not connected to the internet',
   'Note': 'Note',
