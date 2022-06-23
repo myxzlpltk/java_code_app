@@ -13,7 +13,7 @@ import 'package:java_code_app/constants/commons/constants.dart';
 import 'package:java_code_app/modules/global_controllers/global_binding.dart';
 import 'package:java_code_app/utils/services/notification_services.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   /// Firebase

@@ -33,7 +33,7 @@ class _DatePickerState extends State<DatePicker> {
     endDate = Rx<DateTime>(widget.selectedDate.end);
   }
 
-  void _openDateRangePicker(BuildContext context) async {
+  Future<void> _openDateRangePicker(BuildContext context) async {
     final dateTimeRange = await showDateRangePicker(
       context: context,
       initialDateRange: DateTimeRange(

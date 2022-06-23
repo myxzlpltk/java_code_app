@@ -169,7 +169,7 @@ class CartController extends GetxController {
   /// Cart action functions
   /// - Order
   /// - Verify fingerprint or PIN
-  void order() async {
+  Future<void> order() async {
     /// Tutup modal
     Get.until(ModalRoute.withName(AppRoutes.cartView));
     Get.defaultDialog(
@@ -209,7 +209,7 @@ class CartController extends GetxController {
   }
 
   /// Verify fingerprint or PIN
-  void verify() async {
+  Future<void> verify() async {
     /// Mencari tahu jenis otentikasi yang tersedia
     final LocalAuthentication auth = LocalAuthentication();
     final bool isBiometricSupported = await auth.isDeviceSupported();
@@ -284,7 +284,7 @@ class CartController extends GetxController {
   }
 
   /// Open order success dialog
-  void openOrderSuccessDialog(int id) async {
+  Future<void> openOrderSuccessDialog(int id) async {
     /// Kirim notifikasi
     NotificationServices.sendNotification(
       'Order accepted'.tr,

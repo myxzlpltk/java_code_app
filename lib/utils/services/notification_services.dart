@@ -127,7 +127,7 @@ class NotificationServices {
     onMessageHandler(message);
   }
 
-  static void onMessageHandler(RemoteMessage message) async {
+  static Future<void> onMessageHandler(RemoteMessage message) async {
     await flutterLocalNotificationsPlugin.show(
       DateTime.now().millisecond,
       message.notification!.title,
@@ -137,7 +137,7 @@ class NotificationServices {
     );
   }
 
-  static void sendNotification(
+  static Future<void> sendNotification(
       String title, String body, Map<String, dynamic> data) async {
     /// Cek FCM token
     final String? fcmToken = await FirebaseMessaging.instance.getToken();

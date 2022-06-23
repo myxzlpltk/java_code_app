@@ -58,14 +58,14 @@ class ProfileController extends GetxController {
   }
 
   /// Logout user
-  void logout() async {
+  Future<void> logout() async {
     await LocalDBServices.clearToken();
     await LocalDBServices.clearUser();
     Get.offAllNamed(AppRoutes.loginView);
   }
 
   /// Update photo
-  void openUpdatePhotoDialog() async {
+  Future<void> openUpdatePhotoDialog() async {
     /// Buka dialog pilih sumber gambar
     ImageSource? imageSource = await Get.defaultDialog(
       title: '',
@@ -114,7 +114,7 @@ class ProfileController extends GetxController {
   }
 
   /// Update KTP
-  void openVerifyIDDialog() async {
+  Future<void> openVerifyIDDialog() async {
     /// Buka dialog input sumber gambar
     ImageSource? imageSource = await Get.defaultDialog(
       title: '',
@@ -171,7 +171,7 @@ class ProfileController extends GetxController {
   }
 
   /// Update nama dialog
-  void openUpdateNameDialog() async {
+  Future<void> openUpdateNameDialog() async {
     String? nama = await Get.bottomSheet(
       NameBottomSheet(nama: user.value.nama),
       backgroundColor: Colors.white,
@@ -185,7 +185,7 @@ class ProfileController extends GetxController {
   }
 
   /// Update tanggal lahir dialog
-  void openUpdateBirthDateDialog() async {
+  Future<void> openUpdateBirthDateDialog() async {
     DateTime? tglLahir = await showDatePicker(
       context: Get.context!,
       initialDate: user.value.tgl_lahir ?? DateTime(DateTime.now().year - 21),
@@ -199,7 +199,7 @@ class ProfileController extends GetxController {
   }
 
   /// Update phone number dialog
-  void openUpdatePhoneDialog() async {
+  Future<void> openUpdatePhoneDialog() async {
     String? telepon = await Get.bottomSheet(
       PhoneBottomSheet(telepon: user.value.telepon ?? ''),
       backgroundColor: Colors.white,
@@ -213,7 +213,7 @@ class ProfileController extends GetxController {
   }
 
   /// Update email dialog
-  void openUpdateEmailDialog() async {
+  Future<void> openUpdateEmailDialog() async {
     String? email = await Get.bottomSheet(
       EmailBottomSheet(email: user.value.email),
       backgroundColor: Colors.white,
@@ -226,7 +226,7 @@ class ProfileController extends GetxController {
     }
   }
 
-  void openUpdatePINDialog() async {
+  Future<void> openUpdatePINDialog() async {
     String? pin = await Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
@@ -239,7 +239,7 @@ class ProfileController extends GetxController {
   }
 
   /// Language dialog
-  void openLanguageDialog() async {
+  Future<void> openLanguageDialog() async {
     String? language = await Get.bottomSheet(
       const LanguageBottomSheet(),
       backgroundColor: Colors.white,

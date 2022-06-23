@@ -23,7 +23,7 @@ class _PinDialogState extends State<PinDialog> {
   final TextEditingController controller = TextEditingController();
   int tries = 0;
 
-  void processPin(String? pin) async {
+  Future<void> processPin(String? pin) async {
     await Future.delayed(const Duration(milliseconds: 500));
 
     if (pin == widget.pin) {

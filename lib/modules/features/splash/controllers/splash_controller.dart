@@ -8,7 +8,7 @@ class SplashController extends GetxController {
   static SplashController get to => Get.find<SplashController>();
 
   @override
-  void onInit() async {
+  Future<void> onInit() async {
     super.onInit();
 
     /// Delay 1 detik

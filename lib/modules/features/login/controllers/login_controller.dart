@@ -9,7 +9,7 @@ class LoginController extends GetxController {
   static LoginController get to => Get.find<LoginController>();
 
   /// Login dengan email dan kata sandi
-  void loginWithEmailAndPassword(String email, String password) async {
+  Future<void> loginWithEmailAndPassword(String email, String password) async {
     /// Memanggil API repository
     UserRes userRes = await LoginRepository.getUser(email, password);
 
@@ -36,7 +36,7 @@ class LoginController extends GetxController {
   }
 
   /// Login dengan akun google
-  void loginWithGoogle() async {
+  Future<void> loginWithGoogle() async {
     /// Singleton GoogleSignIn
     final GoogleSignIn googleSignIn = GoogleSignIn();
 
