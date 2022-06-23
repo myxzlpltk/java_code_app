@@ -13,7 +13,7 @@ class ImagePickerDialog extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.r),
       child: Column(
         children: [
-          Text('Select image source', style: Get.textTheme.titleMedium),
+          Text('Select image source'.tr, style: Get.textTheme.titleMedium),
           10.verticalSpacingRadius,
           TextButton(
             onPressed: () => Get.back(result: ImageSource.gallery),
