@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
-import 'package:java_code_app/configs/localizations/localization.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/modules/features/menu/view/components/holder_bottom_sheet.dart';
 
@@ -60,9 +57,12 @@ class _EmailBottomSheetState extends State<EmailBottomSheet> {
                     maxLength: 100,
                     keyboardType: TextInputType.emailAddress,
                     autofocus: true,
-                    validator: ValidationBuilder(
-                      localeName: Localization.currentLocale.languageCode,
-                    ).email().required().build(),
+                    validator: (value) {
+                      if (!GetUtils.isEmail(value ?? '')) {
+                        return 'Email is not valid'.tr;
+                      }
+                      return null;
+                    },
                   ),
                 ),
               ),

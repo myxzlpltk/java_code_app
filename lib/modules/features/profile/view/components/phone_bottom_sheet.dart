@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
-import 'package:java_code_app/configs/localizations/localization.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/modules/features/menu/view/components/holder_bottom_sheet.dart';
 
@@ -60,9 +58,14 @@ class _PhoneBottomSheetState extends State<PhoneBottomSheet> {
                     maxLength: 100,
                     keyboardType: TextInputType.phone,
                     autofocus: true,
-                    validator: ValidationBuilder(
-                      localeName: Localization.currentLocale.languageCode,
-                    ).phone().required().build(),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Phone number is required'.tr;
+                      } else if (value.length < 10) {
+                        return 'Phone number must be at least 10 characters'.tr;
+                      }
+                      return null;
+                    },
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                     ],

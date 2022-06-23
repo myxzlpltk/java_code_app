@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
-import 'package:java_code_app/configs/localizations/localization.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/modules/features/menu/view/components/holder_bottom_sheet.dart';
 
@@ -58,9 +56,12 @@ class _NameBottomSheetState extends State<NameBottomSheet> {
                     ),
                     maxLength: 100,
                     autofocus: true,
-                    validator: ValidationBuilder(
-                      localeName: Localization.currentLocale.languageCode,
-                    ).required().build(),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Name is required'.tr;
+                      }
+                      return null;
+                    },
                   ),
                 ),
               ),
