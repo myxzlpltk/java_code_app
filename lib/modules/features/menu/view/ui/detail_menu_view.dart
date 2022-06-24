@@ -4,6 +4,7 @@ import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
+import 'package:java_code_app/constants/commons/constants.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 import 'package:java_code_app/modules/features/menu/controllers/detail_menu_controller.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
@@ -46,6 +47,10 @@ class DetailMenuView extends StatelessWidget {
                     height: 181.r,
                     width: 234.r,
                     fit: BoxFit.contain,
+                    errorWidget: (context, _, __) => CachedNetworkImage(
+                      imageUrl: AppConst.defaultMenuPhoto,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ),
