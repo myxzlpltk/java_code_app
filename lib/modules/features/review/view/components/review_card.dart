@@ -30,17 +30,21 @@ class ReviewCard extends StatelessWidget {
         ),
         child: Row(
           children: [
+            /// Info
             Expanded(
               child: Column(
                 children: [
                   Row(
                     children: [
+                      /// Date Icon
                       SvgPicture.asset(
                         AssetConst.iconDate,
                         width: 13.r,
                         height: 13.r,
                       ),
                       7.horizontalSpaceRadius,
+
+                      /// Review type
                       Flexible(
                         child: Text(
                           review.type,
@@ -51,9 +55,13 @@ class ReviewCard extends StatelessWidget {
                         ),
                       ),
                       11.horizontalSpaceRadius,
+
+                      /// Rating bar
                       RatingBar(rating: review.score, spacing: 5.r, size: 12.r),
                     ],
                   ),
+
+                  /// Review text
                   Text(
                     review.review,
                     style: Get.textTheme.labelMedium!.copyWith(
@@ -66,6 +74,8 @@ class ReviewCard extends StatelessWidget {
               ),
             ),
             20.horizontalSpaceRadius,
+
+            /// Reply button
             IconButton(
               onPressed: () {},
               splashRadius: 30.r,

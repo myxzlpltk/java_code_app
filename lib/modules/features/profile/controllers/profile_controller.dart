@@ -10,7 +10,6 @@ import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/modules/features/profile/repositories/user_repository.dart';
 import 'package:java_code_app/modules/features/profile/view/components/email_bottom_sheet.dart';
-import 'package:java_code_app/modules/features/profile/view/components/image_picker_dialog.dart';
 import 'package:java_code_app/modules/features/profile/view/components/language_bottom_sheet.dart';
 import 'package:java_code_app/modules/features/profile/view/components/logout_dialog.dart';
 import 'package:java_code_app/modules/features/profile/view/components/name_bottom_sheet.dart';
@@ -18,6 +17,7 @@ import 'package:java_code_app/modules/features/profile/view/components/phone_bot
 import 'package:java_code_app/modules/features/profile/view/components/pin_dialog.dart';
 import 'package:java_code_app/modules/models/user.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
+import 'package:java_code_app/shared/widgets/image_picker_dialog.dart';
 import 'package:java_code_app/utils/extensions/date_extension.dart';
 import 'package:java_code_app/utils/services/local_db_services.dart';
 
@@ -105,7 +105,7 @@ class ProfileController extends GetxController {
 
     /// Jika gambar dicrop, encode gambar ke base64
     if (croppedFile == null) return;
-    final base64Image = base64Encode(await croppedFile.readAsBytes());
+    final base64Image = base64.encode(await croppedFile.readAsBytes());
 
     /// Simpan gambar melalui API
     UserRes userRes = await UserRepository.updatePhoto(base64Image);
@@ -138,7 +138,7 @@ class ProfileController extends GetxController {
 
     /// Jika gambar diambil, encode gambar ke base64
     if (image == null) return;
-    final base64Image = base64Encode(await image.readAsBytes());
+    final base64Image = base64.encode(await image.readAsBytes());
 
     /// Simpan gambar melalui API
     UserRes userRes = await UserRepository.updateKTP(base64Image);

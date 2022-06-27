@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:java_code_app/configs/routes/app_routes.dart';
+import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/modules/features/review/view/components/review_card.dart';
 import 'package:java_code_app/modules/models/review.dart';
 import 'package:java_code_app/shared/styles/shapes.dart';
@@ -30,6 +32,11 @@ class ReviewView extends StatelessWidget {
         itemBuilder: (context, _) => ReviewCard(
           review: Review.dummy,
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.toNamed(AppRoutes.addReviewView),
+        backgroundColor: AppColor.blueColor,
+        child: const Icon(Icons.add),
       ),
     );
   }

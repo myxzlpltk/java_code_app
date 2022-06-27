@@ -2,8 +2,10 @@ class AssetConst {
   AssetConst._();
 
   /// Icon
+  static const String iconAddImage = 'assets/svg/ic_add_image.svg';
   static const String iconApple = 'assets/svg/ic_apple.svg';
   static const String iconCart = 'assets/svg/ic_cart.svg';
+  static const String iconCheck = 'assets/svg/ic_check.svg';
   static const String iconDate = 'assets/svg/ic_date.svg';
   static const String iconDiscount = 'assets/svg/ic_discount.svg';
   static const String iconDrink = 'assets/svg/ic_drink.svg';

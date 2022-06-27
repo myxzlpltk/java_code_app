@@ -39,8 +39,11 @@ class QuantityCounter extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4.r),
                     border: Border.all(color: AppColor.blueColor, width: 2.r),
                   ),
-                  child:
-                      Icon(Icons.remove, size: 20.r, color: AppColor.blueColor),
+                  child: Icon(
+                    Icons.remove,
+                    size: 20.r,
+                    color: AppColor.blueColor,
+                  ),
                 ),
               ),
             ),

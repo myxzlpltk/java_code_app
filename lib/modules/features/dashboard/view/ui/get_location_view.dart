@@ -22,8 +22,8 @@ class GetLocationView extends StatelessWidget {
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage(AssetConst.bgPattern2),
-              fit: BoxFit.cover,
-              alignment: Alignment.topCenter,
+              fit: BoxFit.fitHeight,
+              alignment: Alignment.center,
             ),
           ),
           padding: EdgeInsets.symmetric(horizontal: 30.r),
