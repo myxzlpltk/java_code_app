@@ -23,7 +23,7 @@ class ReviewView extends StatelessWidget {
           onPressed: () => Get.back(closeOverlays: true),
         ),
         centerTitle: true,
-        title: Text('List Review'.tr, style: Get.textTheme.titleMedium),
+        title: Text('List review'.tr, style: Get.textTheme.titleMedium),
         shape: CustomShape.bottomRoundedShape,
       ),
       body: Container(

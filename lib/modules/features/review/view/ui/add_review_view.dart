@@ -28,7 +28,7 @@ class AddReviewView extends StatelessWidget {
           onPressed: () => Get.back(closeOverlays: true),
         ),
         centerTitle: true,
-        title: Text('Add Review'.tr, style: Get.textTheme.titleMedium),
+        title: Text('Add review'.tr, style: Get.textTheme.titleMedium),
         shape: CustomShape.bottomRoundedShape,
       ),
       body: Container(
@@ -54,7 +54,7 @@ class AddReviewView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Give review'.tr,
+                    'Give your review!'.tr,
                     style: Get.textTheme.titleSmall,
                   ),
                   13.verticalSpacingRadius,
@@ -176,7 +176,7 @@ class AddReviewView extends StatelessWidget {
                       Expanded(
                         child: PrimaryButton(
                           onPressed: () {},
-                          text: 'Submit review',
+                          text: 'Submit review'.tr,
                         ),
                       ),
                       14.horizontalSpaceRadius,
