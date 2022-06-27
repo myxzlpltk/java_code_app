@@ -217,27 +217,30 @@ class ProfileView extends StatelessWidget {
               18.verticalSpacingRadius,
 
               /// Penilaian
-              InkWell(
-                onTap: () => Get.toNamed(AppRoutes.reviewView),
+              Material(
                 borderRadius: BorderRadius.circular(30.r),
-                child: Ink(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.r, vertical: 16.r),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30.r),
-                    color: AppColor.lightColor2,
-                  ),
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(AssetConst.iconReview),
-                      8.horizontalSpaceRadius,
-                      Text('Review'.tr, style: Get.textTheme.titleSmall),
-                      const Spacer(),
-                      PrimaryButton.compact(
-                        text: 'Review now'.tr,
-                        onPressed: () => Get.toNamed(AppRoutes.addReviewView),
-                      ),
-                    ],
+                clipBehavior: Clip.antiAlias,
+                child: InkWell(
+                  onTap: () => Get.toNamed(AppRoutes.reviewView),
+                  child: Ink(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.r, vertical: 16.r),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30.r),
+                      color: AppColor.lightColor2,
+                    ),
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(AssetConst.iconReview),
+                        8.horizontalSpaceRadius,
+                        Text('Review'.tr, style: Get.textTheme.titleSmall),
+                        const Spacer(),
+                        PrimaryButton.compact(
+                          text: 'Review now'.tr,
+                          onPressed: () => Get.toNamed(AppRoutes.addReviewView),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

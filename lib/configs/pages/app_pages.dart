@@ -16,8 +16,10 @@ import 'package:java_code_app/modules/features/order/view/ui/detail_order_view.d
 import 'package:java_code_app/modules/features/promo/controllers/detail_promo_binding.dart';
 import 'package:java_code_app/modules/features/promo/view/ui/detail_promo_view.dart';
 import 'package:java_code_app/modules/features/review/controllers/add_review_binding.dart';
+import 'package:java_code_app/modules/features/review/controllers/reply_review_binding.dart';
 import 'package:java_code_app/modules/features/review/controllers/review_binding.dart';
 import 'package:java_code_app/modules/features/review/view/ui/add_review_view.dart';
+import 'package:java_code_app/modules/features/review/view/ui/reply_review_view.dart';
 import 'package:java_code_app/modules/features/review/view/ui/review_view.dart';
 import 'package:java_code_app/modules/features/splash/controllers/splash_binding.dart';
 import 'package:java_code_app/modules/features/splash/view/ui/splash_view.dart';
@@ -90,6 +92,11 @@ class AppPages {
         name: AppRoutes.addReviewView,
         page: () => AddReviewView(),
         binding: AddReviewBinding(),
+      ),
+      GetPage(
+        name: AppRoutes.replyReviewView,
+        page: () => ReplyReviewView(),
+        binding: ReplyReviewBinding(),
       ),
     ];
   }

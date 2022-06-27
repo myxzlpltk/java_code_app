@@ -32,6 +32,7 @@ class AssetConst {
   static const String iconPromo = 'assets/svg/ic_promo.svg';
   static const String iconReply = 'assets/svg/ic_reply.svg';
   static const String iconReview = 'assets/svg/ic_review.svg';
+  static const String iconSend = 'assets/svg/ic_send.svg';
   static const String iconServerError = 'assets/svg/ic_server_error.svg';
   static const String iconStar = 'assets/svg/ic_star.svg';
   static const String iconStarEmpty = 'assets/svg/ic_star_empty.svg';

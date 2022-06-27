@@ -24,4 +24,5 @@ class AppRoutes {
   /// Review
   static const String reviewView = '/review/';
   static const String addReviewView = '/review/add-review';
+  static const String replyReviewView = '/review/reply-review';
 }
