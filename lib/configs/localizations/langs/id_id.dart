@@ -44,7 +44,7 @@ const Map<String, String> translations_id_ID = {
   'Food': 'Makanan',
   'Gallery': 'Galeri',
   'Get this promo': 'Dapatkan promo ini! Akses link berikut\n@link',
-  'Give rating': 'Beri penilaian',
+  'Give review': 'Beri penilaian',
   'History': 'Riwayat',
   'Home Page': 'Halaman utama',
   'Home': 'Beranda',

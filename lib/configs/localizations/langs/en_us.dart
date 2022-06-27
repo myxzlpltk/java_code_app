@@ -44,7 +44,7 @@ const Map<String, String> translations_en_US = {
   'Food': 'Food',
   'Gallery': 'Gallery',
   'Get this promo': 'Get this promo! Access this link\n@link',
-  'Give rating': 'Give rating',
+  'Give review': 'Give review',
   'History': 'History',
   'Home Page': 'Home Page',
   'Home': 'Home',

@@ -28,8 +28,11 @@ class AssetConst {
   static const String iconPrice = 'assets/svg/ic_price.svg';
   static const String iconProfile = 'assets/svg/ic_profile.svg';
   static const String iconPromo = 'assets/svg/ic_promo.svg';
+  static const String iconReply = 'assets/svg/ic_reply.svg';
   static const String iconReview = 'assets/svg/ic_review.svg';
   static const String iconServerError = 'assets/svg/ic_server_error.svg';
+  static const String iconStar = 'assets/svg/ic_star.svg';
+  static const String iconStarEmpty = 'assets/svg/ic_star_empty.svg';
   static const String iconTopping = 'assets/svg/ic_topping.svg';
   static const String iconVoucher = 'assets/svg/ic_voucher.svg';
 

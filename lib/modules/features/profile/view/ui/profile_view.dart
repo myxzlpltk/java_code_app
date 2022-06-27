@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:java_code_app/configs/routes/app_routes.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/commons/constants.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
@@ -230,7 +231,7 @@ class ProfileView extends StatelessWidget {
                     const Spacer(),
                     PrimaryButton.compact(
                       text: 'Review now'.tr,
-                      onPressed: () {},
+                      onPressed: () => Get.toNamed(AppRoutes.reviewView),
                     ),
                   ],
                 ),

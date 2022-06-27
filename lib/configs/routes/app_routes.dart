@@ -20,4 +20,7 @@ class AppRoutes {
 
   /// Order
   static const String detailOrderView = '/order/detail-order';
+
+  /// Review
+  static const String reviewView = '/review/';
 }

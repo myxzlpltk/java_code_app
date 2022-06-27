@@ -201,7 +201,7 @@ class OrderCard extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.only(top: 10.r, bottom: 5.r),
                             child: OutlinedPrimaryButton.compact(
-                              text: 'Give rating'.tr,
+                              text: 'Give review'.tr,
                               onPressed: () {},
                             ),
                           ),

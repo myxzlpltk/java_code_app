@@ -15,7 +15,7 @@ class UncheckedStep extends StatelessWidget {
       ),
       child: Icon(
         Icons.circle,
-        color: AppColor.darkColor3,
+        color: AppColor.darkColor4,
         size: 18.r,
       ),
     );
