@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,24 +18,30 @@ import 'package:java_code_app/modules/global_controllers/global_binding.dart';
 import 'package:java_code_app/utils/services/notification_services.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  runZonedGuarded<Future<void>>(() async {
+    WidgetsFlutterBinding.ensureInitialized();
 
-  /// Force potrait mode
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+    /// Force potrait mode
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
-  /// Firebase
-  await Firebase.initializeApp();
-  await NotificationServices.init();
+    /// Firebase
+    await Firebase.initializeApp();
+    await NotificationServices.init();
 
-  runApp(
-    DevicePreview(
-      enabled: kProfileMode,
-      builder: (context) => const MyApp(), // Wrap your app
-    ),
-  );
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+    runApp(
+      DevicePreview(
+        enabled: kProfileMode,
+        builder: (context) => const MyApp(), // Wrap your app
+      ),
+    );
+  }, (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+  });
 }
 
 class MyApp extends StatelessWidget {

@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,7 @@ class LocationServices {
   LocationServices._();
 
   static Stream<ServiceStatus> streamService =
-      Geolocator.getServiceStatusStream();
+  Geolocator.getServiceStatusStream();
 
   /// Mendapatkan informasi lokasi
   static Future<LocationResult> getCurrentPosition() async {
@@ -48,7 +49,8 @@ class LocationServices {
     late Position position;
     try {
       position = await Geolocator.getCurrentPosition();
-    } catch (e) {
+    } catch (e, st) {
+      FirebaseCrashlytics.instance.recordError(e, st);
       return LocationResult.error(message: 'Location service not enabled'.tr);
     }
 
@@ -106,8 +108,7 @@ class LocationResult {
     this.message,
   });
 
-  factory LocationResult.success(
-      {required Position position, required String address}) {
+  factory LocationResult.success({required Position position, required String address}) {
     return LocationResult(
       success: true,
       position: position,
