@@ -5,10 +5,10 @@ import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/constants/cores/asset_const.dart';
 
 class RatingBar extends StatelessWidget {
-  final int rating;
+  final double rating;
   final double spacing;
   final double size;
-  final void Function(int)? onRatingChanged;
+  final void Function(double)? onRatingChanged;
 
   const RatingBar({
     Key? key,

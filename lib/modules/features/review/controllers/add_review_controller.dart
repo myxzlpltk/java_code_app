@@ -20,7 +20,7 @@ class AddReviewController extends GetxController {
   ];
 
   /// Data
-  RxnInt selectedRating = RxnInt();
+  RxnDouble selectedRating = RxnDouble();
   RxnString selectedReviewType = RxnString('');
   Rxn<File> selectedImage = Rxn<File>();
 
@@ -28,7 +28,7 @@ class AddReviewController extends GetxController {
     selectedReviewType.value = reviewType;
   }
 
-  void setRating(int rating) {
+  void setRating(double rating) {
     selectedRating.value = rating;
   }
 
