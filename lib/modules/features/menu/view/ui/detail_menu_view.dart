@@ -86,7 +86,11 @@ class DetailMenuView extends StatelessWidget {
                         () => QuantityCounter(
                           quantity: DetailMenuController.to.quantity.value,
                           onIncrement: DetailMenuController.to.onIncrement,
-                          onDecrement: DetailMenuController.to.onDecrement,
+                          onDecrement:
+                              DetailMenuController.to.isExistsInCart.value ||
+                                      DetailMenuController.to.quantity > 1
+                                  ? DetailMenuController.to.onDecrement
+                                  : null,
                         ),
                       ),
                     ],
@@ -211,9 +215,9 @@ class DetailMenuView extends StatelessWidget {
                           DetailMenuController.to.status.value,
                       caseBuilders: {
                         'loading': (context) => RectShimmer(
-                          height: 50.r,
-                          radius: 30.r,
-                        ),
+                              height: 50.r,
+                              radius: 30.r,
+                            ),
                         'success': (context) => SizedBox(
                               width: double.infinity,
                               child: Conditional.single(

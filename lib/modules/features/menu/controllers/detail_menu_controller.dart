@@ -98,7 +98,7 @@ class DetailMenuController extends GetxController {
   /// On decrement quantity
   void onDecrement() {
     /// Jika quantity lebih dari 1, maka decrement
-    if (quantity > 0) quantity.value--;
+    if (quantity > 1 || quantity > 0 && isExistsInCart.value) quantity.value--;
   }
 
   /// Open note bottom sheet
