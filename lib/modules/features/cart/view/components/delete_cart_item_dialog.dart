@@ -5,8 +5,8 @@ import 'package:java_code_app/configs/themes/colors.dart';
 import 'package:java_code_app/shared/widgets/outlined_primary_button.dart';
 import 'package:java_code_app/shared/widgets/primary_button.dart';
 
-class CancelDialog extends StatelessWidget {
-  const CancelDialog({Key? key}) : super(key: key);
+class DeleteCartItemDialog extends StatelessWidget {
+  const DeleteCartItemDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class CancelDialog extends StatelessWidget {
                     ),
                     4.verticalSpacingRadius,
                     Text(
-                      'Are you sure want to cancel order?'.tr,
+                      'Are you sure want to delete this menu from cart?'.tr,
                       style: Get.textTheme.bodyMedium,
                     ),
                   ],

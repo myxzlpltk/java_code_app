@@ -1,38 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/configs/themes/colors.dart';
+import 'package:java_code_app/shared/widgets/outlined_primary_button.dart';
+import 'package:java_code_app/shared/widgets/primary_button.dart';
 
 class LogoutDialog extends StatelessWidget {
   const LogoutDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(
-        'Warning'.tr,
-        style: Get.textTheme.titleMedium?.copyWith(color: AppColor.redColor),
-      ),
-      content: Text(
-        'Are you sure want to logout?'.tr,
-        style: Get.textTheme.bodyMedium,
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Get.back<bool>(result: false),
-          child: Text(
-            'No'.tr,
-            style:
-                Get.textTheme.labelLarge?.copyWith(color: AppColor.greenColor),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.r),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          16.verticalSpacingRadius,
+
+          /// Icon
+          Row(
+            children: [
+              Icon(Icons.warning, color: AppColor.blueColor, size: 72.r),
+              16.horizontalSpaceRadius,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Warning'.tr,
+                      style: Get.textTheme.titleMedium?.copyWith(
+                        color: AppColor.redColor,
+                      ),
+                    ),
+                    4.verticalSpacingRadius,
+                    Text(
+                      'Are you sure want to logout?'.tr,
+                      style: Get.textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ),
-        TextButton(
-          onPressed: () => Get.back<bool>(result: true),
-          child: Text(
-            'Yes'.tr,
-            style: Get.textTheme.labelLarge?.copyWith(color: AppColor.redColor),
+          14.verticalSpacingRadius,
+
+          /// Actions
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedPrimaryButton(
+                  onPressed: () => Get.back(result: false),
+                  text: 'No'.tr,
+                ),
+              ),
+              16.horizontalSpaceRadius,
+              Expanded(
+                child: PrimaryButton(
+                  onPressed: () => Get.back(result: true),
+                  text: 'Yes'.tr,
+                ),
+              ),
+            ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -11,6 +11,7 @@ const Map<String, String> translations_id_ID = {
   'Almost Perfect': 'Hampir Sempurna',
   'Already Ordered? Track the order here.': 'Sudah Pesan?\nLacak pesananmu di sini.',
   'Are you sure want to cancel order?': 'Apakah kamu yakin ingin membatalkan pesanan?',
+  'Are you sure want to delete this menu from cart?': 'Apakah kamu yakin ingin menghapus menu ini dari keranjang?',
   'Are you sure want to logout?': 'Apakah kamu yakin ingin keluar?',
   'Available promo': 'Promo yang tersedia',
   'Bad': 'Buruk',

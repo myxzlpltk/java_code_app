@@ -8,6 +8,7 @@ import 'package:java_code_app/constants/commons/constants.dart';
 import 'package:java_code_app/modules/features/cart/repositories/discount_repository.dart';
 import 'package:java_code_app/modules/features/cart/repositories/order_repository.dart';
 import 'package:java_code_app/modules/features/cart/repositories/voucher_repository.dart';
+import 'package:java_code_app/modules/features/cart/view/components/delete_cart_item_dialog.dart';
 import 'package:java_code_app/modules/features/cart/view/components/discount_info.dart';
 import 'package:java_code_app/modules/features/cart/view/components/fingerprint_dialog.dart';
 import 'package:java_code_app/modules/features/cart/view/components/order_success_dialog.dart';
@@ -61,12 +62,20 @@ class CartController extends GetxController {
   }
 
   /// Decrement item quantity
-  void decrement(CartItem cartItem) {
+  void decrement(CartItem cartItem) async {
     if (cartItem.quantity > 1) {
       cartItem.quantity--;
       cart.refresh();
     } else {
-      cart.remove(cartItem);
+      final result = await Get.defaultDialog(
+        title: '',
+        titleStyle: const TextStyle(fontSize: 0),
+        content: const DeleteCartItemDialog(),
+      );
+
+      if (result == true) {
+        cart.remove(cartItem);
+      }
     }
   }
 
@@ -173,8 +182,6 @@ class CartController extends GetxController {
     /// Tutup modal
     Get.until(ModalRoute.withName(AppRoutes.cartView));
     Get.defaultDialog(
-      title: '',
-      titleStyle: const TextStyle(fontSize: 0),
       content: const CircularProgressIndicator(
         color: AppColor.blueColor,
       ),

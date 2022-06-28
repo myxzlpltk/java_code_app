@@ -11,6 +11,7 @@ const Map<String, String> translations_en_US = {
   'Almost Perfect': 'Almost Perfect',
   'Already Ordered? Track the order here.': 'Already Ordered?\nTrack the order here.',
   'Are you sure want to cancel order?': 'Are you sure want to cancel order?',
+  'Are you sure want to delete this menu from cart?': 'Are you sure want to delete this menu from cart?',
   'Are you sure want to logout?': 'Are you sure want to logout?',
   'Available promo': 'Available promo',
   'Bad': 'Bad',

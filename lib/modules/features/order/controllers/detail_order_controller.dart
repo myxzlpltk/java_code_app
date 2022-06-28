@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:java_code_app/modules/features/order/controllers/order_controller.dart';
 import 'package:java_code_app/modules/features/order/repositories/order_repository.dart';
@@ -67,7 +68,11 @@ class DetailOrderController extends GetxController {
   }
 
   Future<void> cancel() async {
-    final result = await Get.dialog(const CancelDialog());
+    final result = await Get.defaultDialog(
+      title: '',
+      titleStyle: const TextStyle(fontSize: 0),
+      content: const CancelDialog(),
+    );
 
     if (result == true) {
       /// Fetch api batal order

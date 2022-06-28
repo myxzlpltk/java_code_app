@@ -60,7 +60,11 @@ class ProfileController extends GetxController {
 
   /// Logout user
   Future<void> logout() async {
-    final result = await Get.dialog(const LogoutDialog());
+    final result = await Get.defaultDialog(
+      title: '',
+      titleStyle: const TextStyle(fontSize: 0),
+      content: const LogoutDialog(),
+    );
 
     if (result == true) {
       await LocalDBServices.clearToken();
